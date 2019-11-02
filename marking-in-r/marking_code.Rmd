@@ -1,0 +1,113 @@
+---
+title: "marking-mcq-code"
+author: "David Reinstein"
+date: "11/2/2019"
+output: html_document
+---
+
+# Outline of code and procedure
+
+1. mark_scheme: ms <- Input 'marking.csv' file of q_label, point_value, d_partial_credit, num_ans (number of possible answers per question, typically 5), c_ans (correct_answers), alt_ans (alternate correct, where non-blank), free_marks (grant everyone this share of marks for a question as a minimum)
+
+- Convert correct_answers, alt_correct to character lists
+
+2. student_responses: sr <- Input (key sheet and rows of) Excel file of student_id, r_q_[label] (responses to all questions, same order as for marking.csv) as produced by Exeter MCQ administrative processing; each row is a student
+
+3. Clean student_responses file to aid processing:
+
+- dataframe or matrix; each r_q[label] is a list of responses chosen ("A","C","E") etc
+- clean each response to have the same format as mark_scheme$correct_answers (capital letters etc)
+
+4. Create additional 'sr$m_pct_q_[label]' columns^[note, this could also be done by creating a different matrix, or a multidimensional array] in sr, one for each question, calculating 'share of marks to be awarded' as follows
+
+Comparing `ms$c_ans` and `student_responses$response_q` element-by-element
+
+- If d_partial_credit = 0, then sr$m_pct_q_[label] <= ifelse 'exact match' 1,0
+
+- If d_partial_credit = 1, then 
+  - Share of correct: (sum 'list elements in common') / length(`ms$q_label`)
+  - less 'Share of incorrect': ((length(`ms$q_label`) - sum 'list elements in common')) / `(ms$num_ans - length(ms$c_ans)`)
+
+- if `length$alt_ans>0` do the previous step again wrt `alt_ans`, assigning a column sr$alt_m_pct_q_[label]
+
+- set `sr$max_m_pct_q_[label]` to max of 0, `sr$alt_m_pct_q_[]`,  `sr$m_pct_q_[]`, `sr$free_marks` (note no negative marks for a question, award best possible mark for all alternate answers)
+
+5. Take product of `ms$point_value`  and `sr$max_m_pct_q_[label]` element by element for each student and question, creating `sr$mark_q_[label]` columns.
+
+6. `sr$total_mark <- ` Sum `sr$mark_q_[label]` for each student to get overall mark.
+
+7. Output as organised excel sheet (and other formats to give individual students their breakdowns?)
+
+
+
+```{r local_values}
+
+folder <- "/Users/yosemite/OneDrive - University of Exeter/exeter_teaching/marking/bee2038_midterm_marking"
+
+markscheme <- "mark_scheme.csv"
+student_responses <- "BEE2038 - data - not marked.xlsx"
+```
+
+
+
+```{r setup, include=TRUE, warning=FALSE, echo=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+require("knitr")
+
+opts_knit$set(root.dir = folder)
+
+library(pacman)
+#knitr,dplyr,tidyverse,labelled,citr,reporttools,magrittr,glue,huxtable,experiment,dataMaid,broom,janitor,here,xRStata,estimatr,xtable
+p_load(dplyr,magrittr,purrr,tidyverse,tidyr,broom,janitor, here,glue,dataMaid,readr,lubridate,summarytools, httr,jsonlite,rlist,XML, readxl)
+
+
+```
+
+
+Just go to the relevant directory 
+```{r}
+
+setwd(folder)
+
+```
+
+
+# 1. mark_scheme: ms <- Input 'marking.csv' file
+
+```{r input-mark-scheme}
+
+
+ms <- read.csv(markscheme, header=TRUE,  stringsAsFactors=FALSE, row.names = 1) %>%
+  as_tibble() 
+
+```
+
+- Convert correct_answers, alt_correct to character lists
+
+```{r}
+
+ms$c_ans <- lapply(strsplit(as.character(ms$c_ans),split=','),trimws)
+ms$alt_ans <- lapply(strsplit(as.character(ms$alt_ans),split=','),trimws)
+
+```
+
+
+2. student_responses: sr <- input mark sheet, remove parens, make list columns
+
+```{r}
+
+sr <- read_excel(student_responses) 
+
+sr <- lapply(sr, gsub, pattern = ")", replacement = "", fixed = TRUE)
+sr <- lapply(sr, gsub, pattern = "(", replacement = "", fixed = TRUE)
+
+sr <- as_tibble(sr)
+
+sr$questions1 <- lapply(strsplit(as.character(sr$questions1),split=','),trimws)
+#apply this to all elements but the first one
+
+
+
+```
+
