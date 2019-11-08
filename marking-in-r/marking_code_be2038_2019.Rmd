@@ -47,9 +47,7 @@ markscheme <- "mark_scheme.csv"
 student_responses <- "BEE2038 - data - not marked.xlsx"
 adhoc_adjust <- 5.8333333333
 
-maxmark <- 100
-
-outfile <-  "bee2038_midterm_results.xlsx"
+outfile <-  "bee2038_midterm_results.csv"
 ```
 
 
@@ -209,13 +207,12 @@ for(q in rownames(ms)) {   #iterate over all questions
 
 ```
 
-Generate total marks and percentage
+Generate total marks
 ```{r}
 sr <- sr %>%
   mutate(
     total = rowSums(.[grep("mk_max*", names(.))], na.rm = TRUE),
-    total_adjust = rowSums(.[grep("mk_max*", names(.))], na.rm = TRUE)+ adhoc_adjust,
-    tot_adj_share  = total_adjust/maxmark
+    total_adjust = rowSums(.[grep("mk_max*", names(.))], na.rm = TRUE)+ adhoc_adjust
   )
 ```
 
@@ -250,6 +247,7 @@ ordering$id  <- 1:nrow(ordering)
 test <- sr %>% select(1,"total_adjust") %>%  merge(., ordering,  by.x="Student Candidate Number", by.y="...1",   all = TRUE)  %>% 
   arrange(id) %>%
   write_excel_csv(file.path(folder,outfile)) 
+
 
 
 ```
