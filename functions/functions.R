@@ -284,11 +284,11 @@ tabylme <- function(df = ADSX, rowvar = TreatFirstAsk, colvar = treat_second_ask
     kable_styling()
 }
 
-adornme <- function(atabyl, adorn = "row", digits = 2, cap = "", 
+adornme <- function(atabyl, adorn = "row", digits = 2, cap = "",
                     title = "") {
   atabyl %>% adorn_totals("row") %>% # adorn_totals(c('row', 'col')) %>%
-    adorn_percentages(adorn) %>% adorn_pct_formatting(digits = digits) %>% 
-    adorn_ns() %>% adorn_title(title, placement = "top") %>% 
+    adorn_percentages(adorn) %>% adorn_pct_formatting(digits = digits) %>%
+    adorn_ns() %>% adorn_title(title, placement = "top") %>%
     kable(caption = cap) %>% kable_styling()
 }
 
@@ -514,12 +514,12 @@ colFmt = function(x, color) {
 
 ################# Coding shortcuts
 
-sm <- function(df, X) dplyr::select(df, matches(glue::glue("{X}"),  ignore.case = FALSE))
+Sm <- function(df, X) dplyr::select(df, matches(glue::glue("{X}"),  ignore.case = FALSE))
 
-Sm <- function(df, X) dplyr::select(df, matches(glue::glue("{X}")))
-Smn <- function(df, X) dplyr::select(df, matches(glue::glue("{X}"))) %>% names()
+sm <- function(df, X) dplyr::select(df, matches(glue::glue("{X}")))
+smn <- function(df, X) dplyr::select(df, matches(glue::glue("{X}"))) %>% names()
 
-snm <- function(df, X) dplyr::select(df, -matches(glue::glue("{X}"), ignore.case = FALSE))
+Snm <- function(df, X) dplyr::select(df, -matches(glue::glue("{X}"), ignore.case = FALSE))
 
-Snm <- function(df, X) dplyr::select(df, -matches(glue::glue("{X}")))
+snm <- function(df, X) dplyr::select(df, -matches(glue::glue("{X}")))
 

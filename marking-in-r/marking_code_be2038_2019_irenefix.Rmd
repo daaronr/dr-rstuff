@@ -44,13 +44,15 @@ Comparing `ms$c_ans` and `student_responses$response_q` element-by-element
 folder <- "/Users/yosemite/OneDrive - University of Exeter/exeter_teaching/marking/bee2038_midterm_marking"
 
 markscheme <- "mark_scheme.csv"
+student_responses <-  "BEE2038 - results_irene_fixed.xlsx"
 #student_responses <- "BEE2038 - data - not marked.xlsx"
-student_responses <- "bee2038-midterm-2019-extra-ilp.xlsx"
+#student_responses <- "bee2038-midterm-2019-extra-ilp.xlsx"
 
 adhoc_adjust <- 5.8333333333
 
-#outfile <-  "bee2038_midterm_results.csv"
-outfile <-  "bee2038_midterm_results_extra_ilp.csv"
+outfile <-  "bee2038_midterm_results_irene_fixed.csv"
+outfile_uni_order <-  "bee2038_midterm_results_irene_fixed_uni_order.csv"
+#outfile <-  "bee2038_midterm_results_extra_ilp.csv"
 ```
 
 
@@ -242,12 +244,12 @@ sr %>%
 ```{r}
 ordering <- read_excel("cand_number_ordering.xlsx", col_names = FALSE) %>% 
 lapply(., gsub, pattern = "#", replacement = "", fixed = TRUE) %>% as.data.frame()
-
+  
 ordering$id  <- 1:nrow(ordering)
 
 test <- sr %>% select(1,"total_adjust") %>%  merge(., ordering,  by.x="Student Candidate Number", by.y="...1",   all = TRUE)  %>% 
   arrange(id) %>%
-  write_excel_csv(file.path(folder,outfile)) 
+  write_excel_csv(file.path(folder,outfile_uni_order)) 
 
 
 ```
