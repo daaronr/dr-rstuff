@@ -1,13 +1,13 @@
 ---
-title: "marking-mcq-code"
+title: "marking-mcq-code - for beem101 - 2020"
 author: "David Reinstein"
-date: "11/2/2019"
+date: "11/2/2019 adapted 16 Jan 2020"
 output: html_document
 ---
 
 # Outline of code and procedure
 
-1. mark_scheme: ms <- Input 'marking.csv' file of q_label, point_value, d_partial_credit, num_ans (number of possible answers per question, typically 5), c_ans (correct_answers), alt_ans (alternate correct, where non-blank), free_marks (grant everyone this share of marks for a question as a minimum)
+1. mark_scheme: ms <- Input 'marking.csv' file of q_label, point_va lue, d_partial_credit, num_ans (number of possible answers per question, typically 5), c_ans (correct_answers), alt_ans (alternate correct, where non-blank), free_marks (grant everyone this share of marks for a question as a minimum)
 
 - Convert correct_answers, alt_correct to character lists
 
@@ -39,21 +39,24 @@ Comparing `ms$c_ans` and `student_responses$response_q` element-by-element
 7. Output as organised excel sheet (and other formats to give individual students their breakdowns?)
 
 
+# Setup
+
 ```{r local_values}
 
-folder <- "/Users/yosemite/OneDrive - University of Exeter/exeter_teaching/marking/bee2038_midterm_marking"
+folder <- "/Users/yosemite/OneDrive - University of Exeter/exeterteaching_newer/marking/beem101_final_20_marking"
 
 markscheme <- "mark_scheme.csv"
-student_responses <- "BEE2038 - data - not marked.xlsx"
-adhoc_adjust <- 5.8333333333
+student_responses <-  "Copy of BEEM101 answers.xlsx"
 
-maxmark <- 100
+adhoc_adjust <- 0
 
-outfile <-  "bee2038_midterm_results.xlsx"
+outfile <-  "beem101_final_results_20.csv"
+outfile_uni_order <-  "beem101_final_results_20_uni_order.csv"
+
 ```
 
 
-```{r setup, include=TRUE, warning=FALSE, echo=FALSE}
+```{r library, include=TRUE, warning=FALSE, echo=FALSE}
 
 knitr::opts_chunk$set(echo = TRUE)
 require("knitr")
@@ -66,11 +69,10 @@ p_load(dplyr,magrittr,purrr,tidyverse,tidyr,broom,janitor, here,glue,dataMaid,re
 
 ```
 
-
-Just go to the relevant directory 
+Just go to the relevant directory  - set above I think
 ```{r}
 
-setwd(folder)
+#setwd(folder)
 
 ```
 
@@ -79,7 +81,7 @@ setwd(folder)
 
 ```{r input-mark-scheme}
 
-ms <- read.csv(markscheme, header=TRUE,  stringsAsFactors=FALSE, row.names = 1) 
+ms <- read.csv(paste(folder,"/",markscheme, sep = ""), header=TRUE,  stringsAsFactors=FALSE, row.names = 1) 
 
 ```
 
@@ -101,7 +103,6 @@ ms$numc_a[i] <- length(ms$alt_ans[[i]])
 }
 ```
 
-
 2. student_responses
 3. Clean student_responses file
 
@@ -109,7 +110,11 @@ sr <- input mark sheet, remove parens
 
 ```{r}
 
-sr <- read_excel(student_responses) 
+sr <- read_excel(paste(folder, "/", student_responses, sep = "")) 
+
+#remove if no candidate number
+sr <- sr %>% filter(!is.na(`Student Candidate Number`)) %>%
+  filter(!grepl("\\D", `Student Candidate Number`))
 
 sr <- lapply(sr, gsub, pattern = ")", replacement = "", fixed = TRUE)
 sr <- lapply(sr, gsub, pattern = "(", replacement = "", fixed = TRUE)
@@ -153,8 +158,6 @@ for(q in rownames(ms)) {   #iterate over all questions
 ```
 
 
-
-
 - If d_partial_credit = 0, then sr$m_pct_q_[label] <= ifelse 'exact match' 1,0
 
 - If d_partial_credit = 1, then 
@@ -171,7 +174,11 @@ for(q in rownames(ms)) {   #iterate over all questions
     sr[[glue("sh_incor",q)]][[i]] <-  (length(sr[[q]][[i]])-sr[[glue("cr_ans_",q)]][[i]])/(ms[[c(q),"num_choices"]] - length(ms[[c(q),"c_ans"]])) #share of incorrect answers chosen
     sr[[glue("net_cor",q)]][[i]] <- max(0,sr[[glue("sh_cor",q)]][[i]]-sr[[glue("sh_incor",q)]][[i]])  #net positive, minimum 0
     sr[[glue("mk_",q)]][[i]] <- sr[[glue("net_cor",q)]][[i]] *ms[[c(q),"point_value"]] #multiply by point value
+    sr[[glue("pv_",q)]][[i]] <- ms[[c(q),"point_value"]] #point value variable
+#NOTE: this is exactly the redundancy I was trying to avoid.    
     sr[[glue("mk_",q)]][[i]] <- sr[[glue("mk_",q)]][[i]]*(ms[[c(q),"d_partial_credit"]]) +  sr[[glue("mk_",q)]][[i]]*(1-(ms[[c(q),"d_partial_credit"]]))*(sr[[glue("sh_incor",q)]][[i]]==0) # Set imperfect answers to 0 where no partial credit is granted 
+    sr[[glue("markpct_",q)]][[i]] <-  sr[[glue("mk_",q)]][[i]]/sr[[glue("pv_",q)]][[i]] #share of points
+#NOT
   }
 }
 
@@ -181,7 +188,10 @@ sr <- sr %>%
 ```
 
 Marks based on alternate correct answers:
+
+(Do: add if command to skip here if no alternates)
 ```{r}
+
 
 for(q in rownames(ms)) {   #iterate over all questions 
   for (i in 1:NROW(sr)) {  #over all students
@@ -212,24 +222,26 @@ for(q in rownames(ms)) {   #iterate over all questions
 
 ```
 
-Generate total marks and percentage
+Generate total marks
 ```{r}
 sr <- sr %>%
   mutate(
     total = rowSums(.[grep("mk_max*", names(.))], na.rm = TRUE),
-    total_adjust = rowSums(.[grep("mk_max*", names(.))], na.rm = TRUE)+ adhoc_adjust,
-    tot_adj_share  = total_adjust/maxmark
+    total_adjust = rowSums(.[grep("mk_max*", names(.))], na.rm = TRUE)+ adhoc_adjust
   )
 ```
 
-Export spreadsheet of marks
+
+# Merge in marks from longer answer questions
+
+# Export spreadsheet of marks
 
 ```{r}
 sr %>% select(1,"total_adjust") %>%
 write_excel_csv(file.path(folder,outfile)) 
 ```
 
-Summary statistics
+# Summary statistics
 
 ```{r}
 
@@ -242,19 +254,57 @@ sr %>%
 
 ```
 
+
+## Sumstats by question 
+
+```{r}
+options(digits = 2)
+
+sr  %>%  summarise_at(vars(starts_with("markpct_")), .funs = c(mean="mean")) %>% transpose()
+
+```
+
+  dplyr::summarise(mean=mean(total_adjust),
+                   median=median(total_adjust),
+                   p25 = quantile(total_adjust,.25),
+                   p75 = quantile(total_adjust,.75)) 
+
+
+
 # Input random ordering from uni, and put the marks in this order, and then export again
 
 ```{r}
 ordering <- read_excel("cand_number_ordering.xlsx", col_names = FALSE) %>% 
 lapply(., gsub, pattern = "#", replacement = "", fixed = TRUE) %>% as.data.frame()
-
+  
 ordering$id  <- 1:nrow(ordering)
 
 test <- sr %>% select(1,"total_adjust") %>%  merge(., ordering,  by.x="Student Candidate Number", by.y="...1",   all = TRUE)  %>% 
   arrange(id) %>%
-  write_excel_csv(file.path(folder,outfile)) 
+  write_excel_csv(file.path(folder,outfile_uni_order)) 
 
+```
+Flag scripts with missing or strange entries:
+```{r}
+srq <- sr %>%  select(1,starts_with("questions"))  
+srq$q_missing <- 0
+  
+for(q in colnames(srq[2:NCOL(srq)-1])) {   #iterate over all questions 
+   for (i in 1:NROW(srq)) {  #over all students
+      srq[[glue("l_",q)]][[i]]   <-  (length(srq[[glue(q)]][[i]])==0)        
+   }
+}
 
+srq <- srq %>% 
+  mutate(
+    q_missing =    rowSums(select(., starts_with("l_")))
+  )
+     
+srq %>% filter(q_missing>0) %>% select(starts_with("Student")) %>%  as.matrix() %>% sort() %>%  print() 
+  
+#filter((length(questions2[[]]) == 0)(questions2)) #if any answer has a blank or a character other than A-E
+
+#126244
 ```
 
 

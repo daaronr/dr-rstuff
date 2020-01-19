@@ -514,12 +514,15 @@ colFmt = function(x, color) {
 
 ################# Coding shortcuts
 
-Sm <- function(df, X) dplyr::select(df, matches(glue::glue("{X}"),  ignore.case = FALSE))
+Sm <- function(df, X) dplyr::select(df, matches({X},  ignore.case = FALSE))  # Sm<t_úX>("x") selects variables matching string 'x', case-sensitive
+sm <- function(df, X) dplyr::select(df, matches({X})) # ... not case-sensitive
 
-sm <- function(df, X) dplyr::select(df, matches(glue::glue("{X}")))
-smn <- function(df, X) dplyr::select(df, matches(glue::glue("{X}"))) %>% names()
+Snotm <- function(df, X) dplyr::select(df, -matches({X})) # ... not case-sensitive
+snotm <- function(df, X) dplyr::select(df, -matches({X})) # ... selects variables *not* matching that string, not case-sensitive
 
-Snm <- function(df, X) dplyr::select(df, -matches(glue::glue("{X}"), ignore.case = FALSE))
 
-snm <- function(df, X) dplyr::select(df, -matches(glue::glue("{X}")))
+Smn <- function(df, X) dplyr::select(df, matches({X}, ignore.case = FALSE)) %>% names() #  Smn("x") creates vector of *names* of variables matching string 'x', case-sensitive
+smn <- function(df, X) dplyr::select(df, matches({X})) %>% names() # not case-sensitive
+
+
 
