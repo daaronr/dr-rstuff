@@ -1,7 +1,7 @@
 ---
-title: "marking-mcq-code"
+title: "marking-beem101-final-2020"
 author: "David Reinstein"
-date: "11/2/2019"
+date: "24 Jan 2020"
 output: html_document
 ---
 
@@ -39,20 +39,20 @@ Comparing `ms$c_ans` and `student_responses$response_q` element-by-element
 7. Output as organised excel sheet (and other formats to give individual students their breakdowns?)
 
 
-# Setup
-
 ```{r local_values}
 
-#folder <- "/Users/yosemite/OneDrive - University of Exeter/exeter_teaching/marking/bee2038_midterm_marking"
-folder <- "XXX"
+folder <- "/Users/yosemite/OneDrive - University of Exeter/exeterteaching_newer/marking/beem101_final_20_marking"
 
 markscheme <- "mark_scheme.csv"
-student_responses <- "BEE2038 - data - not marked.xlsx"
+student_responses <- "Copy of BEEM101 answers.xlsx" #mcq
 adhoc_adjust <- 0
 
-maxmark <- 100
+longansfile <- "101_final_20.csv"
 
-outfile <-  "XXX.xlsx"
+outfile <-  "beem101_final_results_2020.csv"
+
+#outfile_uni_order <-  ""
+
 ```
 
 
@@ -64,13 +64,8 @@ require("knitr")
 opts_knit$set(root.dir = folder)
 
 library(pacman)
-#knitr,dplyr,tidyverse,labelled,citr,reportools,magrittr,glue,huxtable,experiment,dataMaid,broom,janitor,here,xRStata,estimatr,xtable
+#knitr,dplyr,tidyverse,labelled,citr,reporttools,magrittr,glue,huxtable,experiment,dataMaid,broom,janitor,here,xRStata,estimatr,xtable
 p_load(dplyr,magrittr,purrr,tidyverse,tidyr,broom,janitor, here,glue,dataMaid,readr,lubridate,summarytools, httr,jsonlite,rlist,XML, readxl)
-
-
-install.packages("devtools")
-devtools::install_github("hughjonesd/santoku")
-
 
 ```
 
@@ -110,7 +105,7 @@ ms$numc_a[i] <- length(ms$alt_ans[[i]])
 ```
 
 
-2. student_responses
+# 2. input student_responses
 3. Clean student_responses file
 
 sr <- input mark sheet, remove parens
@@ -118,6 +113,7 @@ sr <- input mark sheet, remove parens
 ```{r}
 
 sr <- read_excel(paste(folder, "/", student_responses, sep = ""))
+
 
 #remove if no candidate number
 sr <- sr %>% filter(!is.na(`Student Candidate Number`)) %>%
@@ -197,51 +193,47 @@ sr <- sr %>%
 
 ```
 
-Marks based on alternate correct answers:
 
-(Do: add if command to skip here if no alternates)
-```{r}
+## Ad-hoc adjustment computation
 
 
-for(q in rownames(ms)) {   #iterate over all questions
-  for (i in 1:NROW(sr)) {  #over all students
-    sr[[glue("cr_ans_alt",q)]][[i]] <- length(intersect(sr[[q]][[i]], ms[[c(q),"alt_ans"]]))
-  }
-}
+```{r adhocadj}
 
-for(q in rownames(ms)) {   #iterate over all questions
-  for (i in 1:NROW(sr)) {  #over all students
-    sr[[glue("sh_cor_alt",q)]][[i]]   <- sr[[glue("cr_ans_alt",q)]][[i]]/length(ms[[c(q),"alt_ans"]]) #share of correct answers attained
-    sr[[glue("sh_incor_alt",q)]][[i]] <-  (length(sr[[q]][[i]])-sr[[glue("cr_ans_alt",q)]][[i]])/(ms[[c(q),"num_choices"]] - length(ms[[c(q),"alt_ans"]])) #share of incorrect answers chosen
-    sr[[glue("net_cor_alt",q)]][[i]] <- max(0,sr[[glue("sh_cor_alt",q)]][[i]]-sr[[glue("sh_incor_alt",q)]][[i]])  #net positive, minimum 0
-    sr[[glue("mk_alt",q)]][[i]] <- sr[[glue("net_cor_alt",q)]][[i]] *ms[[c(q),"point_value"]] #multiply by point value
-  }
-}
+options(digits = 2)
 
-```
+(markpct_p80 <-  sr %>% select(starts_with("markpct_")) %>%
+   summarise_all(list( p80 = ~ quantile(.x,.80))) %>% transpose())
 
-Take max of marking versions:
 
-```{r}
+#todo: automate this
+#for (i in seq_along(sr %>% select(starts_with("markpct_")))){
+#adjust[[i]] <- (1-markpct_p80$`80%`$markpct_questions2_p80)*sr$pv_questions2
+#}
 
-for(q in rownames(ms)) {   #iterate over all questions
-  for (i in 1:NROW(sr)) {  #over all students
-    sr[[glue("mk_max",q)]][[i]] <- max(sr[[glue("mk_",q)]][[i]], sr[[glue("mk_alt",q)]][[i]],ms[[c(q),"free_marks"]],na.rm = TRUE)
-  }
-  }
+adhoc_adjust <- (1-markpct_p80$`80%`$markpct_questions2_p80)*sr$pv_questions1 +
+  (1-markpct_p80$`80%`$markpct_questions2_p80)*sr$pv_questions2 +
+  (1-markpct_p80$`80%`$markpct_questions3_p80)*sr$pv_questions3 +
+(1-markpct_p80$`80%`$markpct_questions4_p80)*sr$pv_questions4 +
+(1-markpct_p80$`80%`$markpct_questions5_p80)*sr$pv_questions5 +
+(1-markpct_p80$`80%`$markpct_questions6_p80)*sr$pv_questions6 +
+(1-markpct_p80$`80%`$markpct_questions7_p80)*sr$pv_questions7 +
+(1-markpct_p80$`80%`$markpct_questions8_p80)*sr$pv_questions8 +
+(1-markpct_p80$`80%`$markpct_questions9_p80)*sr$pv_questions9 +
+(1-markpct_p80$`80%`$markpct_questions10_p80)*sr$pv_questions10
+
 
 ```
 
-## Generate total marks and percentage
-```{r}
+
+## Generate total marks
+```{r gentot}
+
 sr <- sr %>%
   mutate(
-    total = rowSums(.[grep("mk_max*", names(.))], na.rm = TRUE),
-    total_adjust = rowSums(.[grep("mk_max*", names(.))], na.rm = TRUE)+ adhoc_adjust,
-    tot_adj_share  = total_adjust/maxmark
+    total = rowSums(.[grep("mk_q*", names(.))], na.rm = TRUE),
+    total_adjust = rowSums(.[grep("mk_q*", names(.))], na.rm = TRUE)+ adhoc_adjust
   )
 ```
-
 
 
 # Merge in marks from longer answer questions
@@ -251,49 +243,70 @@ sr <- sr %>%
 long_ans <- read.csv(paste(folder,"/",longansfile, sep = ""), header=TRUE,  stringsAsFactors=FALSE)  %>%
   as_tibble()
 
-sr_all <- sr %>% mutate(Cand_num = as.numeric(Cand_num)) %>%
+sr_all <- sr %>% mutate(Cand_num = as.numeric(`Student Candidate Number`)) %>%
   full_join(long_ans, ., by=c("Cand_num")) %>%
-  select(Cand_num, matches("total_adjust|mk_max|Mark|total.for"),starts_with("q"),-starts_with("qu")) %>%
-  mutate(total_mark=total.for.part.B..formula.+total_adjust) %>%
-  select(Cand_num,total_mark,starts_with("total"), everything()) %T>%
+  mutate(total_mark= b_total + c_total + total_adjust) %>%
+  select(Cand_num, matches("total_adjust|mk_max|Mark|total_mark|b_total|c_total"),starts_with("q"),-starts_with("qu")) %>%
+  select(Cand_num,total_mark,b_total,starts_with("total"), everything()) %T>%
   print()
-
 
 ```
 
-# Exporting and reporting
+# Flag scripts with missing or strange entries:
+```{r}
+srq <- sr %>%  select(1,starts_with("questions"))
+srq$q_missing <- 0
 
+for(q in colnames(srq[2:NCOL(srq)-1])) {   #iterate over all questions
+   for (i in 1:NROW(srq)) {  #over all students
+      srq[[glue("l_",q)]][[i]]   <-  (length(srq[[glue(q)]][[i]])==0)
+   }
+}
+
+srq <- srq %>%
+  mutate(
+    q_missing =    rowSums(select(., starts_with("l_")))
+  )
+
+srq %>% filter(q_missing>0) %>% select(starts_with("Student")) %>%  as.matrix() %>% sort() %>%  print()
+
+#filter((length(questions2[[]]) == 0)(questions2)) #if any answer has a blank or a character other than A-E
+
+```
+
+
+# Exporting and reporting
 
 ## Calculate mark classification as factor
 
-
 ```{r markclass}
+
 
 sr_all <- sr_all %>%
       mutate(
         mark_class = cut(total_mark, breaks = c(0, 39, 49, 59, 69, 100), right=FALSE, labels= c("Fail", "3", "2.2", "2.1", "1st"))
       )
 
-
-```
-
 ## Export spreadsheet of marks
 
 ```{r}
-sr %>% select(1,"total_adjust") %>%
+
+sr_all %>%
+  rename_all(
+    list(
+    ~stringr::str_replace_all(.,c('maxquestions'='q','adjust'='part_a','.for.part.B..formula.'='_part_B','Mark.1...out.of.'='mark_B_first_q_from_', 'Mark.2...out.of.'='mark_B_second_q_from_','q(.)c'='q\\1_comments'))
+    )
+  ) %>%
+  arrange(Cand_num) %>%
 write_excel_csv(file.path(folder,outfile))
+
 ```
 
-# Summary statistics
+## Summary statistics
 
 ```{r}
 
 options(digits = 4)
-sr %>%
-  dplyr::summarise(mean=mean(total_adjust),
-                   median=median(total_adjust),
-                   p25 = quantile(total_adjust,.25),
-                   p75 = quantile(total_adjust,.75))
 
 sr_all %>%
   dplyr::summarise(mean=mean(total_mark, na.rm = TRUE),
@@ -301,9 +314,11 @@ sr_all %>%
                    p25 = quantile(total_mark,.25, na.rm = TRUE),
                    p75 = quantile(total_mark,.75, na.rm = TRUE))
 
-#marks by question
-sr %>% select(starts_with("mk_maxq")) %>%
-  dplyr::summarise_all(mean) %>% transpose()
+# marks by question
+
+sr_all %>% select(starts_with("markpct_questions")) %>%
+  dplyr::summarise_all(mean, na.rm=TRUE) %>% transpose()
+
 ```
 
 
@@ -349,7 +364,7 @@ for (i in seq_along(x)) {
 
 ```
 
-# Input random ordering from uni, and put the marks in this order, and then export again
+## Input random ordering from uni, and put the marks in this order, and then export again
 
 ```{r}
 ordering <- read_excel("cand_number_ordering.xlsx", col_names = FALSE) %>%
@@ -357,12 +372,12 @@ lapply(., gsub, pattern = "#", replacement = "", fixed = TRUE) %>% as.data.frame
 
 ordering$id  <- 1:nrow(ordering)
 
-test <- sr %>% select(1,"total_adjust") %>%  merge(., ordering,  by.x="Student Candidate Number", by.y="...1",   all = TRUE)  %>%
+test <- sr_all %>% select(1,"total_mark") %>%  merge(., ordering,  by.x="Cand_num", by.y="...1",   all = TRUE)  %>%
   arrange(id) %>%
-  write_excel_csv(file.path(folder,outfile))
-
+  write_excel_csv(file.path(folder,"ordered_marks.csv"))
 
 ```
+
 
 
 

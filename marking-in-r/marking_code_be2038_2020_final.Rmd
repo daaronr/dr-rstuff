@@ -24,7 +24,7 @@ Comparing `ms$c_ans` and `student_responses$response_q` element-by-element
 
 - If d_partial_credit = 0, then sr$m_pct_q_[label] <= ifelse 'exact match' 1,0
 
-- If d_partial_credit = 1, then 
+- If d_partial_credit = 1, then
   - Share of correct: (sum 'list elements in common') / length(`ms$q_label`)
   - less 'Share of incorrect': ((length(`ms$q_label`) - sum 'list elements in common')) / `(ms$num_ans - length(ms$c_ans)`)
 
@@ -46,11 +46,13 @@ Comparing `ms$c_ans` and `student_responses$response_q` element-by-element
 folder <- "/Users/yosemite/OneDrive - University of Exeter/exeterteaching_newer/marking/be2038_final_20_marking"
 
 markscheme <- "mark_scheme.csv"
+longansfile <- "2038finalmark2020-Grid view_all.csv"
 student_responses <-  "Copy of BEE2038 Answers.xlsx"
 #student_responses <- "BEE2038 - data - not marked.xlsx"
 #student_responses <- "bee2038-midterm-2019-extra-ilp.xlsx"
 
-adhoc_adjust <- 0
+#adhoc_adjust - done at bottom <- 3+
+  #Marks added for questions where top-20% didn't get it.
 
 outfile <-  "bee2038_final_results_20.csv"
 outfile_uni_order <-  "bee2038_final_results_20_uni_order.csv"
@@ -83,7 +85,7 @@ Just go to the relevant directory  - set above I think
 
 ```{r input-mark-scheme}
 
-ms <- read.csv(paste(folder,"/",markscheme, sep = ""), header=TRUE,  stringsAsFactors=FALSE, row.names = 1) 
+ms <- read.csv(paste(folder,"/",markscheme, sep = ""), header=TRUE,  stringsAsFactors=FALSE, row.names = 1)
 
 ```
 
@@ -99,7 +101,7 @@ ms$alt_ans <- lapply(strsplit(as.character(ms$alt_ans),split=','),trimws)
 Count number of correct answers
 ```{r}
 
-for (i in 1:NROW(ms)) {          
+for (i in 1:NROW(ms)) {
 ms$numc[i] <- length(ms$c_ans[[i]])
 ms$numc_a[i] <- length(ms$alt_ans[[i]])
 }
@@ -112,7 +114,8 @@ sr <- input mark sheet, remove parens
 
 ```{r}
 
-sr <- read_excel(paste(folder, "/", student_responses, sep = "")) 
+sr <- read_excel(paste(folder, "/", student_responses, sep = ""))
+
 
 #remove if no candidate number
 sr <- sr %>% filter(!is.na(`Student Candidate Number`)) %>%
@@ -128,16 +131,17 @@ sr <- as_tibble(sr)
 Convert all but the first column to a list column:
 ```{r}
 
-sr_base <- sr 
+sr_base <- sr # preserve original; crappy workaround
 
 makeitlist <- function(x) (lapply(strsplit(as.character(x),split=','),trimws))
 
-for (i in 2:length(sr)) {          
-  sr[[i]] <- makeitlist(sr[[i]]) 
+for (i in 2:length(sr)) {
+  sr[[i]] <- makeitlist(sr[[i]])
 }
 
 ```
 
+# Marking process
 
 4. Create additional 'sr$m_pct_q_[label]' 'share of marks to be awarded' as follows
 
@@ -148,13 +152,13 @@ Compare `ms$c_ans` and `sr$response_q` element-by-element and count number of ma
 
 #This seems to work, element by element...
 #length(intersect(sr$questions3[[2]], ms[[c("questions3"),"c_ans"]]))
-#length(intersect(sr$questions3[[1]], ms[[c("questions3"),"c_ans"]])) 
+#length(intersect(sr$questions3[[1]], ms[[c("questions3"),"c_ans"]]))
 
 #now iterate it over all questions and over all students
 
-for(q in rownames(ms)) {   #iterate over all questions 
+for(q in rownames(ms)) {   #iterate over all questions
   for (i in 1:NROW(sr)) {  #over all students
-    sr[[glue("cr_ans_",q)]][[i]] <- length(intersect(sr[[q]][[i]], ms[[c(q),"c_ans"]])) 
+    sr[[glue("cr_ans_",q)]][[i]] <- length(intersect(sr[[q]][[i]], ms[[c(q),"c_ans"]]))
   }
 }
 ```
@@ -162,7 +166,7 @@ for(q in rownames(ms)) {   #iterate over all questions
 
 - If d_partial_credit = 0, then sr$m_pct_q_[label] <= ifelse 'exact match' 1,0
 
-- If d_partial_credit = 1, then 
+- If d_partial_credit = 1, then
   - Share of correct: (sum 'list elements in common') / length(`ms$q_label`)
   - less 'Share of incorrect': ((length(`ms$q_label`) - sum 'list elements in common')) / `(ms$num_ans - length(ms$c_ans)`)
 
@@ -170,15 +174,15 @@ for(q in rownames(ms)) {   #iterate over all questions
 
 #- If d_partial_credit = 0, then sr$m_pct_q_[label] <= ifelse 'exact match' 1,0
 
-for(q in rownames(ms)) {   #iterate over all questions 
+for(q in rownames(ms)) {   #iterate over all questions
   for (i in 1:NROW(sr)) {  #over all students
     sr[[glue("sh_cor",q)]][[i]]   <- sr[[glue("cr_ans_",q)]][[i]]/length(ms[[c(q),"c_ans"]]) #share of correct answers attained
     sr[[glue("sh_incor",q)]][[i]] <-  (length(sr[[q]][[i]])-sr[[glue("cr_ans_",q)]][[i]])/(ms[[c(q),"num_choices"]] - length(ms[[c(q),"c_ans"]])) #share of incorrect answers chosen
     sr[[glue("net_cor",q)]][[i]] <- max(0,sr[[glue("sh_cor",q)]][[i]]-sr[[glue("sh_incor",q)]][[i]])  #net positive, minimum 0
     sr[[glue("mk_",q)]][[i]] <- sr[[glue("net_cor",q)]][[i]] *ms[[c(q),"point_value"]] #multiply by point value
     sr[[glue("pv_",q)]][[i]] <- ms[[c(q),"point_value"]] #point value variable
-#NOTE: this is exactly the redundancy I was trying to avoid.    
-    sr[[glue("mk_",q)]][[i]] <- sr[[glue("mk_",q)]][[i]]*(ms[[c(q),"d_partial_credit"]]) +  sr[[glue("mk_",q)]][[i]]*(1-(ms[[c(q),"d_partial_credit"]]))*(sr[[glue("sh_incor",q)]][[i]]==0) # Set imperfect answers to 0 where no partial credit is granted 
+#NOTE: this is exactly the redundancy I was trying to avoid.
+    sr[[glue("mk_",q)]][[i]] <- sr[[glue("mk_",q)]][[i]]*(ms[[c(q),"d_partial_credit"]]) +  sr[[glue("mk_",q)]][[i]]*(1-(ms[[c(q),"d_partial_credit"]]))*(sr[[glue("sh_incor",q)]][[i]]==0) # Set imperfect answers to 0 where no partial credit is granted
     sr[[glue("markpct_",q)]][[i]] <-  sr[[glue("mk_",q)]][[i]]/sr[[glue("pv_",q)]][[i]] #share of points
 #NOT
   }
@@ -189,55 +193,101 @@ sr <- sr %>%
 
 ```
 
-Marks based on alternate correct answers:
-```{r}
 
-for(q in rownames(ms)) {   #iterate over all questions 
-  for (i in 1:NROW(sr)) {  #over all students
-    sr[[glue("cr_ans_alt",q)]][[i]] <- length(intersect(sr[[q]][[i]], ms[[c(q),"alt_ans"]])) 
-  }
-}
+## Ad-hoc adjustment computation
 
-for(q in rownames(ms)) {   #iterate over all questions 
-  for (i in 1:NROW(sr)) {  #over all students
-    sr[[glue("sh_cor_alt",q)]][[i]]   <- sr[[glue("cr_ans_alt",q)]][[i]]/length(ms[[c(q),"alt_ans"]]) #share of correct answers attained
-    sr[[glue("sh_incor_alt",q)]][[i]] <-  (length(sr[[q]][[i]])-sr[[glue("cr_ans_alt",q)]][[i]])/(ms[[c(q),"num_choices"]] - length(ms[[c(q),"alt_ans"]])) #share of incorrect answers chosen
-    sr[[glue("net_cor_alt",q)]][[i]] <- max(0,sr[[glue("sh_cor_alt",q)]][[i]]-sr[[glue("sh_incor_alt",q)]][[i]])  #net positive, minimum 0
-    sr[[glue("mk_alt",q)]][[i]] <- sr[[glue("net_cor_alt",q)]][[i]] *ms[[c(q),"point_value"]] #multiply by point value
-  }
-}
+
+```{r adhocadj}
+
+options(digits = 2)
+
+(markpct_p80 <-  sr %>% 
+    select(starts_with("markpct_")) %>%
+   summarise_all(list( p80 = ~ quantile(.x,.80))) %>% transpose())
+
+
+#todo: automate this
+#for (i in seq_along(sr %>% select(starts_with("markpct_")))){
+#adjust[[i]] <- (1-markpct_p80$`80%`$markpct_questions2_p80)*sr$pv_questions2
+#}
+
+adhoc_adjust <- (1-markpct_p80$`80%`$markpct_questions2_p80)*sr$pv_questions1 +
+  (1-markpct_p80$`80%`$markpct_questions2_p80)*sr$pv_questions2 +
+  (1-markpct_p80$`80%`$markpct_questions3_p80)*sr$pv_questions3 +
+(1-markpct_p80$`80%`$markpct_questions4_p80)*sr$pv_questions4 +
+(1-markpct_p80$`80%`$markpct_questions5_p80)*sr$pv_questions5 +
+(1-markpct_p80$`80%`$markpct_questions6_p80)*sr$pv_questions6 +
+(1-markpct_p80$`80%`$markpct_questions7_p80)*sr$pv_questions7 +
+(1-markpct_p80$`80%`$markpct_questions8_p80)*sr$pv_questions8 +
+(1-markpct_p80$`80%`$markpct_questions9_p80)*sr$pv_questions9 +
+(1-markpct_p80$`80%`$markpct_questions10_p80)*sr$pv_questions10
+(1-markpct_p80$`80%`$markpct_questions11_p80)*sr$pv_questions11 +
+(1-markpct_p80$`80%`$markpct_questions12_p80)*sr$pv_questions12 +
+(1-markpct_p80$`80%`$markpct_questions13_p80)*sr$pv_questions13 +
+(1-markpct_p80$`80%`$markpct_questions14_p80)*sr$pv_questions14 +
+(1-markpct_p80$`80%`$markpct_questions15_p80)*sr$pv_questions15 +
+(1-markpct_p80$`80%`$markpct_questions16_p80)*sr$pv_questions16 +
+(1-markpct_p80$`80%`$markpct_questions17_p80)*sr$pv_questions17
+
+
 
 ```
 
-Take max of marking versions:
 
-```{r}
-
-for(q in rownames(ms)) {   #iterate over all questions 
-  for (i in 1:NROW(sr)) {  #over all students
-    sr[[glue("mk_max",q)]][[i]] <- max(sr[[glue("mk_",q)]][[i]], sr[[glue("mk_alt",q)]][[i]],ms[[c(q),"free_marks"]],na.rm = TRUE)
-  }
-  }
-
-```
-
-Generate total marks
-```{r}
+## Generate total marks
+```{r gentot}
 sr <- sr %>%
   mutate(
-    total = rowSums(.[grep("mk_max*", names(.))], na.rm = TRUE),
-    total_adjust = rowSums(.[grep("mk_max*", names(.))], na.rm = TRUE)+ adhoc_adjust
+    total = rowSums(.[grep("mk_q*", names(.))], na.rm = TRUE),
+    total_adjust = rowSums(.[grep("mk_q*", names(.))], na.rm = TRUE)+ adhoc_adjust
   )
+
 ```
 
 
-# Merge in marks from longer answer questions
+# Merge in marks from longer answer questions, flag unmerged IDs
 
-# Export spreadsheet of marks
+```{r merge-long-a}
+
+long_ans <- read.csv(paste(folder,"/",longansfile, sep = ""), header=TRUE,  stringsAsFactors=FALSE, row.names = 1)  %>%
+select(-SID, -Final_total)  %>%
+  as_tibble()
+
+sr_all <- sr %>% mutate(cand_num = as.numeric(`Student Candidate Number`)) %>%
+  full_join(long_ans, ., by=c("cand_num")) %>%
+    rowwise() %>% 
+  mutate(total_mark=sum(B_total, total_adjust, na.rm = TRUE),
+         missing_mcq = is.na(total_adjust),
+         missing_longans = is.na(B_total)
+         ) %>%
+  rename(mcq_marks = total_adjust) %>% 
+  select(cand_num, matches("cand_num|Choices|B_total|total_mark|mk_max|Mark|total.for|cmt|comments|missing|mcq_marks"),starts_with("q"),-starts_with("qu"),-fields_unmarked) %>%
+  select(cand_num,total_mark,starts_with("total"), everything()) %T>%
+  print()
+
+```
+
+
+
+# Exporting and reporting
+
+## Calculate mark classification as factor
+
+```{r markclass}
+
+sr_all <- sr_all %>%
+      mutate(
+        mark_class = cut(total_mark, breaks = c(0, 39, 49, 59, 69, 100), right=FALSE, labels= c("Fail", "3", "2.2", "2.1", "1st"))
+      )
+
+```
+
+
+## Export spreadsheet of marks
 
 ```{r}
 sr %>% select(1,"total_adjust") %>%
-write_excel_csv(file.path(folder,outfile)) 
+write_excel_csv(file.path(folder,outfile))
 ```
 
 # Summary statistics
@@ -245,67 +295,138 @@ write_excel_csv(file.path(folder,outfile))
 ```{r}
 
 options(digits = 4)
-sr %>% 
-  dplyr::summarise(mean=mean(total_adjust),
-                   median=median(total_adjust),
-                   p25 = quantile(total_adjust,.25),
-                   p75 = quantile(total_adjust,.75)) 
+sr_all %>%
+  group_by() %>% 
+  filter(missing_mcq==FALSE & missing_longans==FALSE) %>%
+  dplyr::summarise(mean=mean(total_mark, na.rm = TRUE),
+                   median=median(total_mark, na.rm = TRUE),
+                   sd=sd(total_mark, na.rm = TRUE),
+                   p25 = quantile(total_mark,.25, na.rm = TRUE),
+                   p75 = quantile(total_mark,.75, na.rm = TRUE))
 
 ```
 
 
-## Sumstats by question 
+**Mark classifications**
+
+```{r}
+
+sr_all %>%   
+  filter(missing_mcq==FALSE & missing_longans==FALSE) %>%
+ tabyl(mark_class)
+
+```
+
+
+## Sumstats by question
 
 ```{r}
 options(digits = 2)
 
-sr  %>%  summarise_at(vars(starts_with("markpct_")), .funs = c(mean="mean")) %>% transpose()
+sr  %>%  
+  summarise_at(vars(starts_with("markpct_")), .funs = c(mean="mean")) %>% transpose()
+
+
+sr %>% select(starts_with("markpct_")) %>%
+   summarise_all(list( p80 = ~ quantile(.x,.80))) %>% transpose()
 
 ```
 
-  dplyr::summarise(mean=mean(total_adjust),
-                   median=median(total_adjust),
-                   p25 = quantile(total_adjust,.25),
-                   p75 = quantile(total_adjust,.75)) 
+
+## Export one file per student-row (feedback)
+ 
+```{r, eval=FALSE}
+
+sr_all %>%
+  rename_all(
+    list(
+    ~stringr::str_replace_all(.,c('maxquestions'='q','adjust'='part_a','.for.part.B..formula.'='_part_B','Mark.1...out.of.'='mark_B_first_q_from_', 'Mark.2...out.of.'='mark_B_second_q_from_','q(.)c'='q\\1_comments'))
+    )
+  ) %>%
+  dplyr::arrange(cand_num) %>%
+  mutate(index = 1:n()) %>%
+  rowwise %>%
+  do(write.table(.,
+                 file=paste0("candidate_", .$Cand_num, ".tsv"),
+                 row.names=FALSE, sep="\t", eol = "\r\n" ) )
+
+for (i in 1:nrow(sr_all)) {
+    sink(paste0(folder, "/feedback_cand_", sr_all$Cand_num[i], ".txt"))
+  print(i)
+      print(sr_all[glue('{i}'),])
+    sink()
+}
 
 
 
-# Input random ordering from uni, and put the marks in this order, and then export again
+```
+
+# Admin 
+
+## Select 10 percent of scripts (or 10 scripts) for moderation
+
+Oversample (5x-weight) fails, underweight (1/2) firsts 
 
 ```{r}
-ordering <- read_excel("cand_number_ordering.xlsx", col_names = FALSE) %>% 
-lapply(., gsub, pattern = "#", replacement = "", fixed = TRUE) %>% as.data.frame()
+
+mod_sample <- sr_all %>%
+  filter(missing_mcq==FALSE) %>%
+  group_by(mark_class) %>% 
+  sample_n(case_when(
+    mark_class=="Fail" ~10,
+    mark_class=="3" ~7,
+    mark_class=="2.2" ~6,
+    mark_class=="2.1" ~6,
+    mark_class=="1st" ~6,
+    TRUE ~0)) %>%
+  arrange(desc(mark_class), cand_num) %>% 
+  select(cand_num, mark_class, total_mark, mcq_marks, B_total, Choices, matches("cmt|Comments") )   
+
+
+#sample_frac(0.1, weight= 1 + ifelse(mark_class=="Fail",4,0) + ifelse(mark_class=="1st",-1/3,0))
   
+mod_sample %>% tabyl(mark_class)
+
+mod_sample %>% 
+  write_excel_csv(file.path(folder,"moderation_scripts.csv"))
+
+
+```
+
+## Input random ordering from uni, and put the marks in this order, and then export again
+
+```{r}
+ordering <- read_excel("cand_number_ordering.xlsx", col_names = FALSE) %>%
+lapply(., gsub, pattern = "#", replacement = "", fixed = TRUE) %>% as.data.frame()
+
 ordering$id  <- 1:nrow(ordering)
 
-test <- sr %>% select(1,"total_adjust") %>%  merge(., ordering,  by.x="Student Candidate Number", by.y="...1",   all = TRUE)  %>% 
+test <- sr %>% select(1,"total_adjust") %>%  merge(., ordering,  by.x="Student Candidate Number", by.y="...1",   all = TRUE)  %>%
   arrange(id) %>%
-  write_excel_csv(file.path(folder,outfile_uni_order)) 
+  write_excel_csv(file.path(folder,outfile_uni_order))
 
 
 ```
+
 Flag scripts with missing or strange entries:
 ```{r}
-srq <- sr %>%  select(1,starts_with("questions"))  
+srq <- sr %>%  select(1,starts_with("questions"))
 srq$q_missing <- 0
-  
-for(q in colnames(srq[2:NCOL(srq)-1])) {   #iterate over all questions 
+
+for(q in colnames(srq[2:NCOL(srq)-1])) {   #iterate over all questions
    for (i in 1:NROW(srq)) {  #over all students
-      srq[[glue("l_",q)]][[i]]   <-  (length(srq[[glue(q)]][[i]])==0)        
+      srq[[glue("l_",q)]][[i]]   <-  (length(srq[[glue(q)]][[i]])==0)
    }
 }
 
-srq <- srq %>% 
+srq <- srq %>%
   mutate(
     q_missing =    rowSums(select(., starts_with("l_")))
   )
-     
-srq %>% filter(q_missing>0) %>% select(starts_with("Student")) %>%  as.matrix() %>% sort() %>%  print() 
-  
+
+srq %>% filter(q_missing>0) %>% select(starts_with("Student")) %>%  as.matrix() %>% sort() %>%  print()
+
 #filter((length(questions2[[]]) == 0)(questions2)) #if any answer has a blank or a character other than A-E
 
 #126244
 ```
-
-
-
