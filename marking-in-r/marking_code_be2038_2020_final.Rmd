@@ -193,9 +193,43 @@ sr <- sr %>%
 
 ```
 
+Marks based on alternate correct answers:
+```{r}
+
+for(q in rownames(ms)) {   #iterate over all questions 
+  for (i in 1:NROW(sr)) {  #over all students
+    sr[[glue("cr_ans_alt",q)]][[i]] <- length(intersect(sr[[q]][[i]], ms[[c(q),"alt_ans"]])) 
+  }
+}
+
+for(q in rownames(ms)) {   #iterate over all questions 
+  for (i in 1:NROW(sr)) {  #over all students
+    sr[[glue("sh_cor_alt",q)]][[i]]   <- sr[[glue("cr_ans_alt",q)]][[i]]/length(ms[[c(q),"alt_ans"]]) #share of correct answers attained
+    sr[[glue("sh_incor_alt",q)]][[i]] <-  (length(sr[[q]][[i]])-sr[[glue("cr_ans_alt",q)]][[i]])/(ms[[c(q),"num_choices"]] - length(ms[[c(q),"alt_ans"]])) #share of incorrect answers chosen
+    sr[[glue("net_cor_alt",q)]][[i]] <- max(0,sr[[glue("sh_cor_alt",q)]][[i]]-sr[[glue("sh_incor_alt",q)]][[i]])  #net positive, minimum 0
+    sr[[glue("mk_alt",q)]][[i]] <- sr[[glue("net_cor_alt",q)]][[i]] *ms[[c(q),"point_value"]] #multiply by point value
+  }
+}
+
+```
+
+Take max of marking versions:
+
+```{r}
+
+for(q in rownames(ms)) {   #iterate over all questions 
+  for (i in 1:NROW(sr)) {  #over all students
+    sr[[glue("mk_max",q)]][[i]] <- max(sr[[glue("mk_",q)]][[i]], sr[[glue("mk_alt",q)]][[i]],ms[[c(q),"free_marks"]],na.rm = TRUE)
+  }
+  }
+
+```
+
+
 
 ## Ad-hoc adjustment computation
 
+(Note -- this is not yet adapted to alternate marking version)
 
 ```{r adhocadj}
 
@@ -203,7 +237,7 @@ options(digits = 2)
 
 (markpct_p80 <-  sr %>% 
     select(starts_with("markpct_")) %>%
-   summarise_all(list( p80 = ~ quantile(.x,.80))) %>% transpose())
+   summarise_all(list(p80 = ~ quantile(.x,.80))) %>% transpose())
 
 
 #todo: automate this
@@ -229,8 +263,6 @@ adhoc_adjust <- (1-markpct_p80$`80%`$markpct_questions2_p80)*sr$pv_questions1 +
 (1-markpct_p80$`80%`$markpct_questions16_p80)*sr$pv_questions16 +
 (1-markpct_p80$`80%`$markpct_questions17_p80)*sr$pv_questions17
 
-
-
 ```
 
 
@@ -238,8 +270,8 @@ adhoc_adjust <- (1-markpct_p80$`80%`$markpct_questions2_p80)*sr$pv_questions1 +
 ```{r gentot}
 sr <- sr %>%
   mutate(
-    total = rowSums(.[grep("mk_q*", names(.))], na.rm = TRUE),
-    total_adjust = rowSums(.[grep("mk_q*", names(.))], na.rm = TRUE)+ adhoc_adjust
+    total = rowSums(.[grep("mk_maxq*", names(.))], na.rm = TRUE),
+    total_adjust = rowSums(.[grep("mk_maxq*", names(.))], na.rm = TRUE)+ adhoc_adjust
   )
 
 ```
@@ -386,6 +418,10 @@ mod_sample <- sr_all %>%
 #sample_frac(0.1, weight= 1 + ifelse(mark_class=="Fail",4,0) + ifelse(mark_class=="1st",-1/3,0))
   
 mod_sample %>% tabyl(mark_class)
+
+print("collect the scripts:")
+
+mod_sample %>%  ungroup() %>%  select(cand_num) %>% dplyr::arrange(cand_num) %>% print(n=Inf)
 
 mod_sample %>% 
   write_excel_csv(file.path(folder,"moderation_scripts.csv"))

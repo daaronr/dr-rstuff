@@ -166,8 +166,6 @@ for(q in rownames(ms)) {   #iterate over all questions
 ```
 
 
-
-
 - If d_partial_credit = 0, then sr$m_pct_q_[label] <= ifelse 'exact match' 1,0
 
 - If d_partial_credit = 1, then
@@ -289,12 +287,6 @@ write_excel_csv(file.path(folder,outfile))
 ```{r}
 
 options(digits = 4)
-sr %>%
-  dplyr::summarise(mean=mean(total_adjust),
-                   median=median(total_adjust),
-                   p25 = quantile(total_adjust,.25),
-                   p75 = quantile(total_adjust,.75))
-
 sr_all %>%
   dplyr::summarise(mean=mean(total_mark, na.rm = TRUE),
                    median=median(total_mark, na.rm = TRUE),
