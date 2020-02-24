@@ -1,7 +1,7 @@
 ---
-title: "marking-beem101-final-2020"
+title: "Extra-scripts - marking-mcq-code - for bee2038 - 2020"
 author: "David Reinstein"
-date: "24 Jan 2020"
+date: "11/2/2019 adapted 14 Jan 2020"
 output: html_document
 ---
 
@@ -39,19 +39,24 @@ Comparing `ms$c_ans` and `student_responses$response_q` element-by-element
 7. Output as organised excel sheet (and other formats to give individual students their breakdowns?)
 
 
+# Setup
+
 ```{r local_values}
 
-folder <- "/Users/yosemite/OneDrive - University of Exeter/exeterteaching_newer/marking/beem101_final_20_marking"
+folder <- "/Users/yosemite/OneDrive - University of Exeter/exeterteaching_newer/marking/be2038_final_20_marking"
 
 markscheme <- "mark_scheme.csv"
-student_responses <- "Copy of BEEM101 answers.xlsx" #mcq
-adhoc_adjust <- 0
+longansfile <- "2038finalmark2020-Grid view_all.csv"
+student_responses <-  "bee2038-recovered-missing-scripts.xlsx"
+#student_responses <- "BEE2038 - data - not marked.xlsx"
+#student_responses <- "bee2038-midterm-2019-extra-ilp.xlsx"
+official_sheet <- "BEE2038_official_marksheet.xlsx"
 
-longansfile <- "101_final_20.csv"
+#adhoc_adjust - done at bottom <- 3+
+  #Marks added for questions where top-20% didn't get it.
 
-outfile <-  "beem101_final_results_2020.csv"
-
-#outfile_uni_order <-  ""
+outfile <-  "addmissings_bee2038_final_results_20.csv"
+outfile_uni_order <-  "addmissings_bee2038_final_results_20_uni_order.csv"
 
 ```
 
@@ -69,11 +74,10 @@ p_load(dplyr,magrittr,purrr,tidyverse,tidyr,broom,janitor, here,glue,dataMaid,re
 
 ```
 
-
-Just go to the relevant directory
+Just go to the relevant directory  - set above I think
 ```{r}
 
-setwd(folder)
+#setwd(folder)
 
 ```
 
@@ -104,9 +108,10 @@ ms$numc_a[i] <- length(ms$alt_ans[[i]])
 }
 ```
 
-
-# 2. input student_responses
+2. student_responses
 3. Clean student_responses file
+
+# Input mark sheet, remove garbage 
 
 sr <- input mark sheet, remove parens
 
@@ -162,8 +167,6 @@ for(q in rownames(ms)) {   #iterate over all questions
 ```
 
 
-
-
 - If d_partial_credit = 0, then sr$m_pct_q_[label] <= ifelse 'exact match' 1,0
 
 - If d_partial_credit = 1, then
@@ -193,74 +196,281 @@ sr <- sr %>%
 
 ```
 
+Marks based on alternate correct answers:
+```{r}
+
+for(q in rownames(ms)) {   #iterate over all questions 
+  for (i in 1:NROW(sr)) {  #over all students
+    sr[[glue("cr_ans_alt",q)]][[i]] <- length(intersect(sr[[q]][[i]], ms[[c(q),"alt_ans"]])) 
+  }
+}
+
+for(q in rownames(ms)) {   #iterate over all questions 
+  for (i in 1:NROW(sr)) {  #over all students
+    sr[[glue("sh_cor_alt",q)]][[i]]   <- sr[[glue("cr_ans_alt",q)]][[i]]/length(ms[[c(q),"alt_ans"]]) #share of correct answers attained
+    sr[[glue("sh_incor_alt",q)]][[i]] <-  (length(sr[[q]][[i]])-sr[[glue("cr_ans_alt",q)]][[i]])/(ms[[c(q),"num_choices"]] - length(ms[[c(q),"alt_ans"]])) #share of incorrect answers chosen
+    sr[[glue("net_cor_alt",q)]][[i]] <- max(0,sr[[glue("sh_cor_alt",q)]][[i]]-sr[[glue("sh_incor_alt",q)]][[i]])  #net positive, minimum 0
+    sr[[glue("mk_alt",q)]][[i]] <- sr[[glue("net_cor_alt",q)]][[i]] *ms[[c(q),"point_value"]] #multiply by point value
+  }
+}
+
+```
+
+Take max of marking versions:
+
+```{r}
+
+for(q in rownames(ms)) {   #iterate over all questions 
+  for (i in 1:NROW(sr)) {  #over all students
+    sr[[glue("mk_max",q)]][[i]] <- max(sr[[glue("mk_",q)]][[i]], sr[[glue("mk_alt",q)]][[i]],ms[[c(q),"free_marks"]],na.rm = TRUE)
+  }
+  }
+
+```
+
+
 
 ## Ad-hoc adjustment computation
 
+(Note -- this is not yet adapted to alternate marking version)
 
 ```{r adhocadj}
 
 options(digits = 2)
 
-(markpct_p80 <-  sr %>% select(starts_with("markpct_")) %>%
-   summarise_all(list( p80 = ~ quantile(.x,.80))) %>% transpose())
+(markpct_p80 <-  sr %>% 
+    select(starts_with("markpct_")) %>%
+   summarise_all(list(p80 = ~ quantile(.x,.80))) %>% transpose())
 
 
 #todo: automate this
 #for (i in seq_along(sr %>% select(starts_with("markpct_")))){
-#adjust[[i]] <- (1-markpct_p85$`85%`$markpct_questions2_p80)*sr$pv_questions2
+#adjust[[i]] <- (1-markpct_p80$`80%`$markpct_questions2_p80)*sr$pv_questions2
 #}
 
-adhoc_adjust <- (1-markpct_p80$`80%`$markpct_questions2_p80)*sr$pv_questions1 +
-  (1-markpct_p80$`80%`$markpct_questions2_p80)*sr$pv_questions2 +
-  (1-markpct_p80$`80%`$markpct_questions3_p80)*sr$pv_questions3 +
-(1-markpct_p80$`80%`$markpct_questions4_p80)*sr$pv_questions4 +
-(1-markpct_p80$`80%`$markpct_questions5_p80)*sr$pv_questions5 +
-(1-markpct_p80$`80%`$markpct_questions6_p80)*sr$pv_questions6 +
-(1-markpct_p80$`80%`$markpct_questions7_p80)*sr$pv_questions7 +
-(1-markpct_p80$`80%`$markpct_questions8_p80)*sr$pv_questions8 +
-(1-markpct_p80$`80%`$markpct_questions9_p80)*sr$pv_questions9 +
-(1-markpct_p80$`80%`$markpct_questions10_p80)*sr$pv_questions10
-
+adhoc_adjust <- 4
 
 ```
 
 
 ## Generate total marks
 ```{r gentot}
-
 sr <- sr %>%
   mutate(
-    total = rowSums(.[grep("mk_q*", names(.))], na.rm = TRUE),
-    total_adjust = rowSums(.[grep("mk_q*", names(.))], na.rm = TRUE)+ adhoc_adjust
+    total = rowSums(.[grep("mk_maxq*", names(.))], na.rm = TRUE),
+    total_adjust = rowSums(.[grep("mk_maxq*", names(.))], na.rm = TRUE)+ adhoc_adjust
   )
+
 ```
 
 
-# Merge in marks from longer answer questions
+# Merge in marks from longer answer questions, flag unmerged IDs
 
 ```{r merge-long-a}
 
-long_ans <- read.csv(paste(folder,"/",longansfile, sep = ""), header=TRUE,  stringsAsFactors=FALSE)  %>%
+long_ans <- read.csv(paste(folder,"/",longansfile, sep = ""), header=TRUE,  stringsAsFactors=FALSE, row.names = 1)  %>%
+select(-Final_total)  %>%
   as_tibble()
 
-sr_all_join <- sr %>% mutate(Cand_num = as.numeric(`Student Candidate Number`)) %>%
-  full_join(long_ans, ., by=c("Cand_num")) %>%
-  rowwise() %>%
-  mutate(total_mark=sum(b_total, c_total, total_adjust, na.rm = TRUE),
+sr_all <- sr %>% mutate(cand_num = as.numeric(`Student Candidate Number`)) %>%
+  full_join(long_ans, ., by=c("cand_num")) %>%
+  filter(total_adjust>0) %>% ###extra scripts only 
+  rowwise() %>% 
+  mutate(total_mark=sum(B_total, total_adjust, na.rm = TRUE),
          missing_mcq = is.na(total_adjust),
-         missing_longans = is.na(b_total)|is.na(b_total)
+         missing_longans = is.na(B_total)
          ) %>%
-  rename(mcq_marks = total_adjust,
-         cand_num = Cand_num)
-
-sr_all <- sr_all_join %>%
-  select(cand_num, matches("total_adjust|mk_max|Mark|total_mark|b_total|c_total|cmt|Comments|B1|B2|B3|B4|B5"),starts_with("q"),-starts_with("qu")) %>%
-  select(cand_num,total_mark,b_total,starts_with("total"), everything()) %T>%
+  rename(mcq_marks = total_adjust) %>% 
+  select(cand_num, SID, matches("cand_num|Choices|B_total|total_mark|mk_max|Mark|total.for|cmt|comments|missing|mcq_marks|B1|B2|B3|B4|B5"),starts_with("q"),-starts_with("qu"),-fields_unmarked) %>%
+  select(cand_num,total_mark,starts_with("total"), everything()) %T>%
   print()
 
 ```
 
-# Flag scripts with missing or strange entries:
+
+
+# Exporting and reporting
+
+## Sorting out missings
+
+```{r}
+
+(missings <- sr_all %>%
+  filter(total_mark> 0 & missing_mcq==TRUE | missing_longans==TRUE) %>%
+  select(cand_num, missing_mcq, missing_longans,  total_mark) %>%
+  arrange(cand_num) )
+
+#93142 = 680018091
+#105344 = 670003048
+#130436 = ??
+#130486 = 680029888
+
+
+```
+
+## Round mark, calculate mark classification as factor
+
+```{r markclass}
+
+sr_all <- sr_all %>%
+      mutate(
+        mark_class = cut(round(total_mark), breaks = c(0, 39.99, 49.99, 59.99, 69.99, 100), right=FALSE, labels= c("Fail", "3", "2.2", "2.1", "1st")), 
+        total_mark <- round(total_mark)
+      )
+
+```
+
+
+## Export spreadsheet of marks
+
+```{r}
+sr_all %>% select(1,SID,"total_mark") %>%
+write_excel_csv(file.path(folder,outfile))
+```
+
+# Summary statistics
+
+```{r}
+
+options(digits = 2)
+sr_all %>%
+  group_by() %>% 
+  filter(missing_mcq==FALSE & missing_longans==FALSE) %>%
+  dplyr::summarise(mean=mean(total_mark, na.rm = TRUE),
+                   median=median(total_mark, na.rm = TRUE),
+                   sd=sd(total_mark, na.rm = TRUE),
+                   p25 = quantile(total_mark,.25, na.rm = TRUE),
+                   p75 = quantile(total_mark,.75, na.rm = TRUE))
+
+```
+
+
+**Mark classifications**
+
+```{r}
+
+sr_all %>%   
+  filter(missing_mcq==FALSE & missing_longans==FALSE) %>%
+ tabyl(mark_class)
+
+
+sr_all %>%   
+  group_by(mark_class) %>% 
+  summarise(min=min(total_mark), max=max(total_mark))
+
+```
+
+
+## Sumstats by question
+
+```{r}
+options(digits = 2)
+
+sr  %>%  
+  summarise_at(vars(starts_with("markpct_")), .funs = c(mean="mean")) %>% transpose()
+
+
+sr %>% select(starts_with("markpct_")) %>%
+   summarise_all(list( p80 = ~ quantile(.x,.80))) %>% transpose()
+
+```
+
+
+## Export one file per student-row (feedback)
+ 
+```{r, eval=FALSE}
+
+student_feedback <-  sr_all %>%
+  arrange(cand_num) %>% 
+  select(cand_num, mark_class, total_mark, mcq_marks, B_total, Choices, matches("cmt|Comments|B1|B2|B3|B4|B5"), -Other.comments.on.exam, -commentsroundup )   %>%
+    rename_all(
+    list(
+    ~stringr::str_replace_all(.,c('Comments'='cmt','total'='tot','.for.part.B..formula.'='_part_B','Mark.1...out.of.'='mark_B_first_q_from_', 'Mark.2...out.of.'='mark_B_second_q_from_','q(.)c'='q\\1_comments'))
+    )) %>% 
+  ungroup()  %>% 
+  dplyr::arrange(cand_num) 
+
+
+
+for (i in 1:nrow(sr_all)) {
+    sink(paste0(folder, "/feedback_cand_", student_feedback$cand_num[i], ".txt"))
+      print(as.matrix(student_feedback[glue('{i}'),]))
+    sink()
+}
+
+print(student_feedback[glue('{i}'),])
+
+
+```
+
+# Admin 
+
+## Select 10 percent of scripts (or 10 scripts) for moderation
+
+Oversample (5x-weight) fails, underweight (1/2) firsts 
+
+```{r}
+
+#set seed before random selection -- OOPS I forgot to do this.... recovering the moderation scripts and merging these back now 
+
+marknums <- read_csv(file.path(folder,"moderation_scripts.csv")) %>%
+  select(cand_num)
+
+mod_sample <- sr_all %>%
+ left_join(marknums, ., by=c("cand_num")) %>%
+  group_by(mark_class) %>% 
+  arrange(desc(mark_class), cand_num) %>% 
+  select(cand_num, mark_class, total_mark, mcq_marks, B_total, Choices, matches("cmt|Comments|B1|B2|B3|B4|B5") )   
+
+
+#sample_frac(0.1, weight= 1 + ifelse(mark_class=="Fail",4,0) + ifelse(mark_class=="1st",-1/3,0))
+  
+mod_sample %>% tabyl(mark_class)
+
+print("collect the scripts:")
+
+mod_sample %>%  ungroup() %>%  select(cand_num) %>% dplyr::arrange(cand_num) %>% print(n=Inf)
+
+mod_sample %>% 
+  write_excel_csv(file.path(folder,"moderation_scripts.csv"))
+
+
+```
+
+## Input random ordering from uni, and put the marks in this order, and then export again
+
+```{r}
+
+
+sr_all %>%
+  arrange(cand_num) %>%
+  select(cand_num, total_mark) %>% 
+  write_csv(file.path(folder, "marks_only.csv"))
+
+
+ordering <- read_excel(paste(folder,"/", official_sheet, sep = ""),  col_names = TRUE)  %>%
+  lapply(., gsub, pattern = "#", replacement = "", fixed = TRUE) %>% 
+  as.tibble() %>% 
+   mutate(
+    cand_num=as.numeric(`#Cand Key...7`)
+  )
+
+ordering$id  <- 1:nrow(ordering)
+
+
+
+test <- sr_all %>% 
+  select(1,total_mark) %>%  
+  rename(Mark=total_mark) %>% 
+  anti_join(., ordering, by = c("cand_num"))  %>% 
+  distinct(cand_num, .keep_all = FALSE) %>%
+  arrange(cand_num) %>% 
+  write_csv(file.path(folder, outfile_uni_order))
+
+
+```
+
+Flag scripts with missing or strange entries:
 ```{r}
 srq <- sr %>%  select(1,starts_with("questions"))
 srq$q_missing <- 0
@@ -280,147 +490,5 @@ srq %>% filter(q_missing>0) %>% select(starts_with("Student")) %>%  as.matrix() 
 
 #filter((length(questions2[[]]) == 0)(questions2)) #if any answer has a blank or a character other than A-E
 
+#126244
 ```
-
-
-# Exporting and reporting
-
-## Calculate mark classification as factor
-
-```{r markclass}
-
-
-sr_all <- sr_all %>%
-      mutate(
-        mark_class = cut(round(total_mark), breaks = c(0, 39.99, 49.99, 59.99, 69.99, 100), right=FALSE, labels= c("Fail", "3", "2.2", "2.1", "1st")),
-        total_mark <- round(total_mark)
-      )
-
-sr_all_join <- sr_all_join %>%
-      mutate(
-        mark_class = cut(round(total_mark), breaks = c(0, 39.99, 49.99, 59.99, 69.99, 100), right=FALSE, labels= c("Fail", "3", "2.2", "2.1", "1st")),
-        total_mark <- round(total_mark)
-      )
-
-```
-
-## Spreadsheet for moderator
-
-
-```{r}
-sr_all_mod <- sr_all_join %>%
-  arrange(cand_num) %>%
-  select(cand_num, mark_class, total_mark, mcq_marks, b_total, c_total, q_ch_B, matches("B1"), matches("B2"), q_ch_C, matches("C1|C2|C3") , notes)
-
-#sample_frac(0.1, weight= 1 + ifelse(mark_class=="Fail",4,0) + ifelse(mark_class=="1st",-1/3,0))
-
-sr_all_mod %>% tabyl(mark_class)
-
-print("collect the scripts:")
-
-sr_all_mod %>%
-  write_excel_csv(file.path(folder,"moderation_scripts.csv"))
-
-
-```
-
-
-## Export spreadsheet of marks
-
-```{r}
-
-sr_all %>%
-  rename_all(
-    list(
-    ~stringr::str_replace_all(.,c('maxquestions'='q','adjust'='part_a','.for.part.B..formula.'='_part_B','Mark.1...out.of.'='mark_B_first_q_from_', 'Mark.2...out.of.'='mark_B_second_q_from_','q(.)c'='q\\1_comments'))
-    )
-  ) %>%
-  arrange(cand_num) %>%
-write_excel_csv(file.path(folder,outfile))
-
-```
-
-## Summary statistics
-
-```{r}
-
-options(digits = 4)
-
-sr_all %>%
-  group_by() %>%
-  dplyr::summarise(mean=mean(total_mark, na.rm = TRUE),
-                   median=median(total_mark, na.rm = TRUE),
-                   sd=sd(total_mark, na.rm = TRUE),
-                   p25 = quantile(total_mark,.25, na.rm = TRUE),
-                   p75 = quantile(total_mark,.75, na.rm = TRUE))
-
-# marks by question
-
-#sr_all %>% select(starts_with("markpct_questions")) %>%
- # dplyr::summarise_all(mean, na.rm=TRUE) %>% transpose()
-
-```
-
-
-
-**Mark classifications**
-
-```{r}
-
-sr_all %>% tabyl(mark_class)
-
-```
-
-
-
-## Export one file per student-row (feedback)
-```{r}
-
-student_feedback <-  sr_all %>%
-  arrange(cand_num) %>%
-  select(cand_num, mark_class, total_mark, mcq_marks, b_total, c_total, q_ch_B,  q_ch_C, matches("cmt|Comments|B1|B2|B3|B4|B5|notes"), -add.1.mark.for.parity.with.B1 )   %>%
-    rename_all(
-    list(
-    ~stringr::str_replace_all(.,c('Comments'='cmt','total'='tot','.for.part.B..formula.'='_part_B','Mark.1...out.of.'='mark_B_first_q_from_', 'Mark.2...out.of.'='mark_B_second_q_from_'))
-    )) %>%
-  ungroup()  %>%
-  dplyr::arrange(cand_num)
-
-# sr_all %>%
-#   rename_all(
-#     list(
-#     ~stringr::str_replace_all(.,c('maxquestions'='q','adjust'='part_a','.for.part.B..formula.'='_part_B','Mark.1...out.of.'='mark_B_first_q_from_', 'Mark.2...out.of.'='mark_B_second_q_from_','q(.)c'='q\\1_comments'))
-#     )
-#   ) %>%
-#   dplyr::arrange(cand_num) %>%
-#   mutate(index = 1:n()) %>%
-#   rowwise %>%
-#   do(write.table(.,
-#                  file=paste0("candidate_", .$cand_num, ".tsv"),
-#                  row.names=FALSE, sep="\t", eol = "\r\n" ) )
-
-for (i in 1:nrow(student_feedback)) {
-    sink(paste0(folder, "/feedback_cand_", student_feedback$cand_num[i], ".txt"))
-      print(as.matrix(student_feedback[glue('{i}'),]))
-    sink()
-}
-
-```
-
-## Input random ordering from uni, and put the marks in this order, and then export again
-
-```{r}
-ordering <- read_excel("cand_number_ordering.xlsx", col_names = FALSE) %>%
-lapply(., gsub, pattern = "#", replacement = "", fixed = TRUE) %>% as.data.frame()
-
-ordering$id  <- 1:nrow(ordering)
-
-test <- sr_all %>% select(1,"total_mark") %>%  merge(., ordering,  by.x="cand_num", by.y="...1",   all = TRUE)  %>%
-  arrange(id) %>%
-  write_excel_csv(file.path(folder,"ordered_marks.csv"))
-
-```
-
-
-
-
