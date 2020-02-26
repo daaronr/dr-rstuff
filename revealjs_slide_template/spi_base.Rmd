@@ -1,0 +1,310 @@
+---
+title: 'TITLE'
+author: "David Reinstein, Gerhard Riener, and Danielle Vance-McMullen"
+date: "`r format(Sys.time(), '%d/%m/%Y')`"
+output:
+  revealjs::revealjs_presentation:
+    self_contained: true
+    #reveal_plugins: ["notes", "search"]
+    theme: white
+    highlight: pygments
+    transition: fade
+    smart: true
+    css: reveal.css
+    center: true
+  beamer_presentation:
+    latex_engine: xelatex
+    keep_tex: yes
+    theme: metropolis
+  ioslides_presentation:
+      transition: faster
+      df_print: kable
+options: knitr.table.format = "html"
+classoption: table
+bibliography: SubstitutionExperiment.bib
+---
+
+<style>
+.reveal section p {
+    font-size: .90em !important;
+}
+
+.reveal section pre code {
+    font-size: 0.5em !important;
+}
+
+
+.reveal blockquote {
+	display: block;
+	position: relative;
+	width: 95%;
+	margin: $blockMargin auto;
+	padding: 3px;
+  font-size: .6em !important;
+	background: rgba(255, 255, 255, 0.25);
+	box-shadow: 0px 0px 2px rgba(0,0,0,0.2);
+}
+	.reveal blockquote p:first-child,
+	.reveal blockquote p:last-child {
+		display: inline-block;
+	}
+
+.reveal section img {
+    display: block;
+    float: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+</style>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+  $chunks = $('div.sourceCode'); // get all divs containing source code...
+  // add the button and a wrapping container to each of them...
+  $chunks.each(function() {
+    $(this).prepend('<div class=\"but_con\"><div class=\"showopt\">Show Source</div></div>');  // add the button and a wrapping container to each of them...
+    $(this).find('code').toggle(); // hide them right away...
+  });
+
+  // definition of the function to toggle visibility
+  // we select all buttons, and add a click function
+  $('.showopt').click(function() {
+    var label = $(this).html();
+    if (label.indexOf("Show") >= 0) {
+      $(this).html(label.replace("Show", "Hide"));
+    } else {
+      $(this).html(label.replace("Hide", "Show"));
+    }
+    $(this).parent().siblings('pre').children('code').slideToggle('fast', 'swing');
+  });
+
+});
+</script>
+
+<style>
+div.but_con {
+  margin: auto;
+  width: 90%;
+  height: 85%;
+  padding-bottom: 0px;
+}
+
+div.showopt {
+  font-size: 5%;
+  background-color: #004c93;
+  color: #FFFFFF;
+  width: 100px;
+  height: 20px;
+  text-align: center;
+  vertical-align: middle !important;
+  float: right;
+  font-family: sans-serif;
+  border-radius: 3px;
+  margin-bottom: 0px;
+}
+
+.showopt:hover {
+    background-color: #dfe4f2;
+    color: #004c93;
+}
+.reveal h1 { font-size: 1.4em; }
+.reveal h2 { font-size: 1.2em;
+  text-transform: none;}
+</style>
+
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+    font-size: .85em !important;
+  }
+  .reveal ul {
+    display: block;
+    font-size: .85em !important;
+  }
+  .reveal ul ul {
+    display: block;
+    font-size: .75em !important;
+  }
+  .reveal ol {
+    display: block;
+    font-size: .85em !important;
+  }
+
+.reveal section p {
+    font-size: .90em !important;
+}
+
+.reveal section pre code {
+    font-size: 0.5em !important;
+}
+
+.reveal blockquote {
+	display: block;
+	position: relative;
+	width: 95%;
+	margin: $blockMargin auto;
+	padding: 3px;
+  font-size: .6em !important;
+	background: rgba(255, 255, 255, 0.05);
+	box-shadow: 0px 0px 2px rgba(0,0,0,0.2);
+}
+	.reveal blockquote p:first-child,
+	.reveal blockquote p:last-child {
+		display: inline-block;
+	}
+
+</style>
+
+
+
+```{r Setup, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE,echo = FALSE}
+
+local({r <- getOption("repos")
+       r["CRAN"] <- "http://cran.r-project.org"
+       options(repos=r)
+})
+
+knitr::opts_chunk$set(echo = FALSE)
+
+library(knitr)
+#detach("package:kable", unload=TRUE)
+library(kableExtra)
+options(kableExtra.latex.load_packages = FALSE)
+library(tidyverse)
+library(labelled)
+library(citr)
+# library(reporttools)
+library(magrittr)
+library(glue)
+library(experiment)
+library(ggpubr)
+library(janitor)
+library(broom)
+library(stargazer)
+
+source(here::here("code","baseoptions.R"))
+source(here("code","functions.R"))
+#source(here("presentations","hooks.R"))
+
+
+```
+
+
+```{r data-and-functions, message=FALSE, warning=FALSE, include=FALSE, cache=FALSE, paged.print=FALSE,echo = FALSE,warning=FALSE}
+
+#library(bindrcpp)
+
+source(here::here("code","baseoptions.R"))
+source(here("code","functions.R"))
+#purl(here("analysis","ImportData.Rmd"), output = (here("code","ImportData.R")))
+#source(here("code","ImportData.R")) #shouldn't need to source this because analysis does as well
+purl(here("analysis","analysis_subst.Rmd"), output = (here("code","analysis_subst.R")))
+source(here("code","analysis_subst.R"))
+```
+
+# Motivation and Research Question
+
+## Motivation and Research Question
+
+Blah
+
+> "Donor fatigue" or "habit of giving"?
+
+Blah
+
+* Do earlier solicitations affect later gifts?
+
+* Does the effect vary:
+
+    - By similarity of charities?
+
+    - By length of gap?
+
+    - By previous information/knowledge about cause?
+
+# Framework
+
+## Defining the question
+
+What's the GOAL? $\rightarrow$ which estimand is 'appropriate'
+
+> - Does an event motivating giving to A reduce giving to B?''
+
+> - Does 'giving more to A' reduce 'giving to B'?
+
+***
+
+Magnitude of *response* may matter... policy maker wants to know:
+
+> - A 'shock' leads donations to A to rise by EUR 1,000,000, $\rightarrow$ how much will donations to B to fall?
+
+*Can we frame this?* Not easily.
+
+## Modeling
+
+Predictions are ambiguous
+
+!["Predictions"](picsfigs/predictions.png)
+
+
+## Mechanisms: 'effect of promo for A on gifts to B'
+
+- Budget effects
+- Effects on perception of organization
+- Effects on feelings about giving
+
+*Can we disambiguate?*
+
+!["Predictions"](picsfigs/dag_mockup.png){width=600px}
+
+
+# Previous approaches and evidence
+
+## Empirical approaches
+
+####### **1. Observational work:** {.fragment}
+
+> - @Reinstein2011Jun - fixed effects, bounding arguments
+
+> - With 'exogenous' shocks: @DeryuginaMarx2015,  @ScharfSmithOttoni-Wilhelm2017
+
+<!--
+Todo: add pictures of the relevant environments for these studies here
+-->
+## Essex 2019: Timings of treatments
+
+```{r essex2019-implement_pairings, echo=FALSE}
+
+essex2019_treat_assign %>% kable("html", booktabs = T) %>%   kable_styling()
+
+essex2019_treat_dates %>% kable("html", booktabs = T) %>%   kable_styling()
+
+```
+## Lee-bounded estimates: impact of S1 Ask (vs no ask )
+
+Overall ATE 95\% CI:  [-0.22, 2.17], bootstrapped [0.04,1.56]
+
+  + cf untightened OLS with fitted controls: [0.21,1.48]
+
+&nbsp;
+
+Students (virtually no trimming): [-1.79  3.37]
+
++ cf ... OLS w. fit...: [-0.17,1.28]
+
+
+Nonstudents (12\% trimmed): [-0.11, 2.58]
+
++ $\rightarrow$ Ex-post underpowered, bc of low turnout \& attrition
+
+
+## Things to do next
+
+
+
+#  Results in context
+
+
