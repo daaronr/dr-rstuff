@@ -8,7 +8,7 @@ site: bookdown::bookdown_site
 output:
   bookdown::html_document2:
     includes:
-      in_header: header.html
+      in_header: support/header.html
   bookdown::tufte_html_book:
     split_by: chapter
     config:
@@ -25,9 +25,10 @@ output:
      # in_header: [header_include.html]
     download: [pdf, epub, mobi]
   bookdown::gitbook:
+    lib_dir: "book_assets"
     includes:
-      in_header: header.html
-    css: paper/tufte_plus.css
+      in_header: support/header.html
+    css: support/tufte_plus.css
     config:
       toc:
         after: |
@@ -47,8 +48,6 @@ output:
         vk: no
         all: ['facebook', 'twitter', 'linkedin', 'weibo', 'instapaper']
     highlight: tango
-    #includes:
-     # in_header: [header_include.html]
     download: [pdf, epub, mobi]
     sharing:
       github: yes
@@ -56,7 +55,7 @@ output:
 bookdown::pdf_book:
     keep_tex: yes
 always_allow_html: yes
-bibliography: [giving_keywords.bib, packages.bib]
+bibliography: [support/giving_keywords.bib, support/packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: #gerhardriener/CharitySubstitutionExperiment
@@ -66,26 +65,13 @@ tags: [Economics, Experiments, Charitable giving, field experiments, lab experim
 ---
 
 
-<!--
-download: ["book.pdf", "book.epub"]
-    includes:
-      in_header:  style.css
--->
-
----
-site: "bookdown::bookdown_site"
-output:
-  bookdown::gitbook:
-    lib_dir: "book_assets"
-  bookdown::pdf_book:
-    keep_tex: yes
----
 
 ```{r}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
+<!--
 
 ```{r htmlTemp3, echo=FALSE, eval=FALSE}
 
@@ -159,6 +145,8 @@ document.write(\'<div class="btn-group pull-right" style="position: absolute; to
 
 readr::write_lines(htmlhead, path = "header.html")
 ```
+
+-->
 
 <!--
 base file created from
@@ -239,6 +227,7 @@ Can define text blocks here, refer to them again and again if desired
 -->
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
+
 
 <html>
 
