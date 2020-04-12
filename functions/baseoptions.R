@@ -1,4 +1,4 @@
-#Options and sourcing; takin from analysis_subst.Rmd
+#Options and sourcing for general Reinstein code
 
 knitr::opts_chunk$set(echo = TRUE,include=TRUE, warning=FALSE)
 #knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
@@ -10,7 +10,6 @@ library(pacman)
 #p_load(DescTools, blockTools, broom, car, citr, cobalt, codebook, coefplot, data.table, dataMaid, dplyr, estimatr, experiment, forcats, ggsignif, glmnet, glmnetcr, glue, here, huxtable, janitor, kableExtra, knitr, lmtest, lubridate, magrittr, p_load(knitr, paramtest, plyr, purrr, purrr, pwr, pwr, randomizr, readxl, recipes, recipes, reporttools, rsample, sandwich, sjmisc, skimr, snakecase, statmod, statmod, summarytools, tidyverse)
 
 
-
 options(kableExtra.latex.load_packages = FALSE)
 
 options(warning.length = 100)
@@ -20,7 +19,7 @@ options(max.print = 1000)
 options(scipen = 1, digits = 2)
 
 # set important functions to correct package
-select <- dplyr::select 
+select <- dplyr::select
 fill <- tidyr::fill
 as_factor <- forcats::as_factor
 rename <- dplyr::rename
@@ -32,7 +31,7 @@ here <- here::here
 
 # Lazy man's typing shortcuts and composite functions
 pp <- base::print
-sel <- dplyr::select 
+sel <- dplyr::select
 ft <- dplyr::filter
 gb <- dplyr::group_by
 summarise <- dplyr::summarise

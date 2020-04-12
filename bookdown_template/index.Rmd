@@ -1,34 +1,16 @@
 ---
-title: "TITLE"
+title: "Template for Reinstein bookdowns"
 author: "Dr. David Reinstein, "
 abstract: "This 'book' organizes the project and helps others understand it and learn from it"
 #cover-image: "images/cardcatalogue.JPG"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output:
-  bookdown::html_document2:
-    includes:
-      in_header: support/header.html
-  bookdown::tufte_html_book:
-    split_by: chapter
-    config:
-      toc:
-        after: |
-          <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
-        collapse: section
-        scroll_highlight: yes
-      fontsettings:
-        theme: white
-        size: 2
-    highlight: tango
-    #includes:
-     # in_header: [header_include.html]
-    download: [pdf, epub, mobi]
   bookdown::gitbook:
     lib_dir: "book_assets"
     includes:
-      in_header: support/header.html
-    css: support/tufte_plus.css
+      in_header: https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/header.html
+    css: https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/tufte_plus.css
     config:
       toc:
         after: |
@@ -61,7 +43,7 @@ link-citations: yes
 github-repo: #gerhardriener/CharitySubstitutionExperiment
 description: "A new format for an Economics paper"
 #url: 'https\://daaronr.github.io//'
-tags: [Economics, Experiments, Charitable giving, field experiments, lab experiments, experimental design, substitution, moral licensing, crowding-out]
+tags: [Economics, Experiments, C]
 ---
 
 

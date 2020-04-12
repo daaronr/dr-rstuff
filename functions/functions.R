@@ -1,8 +1,8 @@
-# Functions used in analysis_subst.Rmd
+# Functions used in general Reinstein code
 
 ################# Test functions
 
-# Generic test function: ?a helper function
+# Generic test function: a helper function
 doTest <- function(pair, df = ADSX, stage = 2, depvar = donation, treatvar = Treatment, testname = "t.test2") {
   require("dplyr")
   depvar <- enquo(depvar)
@@ -20,7 +20,7 @@ doTest <- function(pair, df = ADSX, stage = 2, depvar = donation, treatvar = Tre
              TreatCol = pair[2])
 }
 
-# adds `dplyr::filter(is.na(Attrited))` to the above
+# adds `dplyr::filter(is.na(depvar))` to the above
 doTest_noatr <- function(pair, df = ADSX, stage = 2, depvar = donation,
   treatvar = Treatment, testname = "t.test2") {
   require("dplyr")
@@ -41,6 +41,17 @@ TR <- thetest(pull(ADSplit[[1]], !!depvar), pull(ADSplit[[2]], !!depvar)) %>%
 }
 
 # Fisher's exact test
+
+## With numbers
+
+fisherme <- function(g1, g1pos, g2, g2pos) {
+  mat <- matrix(c(g1-g1pos, g1pos, g2-g2pos, g2pos),
+       nrow = 2,
+       dimnames = list(control = c("no", "yes"), treat = c("no", "yes")))
+  fisher.test(mat, or=1, alternative="t", conf.int=TRUE)
+}
+
+## From data
 fisher <- function(A, B) {
   m <- matrix(c(sum(A), length(A) - sum(A), sum(B), length(B) -
     sum(B)), byrow = T, nrow = 2)
@@ -491,13 +502,16 @@ unite_spread <- function(df) {
 
 
 ################# Pre-model data cleaning functions
-
+### The 'kitchen sink' of cleans and imputes:
 
 clean_sink <- function(df) {
   require("dplyr")
-  step_meanimpute(all_numeric(), -all_outcomes()) %>% step_knnimpute(all_nominal()) %>%
-    step_center(all_numeric(), -all_outcomes()) %>% step_scale(all_numeric(),
-    -all_outcomes()) %>% step_other(all_nominal())
+  step_meanimpute(all_numeric(), -all_outcomes()) %>%
+      step_knnimpute(all_nominal()) %>%
+    step_center(all_numeric(), -all_outcomes()) %>%
+    step_scale(all_numeric(),
+    -all_outcomes()) %>%
+    step_other(all_nominal())
 }
 
 ############### Formatting stuff
@@ -510,6 +524,8 @@ colFmt = function(x, color) {
     paste("\\textcolor{", color, "}{", x, "}", sep = "") else if (outputFormat == "html")
     paste("<font color='", color, "'>", x, "</font>", sep = "") else x
 }
+
+# TODO: formatting options for bookdown etc
 
 
 ################# Coding shortcuts
