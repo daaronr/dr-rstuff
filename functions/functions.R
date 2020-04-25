@@ -1,5 +1,22 @@
 # Functions used in general Reinstein code
 
+
+################# 'Hijacking' standard functions
+
+### See - https://www.r-bloggers.com/hijacking-r-functions-changing-default-arguments/
+
+
+hijack <- function (FUN, ...) {
+    .FUN <- FUN
+    args <- list(...)
+    invisible(lapply(seq_along(args), function(i) {
+        formals(.FUN)[[names(args)[i]]] <<- args[[i]]
+    }))
+    .FUN
+}
+
+# usage: .data.frame <- hijack(data.frame, stringsAsFactors = FALSE)
+
 ################# Test functions
 
 # Generic test function: a helper function
