@@ -320,6 +320,17 @@ adornme <- function(atabyl, adorn = "row", digits = 2, cap = "",
     kable(caption = cap) %>% kable_styling()
 }
 
+adornme_not <- function(atabyl, adorn = "row", digits = 2, cap = "",
+                    title = "") {
+  atabyl %>% adorn_totals("row") %>% # adorn_totals(c('row', 'col')) %>%
+    adorn_percentages(adorn) %>% adorn_pct_formatting(digits = digits) %>%
+    adorn_ns() %>%
+    kable(caption = cap) %>% kable_styling()
+}
+
+
+
+
 # formatting default options for tabyl
 tabylstuff <- function(df, cap = "") {
   adorn_totals(df, c("row", "col")) %>% adorn_percentages("row") %>%
@@ -544,13 +555,20 @@ colFmt = function(x, color) {
 
 # TODO: formatting options for bookdown etc
 
+comb2pngs <- function(imgs, bottom_text = NULL){
+  img1 <-  grid::rasterGrob(as.raster(readPNG(imgs[1])),
+                            interpolate = FALSE)
+  img2 <-  grid::rasterGrob(as.raster(readPNG(imgs[2])),
+                            interpolate = FALSE)
+  grid.arrange(img1, img2, ncol = 2, bottom = bottom_text)
+}
 
 ################# Coding shortcuts
 
 Sm <- function(df, X) dplyr::select(df, matches({X},  ignore.case = FALSE))  # Sm<t_úX>("x") selects variables matching string 'x', case-sensitive
 sm <- function(df, X) dplyr::select(df, matches({X})) # ... not case-sensitive
 
-Snotm <- function(df, X) dplyr::select(df, -matches({X})) # ... not case-sensitive
+Snotm <- function(df, X) dplyr::select(df, -matches({X},  ignore.case = FALSE)) # ...  case-sensitive
 snotm <- function(df, X) dplyr::select(df, -matches({X})) # ... selects variables *not* matching that string, not case-sensitive
 
 
