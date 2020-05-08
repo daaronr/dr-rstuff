@@ -17,6 +17,18 @@ hijack <- function (FUN, ...) {
 
 # usage: .data.frame <- hijack(data.frame, stringsAsFactors = FALSE)
 
+
+############## Automation helpers
+
+### Function to filter by given string:
+
+
+df_subset <- function(df, cond){
+    q = quote(filter(df, cond))
+    eval(parse(text=sub("cond", cond, deparse(q))))
+}
+
+
 ################# Test functions
 
 # Generic test function: a helper function
@@ -417,13 +429,16 @@ boxplot_func <- function(df = ADSX, yvar = donation, treatvar = Treatment,
     theme(axis.text.x = element_text(size = 12)) +
     labs(title = treatvar, y = yvar, caption = "p-values of Wilcox-(below) and  t-test (above brackets)") +
     geom_signif(comparisons = comparisons, step_increase = c(0.4),
-      vjust = 1.7, margin_top = 0.5, textsize = 5) + geom_signif(comparisons = comparisons,
+      vjust = 1.7, margin_top = 0.5, textsize = 5) +
+    geom_signif(comparisons = comparisons,
     step_increase = c(0.4), vjust = 0, margin_top = 0.5,
     textsize = 5, test = "t.test") +
      stat_summary(
     fun.y = mean, geom = "point", shape = 18,
       size = 3, color = "red")
 }
+
+
 
 
 # Options and formatting code elements
