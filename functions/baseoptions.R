@@ -7,7 +7,7 @@ library(pacman)
 #p_load(knitr, dplyr, tidyverse, here, janitor, citr, reporttools, magrittr, glue, experiment, estimatr, broom, kableExtra, purrr, ggsignif, recipes, pwr,lubridate,huxtable,sandwich,randomizr)
 
 #p_load_gh("acoppock/attrition", "ngreifer/cobalt") # Alexander Coppock package to calculate trimming bounds. Not on CRAN
-#p_load(DescTools, blockTools, broom, car, citr, cobalt, codebook, coefplot, data.table, dataMaid, dplyr, estimatr, experiment, forcats, ggsignif, glmnet, glmnetcr, glue, here, huxtable, janitor, kableExtra, knitr, lmtest, lubridate, magrittr, p_load(knitr, paramtest, plyr, purrr, purrr, pwr, pwr, randomizr, readxl, recipes, recipes, reporttools, rsample, sandwich, sjmisc, skimr, snakecase, statmod, statmod, summarytools, tidyverse)
+p_load(DescTools, blockTools, broom, car, citr, cobalt, codebook, coefplot, data.table, dataMaid, dplyr, estimatr, experiment, forcats, ggsignif, glmnet, glmnetcr, glue, here, huxtable, janitor, kableExtra, knitr, lmtest, lubridate, magrittr, p_load(knitr, paramtest, plyr, purrr, purrr, pwr, pwr, randomizr, readxl, recipes, recipes, reporttools, rsample, sandwich, sjmisc, skimr, snakecase, statmod, statmod, summarytools, tidyverse)
 
 
 options(kableExtra.latex.load_packages = FALSE)
