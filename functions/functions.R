@@ -17,7 +17,7 @@ hijack <- function (FUN, ...) {
 
 # usage: .data.frame <- hijack(data.frame, stringsAsFactors = FALSE)
 
-.read_csv <- hijack(read_csv, trim_ws = TRUE)
+#e.g, .read_csv <- hijack(read_csv, trim_ws = TRUE)
 
 
 
