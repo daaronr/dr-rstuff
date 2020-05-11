@@ -28,8 +28,8 @@ group_by <- dplyr::group_by
 coalesce <- dplyr::coalesce
 here <- here::here
 
-first <- dplyr;:first
-last  <- dplyr;:last
+first <- dplyr::first
+last  <- dplyr::last
 mutate <- dplyr::mutate
 
 
