@@ -28,6 +28,11 @@ group_by <- dplyr::group_by
 coalesce <- dplyr::coalesce
 here <- here::here
 
+first <- dplyr;:first
+last  <- dplyr;:last
+mutate <- dplyr::mutate
+
+
 # Lazy man's typing shortcuts and composite functions
 pp <- base::print
 sel <- dplyr::select
