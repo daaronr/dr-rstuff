@@ -25,9 +25,9 @@ hijack <- function (FUN, ...) {
 
 ### Function to filter by given string:
 
-filter_parse =  function(df, x) {
-  {{df}} %>%
-   filter(rlang::eval_tidy(rlang::parse_expr({{x}})))
+filter_parse <- function(df, x) {
+ {{df}} %>%
+   filter(rlang::eval_tidy(rlang::parse_expr({{x}})))
 }
 
 ################# Test functions
