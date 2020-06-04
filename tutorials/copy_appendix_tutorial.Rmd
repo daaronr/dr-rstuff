@@ -1,0 +1,359 @@
+# Appendix: Tech for creating, editing and collaborating on this 'Bookdown' web book/project (and starting your own) {#bookdown-appendix}
+
+*This tutorial written by Oska Fentem with David Reinstein*
+
+## Introduction
+
+This appendix provides a brief introduction to the several types of software and processes used to creating websites such as [Increasing Effective Charitable Giving](https://daaronr.github.io/ea_giving_barriers/outline.html) and [Researching and writing for Economics students](https://daaronr.github.io/writing_econ_research/about-this-work.html). We aim to encourage others to participate in this collaborative work, and to spin off their own projects. If you would like to provide feedback or ask a question about these projects then using 'hypothes.is' is an easy way to do so.
+
+
+```{block2,  type='note'}
+The template for my bookdown projects is maintained in my repo [here](https://github.com/daaronr/dr-rstuff/tree/master/bookdown_template) 
+```  
+
+```{block2,  type='note'}
+
+**This site (web-book project) is**
+
+<!-- TODO: Add internal and web links here -->
+
+Hosted:
+
+- Hosted on Github (Github pages)
+- A project managed out of a Git repo stored in Github
+
+\
+
+**The content is:**
+
+- A 'Bookdown' (in the 'Gitbook' style, although we've drawn elements from the Tufte style)
+- ...which is a hosted collection of HTML (and other) files...
+- ...constructed/compiled/built from R-Markdown (.Rmd) files and other support files using the R language
+
+\
+
+This relies heavily on:
+
+- 'Markdown syntax' for basic writing/formatting
+- Latex for mathematics notation
+- Bibtex for references/citations
+- 'Pandoc' to convert between different document formats
+- CSS (style sheets)
+
+\
+
+To build this, we chose to use tools and software including:
+
+- The RStudio environment for working with R code
+- Github desktop to manage pushing/pulling and integrating content (although sometimes we use raw Git)
+- Features of the GitHub website such as 'projects'
+
+```
+
+We first give a *brief* overview of R & RStudio, Git & Github, and R Markdown & Bookdown, linking more extensive further resources/tutorials.
+
+## R and RStudio
+
+* **R** is a free programming language which is mainly used for data analysis and statistics. It can be downloaded [here](https://www.r-project.org/). The popularity of R is growing in Economics Academia, largely due to the growth of Machine Learning techniques in R as well as the flexibility of the language itself.
+R makes use of **packages** which are a collection of functions written in order to achieve specific tasks. Whilst R comes pre-installed with a variety of useful packages, it is often useful to install more, which can be done using the *install.packages* command.  <div class="marginnote">
+If you are familiar with Python, these R packages are roughly comparable to Python's **modules**.
+</div>
+
+
+```{block2,  type='note'}
+Installing R should take about XXX minutes.
+
+Here's a guide to exactly how to do it.
+```
+
+
+* **RStudio** is a programming environment and interface which helps facilitate  a variety of tasks such as writing scripts using R (as well as other languages), and  building/knitting these into various document formats. RStudio 'Addins' can also be extremely useful for things like tracking 'todos', adding citations, and formatting code. RStudio can also be configured so as to work seamlessly with Git (more on this later). RStudio can be downloaded [here](https://rstudio.com/)
+
+```{block2,  type='note'}
+Installing and configuring RStudio should take about XXX minutes.
+
+Here's a guide to exactly how to do it.
+```
+
+
+## Git and Github
+
+* **Git** is a version control system which enables users to track changes and progress in coding projects or any files in general. It is particularly useful for collaborating on projects as it provides a useful way to show who has altered which files and when. Users are even able to clone a _repository_ (a folder inside of a project which tracks all changes made) and make changes without affecting the original project. Git also provides a very simple way to keep changes to projects up to date across different operating systems such as Windows and Mac. Installation and configuration of Git can be confusing to the newly-initiated user, [Happy Git](https://happygitwithr.com/index.html) provides a user friendly tutorial on installing Git, [which can be downloaded here](https://git-scm.com/).
+
+```{block2,  type='note'}
+Getting a Github account should take about XXX minutes.
+
+Here's a guide to exactly how to do it.
+```
+
+```{block2,  type='note'}
+Installing Git and the GitHub Desktop should take about XXX minutes.
+
+Here's a guide to exactly how to do it.
+```
+
+
+### Some key things to know about Git and GitHub
+
+Git and GitHub can be a bit confusing.  Here are some things that I wish I had known, that took my a while to figure out (unfold)
+
+```{block2,  type='fold'}
+
+- Git and Github are not the same thing ... (explain)
+
+- A 'commit' does not actually change the files in the shared (remote) Github repo; you need to 'push' to do that
+
+- After 'pulling' from the remote repo, you may need to merge changes... (explain)
+
+- You can have several different 'branches' of the same Repo existing at the same time. When you switch to a new 'branch' the files you see on your computer will instantly and amazingly change to exactly the files in that branch. But don't worry, the old branch is not lost.
+
+- ... add some more
+
+```
+\
+
+
+A brief overview of key functions inside Git (assuming a remote Github repo) including commits, pushes & pulls, forks & branches and pull requests: (unfold)
+
+```{block2,  type='fold'}
+
+* A **commit** saves the changes made in the current document to the **local** repository. Specific changes to commit to the remote (online) repo must be specified. This process is made much easier using a program such as Github Desktop rather than the Git code itself (although they do the same thing, and the latter is more flexible).
+* A **push**, pushes all local commits to the online version of this repository, essentially updating the online version of the files, to the version which is stored locally on your device.
+* A **pull**, is used to pull the changes made to the online repository, into the local repository. Thus making the local repository up to date with the remote/online repository.
+* Creating a **branch** allows you to create a separate version of a repository and make changes to this without affecting the master/original repository.
+* A **pull request** then allows you to pull the changes made in a branch over to the master repository, in order to merge the work.
+* As noted, **Github Desktop** provides a user interface for a more simple and intuitive way to use Git.  There are a variety of other interfaces.
+  * Github can also be integrated into RStudio and into many other tools, such as the Atom text editor.
+* Repos that are stored on Github can be accessed via a browser at [github.com](https://github.com/). The Github website itself provides a wide variety of tools.
+
+```
+
+## Markdown and Bookdown
+
+* **Markdown** is a popular set of formats (really a 'syntax for specifying output') for generating and authoring documents. The Rmarkdown format (rmarkdown package) is one flavor of Markdown that works with R to enable 'dynamic documents' involving text, data-analysis, and other elements. It can then export your work to a variety of outputs such as html, pdf and word documents. As well as this it can also be used to create webpages, such as the one you are currently reading. The power of Markdown files comes from the way that they are able include/embed code as well as data and tables, which is useful for writing reproducible research and creating websites.\
+
+- The **Bookdown** package was built on the Rmarkdown package, but it adds many features to enable larger and more structured output, particularly 'web books' and web sites. As we use it, this these books combine multiple Rmarkdown files, with each such 'Rmd' file becoming its own HTML page.
+
+<div class="marginnote">
+Look at the list of headings on the left of this page: each second-level header is it's own web-page (a distinct html link). "All the content in one scrolled page" is limited to a single first-level header.
+<!-- @Oska -- perhaps you can say this better -->
+</div>
+
+## The code and folder structure in this repo,  and what it means
+
+### Writing_econ_book: Files-folders of interest (taken from readme March 2020)
+
+docs: html output put here for web hosting
+
+**Folder: [writing_econ_book](writing_econ_book)**
+
+- [bookdown.yml](writing_econ_book/bookdown.yml): determines which files are included in the book
+- [writing_econ_gfm.Rmd](writing_econ_book/writing_econ_gfm.Rmd): The main content; body of the book (many chapters)
+- index.Rmd: Setup content and some styling/parameters; determines how the book is built (into which format, etc)
+- header_include.html: Important commands included here including folding boxes
+- references_cut.bib: bibtex references referred to in '@ref' notes
+- tufte_plus.css: Determines layout and styling
+- writing_econ_book.Rproj: 'project' ... to work on this in R-studio
+
+
+## The code in a single ".Rmd" file and how it translates into content
+
+### Basic (R-)Markdown
+<!-- Could do with rewording -->
+
+The Markdown format offers a simple plain-text notation for specifying the elements of documents, reports, web sites, etc. (It is much simpler and easier to read than html, latex, etc.)  It is widely used by programmers, on comment boards/forums, and throughout the internet. For example, GitHub.com automatically renders markdown code, particularly in `readme.md` files.
+
+<div class="marginnote">
+Actually there are several varieties of markdown, but they mainly share key elements.
+</div>
+ 
+
+
+Markdown documents are usually saved as plain text files with the extension `.md`, e.g., `report.md`.   These allow for an easy way to create a variety of outputs, particularly reports and text-focused web pages. The markdown format is *converted* into other formats (html, latex, etc.) with a variety of tools, particularly something called Pandoc.
+
+In the R (statistically focused) language there are tools such as `knitR` that  allow R users to produce reports combining text, statistical output, and interactive content. These are generally written in "R-markdown" documents, saved as `.Rmd` rather than `.md` files. The R-studio interface, and several "add-ins", also help facilitate this. This interface is very useful; in fact, it may be convenient to build web books and other content using this even if you are not planning to extensively integrate R code and data. (As in the present book, although I'm hoping to build this in).
+
+Using R-markdown and Knitr (and other tools and add-ins like 'Bookdown') content from multiple sources can easily be embedded into these documents allowing users to easily display objects such as plots or regression output. 
+
+### Some simple markdown rules {#simple-md-rules}
+
+  
+Text can be made *italic* using single asterisks `*italic` or **bold** by using asterisks `**bold**`.
+
+Hashtags/pound signs (`#`) specify headers and subheaders, e.g., this third-level subsection header was created with the code:
+  
+`### Some simple markdown rules {#simple-md-rules}`
+
+Where the bit in the curly braces allows us to link-back with the code `[link back text whatever](#simple-md-rules)` ... rendering as [link back text whatever](#simple-md-rules).
+
+Other key features are ordered lists and unordered lists:
+  
+```
+- unordered first entry
+- unordered second entry
+     - subelement of second entry
+```
+
+While basic markdown has a limited set of rules, there are many more formatting and content options for documents produced in (R)-Markdown, far too many to detail here. These may combine markdown code, html code, latex code, and more. The following cheatsheets are very useful for writing (R)-markdown documents:
+
+Markdown documents allow for an easy way to write reports. Content from multiple sources can easily be embedded into these documents allowing users to easily display objects such as plots or tables of data. 
+
+<div class='marginnote'>
+Text can be made *italic* using single asterisks `*italic*` and **bold** by using double asterisks `**bold**`.
+</div>
+
+There are various text formatting options in Markdown, far too many to detail here... The following cheatsheets are very useful for writing markdown documents:
+>>>>>>> 78db1096bf2899c13e2248dc8728ad0dc55e7fdc
+
+- [Markdown cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+
+- [R Markdown cheatsheet](https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)
+
+<<<<<<< HEAD
+See also (most useful, but highly detailed):
+
+- [R markdown - the definitive guide](https://bookdown.org/yihui/rmarkdown/)
+
+Code chunks provide an easy way to embed code into your R Markdown files. The code language is not just limited to R either, as other languages can be used. This means that there is a wide variety of content which can be displayed in a chunk. Such as tables of data:
+
+```{r, echo=FALSE}
+head(iris)
+```
+Code chunks are defined by wrapping text inside ```` ```  ``` ````. The above example was coded using:
+````markdown
+`r ''````{r}
+head(iris)
+``` 
+````
+<!-- ````markdown `r ''````
+```` -->
+Options can be specified inside of the curly brackets {}
+More information is provided [here](https://bookdown.org/yihui/rmarkdown/r-code.html)
+>>>>>>> 78db1096bf2899c13e2248dc8728ad0dc55e7fdc
+
+### Inline code
+Inline code is a quick and easy way to put snippets of R code. As an alternative to using code chunks, R code can simply be placed inside of ``` `r ` ```. For example, this can be used as an easy way to insert the value of a variable into a paragraph without inserting a chunk.
+
+### Latex/maths
+
+R Markdown also can make use of the LaTeX document preparation system, which is popular for writing technical documents with mathematical content. This allows us to publish documents which include equations such as:
+
+$$y = \beta_0+\beta_1x_1 +\beta_2x_2+...+\beta_kx_k+u$$
+
+Which is written using `$$y = \beta_0+\beta_1x_1 +\beta_2x_2+...+\beta_kx_k+u.$$`. Using `$$` means that the equation will be centered on the page. Alternatively `$` can be used in the same way, without the centering. 
+<<<<<<< HEAD
+
+[A very useful guide to maths in R Markdown](https://www.calvin.edu/~rpruim/courses/s341/S17/from-class/MathinRmd.html)
+
+### Custom styles
+
+Bookdown allows for users to build their own custom styles in order to change the appearance of documents. To create styles for HTML projects a custom css file is used. For these projects, styles are contained in [support/tufte_plus.css](support/tufte_plus.css). To use a defined style, the user can specify options at the start of a chunk, or using a HTML wrapper as show below for margin notes.
+
+- More on creating styles [here](https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html). Below will outline several key styles used throughout these projects.
+
+### 'Notes'
+[A very useful guide to maths in R Markdown](https://www.calvin.edu/~rpruim/courses/s341/S17/from-class/MathinRmd.html) provides a detailed outline of the various mathematical symbols which can be used.
+
+### Custom styles
+Bookdown allows for users to build their own custom styles in order to change the appearance of documents. To create styles for HTML projects a custom css file is used. For these projects, styles are contained in [tufte_plus.css](support/tufte_plus.css). To use a defined style, the user can specify options at the start of a chunk, or using a HTML wrapper as shown below for margin notes.
+>>>>>>> 78db1096bf2899c13e2248dc8728ad0dc55e7fdc
+
+<div class = 'marginnote'>
+More on creating styles [here](https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html).
+There are 3 main custom styles which are used throughout the projects:
+
+- **'Notes'**
+
+```{block2, type = 'note'}
+Formatted 'Notes' have been defined in this work which allow text to be placed in coloured blocks such as this one. To use this note style, `{block2, type ='note'}` can be specified at the start of the block, or a HTML wrapper can be used. This assigns the .note formatting from the tufte_plus.css file to the chunk.
+```
+
+- **Margin notes**
+Margin notes are used throughout these projects as a way of displaying information in an organised and aesthetically pleasing way. To add a margin note, text is placed inside the following HTML wrapper:
+>>>>>>> 78db1096bf2899c13e2248dc8728ad0dc55e7fdc
+
+
+<div class='marginnote'>
+The margin notes used in this project are inspired by the Tufte handout style developed by American statistician Edward Tufte.
+</div>
+
+```{html}
+<div class="marginnote">
+Your margin note goes here.
+</div>
+```
+Or margin notes can be added by using chunk options.
+
+- **Folding boxes**
+
+```{block2, type = 'fold'}
+Folding boxes also provide a useful way to incorporate content without cluttering the page. Similarly to the 'notes' the folding boxes are defined in tufte_plus.css and called by specifying `{block2, type='fold'}` at the start of a chunk, or using a HTML wrapper.
+```
+
+### Adding references/citations
+As with any academic work, it is always important to reference sourced material. Across these projects the following software is used:
+
+- **Setup**
+
+Pandoc provides a way to generate formatted references as well as a bibliography in Markdown.
+
+(This is done through Pandoc tools.)
+
+<div class="marginnote">
+Oska, are you sure about this? 
+</div>
+
+The bibliography file to be sourced is specified within 'YAML' content, which guides the processing of these documents. (YAML content is generally enclosed with a three-dash `---` break at top and bottom.)
+
+I generally specify the bibliography source in the YAML at the top of the .Rmd file, or for Bookdown project,s in the  the YAML content in index.Rmd.  (Y
+
+<div class="marginnote">
+@Oska -- we should try to ecplain this yaml stuff a bit better.
+</div>
+ 
+
+- **BibTeX**
+
+The BibTeX format refers to a stylized file format which is used predomoninantly for lists of references, mainly and originally for working with latex.. BibTeX bibliographies use the .bib extension. For example the bibliography for this project is [giving_keywords.bib](support/giving_keywords.bib). For more information on BibTeX see [here](http://www.bibtex.org/)
+
+- **Citr package (addin) for RStudio**
+
+The Citr package provides functions to search Zotero and BibTeX libraries in order to insert references into Markdown files. Citr also features a plugin for RStudio which makes the referencing process even easier. Instructions for download, as well as a demonstration of the Rstudio plugin are provided [here.](https://github.com/crsh/citr/blob/master/README.md)
+
+- **Zotero** 
+
+Zotero is a free open source reference manager, which enables users to sync their library of references across multiple devices. Similarly to other reference managers, Zotero offers plugins for popular browsers such as Chrome and Safari. [Download Zotero](https://www.zotero.org/download/) 
+
+
+- **Better BibTeX for Zotero** 
+
+Better BibTeX for Zotero is a add-on for Zotero. Among other things it allows the Zotero library to be exported from Zotero for use in Markdown. Installation instructions are provided [here.](http://retorque.re/zotero-better-bibtex/installation/)
+
+I currently (25 Apr 2020) am having Zotero automatically maintain/output the key .bib file to a dropbox folder. Each project has code to routinely download this file with a command such as 
+
+`download.file(url = "https://www.dropbox.com/s/3i8bjrgo8u08v5w/reinstein_bibtex.bib?raw=1", destfile = "reinstein_bibtex.bib")`
+
+
+## How to 'build' and view the book
+
+## Joining this project
+
+- Get a Github account, contact daaronr AT gmail.com 
+
+### Creating a Branch and a 'pull request'
+
+### GitHub web page: Readme,  'Project' board, 'Issues', Comments/notifications, commenting within commits, etc.
+
+## Airtable and innovationsinfundraising.org 
+
+This project is closely connected to [innovationsinfundraising.org](innovationsinfundraising.org). Much of these projects overlap, and there is a shared 'database.' 
+
+For more information, [see the tutorial on using the Airtable and Innovationsinfundraising.org here](https://github.com/daaronr/ea_giving_barriers/blob/master/documentatiion_and_tutorials/project_airtableexplained/airtable_database_overview.pdf) 
+
+## Useful resources
+Like most things, when working with code the internet is your best friend. Listed below are several useful resources for learning about the material mentioned above:
+
+#### [R Markdown: The definitive guide](https://bookdown.org/yihui/rmarkdown/)
+#### [R for Data Science](https://r4ds.had.co.nz/)
+#### [Authoring Books with R Markdown](https://bookdown.org/yihui/bookdown/)
+#### [YaRrr! The Pirate’s Guide to R](https://bookdown.org/ndphillips/YaRrr/)

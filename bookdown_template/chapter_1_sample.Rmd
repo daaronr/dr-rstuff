@@ -4,6 +4,7 @@
 Click [HERE](#chapter_2) to jump to next chapter.
 ```
 
+
 `r format_with_col("**Note to friends I've asked to look at this book...**","brown")`
 
 `r format_with_col("Thanks for looking at this.", "brown")`
@@ -14,6 +15,11 @@ Click [HERE](#chapter_2) to jump to next chapter.
 **Leaving feedback, asking questions, seeking other's feedback/notes/questions:**
 
 *All feedback is appreciated, and I will try to respond to your questions.* An easy way to take notes and leave feedback: sign up for ['hypothes.is'](https://web.hypothes.is/) and you can put your 'public notes' *directly on this web book.* Don't worry, these comments are saved even if the web book is updated.
+
+> an example of a quotation  example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation.
+ddddddd 
+
+
 
 <!--
 (As noted at <https://www.econometrics-with-r.org/>; thanks for this example:)
@@ -42,9 +48,19 @@ https://creativecommons.org/licenses/by-nc-sa/4.0/
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Researching and writing in Economics (Essays, term paper, dissertations for Economics undergraduates and MSc students)</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/daaronr/writing_econ_research" property="cc:attributionName" rel="cc:attributionURL">David Reinstein</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
 
-### Citations
+## Citations
 
 Let's cite a paper here: [@Akerlof1984a]; I don't think I needed the brackets though (@Akerlof1984a would also have worked).
+
+Testing another one: [@alecstephensonQuickIntroductionShiny2013]
+  
+
+It is referring the contents of bibtex files, in the line `bibliography: [./references.bib, support/reinstein_bibtex.bib]`
+
+
+<div class="marginnote">
+ This can be made easier with the addin citation tool 'citr', along with Zotero and betterbibtex.
+</div>
 
 
 ## Examples of the sort of fancy interactive stuff I hope to incorporate in this web book
@@ -54,6 +70,7 @@ Thanks to Yihui and many others, this book should permit lots of flexible tools.
 ### Questions with folded answers, folded expanded discussions
 
 Can I ask you a question? (Answer below the fold.)
+
 
 ```{block2,  type='fold'}
 
@@ -98,7 +115,6 @@ knitr::include_url("https://davidreinstein.wordpress.com/")
 
 ```
 
-***
 
 ### Scary math {-}
 
