@@ -39,8 +39,7 @@ output:
 bookdown::pdf_book:
     keep_tex: yes
 always_allow_html: yes
-#bibliography: [support/reinstein_bibtex.bib]
-bibliography: [support/reinstein_bibtex.bib, packages.bib]
+bibliography: ["support/reinstein_bibtex_dropbox.bib", "support/reinstein_references.bib", "packages.bib"] #this second one should be included in the citr settings, first comes from Zotero-dropbox sync, and it's re-downloaded below
 biblio-style: apalike
 link-citations: yes
 github-repo: #gerhardriener/CharitySubstitutionExperiment
@@ -54,8 +53,6 @@ tags: [Economics, Experiments, Charity]
 ```{r}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-
 
 
 Try downloading and accessing some functions here:
@@ -79,7 +76,7 @@ tryCatch(
 file.rename(here("support", "tufte_plusX.css"), here("support", "tufte_plus.css"))
 )
 tryCatch(
-file.rename(here("support", "reinstein_bibtexX.bib"), here("support", "reinstein_bibtex.bib"))
+file.rename(here("support", "reinstein_bibtex_dropboxX.bib"), here("support", "reinstein_bibtex_dropbox.bib"))
 )
 ```
 
@@ -116,10 +113,25 @@ install.packages("bookdown")
 # or the development version
 # devtools::install_github("rstudio/bookdown")
 ```
+<!-- Download 'backup' bibtex file from dropbox (synced with Zotero), do the rename workaround -->
+
+
+```{r }
+
+tryCatch(
+  {
+download.file(url = "https://www.dropbox.com/s/3i8bjrgo8u08v5w/reinstein_bibtex.bib?raw=1", destfile = here("support", "reinstein_bibtex_dropboxX.bib"))
+
+
+file.rename(here("support", "reinstein_bibtex_dropboxX.bib"), here("support", "reinstein_bibtex_dropbox.bib"))
+  }
+)
+
+```
 
 <!-- note installing packages is mainly removed because this is done in baseoptions.R -->
 
-```{r include=FALSE}
+```{r }
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
@@ -153,8 +165,7 @@ my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 
 ```
 
-
-<!---
+<!--
 Can define text blocks here, refer to them again and again if desired
 -->
 
@@ -171,4 +182,4 @@ Can define text blocks here, refer to them again and again if desired
 
   gtag('config', 'G-QLKFNFTGXX');
 </script>
-</html >
+</html>
