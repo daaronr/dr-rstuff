@@ -55,7 +55,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-Try downloading and accessing some functions here:
+Try downloading and accessing my basic content support tool...
 ```{r download-formatting-to-support-folder}
 
 library(here)
@@ -79,6 +79,10 @@ tryCatch(
 file.rename(here("support", "reinstein_bibtex_dropboxX.bib"), here("support", "reinstein_bibtex_dropbox.bib"))
 )
 ```
+
+\
+
+Try downloading and accessing my basic functions and options and package installations here...
 
 ```{r download-fncns}
 
@@ -138,24 +142,6 @@ knitr::write_bib(c(
 ), 'packages.bib')
 ```
 
-```{r somefunctions}
-
-#possibly move these to a separate file
-
-#multi-output text color
-#https://dr-harper.github.io/rmarkdown-cookbook/changing-font-colour.html#multi-output-text-colour
-#We can then use the code as an inline R expression format_with_col("my text", "red")
-
-format_with_col = function(x, color){
-  if(knitr::is_latex_output())
-    paste("\\textcolor{",color,"}{",x,"}",sep="")
-  else if(knitr::is_html_output())
-    paste("<font color='",color,"'>",x,"</font>",sep="")
-  else
-    x
-}
-
-```
 
 ```{r html, echo=FALSE}
 # globally set chunk options
