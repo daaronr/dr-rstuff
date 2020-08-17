@@ -363,6 +363,13 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
 }
 .note p { width: 100%!important; }
 
+/*This one is meant to cue student input, e.g., through Hypothes.is*
+.inputq{
+  padding: 1em 1em 1em 1em;
+  margin-bottom: 5px;
+  background: #c9f5c9 5px right/3em no-repeat;
+}
+
 .technote{
   padding: 1em 1em 1em 1em;
   margin-bottom: 5px;
