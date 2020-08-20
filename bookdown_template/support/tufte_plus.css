@@ -350,7 +350,7 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
 
 
 .note, .inputq, .supplement, .tip, .supplement, .technote, .warning, .tip, ,.compqn, .rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning {
-  padding:.7em .7em .7em .7em;
+  padding: 1em 1em 1em 1em;
   margin-bottom: 5px;
   width: 75%!important;
   }
