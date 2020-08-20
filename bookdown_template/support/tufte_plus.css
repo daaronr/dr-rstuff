@@ -349,9 +349,10 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
 /*MY OWN ELEMENTS largely from textbook work*/
 
 .rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning {
-  padding: 1em 1em 1em 1em;
+  padding:.7em .7em .7em .7em;;
   margin-bottom: 5px;
   background: #f5f5f5 5px center/3em no-repeat;
+
 }
 .note{
   padding: .7em .7em .7em .7em;
@@ -366,9 +367,9 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
 /*This one is meant to cue student input, e.g., through Hypothes.is*/
 
 .inputq{
-  padding: 1em 1em 1em 1em;
+  padding:.7em .7em .7em .7em;
   margin-bottom: 5px;
-  background: #c9f5c9 5px right/3em no-repeat;
+  background: #c9f5c9 5px center/3em no-repeat;
 }
 
 .technote{
@@ -382,10 +383,15 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
   background: #ffaaa5 5px center/3em no-repeat;
 }
 .tip{
-  padding: 1em 1em 1em 1em;
+  padding: .7em .7em .7em .7em;
   margin-bottom: 5px;
   background: #f8e6ff 5px center/3em no-repeat;
+  width: 80%!important;
+    border: 1px solid black;
 }
+.tip p { width: 100%!important; }
+
+
 .compqn{
   padding: 1em 1em 1em 1em;
   margin-bottom: 5px;
@@ -432,7 +438,7 @@ h3.subtitle em {
 
 
 .fold {
-  border: 1px solid grey;
+  border: 1px solid black;
   min-height: 40px;
     max-width: 90%;
   padding: .7em .7em .7em .7em;
