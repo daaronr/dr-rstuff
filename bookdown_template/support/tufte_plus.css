@@ -386,10 +386,6 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
   background: #ffaaa5 5px center/3em no-repeat;
 }
 
-.tip{
-  background: #f8e6ff 5px center/3em no-repeat;
-    border: 1px solid black;
-}
 
 .compqn{
   background: #cbecf2 5px center/3em no-repeat;
