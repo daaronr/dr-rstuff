@@ -394,6 +394,7 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
   background: #bfffdf 5px center/3em no-repeat;
   width: 75%!important;
 }
+
 .warning{
   padding: 1em 1em 1em 1em;
   margin-bottom: 5px;
@@ -464,6 +465,6 @@ h3.subtitle em {
   padding: .7em .7em .7em .7em;
 }
 
-.technote p .inputq p .warning p .tip p .compqn p .fold p { width: 100%!important; }
+.def p, .technote p, .inputq p, .warning p, .tip p, .compqn p, .fold p, .goofus p, .gallant p { width: 100%!important; }
 
 /*Note here to check it's updating */
