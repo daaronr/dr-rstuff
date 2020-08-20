@@ -364,6 +364,19 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
 }
 .note p { width: 100%!important; }
 
+
+.def{
+  padding: 1em 1em 1em 1em;
+  margin-bottom: 5px;
+  background: #f5f5f5 5px center/3em no-repeat;
+  width: 75%!important;
+    border: 1px solid black;
+}
+.def p { width: 100%!important; }
+
+
+
+
 /*This one is meant to cue student input, e.g., through Hypothes.is*/
 
 .inputq{
@@ -372,6 +385,7 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
   background: #c9f5c9 5px center/3em no-repeat;
   width: 75%!important;
 }
+
 
 
 .technote{
@@ -449,5 +463,7 @@ h3.subtitle em {
     max-width: 75%;
   padding: .7em .7em .7em .7em;
 }
+
+.technote p .inputq p .warning p .tip p .compqn p .fold p { width: 100%!important; }
 
 /*Note here to check it's updating */
