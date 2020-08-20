@@ -352,10 +352,10 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
 .note, .inputq, .supplement, .tip, .supplement, .technote, .warning, .tip, ,.compqn, .rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning {
   padding: 1em 1em 1em 1em;
   width: 75%!important;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
   }
 
 .rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning {
@@ -379,7 +379,7 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
 /*This one is meant to cue student input, e.g., through Hypothes.is*/
 
 .inputq{
-  background: #c9f5c9 5px center/3em no-repeat;
+  background: #c9f5c9 50px center/3em no-repeat;
 }
 
 .supplement{
