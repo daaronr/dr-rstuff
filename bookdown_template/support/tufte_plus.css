@@ -360,7 +360,7 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
 }
 
 .def{
-  padding: 1em 1em 1em 1em;
+  padding: 1em;
   display: inline-block;
   background: #f5f5f5 5px center/3em no-repeat;
   width: 75%!important;
@@ -417,7 +417,10 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
 }
 
 .book .book-body .page-wrapper .page-inner {
-  max-width: 95%;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 h3.subtitle em {
@@ -445,12 +448,8 @@ h3.subtitle em {
 .note p, .def p, .technote p, .inputq p, .warning p, .tip p, .compqn p, .fold p, .goofus p, .gallant p, .supplement p { width: 100%!important; }
 
 .note, .inputq, .supplement, .tip, .supplement, .technote, .warning, .tip, ,.compqn, .rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning {
-  padding: 1em 1em 1em 1em;
-  width: 75%!important;
-  margin-bottom: 50px;
-  margin-top: 50px;
-  margin-left: 50px;
-  margin-right: 50px;
+  padding: .8em;
+  max-width: 75%!important;
   }
 
 /*Note here to check it's updating */
