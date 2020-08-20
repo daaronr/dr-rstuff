@@ -43,8 +43,8 @@ tryCatch(
 tryCatch(
   {
     download.file(url = "https://www.dropbox.com/s/3i8bjrgo8u08v5w/reinstein_bibtex.bib?raw=1", destfile = here("support", "reinstein_bibtex_dropboxX.bib"))
-    
-    
+
+
     file.rename(here("support", "reinstein_bibtex_dropboxX.bib"), here("support", "reinstein_bibtex_dropbox.bib"))
   }
 )
@@ -54,7 +54,7 @@ tryCatch(
 tryCatch(
   {
     download.file(url = "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/functions.R", destfile = here("code", "functionsX.R"))
-    
+
     download.file(url = "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/baseoptions.R", destfile = here("code", "baseoptionsX.R"))
   },  error = function(e) {
     print("you are not online, so we source locally instead; hope you've updated")

@@ -363,7 +363,8 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
 }
 .note p { width: 100%!important; }
 
-/*This one is meant to cue student input, e.g., through Hypothes.is*
+/*This one is meant to cue student input, e.g., through Hypothes.is*/
+
 .inputq{
   padding: 1em 1em 1em 1em;
   margin-bottom: 5px;
