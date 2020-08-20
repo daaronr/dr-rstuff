@@ -447,7 +447,7 @@ h3.subtitle em {
 
 .note p, .def p, .technote p, .inputq p, .warning p, .tip p, .compqn p, .fold p, .goofus p, .gallant p, .supplement p { width: 100%!important; }
 
-.note, .inputq, .supplement, .tip, .supplement, .technote, .warning, .tip, ,.compqn, .rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning {
+.note, .inputq, .supplement, .tip, .supplement, .technote, .warning, .tip, .compqn, .rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning {
   padding: .8em;
   max-width: 75%!important;
   }
