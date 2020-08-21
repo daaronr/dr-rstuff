@@ -442,6 +442,7 @@ h3.subtitle em {
   border: 1px solid black;
   min-height: 40px;
     max-width: 75%;
+    padding: .6em;
 }
 
 
