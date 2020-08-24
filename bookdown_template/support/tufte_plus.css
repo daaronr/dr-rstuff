@@ -355,9 +355,14 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
 
 .note{
   display: inline-block;
-  background: #ffb972 5px center/3em no-repeat;
+  background: #faf4c8 5px center/3em no-repeat;
     border: 1px solid black;
 }
+
+.notei {
+  background-image: url("support/images/notechalk.jpeg");
+}
+
 
 .def{
   padding: 1em;
@@ -413,7 +418,7 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
 }
 
 .rmdtipi {
-  background-image: url("../images/tip.png");
+  background-image: url("support/images/tip.png");
 }
 
 .book .book-body .page-wrapper .page-inner {
