@@ -66,7 +66,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Try downloading and accessing my basic content support tool...
 
 
-```{r download-project-setup, eval=FALSE}
+```{r download-project-setup, eval=TRUE}
 library(here)
 
 
@@ -84,7 +84,7 @@ tryCatch(
 )
 ```
 
-```{r run-project-setup, eval=FALSE}
+```{r run-project-setup, eval=TRUE}
 
 source(here("code", "project_setup.R"))
 
