@@ -348,41 +348,63 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
 
 /*MY OWN ELEMENTS largely from textbook work*/
 
+
 .rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning {
-  padding: 1em 1em 1em 1em;
-  margin-bottom: 5px;
   background: #f5f5f5 5px center/3em no-repeat;
 }
+
 .note{
-  padding: .7em .7em .7em .7em;
   display: inline-block;
-  margin-bottom: 5px;
-  background: #ffb972 5px center/3em no-repeat;
-  width: 70%!important;
+  background: #faf4c8 5px center/3em no-repeat;
     border: 1px solid black;
 }
-.note p { width: 100%!important; }
+
+.note {
+  background-image: url("support/images/notechalk.jpeg");
+}
+
+
+.def{
+  padding: 1em;
+  display: inline-block;
+  background: #f5f5f5 5px center/3em no-repeat;
+  width: 75%!important;
+    border: 1px solid black;
+}
+
+
+/*This one is meant to cue student input, e.g., through Hypothes.is*/
+
+.inputq{
+  background: #c9f5c9 50px center/3em no-repeat;
+  background-image: url("support/images/mega.png");
+}
+
+.supplement{
+  background: #d6b5e5 5px center/3em no-repeat;
+  background-image: url("support/images/pills.jpeg");
+}
 
 .technote{
-  padding: 1em 1em 1em 1em;
-  margin-bottom: 5px;
   background: #bfffdf 5px center/3em no-repeat;
 }
+
 .warning{
-  padding: 1em 1em 1em 1em;
-  margin-bottom: 5px;
   background: #ffaaa5 5px center/3em no-repeat;
+  background-image: url("support/images/warning.png");
 }
+
 .tip{
-  padding: 1em 1em 1em 1em;
-  margin-bottom: 5px;
   background: #f8e6ff 5px center/3em no-repeat;
+  background-image: url("support/images/tip.png");
+    border: 1px solid black;
 }
+
 .compqn{
-  padding: 1em 1em 1em 1em;
-  margin-bottom: 5px;
   background: #cbecf2 5px center/3em no-repeat;
+  background-image: url("support/images/micro.png");
 }
+
 .goofus{
   margin-bottom: 2px;
   background: #fcd1c2 2px center/3em no-repeat;
@@ -390,6 +412,7 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
   display: inline-block;
   margin-bottom: 5px;
   width: 75%!important;
+  background-image: url("support/images/goofus.png");
 }
 .gallant{
   margin-bottom: 2px;
@@ -398,14 +421,18 @@ label.margin-toggle:not(.sidenote-number) { display: none; }
   display: inline-block;
   margin-bottom: 5px;
   width: 75%!important;
+  background-image: url("support/images/crown.png");
 }
 
 .rmdtipi {
-  background-image: url("../images/tip.png");
+  background-image: url("support/images/tip.png");
 }
 
 .book .book-body .page-wrapper .page-inner {
-  max-width: 95%;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 h3.subtitle em {
@@ -424,10 +451,18 @@ h3.subtitle em {
 
 
 .fold {
-  border: 1px solid grey;
+  border: 1px solid black;
   min-height: 40px;
-    max-width: 90%;
-  padding: .7em .7em .7em .7em;
+    max-width: 75%;
+    padding: .6em;
 }
+
+
+.note p, .def p, .technote p, .inputq p, .warning p, .tip p, .compqn p, .fold p, .goofus p, .gallant p, .supplement p { width: 100%!important; }
+
+.note, .inputq, .supplement, .tip, .supplement, .technote, .warning, .tip, .compqn, .rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning {
+  padding: .8em;
+  max-width: 75%!important;
+  }
 
 /*Note here to check it's updating */
