@@ -9,10 +9,10 @@ output:
   bookdown::gitbook:
     lib_dir: "book_assets"
     includes:
-      in_header: support/header_nocode.html
+      in_header: support/header.html
       #in_header: https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/header.html
     #css: https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/tufte_plus.css
-    css: support/tufte_plus.css
+    css: support/tufte_plus_test.css
     config:
       toc:
         after: |

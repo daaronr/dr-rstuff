@@ -101,6 +101,31 @@ $(document).ready(function() {
 </script>
 
 
+<script type="text/javascript">
+
+// toggle visibility of R source blocks in R Markdown output
+function toggle_R() {
+  var x = document.getElementsByClassName('r');
+  if (x.length == 0) return;
+  function toggle_vis(o) {
+    var d = o.style.display;
+    o.style.display = (d == 'block' || d == '') ? 'none':'block';
+  }
+
+  for (i = 0; i < x.length; i++) {
+    var y = x[i];
+    if (y.tagName.toLowerCase() === 'pre') toggle_vis(y);
+  }
+
+    var elem = document.getElementById("myButton1");
+    if (elem.value === "Hide Global") elem.value = "Show Global";
+    else elem.value = "Hide Global";
+}
+
+document.write('<input onclick="toggle_R();" type="button" value="Hide Global" id="myButton1" style="position: absolute; top: 10%; right: 2%; z-index: 200"></input>')
+
+</script>
+
 <!-- Global site tag (gtag.js) - Google Analytics
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148137970-3"></script>
 <script>
@@ -176,7 +201,7 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="support/tufte_plus.css" type="text/css" />
+<link rel="stylesheet" href="support/tufte_plus_test.css" type="text/css" />
 </head>
 
 <body>
@@ -355,7 +380,7 @@ ddddddd</p>
 <div id="r-code-and-data" class="section level3 unnumbered" number="">
 <h3>R code and data</h3>
 <p>These are “code chunks”</p>
-<pre><code>##  [1] -1.470 -0.328 -0.486 -1.136  0.131 -1.268  0.871  2.191  0.293 -0.027</code></pre>
+<pre><code>##  [1] -0.32  1.38 -0.13  1.33  1.03  0.28 -1.56  1.59 -1.81 -0.32</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:chunk-label"></span>
 <img src="template_project_files/figure-html/chunk-label-1.png" alt="A figure caption." width="80%" />
 <p class="caption">
