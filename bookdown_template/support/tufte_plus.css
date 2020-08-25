@@ -72,14 +72,14 @@
 /* Tufte CSS styles */
 html { font-size: 10px; }
 
-body { width: 100%;
+body { width: 92%;
        margin-left: auto;
        margin-right: auto;
        padding-left: 0%;
        font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
        /*background-color: #fffff8;*/
        color: #111;
-       max-width: 1400px;
+       max-width: 1350px;
        counter-reset: sidenote-counter; }
 
 h1.title { font-weight: 400;
