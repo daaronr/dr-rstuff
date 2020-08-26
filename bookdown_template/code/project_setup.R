@@ -43,10 +43,13 @@ tryCatch(
 tryCatch(
   {
     download.file(url = "https://www.dropbox.com/s/3i8bjrgo8u08v5w/reinstein_bibtex.bib?raw=1", destfile = here("support", "reinstein_bibtex_dropboxX.bib"))
-
-
-    file.rename(here("support", "reinstein_bibtex_dropboxX.bib"), here("support", "reinstein_bibtex_dropbox.bib"))
+  },  error = function(e) {
+    print("you are not online, so we can't download")
   }
+)
+
+tryCatch(
+    file.rename(here("support", "reinstein_bibtex_dropboxX.bib"), here("support", "reinstein_bibtex_dropbox.bib"))
 )
 
 #Source R functions and baseoptions
