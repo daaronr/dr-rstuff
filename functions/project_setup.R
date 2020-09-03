@@ -36,7 +36,7 @@ try_download <- function(url, path) {
 #Downloading html Formatting
 try_download("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/header.html", here("support", "header.html"))
 
-try_download("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/tufte_plus.css", here("support", "tufte_plus.css"))
+try_download("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/tufte_plus.css", here("support", "tufte_plusX.css"))
 
 try_download("https://www.dropbox.com/s/3i8bjrgo8u08v5w/reinstein_bibtex.bib?raw=1", here("support", "reinstein_bibtex_dropbox.bib"))
 
