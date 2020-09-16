@@ -236,7 +236,7 @@ merge_cols <- function(x, y, by) {
 }
 
 
-#### TODO Coalesce all .x and .y columns, taking .x as default, removing extensions
+#### TODO function to Coalesce all .x and .y columns, taking .x as default, removing extensions
 
 #### Just keep .x after a join ####
 just_x  <- function(df) {
