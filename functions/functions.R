@@ -241,7 +241,7 @@ merge_cols <- function(x, y, by) {
 #### Just keep .x after a join ####
 just_x  <- function(df) {
     {{df}} %>%
-        select(!matches("\\.y$") %>%
+        select(!matches("\\.y$")) %>%
                select_all(~gsub("\\.x$", "", .))
 }
 
