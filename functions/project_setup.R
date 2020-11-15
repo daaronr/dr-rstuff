@@ -9,7 +9,7 @@ library(here)
 #library(checkpoint) #TODO ... in to avoid differential processing from different package versions
 library(pacman)
 
-p_load(GGally,Hmisc,broom,codebook,corx,data.table,dataMaid,devtools,dplyr,glue,gtools,here,hrbrthemes,janitor,kableExtra,knitr,lubridate,magrittr,pastecs,plyr,purrr, pryr, readr,scales,sjlabelled,
+p_load(GGally,Hmisc,broom,codebook,corx,data.table,dataMaid,devtools,dplyr,glue,gtools,here,hrbrthemes,janitor,kableExtra,knitr,lubridate,learnr,magrittr,pastecs,plyr,purrr, pryr, readr,scales,sjlabelled,
        snakecase,summarytools,tictoc,tidyr,tidyverse,todor,xtable)
 
 #Set function defaults
