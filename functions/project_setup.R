@@ -13,8 +13,9 @@ p_load(GGally,Hmisc,broom,codebook, conflicted, corx,data.table,dataMaid,devtool
        snakecase,summarytools,tictoc,tidyr,tidyverse,todor,xtable)
 
 #Set function defaults
-conflict_prefer("here", "here")
-conflict_prefer("where", "pryr")
+here <- here::here
+where <- pryr::where
+
 
 #### Sourcing R scripts and HTML formatting ####
 
