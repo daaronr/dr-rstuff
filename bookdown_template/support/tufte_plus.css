@@ -299,7 +299,7 @@ h1 code, h2 code, h3 code { font-size: 0.80em; }
 
 .marginnote code, .sidenote code { font-size: 1rem; }
 
-pre { width: 70%;
+pre { width: 75%;
            overflow-x: auto; }
 
 .fullwidth { max-width: 90%;
