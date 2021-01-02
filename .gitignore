@@ -39,3 +39,4 @@ rsconnect/
 *.tsv
 marking-in-r/candidate_.tsv
 marking-in-r/candidate_.tsv
+.DS_Store
