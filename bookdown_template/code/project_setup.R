@@ -7,14 +7,11 @@
 
 library(here)
 #library(checkpoint) #TODO ... in to avoid differential processing from different package versions
-library(pacman)
 
-p_load(GGally,Hmisc,broom,codebook,corx,data.table,dataMaid,devtools,dplyr,gapminder,gganimate, ggthemes, glue,gtools,gtsummary,here,hrbrthemes,janitor,kableExtra,knitr,lubridate,magrittr,pastecs,plyr,purrr, pryr, readr,scales,sjlabelled,
-       snakecase,summarytools,tictoc,tidyr,tidyverse,todor,xtable)
+# moved all sourcing/loading of packages (using pacman) to baseoptions.R
 
 #Set function defaults
 here <- here::here
-where <- pryr::where
 
 #### Sourcing R scripts and HTML formatting ####
 
@@ -71,8 +68,8 @@ tryCatch(
 file.rename(here::here("code", "functionsX.R"), here::here("code", "functions.R"))
 file.rename(here::here("code", "baseoptionsX.R"), here::here("code", "baseoptions.R"))
 
-source(here("code", "functions.R"))
 source(here("code", "baseoptions.R"))
+source(here("code", "functions.R"))
 
 # Basic options used across files and shortcut functions, e.g., 'pp()' for print
 # functions grabbed from web and created by us for analysis/output
