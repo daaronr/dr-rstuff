@@ -6,9 +6,15 @@ knitr::opts_chunk$set(echo = TRUE,include=TRUE, warning=FALSE)
 library(pacman)
 #p_load(knitr, dplyr, tidyverse, here, janitor, citr, reporttools, magrittr, glue, experiment, estimatr, broom, kableExtra, purrr, ggsignif, recipes, pwr,lubridate,huxtable,sandwich,randomizr)
 
+
+#tryCatch(
+#devtools::install_github("moodymudskipper/safejoin")
+#)
+
 #p_load_gh("acoppock/attrition", "ngreifer/cobalt") # Alexander Coppock package to calculate trimming bounds. Not on CRAN
-p_load(arsenal, blockTools, broom, broom, car, citr, cobalt, codebook, codebook, coefplot, corx, data.table, data.table, dataMaid, dataMaid, DescTools, devtools, dplyr, dplyr, estimatr, experiment, forcats, furniture, gapminder, GGally, gganimate, gganimate, ggsignif, ggthemes, ggthemes, glmnet, glmnetcr, glue, glue, gtools, gtsummary, gtsummary, here, here, Hmisc, hrbrthemes, huxtable, janitor, janitor, kableExtra, kableExtra, knitr, knitr, lmtest, lubridate, lubridate, magrittr, magrittr, paramtest, pastecs, plyr, plyr, pryr, psych, purrr, purrr, pwr, randomizr, readr, readxl, recipes, reporttools, rlang, sandwich, scales, sjlabelled, sjlabelled, sjmisc, skimr, snakecase, statmod, summarytools, tidyverse, todor,
-)
+
+p_load(arsenal, blockTools, broom, car, citr, cobalt, codebook, coefplot, corx, data.table, dataMaid, DescTools, devtools, dplyr, estimatr, experiment, forcats, furniture, gapminder, GGally, gganimate, ggsignif, ggthemes, glmnet, glmnetcr, glue, gtools, gtsummary, here, Hmisc, hrbrthemes, huxtable, janitor, kableExtra, knitr, lmtest, lubridate, magrittr, paramtest, pastecs, plotly, plyr, pryr, psych, purrr, pwr, randomizr, readr, readxl, recipes, reporttools, rlang, safejoin, sandwich, scales, sjlabelled, sjmisc, skimr, snakecase, statmod, summarytools, tidyverse, todor)
+
 
 #Set function defaults
 where <- pryr::where
@@ -21,7 +27,7 @@ options(warning.length = 100)
 options(nwarnings = 1) # trying to limit display of  warnings; I don't think  it is working!
 options(max.print = 1000)
 
-options(scipen = 9, digits = 2)
+options(scipen = 1, digits = 2)
 
 # set important functions to correct package
 select <- dplyr::select
