@@ -461,6 +461,9 @@ h3.subtitle em {
     padding: .6em;
 }
 
+.navigation navigation-prev {
+  left: -30px; /* Stop navigation pane overlapping code hiding */
+}
 
 .note p, .def p, .technote p, .inputq p, .warning p, .tip p, .compqn p, .fold p, .goofus p, .gallant p, .supplement p { width: 100%!important; }
 
