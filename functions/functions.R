@@ -169,6 +169,9 @@ compareColumns <- function(df1, df2) {
 
 # Bayesian test coding ####
 
+#(Coded By Scott Dickerson)
+
+
 
 bayesian_test_me <- function(g1, g1pos, g2, g2pos,i,j,a,b){
   #Function which takes the same inputs as the fishertestme function, turns them into a matrix
