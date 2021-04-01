@@ -1,6 +1,7 @@
 fig:chunk-label
 fig:unnamed-chunk-11
 download-access-and-run-project_setup.r
+about-this-work
 preface
 citations
 examples-of-the-sort-of-fancy-interactive-stuff-i-hope-to-incorporate-in-this-web-book
