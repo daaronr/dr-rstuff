@@ -12,11 +12,12 @@ library(here)
 
 #Set function defaults
 here <- here::here
+where <- pryr::where
+
 
 #### Sourcing R scripts and HTML formatting ####
 
-#... Downloading html Formatting ####
-
+#Function to try and download
 try_download <- function(url, path) {
   new_path <- gsub("[.]", "X.", path)
   tryCatch({
@@ -26,7 +27,8 @@ try_download <- function(url, path) {
     print("You are not online, so we can't download")
   })
   tryCatch(
-    file.rename(new_path, path)
+    file.rename(new_path, path
+    )
   )
 }
 
@@ -40,19 +42,15 @@ try_download(
   here::here("support", "tufte_plus.css")
 )
 
-
-
-
 # ... Downloading Bib files ####
 
 try_download(
-  "https://www.dropbox.com/s/3i8bjrgo8u08v5w/reinstein_bibtex.bib?raw=1",
-  here::here("support", "reinstein_bibtex_dropbox.bib")
+             "https://www.dropbox.com/s/3i8bjrgo8u08v5w/reinstein_bibtex.bib?raw=1",
+             here::here("support", "reinstein_bibtex_dropbox.bib")
 )
 
 
-
-# ... Source R functions and baseoptions ####
+#Source R functions and baseoptions
 
 try_download(
   "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/baseoptions.R",
@@ -66,8 +64,22 @@ try_download(
 
 
 
-source(here("code", "baseoptions.R"))
-source(here("code", "functions.R"))
 
-# Basic options used across files and shortcut functions, e.g., 'pp()' for print
-# functions grabbed from web and created by us for analysis/output
+source(here("code", "baseoptions.R")) # Basic options used across files and shortcut functions, e.g., 'pp()' for print
+
+source(here("code", "functions.R")) # functions grabbed from web and created by us for analysis/output
+
+#multi-output text color
+#https://dr-harper.github.io/rmarkdown-cookbook/changing-font-colour.html#multi-output-text-colour
+#We can then use the code as an inline R expression format_with_col("my text", "red")
+
+format_with_col = function(x, color){
+  if(knitr::is_latex_output())
+    paste("\\textcolor{",color,"}{",x,"}",sep="")
+  else if(knitr::is_html_output())
+    paste("<font color='",color,"'>",x,"</font>",sep="")
+  else
+    x
+}
+
+
