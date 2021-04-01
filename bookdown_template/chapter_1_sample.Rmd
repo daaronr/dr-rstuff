@@ -1,4 +1,4 @@
-# About this work {-}
+# About this work 
 
 ```{block2,  type='note'}
 Click [HERE](#chapter_2) to jump to next chapter.
