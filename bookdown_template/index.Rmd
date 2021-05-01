@@ -60,9 +60,6 @@ knitr::opts_chunk$set(echo = TRUE)
 (Note: we ultimately can do this in main, but this is a bridge)
 
 
-
-
-
 Try downloading and accessing my basic content support tool...
 
 
