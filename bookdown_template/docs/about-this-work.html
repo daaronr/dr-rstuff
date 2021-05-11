@@ -24,7 +24,7 @@
 <meta name="author" content="Dr. David Reinstein," />
 
 
-<meta name="date" content="2021-04-01" />
+<meta name="date" content="2021-05-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -833,7 +833,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Template for Reinstein bookdowns</h1>
 <p class="author"><em>Dr. David Reinstein,</em></p>
-<p class="date"><em>2021-04-01</em></p>
+<p class="date"><em>2021-05-07</em></p>
 <div class="abstract">
 <p class="abstract">Abstract</p>
 This ‘book’ organizes the project and helps others understand it and learn from it
@@ -849,11 +849,11 @@ Click <a href="chapter-2.html#chapter_2">HERE</a> to jump to next chapter.
 <p><font color='brown'>Thanks for looking at this.</font></p>
 <div id="preface" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Preface</h2>
+<p>Testing a Zotero reference: <span class="citation">(<a href="references.html#ref-becker1974" role="doc-biblioref">Becker 1974</a>)</span> (should cite Becker, 1974). <span class="citation">(<a href="references.html#ref-adena2019" role="doc-biblioref">Adena and Huck 2019</a>)</span> – should cite Adena 2019.</p>
 <p><strong>Leaving feedback, asking questions, seeking other’s feedback/notes/questions:</strong></p>
 <p><em>All feedback is appreciated, and I will try to respond to your questions.</em> An easy way to take notes and leave feedback: sign up for <a href="https://web.hypothes.is/">‘hypothes.is’</a> and you can put your ‘public notes’ <em>directly on this web book.</em> Don’t worry, these comments are saved even if the web book is updated.</p>
 <blockquote>
-<p>an example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation.
-ddddddd</p>
+<p>an example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation.</p>
 </blockquote>
 <!--
 (As noted at <https://www.econometrics-with-r.org/>; thanks for this example:)
@@ -872,13 +872,13 @@ ddddddd</p>
 <li><p>You cannot sell this or use it, or any part of it, for commercial purposes</p></li>
 </ul>
 <p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="uri">https://creativecommons.org/licenses/by-nc-sa/4.0/</a></p>
-<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Researching and writing in Economics (Essays, term paper, dissertations for Economics undergraduates and MSc students)</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/daaronr/writing_econ_research" property="cc:attributionName" rel="cc:attributionURL">David Reinstein</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Researching and writing in Economics (Essays, term paper, dissertations for Economics undergraduates and MSc students)</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/daaronr/writing_econ_research" property="cc:attributionName" rel="cc:attributionURL">David Reinstein</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
 </div>
 </div>
 <div id="citations" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Citations</h2>
 <p>Let’s cite a paper here: <span class="citation">(<a href="#ref-Akerlof1984a" role="doc-biblioref"><strong>Akerlof1984a?</strong></a>)</span>; I don’t think I needed the brackets though (<span class="citation">(<a href="#ref-Akerlof1984a" role="doc-biblioref"><strong>Akerlof1984a?</strong></a>)</span> would also have worked).</p>
-<p>Testing another one: <span class="citation">(<a href="references.html#ref-alecstephensonQuickIntroductionShiny2013" role="doc-biblioref">Alec Stephenson 2013</a>)</span></p>
+<p>Testing another one: <span class="citation">(<a href="#ref-alecstephensonQuickIntroductionShiny2013" role="doc-biblioref"><strong>alecstephensonQuickIntroductionShiny2013?</strong></a>)</span></p>
 <p>It is referring the contents of bibtex files, in the line <code>bibliography: [./references.bib, support/reinstein_bibtex.bib]</code></p>
 <div class="marginnote">
 <p>This can be made easier with the addin citation tool ‘citr,’ along with Zotero and betterbibtex.</p>
@@ -907,8 +907,8 @@ ddddddd</p>
 </div>
 <div id="shiny_test" class="section level3 unnumbered">
 <h3>A Shiny app</h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="about-this-work.html#cb12-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_app</span>(<span class="st">&quot;https://yihui.shinyapps.io/miniUI/&quot;</span>,</span>
-<span id="cb12-2"><a href="about-this-work.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="st">&quot;600px&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="about-this-work.html#cb17-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_app</span>(<span class="st">&quot;https://yihui.shinyapps.io/miniUI/&quot;</span>,</span>
+<span id="cb17-2"><a href="about-this-work.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="st">&quot;600px&quot;</span>)</span></code></pre></div>
 <iframe src="https://yihui.shinyapps.io/miniUI/?showcase=0" width="80%" height="600px">
 </iframe>
 </div>
@@ -917,7 +917,7 @@ ddddddd</p>
 <p><a href="https://innovationsinfundraising.org/doku.php">innovationsinfundraising.org</a></p>
 <p>(This page couldn’t embed)</p>
 <hr />
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="about-this-work.html#cb13-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">&quot;https://davidreinstein.wordpress.com/&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="about-this-work.html#cb18-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">&quot;https://davidreinstein.wordpress.com/&quot;</span>)</span></code></pre></div>
 <iframe src="https://davidreinstein.wordpress.com/" width="80%" height="400px">
 </iframe>
 </div>
@@ -988,7 +988,7 @@ Heteroskedasticity and Homoskedasticity
 <h2>Notes for instructors and course organisers</h2>
 <p>Note: related pptx slides (covering Ch 1-3, adapted to Exeter) are downloadable:</p>
 <button onclick="window.open(&#39;Lecture1_intro_andyourtopic_exeter.pptx&#39;)">
-Download
+<p>Download</p>
 </button>
 </div>
 <div id="link_back" class="section level2" number="1.5">
@@ -999,7 +999,7 @@ Download
 <p><strong>Six simple rules for writing a good paper</strong> (and, incidentally, for getting a good mark)</p>
 <ol style="list-style-type: decimal">
 <li><p>Frame your topic as an interesting, well-defined <strong>Economic</strong> question. Demonstrate that you understand your question.</p></li>
-<li><p>Explain what others have written about your topic and which techniques they used. <strong><a href="#crit_examine">Critically</a> discuss</strong> the strengths and limitations these. Explain how these relate to and inform your own work. Cite correctly and do not plagiarise.</p></li>
+<li><p>Explain what others have written about your topic and which techniques they used. <a href="#crit_examine"><strong>Critically</strong></a> <strong>discuss</strong> the strengths and limitations these. Explain how these relate to and inform your own work. Cite correctly and do not plagiarise.</p></li>
 <li><p><strong>Apply economics</strong> (and econometrics) to your question. Demonstrate an understanding of your approach and techniques.</p></li>
 <li><p><strong>Organise and present</strong> your work clearly, including an outline and labels and explanations of any tables, graphs, and equations.</p></li>
 <li><p>Write clearly, logically, and in a professional <strong>academic</strong> style.</p></li>

@@ -1,9 +1,12 @@
-# About this work 
+---
+bibliography: references.bib
+---
+
+# About this work
 
 ```{block2,  type='note'}
 Click [HERE](#chapter_2) to jump to next chapter.
 ```
-
 
 `r format_with_col("**Note to friends I've asked to look at this book...**","brown")`
 
@@ -11,57 +14,50 @@ Click [HERE](#chapter_2) to jump to next chapter.
 
 ## Preface {#preface}
 
+Testing a Zotero reference: [@becker1974] (should cite Becker, 1974). [@adena2019] -- should cite Adena 2019.
 
 **Leaving feedback, asking questions, seeking other's feedback/notes/questions:**
 
 *All feedback is appreciated, and I will try to respond to your questions.* An easy way to take notes and leave feedback: sign up for ['hypothes.is'](https://web.hypothes.is/) and you can put your 'public notes' *directly on this web book.* Don't worry, these comments are saved even if the web book is updated.
 
-> an example of a quotation  example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation.
-ddddddd 
+> an example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation.
 
-
-
+```{=html}
 <!--
 (As noted at <https://www.econometrics-with-r.org/>; thanks for this example:)
 -->
+```
+::: {.rmdreview}
+This book is in <b>Open Review</b>. We want your feedback to make the book better for you and other students. You may annotate some text by [selecting it with the cursor]{style="background-color: #3297FD; color: white"} and then click the <i class="h-icon-annotate"></i> on the pop-up menu. You can also see the annotations of others: click the <i class="h-icon-chevron-left"></i> in the upper right hand corner of the page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i>
+:::
 
-<div class = rmdreview>
-This book is in <b>Open Review</b>. We want your feedback to make the book better for you and other students. You may annotate some text by <span style="background-color: #3297FD; color: white">selecting it with the cursor</span> and then click the <i class="h-icon-annotate"></i> on the pop-up menu. You can also see the annotations of others: click the <i class="h-icon-chevron-left"></i> in the upper right hand corner of the page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i>
-</div>
+::: {.marginnote}
+If you have benefitted from this work (and you are not one of my students), please consider giving me some sort of ''kudos'' on Twitter or wherever. One way to materially express gratitude: make a donation in my honor to an *effective and international charity*, such as those listed at [givewell.org](givewell.org). If you make this donation and share it on a social media site with the hashtag \#DRWritingEcon, that would be greatly appreciated.
+:::
 
-<div class="marginnote">
- 
-If you have benefitted from this work (and you are not one of my students), please consider giving me some sort of ''kudos'' on Twitter or wherever. One way to materially express gratitude: make a donation in my honor to an *effective and international charity*, such as those listed at [givewell.org](givewell.org). If you make this donation and share it on a social media site with the hashtag #DRWritingEcon, that would be greatly appreciated.
-
-</div>
-
-### Licence {-}
+### Licence {.unnumbered}
 
 Essentially:
 
-- You can use this freely and create other versions as long as you give proper attribution, and you make your work publicly available
+-   You can use this freely and create other versions as long as you give proper attribution, and you make your work publicly available
 
-- You cannot sell this or use it, or any part of it, for commercial purposes
+-   You cannot sell this or use it, or any part of it, for commercial purposes
 
-https://creativecommons.org/licenses/by-nc-sa/4.0/
+<https://creativecommons.org/licenses/by-nc-sa/4.0/>
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Researching and writing in Economics (Essays, term paper, dissertations for Economics undergraduates and MSc students)</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/daaronr/writing_econ_research" property="cc:attributionName" rel="cc:attributionURL">David Reinstein</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
-
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br />[Researching and writing in Economics (Essays, term paper, dissertations for Economics undergraduates and MSc students)]{xmlns:dct="http://purl.org/dc/terms/" property="dct:title"} by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/daaronr/writing_econ_research" property="cc:attributionName" rel="cc:attributionURL">David Reinstein</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
 ## Citations
 
 Let's cite a paper here: [@Akerlof1984a]; I don't think I needed the brackets though (@Akerlof1984a would also have worked).
 
 Testing another one: [@alecstephensonQuickIntroductionShiny2013]
-  
 
 It is referring the contents of bibtex files, in the line `bibliography: [./references.bib, support/reinstein_bibtex.bib]`
 
-
-<div class="marginnote">
- This can be made easier with the addin citation tool 'citr', along with Zotero and betterbibtex.
-</div>
-
+::: {.marginnote}
+This can be made easier with the addin citation tool 'citr', along with Zotero and betterbibtex.
+:::
 
 ## Examples of the sort of fancy interactive stuff I hope to incorporate in this web book
 
@@ -71,18 +67,15 @@ Thanks to Yihui and many others, this book should permit lots of flexible tools.
 
 Can I ask you a question? (Answer below the fold.)
 
-
 ```{block2,  type='fold'}
 
 Yes: I just did.
 
 ```
 
-
 \
 
 I can also put expansive detail into the fold, to avoid clutter. If you want to know more about spittlebugs, feel free (to open the fold below).
-
 
 ```{block2,  type='fold'}
 
@@ -92,7 +85,7 @@ Indirect source: [wikipedia: Froghopper, accessed 21 Feb 2020](https://en.wikipe
 
 ```
 
-### A Shiny app {-#shiny_test}
+### A Shiny app {#shiny_test .unnumbered}
 
 ```{r knitrapp}
 
@@ -101,13 +94,13 @@ knitr::include_app("https://yihui.shinyapps.io/miniUI/",
 
 ```
 
-### My web pages {-}
+### My web pages {.unnumbered}
 
 [innovationsinfundraising.org](https://innovationsinfundraising.org/doku.php)
 
 (This page couldn't embed)
 
-***
+------------------------------------------------------------------------
 
 ```{r wppage}
 
@@ -115,14 +108,13 @@ knitr::include_url("https://davidreinstein.wordpress.com/")
 
 ```
 
-
-### Scary math {-}
+### Scary math {.unnumbered}
 
 $$\Theta = \begin{pmatrix}\alpha & \beta\\
 \gamma & \delta
 \end{pmatrix}$$
 
-### R code and data {-}
+### R code and data {.unnumbered}
 
 These are "code chunks"
 
@@ -134,14 +126,11 @@ plot(dist ~ speed, cars)  # a scatterplot
 
 And I can refer to the results of the r code in the text itself, e.g., by writing
 
-````
-``  one plus one equals  ` r x `   ``
-````
+    ``  one plus one equals  ` r x `   ``
 
 I get ... one plus one equals `r x`.
 
-### Other fancy stuff {-}
-
+### Other fancy stuff {.unnumbered}
 
 ```{r, eval = my_output == "html", results='asis', echo=F, purl=F}
 cat('
@@ -154,7 +143,6 @@ cat('
 </div>
 ')
 ```
-
 
 ### Interactive questions
 
@@ -202,9 +190,7 @@ knitr::include_app('https://os301.shinyapps.io/Video/')
 
 ```
 
-
 ## Types of notes within text
-
 
 ```{block2,  type='note'}
 
@@ -218,43 +204,43 @@ Warnings look like this.
 
 ```
 
-
 ### A margin note
 
-<div class="marginnote">
+::: {.marginnote}
 If you are considering pursuing an MSc or PhD this will typically be centered on doing research; it's worth knowing whether this is for you before diving in. Doing research is also a key component of much professional work in the private and public (government) sectors, including at 'think tanks', some government agencies, and many private consulting and 'data analytics' firms.
-</div>
+:::
 
-
-## Notes for instructors and course organisers {-}
+## Notes for instructors and course organisers {.unnumbered}
 
 Note: related pptx slides (covering Ch 1-3, adapted to Exeter) are downloadable:
 
+<button onclick="window.open(&#39;Lecture1_intro_andyourtopic_exeter.pptx&#39;)">
 
-<button onclick="window.open('Lecture1_intro_andyourtopic_exeter.pptx')">Download</button>
+Download
+
+</button>
+
 ## We link back here in the next chapter -- check it out {#link_back}
 
-
 Jump to [next chapter](#chapter_2)
-
 
 ### A fun acronym
 
 **Six simple rules for writing a good paper** (and, incidentally, for getting a good mark)
 
-1. Frame your topic as an interesting, well-defined **Economic** question. Demonstrate that you understand your question.
+1.  Frame your topic as an interesting, well-defined **Economic** question. Demonstrate that you understand your question.
 
-2. Explain what others have written about your topic and which techniques they used. **[Critically](#crit_examine) discuss** the strengths and limitations these. Explain how these relate to and inform your own work. Cite correctly and do not plagiarise.
+2.  Explain what others have written about your topic and which techniques they used. [**Critically**](#crit_examine) **discuss** the strengths and limitations these. Explain how these relate to and inform your own work. Cite correctly and do not plagiarise.
 
-3. **Apply economics** (and econometrics) to your question. Demonstrate an understanding of your approach and techniques.
+3.  **Apply economics** (and econometrics) to your question. Demonstrate an understanding of your approach and techniques.
 
-4. **Organise and present** your work clearly, including an outline and labels and explanations of any tables, graphs, and equations.
+4.  **Organise and present** your work clearly, including an outline and labels and explanations of any tables, graphs, and equations.
 
-5. Write clearly, logically, and in a professional **academic** style.
+5.  Write clearly, logically, and in a professional **academic** style.
 
-6. If you are aiming to produce a great paper, make an original contribution or **insight.** (This can be a small insight, and it is not always necessary for a top mark.)
+6.  If you are aiming to produce a great paper, make an original contribution or **insight.** (This can be a small insight, and it is not always necessary for a top mark.)
 
-***
+------------------------------------------------------------------------
 
 ```{r  fig.cap = 'Just remember...', out.width='40%', fig.asp=.4, fig.align='center',  echo = FALSE}
 
@@ -262,7 +248,8 @@ knitr::include_graphics("images/ecacoacin4life.jpg")
 
 ```
 
-Just remember the simple acronym "ECAOAcIn":^[(Isn’t that catchy?)]
+Just remember the simple acronym "ECAOAcIn":[^chapter_1_sample-1]
 
-**E**conomic question -- **C**ritical discussion -- **A**pply economics --  **O**rganise/present well -- **Ac**ademic writing -- original **In**sight
+**E**conomic question -- **C**ritical discussion -- **A**pply economics -- **O**rganise/present well -- **Ac**ademic writing -- original **In**sight
 
+[^chapter_1_sample-1]: (Isn't that catchy?)
