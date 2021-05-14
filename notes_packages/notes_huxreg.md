@@ -21,7 +21,7 @@ None of the commented out stuff belowseems to help, broom gets rid of the number
 #broom.helpers::tidy_and_attach(conf.int = TRUE, exponentiate = TRUE) %>%
 #broom.helpers::tidy_add_n() %>%
 
-    ```
+```
 
 3. I want to save the model objects as well (to use in other ways) but I can't get that to work with my function thing, so I end up having to run the whole thing twice.
 
