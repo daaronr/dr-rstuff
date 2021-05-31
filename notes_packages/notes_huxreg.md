@@ -8,7 +8,11 @@ But here are my stumbling blocks:
 
 1. Titles and captions -- no easy approach
 
+* DHJ: `huxreg(...) %>% set_caption("My caption")`?
+
 2. How to show exponentiated coefficients after, e.g., polr? I only could manage this by doing a separate `broom::tidy(conf.int = TRUE, exponentiate = TRUE)` ... But that gets rid of the number of observations and I can't get them back easily.  I can't seem to get `tidy_override` to help with this.
+
+* DHJ: `tidy_args` argument to huxreg?
 
 None of the commented out stuff belowseems to help, broom gets rid of the number of obs anyways:
 
@@ -39,6 +43,14 @@ ol_mdl <- function(df, rhs) {
             }
 ```
 
+* DHJ: Option 1: create the polr, assign it to a variable, then tidy it etc., then return the model and the tidy in the list.
+* Option 2, cleaner and simpler: one function runs polr, the other function runs tidy:
+
+```
+model <- run_polr(df, rhs)
+output <- tidy_etc(model)
+```
+
 
 Note
 
@@ -54,6 +66,12 @@ I want to separate the 'pre-tidy' part of the above out in order to preserve the
 
 4. Not sure how to manipulate the object 'Classes ‘huxtable’ and 'data.frame'  at the end. (Probably I just need to read the docs on this?)
 
+* DHJ: I don't know what this means. Also, yes, you should read the docs before asking me for help....
+
 5. I haven't managed to get a beautiful format for the regression table
 
+* DHJ: consult Vogue for beauty tips.
+
 6. The display *within* Rstudio is not great, and I sometimes need to show intermediate output without building my big bookdown every time.
+
+* On-screen output or `quick_*` functions are your friends.
