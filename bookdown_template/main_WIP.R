@@ -37,16 +37,16 @@ source(here::here("code", "project_setup.R"))
 #... and a few more packages ####
 p_load_gh("peterhurford/funtools")
 p_load_gh("remotes")
-p_load_gh("tidymodels/corrr")
+#p_load_gh("tidymodels/corrr")
 
 
 if (!require("devtools")) { install.packages("devtools") }
 p_load_gh("peterhurford/checkr")
 
-p_load_gh("peterhurford/currencyr")
+#p_load_gh("peterhurford/currencyr")
 
-p_load("binom")
-p_load("readstata13")
+#p_load("binom")
+#p_load("readstata13")
 
 #options(error = searcher("stackoverflow"))
 
@@ -57,9 +57,7 @@ p_load("readstata13")
 
 ## ...Import and work on data ####
 
-  ## ...Import pre-2020 data, try to harmonise ####
-  #needs running, as it's used (a bit) below
-source(here("build", "eas_cross_year_harmonisation.R"))
+#source(here("build", "eas_cross_year_harmonisation.R"))
 
 
 #### Building bookdown  ####
