@@ -63,25 +63,9 @@ knitr::opts_chunk$set(echo = TRUE)
 Try downloading and accessing my basic content support tool...
 
 
-```{r download-project-setup, eval=TRUE}
-library(here)
+```{r download-project-setup, eval=FALSE}
+#removed because this is now in `main.R`
 
-
-library(devtools)
-tryCatch(
-  {
-     download.file(url = "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/project_setup.R", destfile = here("code", "project_setupX.R"))
-  },  error = function(e) {
-  print("you are not online, so we can't download")
-  }
-)
-
-tryCatch(
-  file.rename(here("code", "project_setupX.R"), here("code", "project_setup.R"))
-)
-```
-
-```{r run-project-setup, eval=TRUE}
 
 source(here("code", "project_setup.R"))
 
