@@ -323,6 +323,10 @@ rdr_cbk <- function(cbfile) {
 
 ####  summary tables function(s) ####
 
+.summ <- hijack(vtable::sumtable,
+                summ=c('notNA(x)','mean(x)','sd(x)', 'pctile(x)[50]', 'pctile(x)[90]'),
+                digits=0,
+                simple.kable = TRUE)
 
 
 #### ... Sumtabs by 'treatment' ... from substitution project
@@ -393,7 +397,7 @@ sumtab2_func_plus <- function(df = ADSX, depvar = donation, treatvar = TreatFirs
 }
 
 # filter(!is.na(donation)) %>% group_by(Treatment, Stage) %>%
-# dplyr::summarize(N = n(), Mean = round(mean(donation, na.rm
+# dplyr::ummarize(N = n(), Mean = round(mean(donation, na.rm
 # = T), 2), 'Std.dev.' = glue('(', { round(sd(donation, na.rm
 # = T), 2) }, ')')
 
