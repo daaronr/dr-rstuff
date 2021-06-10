@@ -728,7 +728,10 @@ format_with_col = function(x, color){
     x
 }
 
+## More formatting stuff ###..#
 
+.kable_styling <- hijack(kableExtra::kable_styling, full_width=FALSE)
+.kable <- hijack(knitr::kable, format.args = list(big.mark = ",", scientific = FALSE))
 
 
 ################# Coding shortcuts ####
