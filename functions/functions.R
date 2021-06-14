@@ -323,9 +323,12 @@ rdr_cbk <- function(cbfile) {
 
 ####  summary tables function(s) ####
 
+#intended for donation data:
 .summ <- hijack(vtable::sumtable,
                 summ=c('notNA(x)','mean(x)','sd(x)', 'pctile(x)[50]', 'pctile(x)[90]'),
+                summ.names = c('N Responses', 'N positive', 'Mean', 'Sd', "Median", "90th pct"),
                 digits=0,
+                labels = TRUE, #uses assigned in Hmisc or sjlabelled
                 simple.kable = TRUE)
 
 
