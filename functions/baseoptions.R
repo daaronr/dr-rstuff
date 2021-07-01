@@ -22,8 +22,8 @@ print("Note we have now set install=FALSE in the p_load; thus you must install a
 
 
 
-p_load_gh('peterhurford/surveytools2')
-p_load_gh('hughjonesd/rumpel')
+p_load_gh('peterhurford/surveytools2', install=FALSE)
+p_load_gh('hughjonesd/rumpel', install=FALSE)
 
 #Set function defaults
 where <- pryr::where
