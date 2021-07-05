@@ -46,6 +46,11 @@ try_download(
 # Download R functions and baseoptions
 
 try_download(
+  "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/project_setup.R",
+  here::here("code", "project_setup.R")
+)
+
+try_download(
   "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/baseoptions.R",
   here::here("code", "baseoptions.R")
 )
