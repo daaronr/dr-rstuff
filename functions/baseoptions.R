@@ -19,7 +19,7 @@ tab <- surveytools2::tab
 
 options(kableExtra.latex.load_packages = FALSE)
 
-options(warning.length = 100)
+# options(warning.length = 100)
 options(nwarnings = 1) # trying to limit display of  warnings; I don't think  it is working!
 options(max.print = 1000)
 
