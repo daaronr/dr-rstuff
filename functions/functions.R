@@ -763,11 +763,17 @@ group_by_sum <- function(df, col, group=year, value=NA, name="n_NA"){
   # value = values to aggregate, i.e value = NA means summarise the NA values in a column by year
   # name = output column name
   
+  # Column name for proportion of col == value
+  prop_name = paste("prop", name, sep="_")
+  
   assertthat::assert_that(class(name) == "character", msg="Name must be a string")
   
   df %>% dplyr::group_by({{group}}) %>%
-    dplyr::summarise(name := dplyr::if_else(is.na(value), # If value if NA then use is.na
+    dplyr::summarise(!!name := dplyr::if_else(is.na(value), # If value if NA then use is.na
                                             sum(is.na({{col}})), 
-                                            sum({{col}} == value, na.rm=TRUE))) # Else sum col == value
+                                            sum({{col}} == value, na.rm=TRUE)), # Else sum col == value
+                     n = n()) %>% 
+    mutate(!!prop_name := !!parse_expr(name)/n)
 }
 
+                   
