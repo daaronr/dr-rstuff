@@ -424,12 +424,17 @@ tabsum <- function(df = ADSX, yvar = donation, xvar = Stage, treatvar = Treatmen
 
 
 
-tabyl_ow_plus <- function(df, var) {
-    {{df}} %>%
-  tabyl({{var}}) %>%
-   dplyr::arrange(desc(n)) %>%
-    adorn_totals() %>%
-    kable() %>%
+tabyl_ow_plus <- function(df, var, caption=NULL, title_case = FALSE) {
+  df <- {{df}} %>%
+    tabyl({{var}}) %>%
+    dplyr::arrange(desc(n)) %>%
+    adorn_totals()
+  
+  if (title_case == TRUE){
+    df <- df %>% rename_with(snakecase::to_title_case)
+  }
+  df %>%
+    kable(caption = caption) %>%
     kable_styling()
 }
 
