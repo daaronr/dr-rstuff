@@ -449,12 +449,17 @@ tabsum <- function(df = ADSX, yvar = donation, xvar = Stage, treatvar = Treatmen
 
 
 
-tabyl_ow_plus <- function(df, var, cap ="") {
-    {{df}} %>%
-  tabyl({{var}}) %>%
-   dplyr::arrange(desc(n)) %>%
-    adorn_totals() %>%
-    kable(caption=cap) %>%
+tabyl_ow_plus <- function(df, var, caption=NULL, title_case = FALSE) {
+  df <- {{df}} %>%
+    tabyl({{var}}) %>%
+    dplyr::arrange(desc(n)) %>%
+    adorn_totals()
+
+  if (title_case == TRUE){
+    df <- df %>% rename_with(snakecase::to_title_case)
+  }
+  df %>%
+    kable(caption = caption) %>%
     kable_styling()
 }
 
@@ -793,7 +798,7 @@ format_with_col = function(x, color){
 
 ################# Coding shortcuts ####
 
-Sm <- function(df, X) dplyr::select(df, matches({X},  ignore.case = FALSE))  # Sm<t_úX>("x") selects variables matching string 'x', case-sensitive
+Sm <- function(df, X) dplyr::select(df, matches({X},  ignore.case = FALSE))  # Sm<t_?X>("x") selects variables matching string 'x', case-sensitive
 sm <- function(df, X) dplyr::select(df, matches({X})) # ... not case-sensitive
 
 Snotm <- function(df, X) dplyr::select(df, -matches({X},  ignore.case = FALSE)) # ...  case-sensitive
@@ -804,4 +809,35 @@ Smn <- function(df, X) dplyr::select(df, matches({X}, ignore.case = FALSE)) %>% 
 smn <- function(df, X) dplyr::select(df, matches({X})) %>% names() # not case-sensitive
 
 
+# Added by Oska
 
+## Group by and summarise
+# Quick group by function to look at NA or 0 values for each year
+group_by_sum <- function(df, col, group=year, value=NA, name="n_NA"){
+  # col = column to summarise
+  # value = values to aggregate, i.e value = NA means summarise the NA values in a column by year
+  # name = output column name
+
+  # Column name for proportion of col == value
+  prop_name = paste("prop", name, sep="_")
+
+  assertthat::assert_that(class(name) == "character", msg="Name must be a string")
+
+  df %>% dplyr::group_by({{group}}) %>%
+    dplyr::summarise(!!name := dplyr::if_else(is.na(value), # If value if NA then use is.na
+                                            sum(is.na({{col}})),
+                                            sum({{col}} == value, na.rm=TRUE)), # Else sum col == value
+                     n = n()) %>%
+    mutate(!!prop_name := !!parse_expr(name)/n)
+}
+
+# Rename a variable with it's label (from sjlabelled)
+rename_to_var_label <- function(df){
+  # Extract variable label
+  labels <- lapply(df, function(x) attributes(x)$label)
+  assertthat::assert_that(!list(NULL) %in% labels,
+                          msg = "Each column must have a corresponding label")
+  # Set names of variables as their label
+  names(df) <- unlist(labels)
+  return(df)
+}
