@@ -781,4 +781,13 @@ group_by_sum <- function(df, col, group=year, value=NA, name="n_NA"){
     mutate(!!prop_name := !!parse_expr(name)/n)
 }
 
-                   
+# Rename a variable with it's label (from sjlabelled)
+rename_to_var_label <- function(df){
+  # Extract variable label
+  labels <- lapply(df, function(x) attributes(x)$label)
+  assertthat::assert_that(!list(NULL) %in% labels,
+                          msg = "Each column must have a corresponding label")
+  # Set names of variables as their label
+  names(df) <- unlist(labels)
+  return(df)
+}               
