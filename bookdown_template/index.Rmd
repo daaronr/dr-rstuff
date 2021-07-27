@@ -50,6 +50,7 @@ tags: [Economics, Experiments, Charity]
 
 
 
+
 ```{r}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -103,15 +104,31 @@ knitr::write_bib(c(
 
 ```{r html, echo=FALSE}
 # globally set chunk options
-knitr::opts_chunk$set(fig.align='center', out.width='80%')
+
+knitr::opts_chunk$set(fig.align='center', out.width='80%', warning=FALSE, message = FALSE, error=TRUE)
 
 my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 
 ```
 
-<!--
-Can define text blocks here, refer to them again and again if desired
--->
+
+```{r knit-hooks-thing, echo=FALSE}
+
+#From https://stackoverflow.com/questions/62028925/how-do-i-catch-errors-in-inline-code-chunk-in-r-markdown
+
+knitr::knit_hooks$set(
+  evaluate.inline = function (code, envir = knit_global()) {
+    v = try(eval(xfun::parse_only(code), envir = envir))
+    knitr::knit_print(v, inline = TRUE, options = knitr::opts_chunk$get())
+  },
+  inline = function(x) {
+  if (any(class(x) == "try-error")) {
+    as.vector(x)
+  } else x
+})
+```
+
+
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 

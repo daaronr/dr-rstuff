@@ -1,11 +1,9 @@
 # Functions used in general Reinstein code
 
 
-
 #### 'Hijacking' standard functions ####
 
 ### See - https://www.r-bloggers.com/hijacking-r-functions-changing-default-arguments/
-
 
 hijack <- function (FUN, ...) {
     .FUN <- FUN
@@ -19,7 +17,6 @@ hijack <- function (FUN, ...) {
 # usage: .data.frame <- hijack(data.frame, stringsAsFactors = FALSE)
 
 #e.g, .read_csv <- hijack(read_csv, trim_ws = TRUE)
-
 
 
 ############## Automation helpers ####
@@ -156,23 +153,9 @@ liftedTT <- purrr::lift(t.test2, .unnamed = TRUE)
 wilcox.test2 <- function(x, y) wilcox.test(x, y, exact = FALSE)
 liftedWilcox <- purrr::lift(wilcox.test2, .unnamed = TRUE)
 
-
-#### Data work ####
-# compare column types across two df (e.g., in advance of a
-# merge); from
-# https://stackoverflow.com/questions/45743991/r-compare-column-types-between-two-dataframes
-compareColumns <- function(df1, df2) {
-  commonNames <- names(df1)[names(df1) %in% names(df2)]
-  data.frame(Column = commonNames, df1 = sapply(df1[, commonNames],
-    class), df2 = sapply(df2[, commonNames], class))
-}
-
-
 # Bayesian test coding ####
 
 #(Coded By Scott Dickerson)
-
-
 
 bayesian_test_me <- function(g1, g1pos, g2, g2pos,i,j,a,b){
   #Function which takes the same inputs as the fishertestme function, turns them into a matrix
@@ -225,6 +208,18 @@ bayesian_test_me <- function(g1, g1pos, g2, g2pos,i,j,a,b){
 }
 
 
+
+#### Data work ####
+
+# compare column types across two df (e.g., in advance of a
+# merge); from
+
+# https://stackoverflow.com/questions/45743991/r-compare-column-types-between-two-dataframes
+compareColumns <- function(df1, df2) {
+  commonNames <- names(df1)[names(df1) %in% names(df2)]
+  data.frame(Column = commonNames, df1 = sapply(df1[, commonNames],
+    class), df2 = sapply(df2[, commonNames], class))
+}
 
 
 #### # Join and update, take nonmissing values from - ####
@@ -306,9 +301,39 @@ just_x  <- function(df) {
                select_all(~gsub("\\.x$", "", .))
 }
 
-#### Basic setup and codebooks
+
+#### Simple recoding assistants ####
+
+zero_to_missing <- function(x){
+  x[x == 0] <- NA
+  return(x)
+}
+
+missing_to_zero <- function (v)
+{
+  v[is.na(v) == TRUE] <- 0
+  return(v)
+}
 
 
+
+
+#### Labelling values and variables ####
+
+# Rename a variable with it's label
+
+rename_to_var_label <- function(df){
+  # Extract variable label
+  labels <- lapply(df, function(x) attributes(x)$label)
+  assertthat::assert_that(!list(NULL) %in% labels,
+                          msg = "Each column must have a corresponding label")
+  # Set names of variables as their label
+  names(df) <- unlist(labels)
+  return(df)
+}
+
+
+#### Basic setup and codebooks ####
 
 rdr_cbk <- function(cbfile) {
   #Convenience function to make codebooks with options
@@ -424,12 +449,12 @@ tabsum <- function(df = ADSX, yvar = donation, xvar = Stage, treatvar = Treatmen
 
 
 
-tabyl_ow_plus <- function(df, var) {
+tabyl_ow_plus <- function(df, var, cap ="") {
     {{df}} %>%
   tabyl({{var}}) %>%
    dplyr::arrange(desc(n)) %>%
     adorn_totals() %>%
-    kable() %>%
+    kable(caption=cap) %>%
     kable_styling()
 }
 
@@ -563,12 +588,36 @@ boxplot_func <- function(df = ADSX, yvar = donation, treatvar = Treatment, facet
 }
 
 
+# Model building #####
 
-# Model building
+# @David: Repeating + renaming for clarity
+make_formula <- function(lhs, rhs) {
+    stats::reformulate(response = lhs, termlabels = rhs,
+              env = globalenv()) # Formula is defined in the global environment
+}
 
+
+# Shorter but less clear version -- remove?
 m_f <- function(lhs, rhs) {
   as.formula(paste(lhs," ~ ", paste(rhs, collapse= "+")))
 }
+
+
+# ... Regression functions #####
+
+# Function for "tidy`" linear regression
+tidy_lm <- function(formula, df, replacement_names){
+
+  lm(formula, data = df) %>%
+    broom::tidy(conf.int =TRUE) %>%
+
+    # Rename terms
+    mutate(term = str_replace_all(term, replacement_names))
+}
+
+
+
+
 # Options and formatting code elements ####
 
 sidebyside <- function(..., width = 60) {
@@ -699,6 +748,7 @@ clean_sink <- function(df) {
     -all_outcomes()) %>%
     step_other(all_nominal())
 }
+
 
 ############### Formatting stuff ####
 
