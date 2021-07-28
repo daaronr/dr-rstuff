@@ -619,21 +619,6 @@ make_formula_df <- function(outcome_vars, indep_vars, dfs){
 }
 
 
-# ... Regression functions #####
-
-# Function for "tidy`" linear regression
-tidy_lm <- function(formula, df, replacement_names){
-
-  lm(formula, data = df) %>%
-    broom::tidy(conf.int =TRUE) %>%
-
-    # Rename terms
-    mutate(term = str_replace_all(term, replacement_names))
-}
-
-
-
-
 # Options and formatting code elements ####
 
 sidebyside <- function(..., width = 60) {
@@ -842,13 +827,3 @@ group_by_sum <- function(df, col, group=year, value=NA, name="n_NA"){
     mutate(!!prop_name := !!parse_expr(name)/n)
 }
 
-# Rename a variable with it's label (from sjlabelled)
-rename_to_var_label <- function(df){
-  # Extract variable label
-  labels <- lapply(df, function(x) attributes(x)$label)
-  assertthat::assert_that(!list(NULL) %in% labels,
-                          msg = "Each column must have a corresponding label")
-  # Set names of variables as their label
-  names(df) <- unlist(labels)
-  return(df)
-}
