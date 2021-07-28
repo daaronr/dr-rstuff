@@ -608,6 +608,17 @@ m_f <- function(lhs, rhs) {
 }
 
 
+make_formula_df <- function(outcome_vars, indep_vars, dfs){
+
+  # Make all associated formulas
+  formulas <- mapply(function(x, y) make_formula(x, y), x = outcome_vars, y = indep_vars)
+
+  tibble(outcome = as.character(outcome_vars),
+         formulas = formulas,
+         dfs = dfs)
+}
+
+
 # ... Regression functions #####
 
 # Function for "tidy`" linear regression
