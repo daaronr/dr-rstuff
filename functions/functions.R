@@ -515,6 +515,8 @@ tabylstuff_nocol <- function(df,cap=""){
 
 # Plotting functions: ####
 
+#TODO -- add ggrepel to these? geom_label_repel() and geom_text_repel
+
 plot_histogram <- function(df, feature) {
   chart_title <- substitute(paste("Histogram of ", feature,
     sep = ""))
@@ -609,7 +611,6 @@ m_f <- function(lhs, rhs) {
 
 
 make_formula_df <- function(outcome_vars, indep_vars, dfs){
-
   # Make all associated formulas
   formulas <- mapply(function(x, y) make_formula(x, y), x = outcome_vars, y = indep_vars)
 
