@@ -828,3 +828,8 @@ group_by_sum <- function(df, col, group=year, value=NA, name="n_NA"){
     mutate(!!prop_name := !!parse_expr(name)/n)
 }
 
+missing_to_zero <- function (v)
+{
+    v[is.na(v) == TRUE] <- 0
+    return(v)
+}
