@@ -19,16 +19,9 @@ hijack <- function (FUN, ...) {
 #e.g, .read_csv <- hijack(read_csv, trim_ws = TRUE)
 
 
-############## Automation helpers ####
 
-#### Function to filter by given string: ####
 
-filter_parse <- function(df, x) {
- {{df}} %>%
-   filter(rlang::eval_tidy(rlang::parse_expr({{x}})))
-}
-
-#### Test functions ####
+############## STATISTICAL TESTS and  test functions ####
 
 # Generic test function: a helper function
 doTest <- function(pair, df = ADSX, stage = 2, depvar = donation, treatvar = Treatment, testname = "t.test2") {
@@ -209,7 +202,14 @@ bayesian_test_me <- function(g1, g1pos, g2, g2pos,i,j,a,b){
 
 
 
-#### Data work ####
+#### Data work ########
+
+###... Function to filter by given string: ####
+
+filter_parse <- function(df, x) {
+ {{df}} %>%
+   filter(rlang::eval_tidy(rlang::parse_expr({{x}})))
+}
 
 # compare column types across two df (e.g., in advance of a
 # merge); from
@@ -346,7 +346,7 @@ rdr_cbk <- function(cbfile) {
 }
 
 
-####  summary tables function(s) ####
+####  SUMMARY tables function(s) ####
 
 #intended for donation data:
 .summ <- hijack(vtable::sumtable,
@@ -513,7 +513,7 @@ tabylstuff_nocol <- function(df,cap=""){
     kable_styling(latex_options = "scale_down")
 }
 
-# Plotting functions: ####
+# VISUALISATION functions: ####
 
 #TODO -- add ggrepel to these? geom_label_repel() and geom_text_repel
 
@@ -828,8 +828,3 @@ group_by_sum <- function(df, col, group=year, value=NA, name="n_NA"){
     mutate(!!prop_name := !!parse_expr(name)/n)
 }
 
-missing_to_zero <- function (v)
-{
-    v[is.na(v) == TRUE] <- 0
-    return(v)
-}
