@@ -25,6 +25,7 @@ hijack <- function (FUN, ...) {
 
 #### .... some missing functions? ###
 
+#std error of binary (or logical) variable
 se_bin <- function(x) {
   x = as.numeric(x)
   n = length(x)
@@ -32,6 +33,27 @@ se_bin <- function(x) {
   se = sqrt((m*(1-m))/n)
   return(se)
 }
+
+
+# Calculate mean, n and sd per group
+summ_add <- function(df, var) {
+    df %>%
+    n = length(x)
+    mean = mean(as.numeric( {{ var }} )),
+    n = n(),
+    sd = sd(as.numeric(d_career_etg))
+
+  var = as.numeric(var)
+  n = length(x)
+  m = mean(x, na.rm=TRUE)
+  se = sqrt((m*(1-m))/n)
+  return(se)
+}
+
+dplyr::summarise(
+    m_etg = mean(as.numeric(d_career_etg)),
+    n = n(),
+    sd = sd(as.numeric(d_career_etg))
 
 
 # Generic test function: a helper function
