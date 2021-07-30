@@ -23,6 +23,17 @@ hijack <- function (FUN, ...) {
 
 ############## STATISTICAL TESTS and  test functions ####
 
+#### .... some missing functions? ###
+
+se_bin <- function(x) {
+  x = as.numeric(x)
+  n = length(x)
+  m = mean(x, na.rm=TRUE)
+  se = sqrt((m*(1-m))/n)
+  return(se)
+}
+
+
 # Generic test function: a helper function
 doTest <- function(pair, df = ADSX, stage = 2, depvar = donation, treatvar = Treatment, testname = "t.test2") {
   require("dplyr")
@@ -371,7 +382,24 @@ sumtab_func_full <- function(df = ADSX, depvar = donation, treatvar = TreatFirst
                      Mean = round(mean({{depvar}}, na.rm = T), 2),
                      Median = round(median({{depvar}}, na.rm = T),2),
                      P80 = round(quantile({{depvar}}, 0.8, na.rm = T), 2),
-                     Std.dev. = glue("(", {round(sd({{depvar}}, na.rm = T), 2) }, ")")) %>%
+                     Std.dev. = glue::glue("(", {round(sd({{depvar}}, na.rm = T), 2) }, ")")) %>%
+    kable(caption = caption) %>% kable_styling()
+}
+
+sumtab <- function(df = ADSX, depvar = donation, treatvar = TreatFirstAsk,
+                             caption = "") {
+  df %>%
+    ungroup() %>%
+    filter(!is.na({{depvar}})) %>%
+    group_by({{treatvar}}) %>%
+    dplyr::summarize(N = n(),
+                     share_pos = sum({{depvar}} >0)/n(),
+                     #share_10 = sum({{depvar}}== 10)/n(),
+                     Mean = round(mean({{depvar}}, na.rm = T), 2),
+                     Median = round(median({{depvar}}, na.rm = T),2),
+                     P80 = round(quantile({{depvar}}, 0.8, na.rm = T), 2),
+                    # P99 = round(quantile({{depvar}}, 0.99, na.rm = T), 2),
+                     Std.dev. = glue::glue("(", {round(sd({{depvar}}, na.rm = T), 2) }, ")")) %>%
     kable(caption = caption) %>% kable_styling()
 }
 
@@ -435,19 +463,29 @@ sumtab2_func_plus <- function(df = ADSX, depvar = donation, treatvar = TreatFirs
 # 'N'), sep = ' ') %>%
 
 
-#### tabsum and simple tables ####
+#### simple tables and tabsum ####
 
-tabsum <- function(df = ADSX, yvar = donation, xvar = Stage, treatvar = Treatment) {
-  yvar <- enquo(yvar)
-  xvar <- enquo(xvar)
-  treatvar <- enquo(treatvar)
-  df %>% ungroup() %>% # mutate(xvar = as.factor(!!xvar)) %>%
-  dplyr::group_by(!!xvar, !!treatvar) %>% # drop_na(!!yvar, !!treatvar) %>%
-  dplyr::select(!!yvar, !!treatvar, !!xvar) %>% dplyr::summarise(meanyvar = mean(!!yvar,
-    na.rm = TRUE))
+# tabg: tabyl one way plus sort by descening frequency -- the version we normally want
+tabg <- function(df, col) {
+    janitor::tabyl({{df}},{{col}}) %>%
+        arrange(-`n`)
 }
 
+# ... formatting default options for tabyl ####
+tabylstuff <- function(df, cap = "") {
+  adorn_totals(df, c("row", "col")) %>% adorn_percentages("row") %>%
+    adorn_pct_formatting(digits = 1) %>% adorn_ns() %>% kable(caption = cap) %>%
+    kable_styling(latex_options = "scale_down")
+}
 
+tabylstuff_nocol <- function(df,cap=""){
+  adorn_totals(df,c("row")) %>%
+    adorn_percentages("row") %>%
+    adorn_pct_formatting(digits = 1) %>%
+    adorn_ns() %>%
+    kable(caption=cap) %>%
+    kable_styling(latex_options = "scale_down")
+}
 
 tabyl_ow_plus <- function(df, var, caption=NULL, title_case = FALSE) {
   df <- {{df}} %>%
@@ -463,7 +501,29 @@ tabyl_ow_plus <- function(df, var, caption=NULL, title_case = FALSE) {
     kable_styling()
 }
 
-# WIP function -- doesn't work yet:
+tabylme <- function(df = ADSX, rowvar = TreatFirstAsk, colvar = treat_second_ask,
+  adorn = "row") {
+    {{df}} %>%
+  tabyl({{rowvar}}, {{colvar}}) %>% adorn_percentages({{adorn}}) %>%
+    adorn_pct_formatting(digits = 2) %>% adorn_ns() %>% kable() %>%
+    kable_styling()
+}
+
+adornme <- function(atabyl, adorn = "row", digits = 2, cap = "",
+                    title = "") {
+  atabyl %>% adorn_totals("row") %>% # adorn_totals(c('row', 'col')) %>%
+    adorn_percentages(adorn) %>% adorn_pct_formatting(digits = digits) %>%
+    adorn_ns() %>% adorn_title(title, placement = "top") %>%
+    kable(caption = cap) %>% kable_styling()
+}
+
+adornme_not <- function(atabyl, adorn = "row", digits = 2, cap = "",
+                    title = "") {
+  atabyl %>% adorn_totals("row") %>% # adorn_totals(c('row', 'col')) %>%
+    adorn_percentages(adorn) %>% adorn_pct_formatting(digits = digits) %>%
+    adorn_ns() %>%
+    kable(caption = cap) %>% kable_styling()
+}
 tabylme <- function(df = ADSX, rowvar = TreatFirstAsk, colvar = treat_second_ask,
   adorn = "row") {
     {{df}} %>%
@@ -488,30 +548,21 @@ adornme_not <- function(atabyl, adorn = "row", digits = 2, cap = "",
     kable(caption = cap) %>% kable_styling()
 }
 
-
-
-
-# tabylgd: tabyl plus sort by descening frequency -- the version we normally want
-tabg <- function(df, col) {
-    janitor::tabyl({{df}},{{col}}) %>%
-        arrange(-`n`)
+tabsum <- function(df = ADSX, yvar = donation, xvar = Stage, treatvar = Treatment) {
+  yvar <- enquo(yvar)
+  xvar <- enquo(xvar)
+  treatvar <- enquo(treatvar)
+  df %>% ungroup() %>% # mutate(xvar = as.factor(!!xvar)) %>%
+  dplyr::group_by(!!xvar, !!treatvar) %>% # drop_na(!!yvar, !!treatvar) %>%
+  dplyr::select(!!yvar, !!treatvar, !!xvar) %>% dplyr::summarise(meanyvar = mean(!!yvar,
+    na.rm = TRUE))
 }
 
-# ... formatting default options for tabyl ####
-tabylstuff <- function(df, cap = "") {
-  adorn_totals(df, c("row", "col")) %>% adorn_percentages("row") %>%
-    adorn_pct_formatting(digits = 1) %>% adorn_ns() %>% kable(caption = cap) %>%
-    kable_styling(latex_options = "scale_down")
-}
 
-tabylstuff_nocol <- function(df,cap=""){
-  adorn_totals(df,c("row")) %>%
-    adorn_percentages("row") %>%
-    adorn_pct_formatting(digits = 1) %>%
-    adorn_ns() %>%
-    kable(caption=cap) %>%
-    kable_styling(latex_options = "scale_down")
-}
+
+
+
+
 
 # VISUALISATION functions: ####
 
