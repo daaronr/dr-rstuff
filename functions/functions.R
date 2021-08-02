@@ -511,7 +511,7 @@ tabyl_ow_plus <- function(df, var, caption=NULL, title_case = FALSE) {
     df <- df %>% rename_with(snakecase::to_title_case)
   }
   df %>%
-    kable(caption = caption) %>%
+    kable(caption = caption, padding=0) %>%
     kable_styling()
 }
 
