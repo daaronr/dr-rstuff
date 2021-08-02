@@ -37,16 +37,14 @@ se_bin <- function(x) {
 
 # Calculate mean, n and sd per group
 summ_add <- function(df, var) {
-    df %>%
-    n = length(x)
+    df %>% 
+    mutate(
     mean = mean(as.numeric( {{ var }} )),
     n = n(),
     sd = sd(as.numeric(d_career_etg)),
     se = sqrt((m*(1-m))/n)
     )
 }
-
-
 
 # Generic test function: a helper function
 doTest <- function(pair, df = ADSX, stage = 2, depvar = donation, treatvar = Treatment, testname = "t.test2") {
