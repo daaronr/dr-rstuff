@@ -41,19 +41,11 @@ summ_add <- function(df, var) {
     n = length(x)
     mean = mean(as.numeric( {{ var }} )),
     n = n(),
-    sd = sd(as.numeric(d_career_etg))
-
-  var = as.numeric(var)
-  n = length(x)
-  m = mean(x, na.rm=TRUE)
-  se = sqrt((m*(1-m))/n)
-  return(se)
+    sd = sd(as.numeric(d_career_etg)),
+    se = sqrt((m*(1-m))/n)
+    )
 }
 
-dplyr::summarise(
-    m_etg = mean(as.numeric(d_career_etg)),
-    n = n(),
-    sd = sd(as.numeric(d_career_etg))
 
 
 # Generic test function: a helper function
@@ -383,9 +375,9 @@ rdr_cbk <- function(cbfile) {
 
 #intended for donation data:
 .summ <- hijack(vtable::sumtable,
-                summ=c('notNA(x)','mean(x)','sd(x)', 'pctile(x)[50]', 'pctile(x)[90]'),
+                summ=c('notNA(x)', 'sum(x != 0)', 'mean(x)', 'sd(x)', 'pctile(x)[50]', 'pctile(x)[90]'),
                 summ.names = c('N Responses', 'N positive', 'Mean', 'Sd', "Median", "90th pct"),
-                digits=0,
+                digits=1,
                 labels = TRUE, #uses assigned in Hmisc or sjlabelled
                 simple.kable = TRUE)
 
@@ -473,6 +465,8 @@ sumtab2_func_plus <- function(df = ADSX, depvar = donation, treatvar = TreatFirs
     N, sep = "") %>% spread(!!treatvar2, Results) %>% knitr::kable(caption = caption,
     escape = F) %>% kable_styling("striped", full_width = F)
 }
+
+
 
 # filter(!is.na(donation)) %>% group_by(Treatment, Stage) %>%
 # dplyr::ummarize(N = n(), Mean = round(mean(donation, na.rm
@@ -581,8 +575,12 @@ tabsum <- function(df = ADSX, yvar = donation, xvar = Stage, treatvar = Treatmen
 }
 
 
-
-
+#shortcut -- summarize data by group
+summarise_by <- function(data, ..., by) {
+  data %>%
+    group_by({{ by }}) %>%
+    summarise(...)
+}
 
 
 
