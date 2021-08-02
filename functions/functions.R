@@ -899,3 +899,21 @@ group_by_sum <- function(df, col, group=year, value=NA, name="n_NA"){
     mutate(!!prop_name := !!parse_expr(name)/n)
 }
 
+group_mean_conf_int <- function(df, var, groups = NULL, se_func = se, ...){
+      # Function to calculate confidence intervals for a variable given grouping variables
+      ci <- function(x, se, lower = TRUE){
+        x + 1.96*se
+      }
+
+      var_s <- rlang::as_string(rlang::ensym(var))
+      df %>% 
+      group_by(across({{groups}})) %>%
+      
+      summarise(across({{ var }}, 
+                       .fns = list(mean = ~mean(.x, na.rm=TRUE),
+                                   se = se_func),
+                       .names = "{.col}_{.fn}")) %>%
+      mutate("upper_ci_{{var}}" := .data[[stringr::str_c(var_s, "_mean")]] + 1.96*.data[[stringr::str_c(var_s, "_se")]],
+             "lower_ci_{{var}}" := .data[[stringr::str_c(var_s, "_mean")]] - 1.96*.data[[stringr::str_c(var_s, "_se")]])
+
+}
