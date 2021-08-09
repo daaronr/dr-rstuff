@@ -37,7 +37,7 @@ se_bin <- function(x) {
 
 # Calculate mean, n and sd per group
 summ_add <- function(df, var) {
-    df %>% 
+    df %>%
     mutate(
     mean = mean(as.numeric( {{ var }} )),
     n = n(),
@@ -864,6 +864,14 @@ format_with_col = function(x, color){
 
 ################# Coding shortcuts ####
 
+#help find where a column with a certain string name takes values across years (or other grouping)
+yfind <- function(df = eas_all, text, n=3, y=year) {
+  df %>%
+    dplyr::select(year, matches({text})) %>%
+    group_by({{y}}) %>%
+    sample_n(size = n)
+}
+
 Sm <- function(df, X) dplyr::select(df, matches({X},  ignore.case = FALSE))  # Sm<t_?X>("x") selects variables matching string 'x', case-sensitive
 sm <- function(df, X) dplyr::select(df, matches({X})) # ... not case-sensitive
 
@@ -904,10 +912,10 @@ group_mean_conf_int <- function(df, var, groups = NULL, se_func = se, ...){
       }
 
       var_s <- rlang::as_string(rlang::ensym(var))
-      df %>% 
+      df %>%
       group_by(across({{groups}})) %>%
-      
-      summarise(across({{ var }}, 
+
+      summarise(across({{ var }},
                        .fns = list(mean = ~mean(.x, na.rm=TRUE),
                                    se = se_func),
                        .names = "{.col}_{.fn}")) %>%
