@@ -18,6 +18,28 @@ hijack <- function (FUN, ...) {
 
 #e.g, .read_csv <- hijack(read_csv, trim_ws = TRUE)
 
+### ... some quick hijacks, esp for na/rm
+
+#why didn't this work? .mean <- hijack(base::mean, na.rm = TRUE)
+
+mn <- function(x) {
+    base::mean(x, na.rm=TRUE)
+}
+
+med <- function(x) {
+    stats::median(x, na.rm=TRUE)
+}
+
+
+sdev <- function(x) {
+    stats::sd(x, na.rm=TRUE)
+}
+
+
+
+.median <- hijack(stats::median, na.rm = TRUE)
+.sd <- hijack(stats::sd, na.rm = TRUE)
+
 
 
 
@@ -581,6 +603,12 @@ summarise_by <- function(data, ..., by) {
 }
 
 
+summ_by <- function(data, groupvar, ...) {
+    data %>
+group_by({{ groupvar }}) %>%
+    summarise(across(everything(), list({{ ... }})))
+}
+
 
 # VISUALISATION functions: ####
 
@@ -871,6 +899,30 @@ yfind <- function(df = eas_all, text, n=3, y=year) {
     group_by({{y}}) %>%
     sample_n(size = n)
 }
+
+
+grp_n <- function (df, groupvar) {
+df %>%
+  group_by({{groupvar}}) %>%
+  summarise(across(.cols = everything(),
+                   .fns = list(n = ~ sum(!is.na(.x)))
+  )
+  )
+}
+#Note: the above doesn't capture cases where 'all values are the same within a group'
+
+
+grp_uniq <- function (df, groupvar) {
+df %>%
+  group_by({{groupvar}}) %>%
+  summarise(across(.cols = everything(),
+                   .fns = list(uniq = ~ n_distinct(.x))
+    )
+  )
+}
+
+  summarise(count = n_distinct(color))
+
 
 Sm <- function(df, X) dplyr::select(df, matches({X},  ignore.case = FALSE))  # Sm<t_?X>("x") selects variables matching string 'x', case-sensitive
 sm <- function(df, X) dplyr::select(df, matches({X})) # ... not case-sensitive
