@@ -604,7 +604,7 @@ summarise_by <- function(data, ..., by) {
 
 
 summ_by <- function(data, groupvar, ...) {
-    data %>
+    data %>%
 group_by({{ groupvar }}) %>%
     summarise(across(everything(), list({{ ... }})))
 }
