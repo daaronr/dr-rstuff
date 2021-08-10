@@ -30,6 +30,7 @@ med <- function(x) {
     stats::median(x, na.rm=TRUE)
 }
 
+impute.med <- function(x) base::replace(x, is.na(x), median(x, na.rm = TRUE))
 
 sdev <- function(x) {
     stats::sd(x, na.rm=TRUE)
@@ -608,7 +609,6 @@ summ_by <- function(data, groupvar, ...) {
 group_by({{ groupvar }}) %>%
     summarise(across(everything(), list({{ ... }})))
 }
-
 
 # VISUALISATION functions: ####
 
