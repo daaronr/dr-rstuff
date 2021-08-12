@@ -851,6 +851,16 @@ clean_sink <- function(df) {
 
 ############### Formatting stuff ####
 
+# Number formatting
+
+op <- function(x, d=3){
+    format(x, format="f", big.mark=",", digits=d,
+           scientific=FALSE)
+ops <- function(x, d=3, ns=2)
+    format(x, format="f", big.mark=",", digits=d, nsmall=ns, scientific = FALSE)
+options(scipen=999)
+}
+
 # Color options for either version of markdown slides
 
 colFmt = function(x, color) {
@@ -921,7 +931,6 @@ df %>%
   )
 }
 
-  summarise(count = n_distinct(color))
 
 
 Sm <- function(df, X) dplyr::select(df, matches({X},  ignore.case = FALSE))  # Sm<t_?X>("x") selects variables matching string 'x', case-sensitive
