@@ -24,7 +24,7 @@ options(kableExtra.latex.load_packages = FALSE)
 options(nwarnings = 1) # trying to limit display of  warnings; I don't think  it is working!
 options(max.print = 1000)
 
-options(scipen = 1, digits = 2)
+# options(scipen = 1, digits = 2)
 
 # set important functions to correct package
 select <- dplyr::select
