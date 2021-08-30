@@ -422,7 +422,7 @@ sumtab_func_full <- function(df = ADSX, depvar = donation, treatvar = TreatFirst
 }
 
 sumtab <- function(df = ADSX, depvar = donation, treatvar = TreatFirstAsk,
-                             caption = "") {
+                             caption = "", digits=3) {
   df %>%
     ungroup() %>%
     filter(!is.na({{depvar}})) %>%
@@ -435,7 +435,8 @@ sumtab <- function(df = ADSX, depvar = donation, treatvar = TreatFirstAsk,
                      P80 = round(quantile({{depvar}}, 0.8, na.rm = T), 2),
                     # P99 = round(quantile({{depvar}}, 0.99, na.rm = T), 2),
                      Std.dev. = glue::glue("(", {round(sd({{depvar}}, na.rm = T), 2) }, ")")) %>%
-    kable(caption = caption) %>% kable_styling()
+    kable(caption = caption, digits=digits) %>%
+    kable_styling()
 }
 
 sumtab_func <- function(df = ADSX, depvar = donation, treatvar = TreatFirstAsk,
@@ -871,8 +872,9 @@ clean_sink <- function(df) {
 
 op <- function(x, d=3){
     format(x, format="f", big.mark=",", digits=d,
-           scientific=FALSE)
-ops <- function(x, d=3, ns=2)
+           scientific=FALSE)}
+
+ops <- function(x, d=3, ns=2){
     format(x, format="f", big.mark=",", digits=d, nsmall=ns, scientific = FALSE)
 options(scipen=999)
 }
@@ -959,6 +961,17 @@ smn <- function(df, X) dplyr::select(df, matches({X})) %>% names() # not case-se
 
 
 # Added by Oska
+
+remove_str_list <- function(list, string){
+  list <- Filter(function(x) !any(grepl(string, x)), list)
+  return(list)
+}
+
+lab_list_to_text <- function(df) {
+  df %>%
+    var_label %>% unname %>% unlist() %>% 
+    paste(collapse = ', ')
+}
 
 ## Group by and summarise
 # Quick group by function to look at NA or 0 values for each year
