@@ -422,7 +422,7 @@ sumtab_func_full <- function(df = ADSX, depvar = donation, treatvar = TreatFirst
 }
 
 sumtab <- function(df = ADSX, depvar = donation, treatvar = TreatFirstAsk,
-                             caption = "", digits=3) {
+                             caption = "", digits=3, label = TRUE) {
   df %>%
     ungroup() %>%
     filter(!is.na({{depvar}})) %>%
@@ -435,7 +435,7 @@ sumtab <- function(df = ADSX, depvar = donation, treatvar = TreatFirstAsk,
                      P80 = round(quantile({{depvar}}, 0.8, na.rm = T), 2),
                     # P99 = round(quantile({{depvar}}, 0.99, na.rm = T), 2),
                      Std.dev. = glue::glue("(", {round(sd({{depvar}}, na.rm = T), 2) }, ")")) %>%
-    kable(caption = caption, digits=digits) %>%
+    kable(caption = caption, digits=digits, label = label) %>%
     kable_styling()
 }
 
@@ -610,6 +610,20 @@ summ_by <- function(data, groupvar, ...) {
 group_by({{ groupvar }}) %>%
     summarise(across(everything(), list({{ ... }})))
 }
+
+# MACHINE learning related functions ###
+
+get_var_importance <- function(fit){
+  extracted <- workflowsets::extract_fit_parsnip(fit)
+
+  vip::vi(extracted)
+}
+
+# For scaling variable importance
+scale_var <- function(x){
+  scale(x)[,1]
+}
+
 
 # VISUALISATION functions: ####
 
