@@ -37,6 +37,10 @@ group_by <- dplyr::group_by
 coalesce <- dplyr::coalesce
 here <- here::here
 
+
+all_numeric <- gtsummary::all_numeric
+
+
 first <- dplyr::first
 last  <- dplyr::last
 mutate <- dplyr::mutate

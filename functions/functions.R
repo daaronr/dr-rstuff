@@ -412,7 +412,7 @@ sumtab_func_full <- function(df = ADSX, depvar = donation, treatvar = TreatFirst
     filter(!is.na({{depvar}})) %>%
     group_by({{treatvar}}) %>%
     dplyr::summarize(N = n(),
-                     share_pos = sum({{depvar}} >0)/n(),
+                     `share > 0` = sum({{depvar}} >0)/n(),
                      share_10 = sum({{depvar}}== 10)/n(),
                      Mean = round(mean({{depvar}}, na.rm = T), 2),
                      Median = round(median({{depvar}}, na.rm = T),2),
@@ -428,7 +428,7 @@ sumtab <- function(df = ADSX, depvar = donation, treatvar = TreatFirstAsk,
     filter(!is.na({{depvar}})) %>%
     group_by({{treatvar}}) %>%
     dplyr::summarize(N = n(),
-                     share_pos = sum({{depvar}} >0)/n(),
+                     `share > 0` = sum({{depvar}} >0)/n(),
                      #share_10 = sum({{depvar}}== 10)/n(),
                      Mean = round(mean({{depvar}}, na.rm = T), 2),
                      Median = round(median({{depvar}}, na.rm = T),2),
