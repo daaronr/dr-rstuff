@@ -1,11 +1,13 @@
 fig:chunk-label
-fig:unnamed-chunk-11
+tab:unnamed-chunk-6
+fig:unnamed-chunk-13
 download-access-and-run-project_setup.r
-about-this-work
+about
 preface
 citations
-examples-of-the-sort-of-fancy-interactive-stuff-i-hope-to-incorporate-in-this-web-book
+examples-of-the-sort-of-fancy-interactive-stuff-one-can-incorporate-in-this-web-book
 questions-with-folded-answers-folded-expanded-discussions
+tables-and-graphs
 interactive-questions
 videos
 types-of-notes-within-text

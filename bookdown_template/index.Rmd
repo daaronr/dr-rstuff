@@ -17,38 +17,36 @@ output:
       toc:
         after: |
           <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
-        collapse: section
+        collapse: none
         scroll_highlight: yes
       fontsettings:
         theme: white
         size: 2
       sharing:
+        github: yes
         facebook: yes
         twitter: yes
-        google: no
         linkedin: yes
         weibo: yes
-        instapaper: no
-        vk: no
-        all: ['facebook', 'twitter', 'linkedin', 'weibo', 'instapaper']
+        all: ['github', 'facebook', 'twitter', 'linkedin']
     highlight: tango
     download: [pdf, epub, mobi]
-    sharing:
-      github: yes
-      facebook: no
+    keep_md: yes 
+
 bookdown::pdf_book:
     keep_tex: yes
+    
 always_allow_html: yes
-bibliography: ["packages.bib"]
+bibliography: "references.bib"
 biblio-style: apalike
 link-citations: yes
-github-repo: #gerhardriener/CharitySubstitutionExperiment
-description: "A new format for an Economics paper"
+
+github-repo: daaronr/dr-rstuff
+
+description: "Template testing this format"
 #url: 'https\://daaronr.github.io//'
-tags: [Economics, Experiments, Charity]
+tags: [Testing, Economics, Experiments, Charity]
 ---
-
-
 
 
 ```{r}

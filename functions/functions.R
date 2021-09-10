@@ -983,7 +983,7 @@ remove_str_list <- function(list, string){
 
 lab_list_to_text <- function(df) {
   df %>%
-    var_label %>% unname %>% unlist() %>% 
+    var_label %>% unname %>% unlist() %>%
     paste(collapse = ', ')
 }
 

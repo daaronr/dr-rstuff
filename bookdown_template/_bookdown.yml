@@ -1,5 +1,5 @@
 book_filename: "template_project.Rmd"
-delete_merged_file: true
+delete_merged_file: false
 output_dir: "docs"
 rmd_files:
   html: ["index.Rmd", "chapter_1_sample.Rmd", "chapter_2_sample.Rmd", "references.Rmd"]

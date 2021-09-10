@@ -15,5 +15,6 @@ LaTeX: pdfLaTeX
 BuildType: Website
 
 MarkdownReferences: Document
+MarkdownCanonical: No
 
 ZoteroLibraries: "My Library"

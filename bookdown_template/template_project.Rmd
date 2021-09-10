@@ -1,4 +1,151 @@
 ---
+title: "Template for Reinstein bookdowns"
+author: "Dr. David Reinstein, "
+abstract: "This 'book' organizes the project and helps others understand it and learn from it"
+#cover-image: "images/cardcatalogue.JPG"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output:
+  bookdown::gitbook:
+    lib_dir: "book_assets"
+    includes:
+      in_header: support/header.html
+      #in_header: https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/header.html
+    #css: https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/tufte_plus.css
+    css: support/tufte_plus_test.css
+    config:
+      toc:
+        after: |
+          <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+        collapse: none
+        scroll_highlight: yes
+      fontsettings:
+        theme: white
+        size: 2
+      sharing:
+        github: yes
+        facebook: yes
+        twitter: yes
+        linkedin: yes
+        weibo: yes
+        all: ['github', 'facebook', 'twitter', 'linkedin']
+    highlight: tango
+    download: [pdf, epub, mobi]
+    keep_md: yes 
+
+bookdown::pdf_book:
+    keep_tex: yes
+    
+always_allow_html: yes
+bibliography: "references.bib"
+biblio-style: apalike
+link-citations: yes
+
+github-repo: daaronr/dr-rstuff
+
+description: "Template testing this format"
+#url: 'https\://daaronr.github.io//'
+tags: [Testing, Economics, Experiments, Charity]
+---
+
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+#### Download,  access and run project_setup.R ####
+
+(Note: we ultimately can do this in main, but this is a bridge)
+
+
+Try downloading and accessing my basic content support tool...
+
+
+```{r download-project-setup, eval=FALSE}
+#removed because this is now in `main.R`
+
+
+source(here("code", "project_setup.R"))
+
+```
+
+
+\
+
+```{r install,  echo = FALSE, include=FALSE}
+library(png)
+library(grid)
+```
+
+
+```
+
+
+# install.packages("bookdown")
+# or the development version
+# devtools::install_github("rstudio/bookdown")
+
+<!-- Download 'backup' bibtex file from dropbox (synced with Zotero), do the rename workaround -->
+
+
+
+<!-- note installing packages is mainly removed because this is done in baseoptions.R -->
+
+```{r }
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+
+```{r html, echo=FALSE}
+# globally set chunk options
+
+knitr::opts_chunk$set(fig.align='center', out.width='80%', warning=FALSE, message = FALSE, error=TRUE)
+
+my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
+
+```
+
+
+```{r knit-hooks-thing, echo=FALSE}
+
+#From https://stackoverflow.com/questions/62028925/how-do-i-catch-errors-in-inline-code-chunk-in-r-markdown
+
+knitr::knit_hooks$set(
+  evaluate.inline = function (code, envir = knit_global()) {
+    v = try(eval(xfun::parse_only(code), envir = envir))
+    knitr::knit_print(v, inline = TRUE, options = knitr::opts_chunk$get())
+  },
+  inline = function(x) {
+  if (any(class(x) == "try-error")) {
+    as.vector(x)
+  } else x
+})
+```
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<html>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QLKFNFTGXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QLKFNFTGXX');
+</script>
+</html>
+
+<!--chapter:end:index.Rmd-->
+
+---
 bibliography: references.bib
 ---
 
@@ -122,7 +269,7 @@ $$\Theta = \begin{pmatrix}\alpha & \beta\\
 
 These are "code chunks"
 
-```{r chunk-label, echo = TRUE, fig.cap = 'A figure caption.'}
+```{r chunk-label, echo = FALSE, fig.cap = 'A figure caption.'}
 x <- 1 + 1
 rnorm(10)  # 10 random numbers
 plot(dist ~ speed, cars)  # a scatterplot
@@ -281,3 +428,64 @@ Just remember the simple acronym "ECAOAcIn":[^chapter_1_sample-1]
 **E**conomic question -- **C**ritical discussion -- **A**pply economics -- **O**rganise/present well -- **Ac**ademic writing -- original **In**sight
 
 [^chapter_1_sample-1]: (Isn't that catchy?)
+
+<!--chapter:end:chapter_1_sample.Rmd-->
+
+# Second sample chapter {#chapter_2}
+
+
+Blah blah
+
+## Test
+
+### Link back to first chapter
+
+Link back to the first chapter [here](link_back)
+
+## Blah
+
+### A proposed lecture programme {-}
+
+*Note:* I have slides covering a range of key topics, which tie in with this web book. Please contact me directly for details.
+
+<br>
+
+\
+
+Large lectures have limited value in this context. From my experience students appreciate *occasional* lectures for motivation and clarification, and to ask questions, but more than 5-6 traditional lectures seems to be overkill.
+
+If resources permit, it will be helpful to intersperse this with casual scheduled 'research coffees', encouraging students to discuss their ideas with instructors and with each other. I recommend a 'light-touch approach' in sessions. Let the students take the lead in presenting and responding (making occasional course-corrections where necessary). From our experience, students engage actively in these contexts!
+
+
+
+
+# Works Cited
+
+# Appendix
+
+## Alphabetical list of abbreviations
+
+
+## Abbreviations: Notes for paper marking and commenting
+
+Here is a categorized list of abbreviations I use in marking; you may
+find it useful just to read these to be aware of common issues.
+
+- (abbreviations as pdf)[https://github.com/daaronr/writing_econ_research/blob/master/ec831%20lecture%20slides%20(powerpoint)/abbreviations%20for%20editing%20-%20alphaall%20(David%20Reinstein's%20conflicted%20copy%202012-05-15).pdf] - download and view
+
+- (link to page to download spreadsheet)](https://github.com/daaronr/writing_econ_research/blob/master/ec831%20lecture%20slides%20(powerpoint)/abbreviations%20for%20marking%20-%20forstudents.xlsx)
+
+- [Airtable view link (sortable etc)](https://airtable.com/shrPGYSbNvnUV4TzU)
+
+
+\
+
+<iframe class="airtable-embed" src="https://airtable.com/embed/shrPGYSbNvnUV4TzU?backgroundColor=purple&viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+
+
+<!--chapter:end:chapter_2_sample.Rmd-->
+
+# List of works cited {#references}
+
+<!--chapter:end:references.Rmd-->
+
