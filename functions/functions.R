@@ -943,6 +943,11 @@ yfind <- function(df = eas_all, text, n=3, y=year) {
 }
 
 
+#Case insensitive string_detect
+str_det <- function(string, pattern, negate = FALSE) {
+  str_detect(string, regex(pattern, ignore_case = T))
+}
+
 grp_n <- function (df, groupvar) {
 df %>%
   group_by({{groupvar}}) %>%
