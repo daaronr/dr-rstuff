@@ -89,7 +89,6 @@ p_load_gh("peterhurford/checkr")
 
 #0. ... possibly (manually) add ‘tags’ to original Rmd files indicating start and end of sections to remove from forum post
 
-
 #1. rmd_edits_for_md.py: apply to all Rmd files in folder, create (in new folder?) new Rmd files with adjustments, removing unrenderable content etc ... maybe not bookdown but something simpler?
 
 #2. Knit Rmds  to commonmark (individual files or?) with
