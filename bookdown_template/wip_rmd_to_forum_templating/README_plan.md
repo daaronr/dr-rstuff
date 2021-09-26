@@ -1,0 +1,34 @@
+# wip_rmd_to_forum_templating
+
+- Work on writing scripts to move from the Rmd bookdown format to a markdown format that can be pasted into EA Forum
+    - the content [here](https://rethinkpriorities.github.io/ea_data_public/eas-donations.html) is currently the prime example
+    - the scripts here are/will be designed to work on the template in the current git Repo, and then be ported to those other repose
+
+- Discussion linked in [google doc here](https://docs.google.com/document/d/1R27474udUmzAD5tozOB6q7GA-EG-sW_j5Pz68bZwJQQ/edit#heading=h.4eoz5fvmsd7x); adding backlinks to this repo
+
+- I propose a [plan](#plan) below
+
+
+- See [some messy coding examples here](https://github.com/daaronr/dr_text_md_tools/tree/master/example_work_from_micro_teaching) for scripts I (Reinstein) have used in the past
+
+
+## My plan is something like: {#plan}
+
+0. ... possibly (manually) add ‘tags’ to original Rmd files indicating start and end of sections to remove from forum post
+
+
+1. rmd_edits_for_md.py: apply to all Rmd files in folder, create (in new folder?) new Rmd files with adjustments, removing unrenderable content etc ... maybe not bookdown but something simpler?
+
+2. Knit Rmds  to commonmark (individual files or?) with
+
+`rmarkdown::render_site(output_format = 'md_document', encoding = 'UTF-8')`
+
+
+3. md_edits_for_eafo.py apply post-knit fixes and substitutions to .md files so that these work on the EA forum
+
+- these may need to take manual arguments to specify,
+- ... e.g, prepend the correct web address where the png files are hosted and append `?raw=true` (not sure if that is necessary)
+-  right now that seems to be
+    - `https://daaronr.github.io/dr-rstuff/bookdown_template/docs/template_project_files/figure-html/FIGURE_NAME.png` in this template
+    - `https://github.com/rethinkpriorities/ea_data_public/blob/main/docs/ea_survey_work_files/figure-html/FIGURE_NAME.png?raw=true` for the relevant actual post
+

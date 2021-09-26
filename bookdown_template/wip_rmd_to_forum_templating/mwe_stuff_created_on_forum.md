@@ -1,6 +1,16 @@
 First Header
 ============
 
+
+[//]: # (This is a comment.)
+
+
+
+
+ [//]: # (it seems to work for
+multiple lines)
+
+
 blah blah, text, in **bold**, in *italics*
 
 [A link](www.cnn.com)

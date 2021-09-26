@@ -80,3 +80,23 @@ p_load_gh("peterhurford/checkr")
  # rdr_cbk("codebook_eas_2020.Rmd")
 #}
 
+
+
+
+########### EA Forum Markdown ##################
+
+#My plan is something like:
+
+#0. ... possibly (manually) add ‘tags’ to original Rmd files indicating start and end of sections to remove from forum post
+
+
+#1. rmd_edits_for_md.py: apply to all Rmd files in folder, create (in new folder?) new Rmd files with adjustments, removing unrenderable content etc ... maybe not bookdown but something simpler?
+
+#2. Knit Rmds  to commonmark (individual files or?) with
+#rmarkdown::render_site(output_format = 'md_document', encoding = 'UTF-8')
+  
+#3. md_edits_for_eafo.py apply post-knit fixes and substitutions to .md files so that these work on the EA forum
+  #these may need to take manual arguments to specify,
+  #…e.g, prepend the correct web address where the png files are hosted and append `?raw=true
+  #… right now that seems to be  https://github.com/rethinkpriorities/ea_data_public/blob/main/docs/ea_survey_work_files/figure-html/FIGURE_NAME.png?raw=true
+

@@ -3,11 +3,9 @@ title: "Template for Reinstein bookdowns"
 author: "Dr. David Reinstein, "
 abstract: "This 'book' organizes the project and helps others understand it and learn from it"
 #cover-image: "images/cardcatalogue.JPG"
-date: "`r Sys.Date()`"
+date: "2021-09-10"
 site: bookdown::bookdown_site
 output:
-  md_document:
-    variant: commonmark
   bookdown::gitbook:
     lib_dir: "book_assets"
     includes:
@@ -33,23 +31,30 @@ output:
         all: ['github', 'facebook', 'twitter', 'linkedin']
     highlight: tango
     download: [pdf, epub, mobi]
-    keep_md: yes 
-  bookdown::pdf_book:
+    keep_md: yes
+
+bookdown::pdf_book:
     keep_tex: yes
+
 always_allow_html: yes
 bibliography: "references.bib"
 biblio-style: apalike
 link-citations: yes
+
 github-repo: daaronr/dr-rstuff
+
 description: "Template testing this format"
 #url: 'https\://daaronr.github.io//'
 tags: [Testing, Economics, Experiments, Charity]
 ---
 
+SCRIPT: remove all of the above (fancy: comment it out in some way)
 
-```{r}
+```r
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+SCRIPT: remove all of the above (fancy: comment it out in some way)
 
 
 #### Download,  access and run project_setup.R ####
@@ -60,22 +65,18 @@ knitr::opts_chunk$set(echo = TRUE)
 Try downloading and accessing my basic content support tool...
 
 
-```{r download-project-setup, eval=TRUE}
-#?removed because this is now in `main.R`
-# but we need it if we use the 'build' option for the md
 
-library(here)
+```r
+#removed because this is now in `main.R`
+
+
 source(here("code", "project_setup.R"))
-
 ```
 
 
 \
 
-```{r install,  echo = FALSE, include=FALSE}
-library(png)
-library(grid)
-```
+
 
 
 ```
@@ -91,39 +92,23 @@ library(grid)
 
 <!-- note installing packages is mainly removed because this is done in baseoptions.R -->
 
-```{r }
+
+```r
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
 ```
 
-
-```{r html, echo=FALSE}
-# globally set chunk options
-
-knitr::opts_chunk$set(fig.align='center', out.width='80%', warning=FALSE, message = FALSE, error=TRUE)
-
-my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
-
+```
+## tweaking Hmisc
 ```
 
 
-```{r knit-hooks-thing, echo=FALSE}
 
-#From https://stackoverflow.com/questions/62028925/how-do-i-catch-errors-in-inline-code-chunk-in-r-markdown
 
-knitr::knit_hooks$set(
-  evaluate.inline = function (code, envir = knit_global()) {
-    v = try(eval(xfun::parse_only(code), envir = envir))
-    knitr::knit_print(v, inline = TRUE, options = knitr::opts_chunk$get())
-  },
-  inline = function(x) {
-  if (any(class(x) == "try-error")) {
-    as.vector(x)
-  } else x
-})
-```
+
+
 
 
 
@@ -150,13 +135,11 @@ bibliography: references.bib
 
 # About this work {#about}
 
-```{block2,  type='note'}
-Click [HERE](#chapter_2) to jump to next chapter.
-```
+\BeginKnitrBlock{note}<div class="note">Click [HERE](#chapter_2) to jump to next chapter.</div>\EndKnitrBlock{note}
 
-`r format_with_col("**Note to friends I've asked to look at this book...**","brown")`
+<font color='brown'>**Note to friends I've asked to look at this book...**</font>
 
-`r format_with_col("Thanks for looking at this.", "brown")`
+<font color='brown'>Thanks for looking at this.</font>
 
 ## Preface {#preface}
 
@@ -217,32 +200,29 @@ We can have internal links to previous sections like [here, to the about section
 
 Can I ask you a question? (Answer below the fold.)
 
-```{block2,  type='fold'}
-
+\BeginKnitrBlock{fold}<div class="fold">
 Yes: I just did.
-
-```
+</div>\EndKnitrBlock{fold}
 
 \
 
 I can also put expansive detail into a fold, to avoid clutter. If you want to know more about spittlebugs, feel free (to open the fold below).
 
-```{block2,  type='fold'}
-
+\BeginKnitrBlock{fold}<div class="fold">
 > These families are best known for the nymphal stage, which produces a cover of foamed-up plant sap visually resembling saliva; the nymphs are therefore commonly known as spittlebugs and their foam as cuckoo spit, frog spit, or snake spit. This characteristic spittle production is associated with the unusual trait of xylem feeding. Whereas most insects that feed on sap feed on the nutrient-rich fluid from the phloem, Cercopidae utilize the much more dilute sap flowing upward from the roots via the xylem. The large amount of excess water that must be excreted and the evolution of special breathing tubes allow the young spittlebug nymphs to grown in the relatively protective environment of the spittle.
 
 Indirect source: [wikipedia: Froghopper, accessed 21 Feb 2020](https://en.wikipedia.org/wiki/Froghopper)
-
-```
+</div>\EndKnitrBlock{fold}
 
 ### A Shiny app {#shiny_test .unnumbered}
 
-```{r knitrapp}
 
+```r
 knitr::include_app("https://yihui.shinyapps.io/miniUI/",
   height = "600px")
-
 ```
+
+<iframe src="https://yihui.shinyapps.io/miniUI/?showcase=0" width="80%" height="600px"></iframe>
 
 ### My web pages {.unnumbered}
 
@@ -252,11 +232,12 @@ knitr::include_app("https://yihui.shinyapps.io/miniUI/",
 
 ------------------------------------------------------------------------
 
-```{r wppage}
 
+```r
 knitr::include_url("https://davidreinstein.wordpress.com/")
-
 ```
+
+<iframe src="https://davidreinstein.wordpress.com/" width="80%" height="400px"></iframe>
 
 ### Scary math {.unnumbered}
 
@@ -268,114 +249,103 @@ $$\Theta = \begin{pmatrix}\alpha & \beta\\
 
 These are "code chunks"
 
-```{r chunk-label, echo = TRUE, fig.cap = 'A figure caption.'}
-x <- 1 + 1
-rnorm(10)  # 10 random numbers
-plot(dist ~ speed, cars)  # a scatterplot
+
 ```
+##  [1]  1.20  0.84 -1.55 -0.71 -2.59  0.33 -0.73  1.73  0.73  0.27
+```
+
+<div class="figure" style="text-align: center">
+<img src="template_project_files/figure-html/chunk-label-1.png" alt="A figure caption." width="80%" />
+<p class="caption">(\#fig:chunk-label)A figure caption.</p>
+</div>
 
 And I can refer to the results of the r code in the text itself, e.g., by writing
 
     ``  one plus one equals  ` r x `   ``
 
-I get ... one plus one equals `r x`.
+I get ... one plus one equals 2.
 
-### Tables and graphs 
+### Tables and graphs
 
 We can make tables from data (but these might struggle exporting to markdown formats?)
 
-```{r}
 
-mtcars %>% as_tibble() %>%  
+```r
+mtcars %>% as_tibble() %>%
   tabyl(cyl) %>%
   .kable(caption="don't forget a caption") %>%
   .kable_styling()
-
 ```
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>(\#tab:unnamed-chunk-6)don't forget a caption</caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> cyl </th>
+   <th style="text-align:right;"> n </th>
+   <th style="text-align:right;"> percent </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 0.34 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 0.22 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 0.44 </td>
+  </tr>
+</tbody>
+</table>
 And of course, graphs aka 'visualisations':
 
-```{r}
+
+```r
 (
-mtcars_plot <- mtcars %>% 
-  ggplot(aes(x=mpg)) 
+mtcars_plot <- mtcars %>%
+  ggplot(aes(x=mpg))
 + geom_histogram(binwidth=5)
 )
 ```
 
+<img src="template_project_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;" />
+
 
 ### Other fancy stuff {.unnumbered}
 
-```{r, eval = my_output == "html", results='asis', echo=F, purl=F}
-cat('
+
 <div class = "keyconcept" id="KC5.4">
 <h3 class = "right"> Key Concept 5.4 </h3>
 <h3 class = "left"> Heteroskedasticity and Homoskedasticity </h3>
 - The error term of our regression model is homoskedastic if the variance of the conditional distribution of $u_i$ given $X_i$, $Var(u_i|X_i=x)$, is constant *for all* observations in our sample:
-\\[ \\text{Var}(u_i|X_i=x) = \\sigma^2 \\ \\forall \\ i=1,\\dots,n. \\]
+\[ \text{Var}(u_i|X_i=x) = \sigma^2 \ \forall \ i=1,\dots,n. \]
 
 </div>
-')
-```
 
 ### Interactive questions
 
-```{r, echo=FALSE}
-knitr::include_app('https://os301.shinyapps.io/Question/', height = "210px")
-
-#Code for this is detailed below
-# library(shiny)
-# ui <- fluidPage(
-#     radioButtons("rb", "In equilibrium what is Quantity demanded equal to?",
-#                        choiceNames =
-#                            list("None selected", "Quantity Supplied", "Bananas",
-#                                 "Apples", "Pears"),
-#                        choiceValues =
-#                            list("", "supply", "demand", "price", "quantity"),
-#                  selected = ""
-#     ),
-#     textOutput("txt")
-#     )
-# server <- function(input, output) {
-#     output$txt <- renderText({
-#         if (input$rb == "supply"){
-#             print("You are correct")
-#             } else if (input$rb == ""){
-#                 print("")}
-#                 else{
-#                     print("You are incorrect")}
-#             })
-# }
-# shinyApp(ui, server)
-```
+<iframe src="https://os301.shinyapps.io/Question/?showcase=0" width="80%" height="210px"></iframe>
 
 ### Videos
 
-```{r, echo=FALSE}
-knitr::include_app('https://os301.shinyapps.io/Video/')
-# Code for this is detailed below
-# library(shiny)
-# ui <- fluidPage(
-#     HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/WyrhmqHfdu8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
-# )
-# server <- function(input, output, session) {
-# }
-# shinyApp(ui, server)
-
-```
+<iframe src="https://os301.shinyapps.io/Video/?showcase=0" width="80%" height="400px"></iframe>
 
 ## Types of notes within text
 
-```{block2,  type='note'}
-
+\BeginKnitrBlock{note}<div class="note">
 "Aside" notes look like this.
+</div>\EndKnitrBlock{note}
 
-```
-
-```{block2,  type='warning'}
-
+\BeginKnitrBlock{warning}<div class="warning">
 Warnings look like this.
-
-```
+</div>\EndKnitrBlock{warning}
 
 ### A margin note
 
@@ -416,11 +386,10 @@ Jump to [next chapter](#chapter_2)
 
 ------------------------------------------------------------------------
 
-```{r  fig.cap = 'Just remember...', out.width='40%', fig.asp=.4, fig.align='center',  echo = FALSE}
-
-knitr::include_graphics("images/ecacoacin4life.jpg")
-
-```
+<div class="figure" style="text-align: center">
+<img src="images/ecacoacin4life.jpg" alt="Just remember..." width="40%" />
+<p class="caption">(\#fig:unnamed-chunk-13)Just remember...</p>
+</div>
 
 Just remember the simple acronym "ECAOAcIn":[^chapter_1_sample-1]
 

@@ -6,6 +6,8 @@ abstract: "This 'book' organizes the project and helps others understand it and 
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output:
+  md_document:
+    variant: commonmark
   bookdown::gitbook:
     lib_dir: "book_assets"
     includes:
@@ -32,17 +34,13 @@ output:
     highlight: tango
     download: [pdf, epub, mobi]
     keep_md: yes 
-
-bookdown::pdf_book:
+  bookdown::pdf_book:
     keep_tex: yes
-    
 always_allow_html: yes
 bibliography: "references.bib"
 biblio-style: apalike
 link-citations: yes
-
 github-repo: daaronr/dr-rstuff
-
 description: "Template testing this format"
 #url: 'https\://daaronr.github.io//'
 tags: [Testing, Economics, Experiments, Charity]
@@ -62,10 +60,11 @@ knitr::opts_chunk$set(echo = TRUE)
 Try downloading and accessing my basic content support tool...
 
 
-```{r download-project-setup, eval=FALSE}
-#removed because this is now in `main.R`
+```{r download-project-setup, eval=TRUE}
+#?removed because this is now in `main.R`
+# but we need it if we use the 'build' option for the md
 
-
+library(here)
 source(here("code", "project_setup.R"))
 
 ```
