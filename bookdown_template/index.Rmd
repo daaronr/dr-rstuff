@@ -52,6 +52,12 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
+Needs to be set to `echo = FALSE` for creating EAF markdowns (or do this in post?)
+```{r}
+#knitr::opts_chunk$set(echo = FALSE)
+```
+
+
 #### Download,  access and run project_setup.R ####
 
 (Note: we ultimately can do this in main, but this is a bridge)

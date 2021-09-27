@@ -1,5 +1,6 @@
 ---
 bibliography: references.bib
+always_allow_html: yes
 ---
 
 # About this work {#about}
@@ -137,6 +138,8 @@ I get ... one plus one equals `r x`.
 ### Tables and graphs 
 
 We can make tables from data (but these might struggle exporting to markdown formats?)
+
+Below, this defaults to an html  styling
 
 ```{r}
 
