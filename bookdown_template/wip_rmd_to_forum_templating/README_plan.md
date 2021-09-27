@@ -60,17 +60,25 @@ Note: putting in `always_allow_html: yes` into the yaml allows this to knit even
     - `https://daaronr.github.io/dr-rstuff/bookdown_template/docs/template_project_files/figure-html/FIGURE_NAME.png` in this template
     - `https://github.com/rethinkpriorities/ea_data_public/blob/main/docs/ea_survey_work_files/figure-html/FIGURE_NAME.png?raw=true` for the relevant actual post
 
+## Preprocessing of Rmd -- simple content to cut or replace syntax
 
-## Images (more precise discussion)
+### Remove deselected content (with 'start/end' tags)
 
-## Tables (numbers produced in R)
+### Margin notes to footnotes
+
+
+###  Tables (numbers produced in R)
 
 At the moment tables come out in some sort of htmly format which doesn’t render on the Forum.
 - Changing options to 'latex tables' in some packages (like `Kable`) may fix this?
 
 
+## Post-processing of md
 
-## Internal links
+### Images (more precise discussion)
+
+
+### Internal links
 
 > Hamish: My guess about the internal links problem: the way internal links work is that you give elements ids like <h1 id="about">About</h1> and then you can link to them like <a href="#about">link</a>. So if the EA forum is generating different IDs to the ones you were using in the R notebook the links won't work.
 
