@@ -9,13 +9,7 @@ always_allow_html: yes
 Click [HERE](#chapter_2) to jump to next chapter.
 ```
 
-<--! bookdown_start -->
-The first bit of content meant 'only for the bookdown' goes here.
 
-
-This contains multiple lines blah blah
-
-<--! bookdown_end -->
 
 
 `r format_with_col("**Note to friends I've asked to look at this book...**","brown")`
@@ -41,9 +35,9 @@ Testing a Zotero reference: [@becker1974] (should cite Becker, 1974). [@adena201
 This book is in <b>Open Review</b>. We want your feedback to make the book better for you and other students. You may annotate some text by [selecting it with the cursor]{style="background-color: #3297FD; color: white"} and then click the <i class="h-icon-annotate"></i> on the pop-up menu. You can also see the annotations of others: click the <i class="h-icon-chevron-left"></i> in the upper right hand corner of the page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i>
 :::
 
-::: {.marginnote}
+^[
 If you have benefitted from this work (and you are not one of my students), please consider giving me some sort of ''kudos'' on Twitter or wherever. One way to materially express gratitude: make a donation in my honor to an *effective and international charity*, such as those listed at [givewell.org](givewell.org). If you make this donation and share it on a social media site with the hashtag \#DRWritingEcon, that would be greatly appreciated.
-:::
+]
 
 ### Licence {.unnumbered}
 
@@ -65,11 +59,11 @@ Testing another one: [@alecstephensonQuickIntroductionShiny2013]
 
 It is referring the contents of bibtex files, in the line `bibliography: [./references.bib, support/reinstein_bibtex.bib]`
 
-<div class="marginnote">
+^[
 
 This can be made easier with the addin citation tool 'citr', along with Zotero and betterbibtex.
 
-</div>
+]
 
 ## Examples of the sort of fancy interactive stuff one can incorporate in this web book
 
@@ -92,13 +86,7 @@ Yes: I just did.
 \
 
 
-<--! bookdown_start -->
-The second bit of content meant 'only for the bookdown' goes here.
 
-With multiple lines.
-
-second bit ends.
-<--! bookdown_end -->
 
 I can also put expansive detail into a fold, to avoid clutter. If you want to know more about spittlebugs, feel free (to open the fold below).
 
@@ -143,7 +131,7 @@ $$\Theta = \begin{pmatrix}\alpha & \beta\\
 
 These are "code chunks"
 
-```{r chunk-label, echo = TRUE, fig.cap = 'A figure caption.'}
+```{r chunk-label, echo=FALSE, fig.cap = 'A figure caption.'}
 x <- 1 + 1
 rnorm(10)  # 10 random numbers
 plot(dist ~ speed, cars)  # a scatterplot
@@ -258,10 +246,10 @@ Warnings look like this.
 
 What about tufte-style margin notes? \*
 
-<div class="marginnote">
+^[
 
 \* If you are considering pursuing an MSc or PhD this will typically be centered on doing research; it's worth knowing whether this is for you before diving in. Doing research is also a key component of much professional work in the private and public (government) sectors, including at 'think tanks', some government agencies, and many private consulting and 'data analytics' firms.
-</div>
+]
 
 ## Notes for instructors and course organisers {.unnumbered}
 
@@ -306,3 +294,4 @@ Just remember the simple acronym "ECAOAcIn":[^chapter_1_sample-1]
 **E**conomic question -- **C**ritical discussion -- **A**pply economics -- **O**rganise/present well -- **Ac**ademic writing -- original **In**sight
 
 [^chapter_1_sample-1]: (Isn't that catchy?)
+

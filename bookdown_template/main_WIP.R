@@ -88,5 +88,99 @@ p_load_gh("peterhurford/checkr")
 
 
 #chapter by chapter could work?
+
+## .... PREPROCESSING ####
+
+#system('sed "/bookdown_start/,/bookdown_end/d" chapter_1_sample.Rmd > "chapter_1_sample_md.Rmd"')
+
+library(rex)
+library(readr)
+
+
+#... input file for editing ####
+ch1_Rmd <- readr::read_file("chapter_1_sample.Rmd")
+#do gsub and rex  stuff here
+
+#... Remove bookdown-only content by tag ####
+
+#define and apply regular expression for 'beginning and end of bookdown only tags'
+
+reg_bd <- rex::rex("<--! bookdown_start -->", 
+                one_or_more(anything, type="lazy"), 
+                "<--! bookdown_end -->")
+
+ch1_Rmd <- gsub(reg_bd, "", ch1_Rmd)
+
+#.... tufte notes and folding boxes to footnotes... ####
+reg_mn_div <- rex('<div class="marginnote">', 
+                       capture(one_or_more(anything, type="lazy")), 
+                       '</div>')
+
+reg_mn_col_to_fn <- rex('::: {.marginnote}', 
+            capture(one_or_more(anything, type="lazy")),                             ':::')
+
+# ... Folding boxes (should be dropped or become footnotes)
+reg_fold <- rex("```{", 
+                one_or_more(anything, type="lazy"),
+                "type='fold'}",
+                capture(one_or_more(anything,
+                                    type="lazy")),
+                "```"
+                )
+
+# make this stuff into footnotes 
+ch1_Rmd <- ch1_Rmd %>%
+  gsub(reg_mn_div, '^[\\1]', .)  %>% 
+  gsub(reg_mn_col_to_fn, '^[\\1]', .)  %>%
+  gsub(reg_fold, '^[\\1]', .)  
+
+
+# ... Other block2 content could be made a bolded 'note'  ####
+#note -- this must be run *after* the previous 
+reg_block2 <- rex("```{block2", 
+                one_or_more(anything, type="lazy"),
+                "}",
+                capture(one_or_more(anything,
+                                    type="lazy")),
+                "```"
+)
+
+ch1_Rmd <- ch1_Rmd %>%
+  gsub(reg_block2, '**Note**: \\1', .)   #maybe add line breaks here?
+  
+  
+# ... echo=FALSE everywhere ####
+reg_echo <- rex("echo", 
+                     zero_or_more(any_spaces),
+                     "=", 
+                     zero_or_more(any_spaces),
+                     "TRUE")
+ch1_Rmd <- ch1_Rmd %>% gsub(reg_echo, "echo=FALSE", .)
+
+
+ch1_Rmd <- ch1_Rmd %>%
+  gsub(reg_fold, '^[\\1]', .)  %>% 
+
+
+# ... Note boxes ####
+
+
+# ... TABLES -- change options to 'latex tables' in some packages (like `Kable`) may fix this? ####
+  
+  
+write_lines(ch1_Rmd, here("chapter_1_sample_md.Rmd"))
+
+
+## RENDER as md
+
 render("chapter_1_sample.Rmd", md_document(variant = "common_mark"))
+
+## POSTPROCESSING md
+
+ch1_md <- readr::read_lines("chapter_1_sample.md")
+
+#do 'gsub' stuff here
+
+write_lines(ch1_md, here("chapter_1_sample.md"))
+
 
