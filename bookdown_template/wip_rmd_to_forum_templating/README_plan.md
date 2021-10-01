@@ -1,5 +1,7 @@
 # wip_rmd_to_forum_templating
 
+28 Sep 2021 working on this at bottom of `main_WIP.R` [HERE](https://github.com/daaronr/dr-rstuff/blob/master/bookdown_template/main_WIP.R)
+
 - Work on writing scripts to move from the Rmd bookdown format to a markdown format that can be pasted into EA Forum
     - the content [here](https://rethinkpriorities.github.io/ea_data_public/eas-donations.html) is currently the prime example
     - the scripts here are/will be designed to work on the [template in the current Github Repo](https://daaronr.github.io/dr-rstuff/bookdown_template/docs/about.html), and then be ported to those other repos
