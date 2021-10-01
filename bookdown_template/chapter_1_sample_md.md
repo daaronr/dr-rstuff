@@ -151,7 +151,7 @@ $$\\Theta = \\begin{pmatrix}\\alpha & \\beta\\\\
 
 These are “code chunks”
 
-    ##  [1] -0.676  0.030  0.398  0.624 -0.366 -0.047 -1.353  0.534  1.320  0.536
+    ##  [1] -0.79  0.32  1.58  1.67 -1.36  0.23 -2.25  0.50 -1.67 -1.12
 
 ![A figure
 caption.](chapter_1_sample_md_files/figure-commonmark/chunk-label-1.png)
@@ -170,48 +170,12 @@ markdown formats?)
 
 Below, this defaults to an html styling
 
+(but in the md substitution code I swap in ‘pipe styling’)
+
 ``` r
 mtcars %>% as_tibble() %>%
   tabyl(cyl) %>%
   .kable(format='pipe', caption="don't forget a caption" )
-```
-
-<table>
-<caption>don’t forget a caption</caption>
-<thead>
-<tr class="header">
-<th style="text-align: right;">cyl</th>
-<th style="text-align: right;">n</th>
-<th style="text-align: right;">percent</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">0.34</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">0.22</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">0.44</td>
-</tr>
-</tbody>
-</table>
-
-don’t forget a caption
-
-and then with latex styling
-
-``` r
-mtcars %>% as_tibble() %>%
-  tabyl(cyl) %>%
-  kable(format='pipe', caption="don't forget a caption" )
 ```
 
 <table>
@@ -254,7 +218,7 @@ mtcars_plot <- mtcars %>%
 )
 ```
 
-![](chapter_1_sample_md_files/figure-commonmark/unnamed-chunk-3-1.png)
+![](chapter_1_sample_md_files/figure-commonmark/unnamed-chunk-2-1.png)<!-- -->
 
 ### Other fancy stuff
 
@@ -380,4 +344,3 @@ share it on a social media site with the hashtag \#DRWritingEcon, that
 would be greatly appreciated.
 
 [2] (Isn’t that catchy?)
-

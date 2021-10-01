@@ -5,9 +5,9 @@ always_allow_html: yes
 
 # About this work {#about}
 
-```{block2,  type='note'}
+**Note**:
 Click [HERE](#chapter_2) to jump to next chapter.
-```
+
 
 
 
@@ -26,11 +26,7 @@ Testing a Zotero reference: [@becker1974] (should cite Becker, 1974). [@adena201
 
 > an example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation.
 
-```{=html}
-<!--
-(As noted at <https://www.econometrics-with-r.org/>; thanks for this example:)
--->
-```
+
 ::: {.rmdreview}
 This book is in <b>Open Review</b>. We want your feedback to make the book better for you and other students. You may annotate some text by [selecting it with the cursor]{style="background-color: #3297FD; color: white"} and then click the <i class="h-icon-annotate"></i> on the pop-up menu. You can also see the annotations of others: click the <i class="h-icon-chevron-left"></i> in the upper right hand corner of the page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i>
 :::
@@ -77,11 +73,11 @@ We can have internal links to previous sections like [here, to the about section
 
 Can I ask you a question? (Answer below the fold.)
 
-```{block2,  type='fold'}
+^[
 
 Yes: I just did.
 
-```
+]
 
 \
 
@@ -90,20 +86,19 @@ Yes: I just did.
 
 I can also put expansive detail into a fold, to avoid clutter. If you want to know more about spittlebugs, feel free (to open the fold below).
 
-```{block2,  type='fold'}
+^[
 
 > These families are best known for the nymphal stage, which produces a cover of foamed-up plant sap visually resembling saliva; the nymphs are therefore commonly known as spittlebugs and their foam as cuckoo spit, frog spit, or snake spit. This characteristic spittle production is associated with the unusual trait of xylem feeding. Whereas most insects that feed on sap feed on the nutrient-rich fluid from the phloem, Cercopidae utilize the much more dilute sap flowing upward from the roots via the xylem. The large amount of excess water that must be excreted and the evolution of special breathing tubes allow the young spittlebug nymphs to grown in the relatively protective environment of the spittle.
 
 Indirect source: [wikipedia: Froghopper, accessed 21 Feb 2020](https://en.wikipedia.org/wiki/Froghopper)
 
-```
+]
 
 ### A Shiny app {#shiny_test .unnumbered}
 
 ```{r knitrapp}
 
-knitr::include_app("https://yihui.shinyapps.io/miniUI/",
-  height = "600px")
+#knitr::include_app("https://yihui.shinyapps.io/miniUI/", height = "600px")
 
 ```
 
@@ -117,7 +112,7 @@ knitr::include_app("https://yihui.shinyapps.io/miniUI/",
 
 ```{r wppage}
 
-knitr::include_url("https://davidreinstein.wordpress.com/")
+#knitr::include_url("https://davidreinstein.wordpress.com/")
 
 ```
 
@@ -149,14 +144,20 @@ We can make tables from data (but these might struggle exporting to markdown for
 
 Below, this defaults to an html  styling
 
-```{r}
+(but in the md substitution code I swap in 'pipe styling')
+
+```{r, results='asis'}
 
 mtcars %>% as_tibble() %>%
   tabyl(cyl) %>%
-  .kable(caption="don't forget a caption") %>%
-  .kable_styling()
+  .kable(format='pipe', caption="don't forget a caption" )
+
+
 
 ```
+
+
+
 And of course, graphs aka 'visualisations':
 
 ```{r}
@@ -170,7 +171,7 @@ mtcars_plot <- mtcars %>%
 
 ### Other fancy stuff {.unnumbered}
 
-```{r, eval = my_output == "html", results='asis', echo=F, purl=F}
+```{r, eval = "html", results='asis', echo=F, purl=F}
 cat('
 <div class = "keyconcept" id="KC5.4">
 <h3 class = "right"> Key Concept 5.4 </h3>
@@ -185,7 +186,7 @@ cat('
 ### Interactive questions
 
 ```{r, echo=FALSE}
-knitr::include_app('https://os301.shinyapps.io/Question/', height = "210px")
+#knitr::include_app('https://os301.shinyapps.io/Question/', height = "210px")
 
 #Code for this is detailed below
 # library(shiny)
@@ -216,7 +217,7 @@ knitr::include_app('https://os301.shinyapps.io/Question/', height = "210px")
 ### Videos
 
 ```{r, echo=FALSE}
-knitr::include_app('https://os301.shinyapps.io/Video/')
+#knitr::include_app('https://os301.shinyapps.io/Video/')
 # Code for this is detailed below
 # library(shiny)
 # ui <- fluidPage(
@@ -230,17 +231,17 @@ knitr::include_app('https://os301.shinyapps.io/Video/')
 
 ## Types of notes within text
 
-```{block2,  type='note'}
+**Note**:
 
 "Aside" notes look like this.
 
-```
 
-```{block2,  type='warning'}
+
+**Note**:
 
 Warnings look like this.
 
-```
+
 
 ### A margin note
 
@@ -285,7 +286,7 @@ Jump to [next chapter](#chapter_2)
 
 ```{r  fig.cap = 'Just remember...', out.width='40%', fig.asp=.4, fig.align='center',  echo = FALSE}
 
-knitr::include_graphics("images/ecacoacin4life.jpg")
+#knitr::include_graphics("images/ecacoacin4life.jpg")
 
 ```
 

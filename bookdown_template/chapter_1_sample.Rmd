@@ -114,8 +114,7 @@ Indirect source: [wikipedia: Froghopper, accessed 21 Feb 2020](https://en.wikipe
 
 ```{r knitrapp}
 
-knitr::include_app("https://yihui.shinyapps.io/miniUI/",
-  height = "600px")
+knitr::include_app("https://yihui.shinyapps.io/miniUI/", height = "600px")
 
 ```
 
@@ -161,14 +160,43 @@ We can make tables from data (but these might struggle exporting to markdown for
 
 Below, this defaults to an html  styling
 
+(but in the md substitution code I swap in 'pipe styling')
+
 ```{r}
 
+#install.packages("magick")
+#install.packages("webshot")
+webshot::install_phantomjs(force=TRUE)
+#library(webshot)
+#library(magick)
+
 mtcars %>% as_tibble() %>%
-  tabyl(cyl) %>%
-  .kable(caption="don't forget a caption") %>%
-  .kable_styling()
+  janitor::tabyl(cyl) %>%
+  kable(caption="don't forget a caption") %>%
+  kable_styling() %>% 
+  as_image()
+  save_kable("testmtcarsimage.png")
+    #as_image(width = 8) (this fails)
+
 
 ```
+And using the gtsummary package:
+
+```{r}
+library(gtsummary)
+
+# make model and tbl_regression object
+m_linear <- lm(mpg ~ cyl, data = mtcars)
+t1 <- tbl_regression(m_linear)
+
+# Use function from gt package to save table, after converting to 
+# gt object using as_gt()
+gt::gtsave(as_gt(t1), file = file.path(tempdir(), "temp.png"))
+
+```
+
+
+
 And of course, graphs aka 'visualisations':
 
 ```{r}
@@ -182,7 +210,7 @@ mtcars_plot <- mtcars %>%
 
 ### Other fancy stuff {.unnumbered}
 
-```{r, eval = my_output == "html", results='asis', echo=F, purl=F}
+```{r, eval = "html", results='asis', echo=F, purl=F}
 cat('
 <div class = "keyconcept" id="KC5.4">
 <h3 class = "right"> Key Concept 5.4 </h3>
