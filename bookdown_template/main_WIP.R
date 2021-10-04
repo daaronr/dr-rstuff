@@ -31,18 +31,20 @@ try_download(
   here::here("code", "project_setup.R")
 )
 
+try_download(
+  "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/parse_ea_forum_md.R",
+  here::here("code", "parse_ea_forum_md.R")
+)
+
+
 ## You MUST run this for anything else to work (installs/loads key packages and functions):
 source(here::here("code", "project_setup.R"))
-
-library(rmarkdown)
-
 
 #... and a few more packages ####
 p_load_gh("peterhurford/funtools")
 
 p_load_gh("remotes")
 #p_load_gh("tidymodels/corrr")
-
 
 if (!require("devtools")) { install.packages("devtools") }
 p_load_gh("peterhurford/checkr")
@@ -60,7 +62,6 @@ p_load_gh("peterhurford/checkr")
 ##Import relevant dataframes and set filters ####
 
 ## ...Import and work on data ####
-
 
 
 #### Building bookdown  ####
@@ -89,6 +90,21 @@ p_load_gh("peterhurford/checkr")
 
 #See plan in https://github.com/daaronr/dr-rstuff/blob/master/bookdown_template/wip_rmd_to_forum_templating/README_plan.md
 
+library(readr)
 
-source(here::here("code", "project_setup.R"))
+#... input file for editing ####
+ch_Rmd <- readr::read_file("chapter_1_sample.Rmd") 
+##You need to call it `ch_Rmd` for parse_ea_forum_md.R to run, until I functionalize it
+
+#prefixes for image files
+im_prefix_here_enter <-  "chapter_1_sample_files/figure-commonmark/"
+im_url_prefix_enter <- "https://github.com/daaronr/dr-rstuff/blob/a66d110c934006b0abe612c7f12bbbb947997cd6/bookdown_template/chapter_1_sample_files/figure-common_mark/"
+
+
+try_download(
+  "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/parse_ea_forum_md.R",
+  here::here("code", "parse_ea_forum_md.R")
+)
+
+source(here::here("code", "parse_ea_forum_md.R"))
 
