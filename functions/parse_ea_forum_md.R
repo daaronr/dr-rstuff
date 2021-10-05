@@ -144,7 +144,7 @@ write_lines(ch_Rmd, here("ch_md.Rmd"))
 
 ## RENDER as md
 
-rmarkdown::render("ch_md.Rmd", md_document(variant = "commonmark"))
+rmarkdown::render("ch_md.Rmd", rmarkdown::md_document(variant = "commonmark"))
 
 ## POSTPROCESSING md ####
 
