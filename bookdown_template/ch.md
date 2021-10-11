@@ -6,15 +6,7 @@ always_allow_html: yes
 # About this work {#about}
 
 
-```{r html, echo=FALSE}
-# globally set chunk options
-knitr::opts_chunk$set(fig.align='center', out.width='80%', warning=FALSE, message = FALSE, error=TRUE, echo=FALSE)
-#parse_ea_forum should switch this to echo=false
 
-
-my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
-
-```
 
 **Note**: 
 Click [HERE](#chapter_2) to jump to next chapter.
@@ -23,9 +15,9 @@ Click [HERE](#chapter_2) to jump to next chapter.
 
 
 
-`r format_with_col("**Note to friends I've asked to look at this book...**","brown")`
+**Note to friends I've asked to look at this book...**
 
-`r format_with_col("Thanks for looking at this.", "brown")`
+Thanks for looking at this.
 
 ## Preface {#preface}
 
@@ -107,11 +99,7 @@ Indirect source: [wikipedia: Froghopper, accessed 21 Feb 2020](https://en.wikipe
 
 ### A Shiny app {#shiny_test .unnumbered}
 
-```{r knitrapp}
-
-knitr::include_app("https://yihui.shinyapps.io/miniUI/", height = "600px")
-
-```
+<a href="https://yihui.shinyapps.io/miniUI/" target="_blank"><img src="ch_md_files/figure-commonmark/knitrapp-1.png" width="80%" style="display: block; margin: auto;" /></a>
 
 ### My web pages {.unnumbered}
 
@@ -121,11 +109,7 @@ knitr::include_app("https://yihui.shinyapps.io/miniUI/", height = "600px")
 
 ------------------------------------------------------------------------
 
-```{r wppage}
-
-knitr::include_url("https://davidreinstein.wordpress.com/")
-
-```
+<a href="https://davidreinstein.wordpress.com/" target="_blank"><img src="ch_md_files/figure-commonmark/wppage-1.png" width="80%" style="display: block; margin: auto;" /></a>
 
 ### Scary math {.unnumbered}
 
@@ -137,17 +121,18 @@ $$\Theta = \begin{pmatrix}\alpha & \beta\\
 
 These are "code chunks"
 
-```{r chunk-label, echo=FALSE, fig.cap = 'A figure caption.'}
-x <- 1 + 1
-rnorm(10)  # 10 random numbers
-plot(dist ~ speed, cars)  # a scatterplot
+
 ```
+##  [1]  0.69 -1.36 -0.53  0.45  2.06 -0.37  1.90  1.21 -1.20 -0.27
+```
+
+<img src="ch_md_files/figure-commonmark/chunk-label-1.png" title="A figure caption." alt="A figure caption." width="80%" style="display: block; margin: auto;" />
 
 And I can refer to the results of the r code in the text itself, e.g., by writing
 
     ``  one plus one equals  ` r x `   ``
 
-I get ... one plus one equals `r x`.
+I get ... one plus one equals 2.
 
 ### Tables and graphs
 
@@ -157,109 +142,56 @@ Below, this defaults to an html  styling
 
 (but in the md substitution code I swap in 'pipe styling')
 
-```{r}
-
-#install.packages("magick")
-#install.packages("webshot")
-#webshot::install_phantomjs(force=TRUE)
-#library(webshot)
-#library(magick)
-
-mtcars %>% as_tibble() %>%
-  janitor::tabyl(cyl) %>%
-  kable(caption="don't forget a caption") %>%
-  kable_styling() 
-    #as_image(width = 8) (this fails)
-
-
-```
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>don't forget a caption</caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> cyl </th>
+   <th style="text-align:right;"> n </th>
+   <th style="text-align:right;"> percent </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 0.34 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 0.22 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 0.44 </td>
+  </tr>
+</tbody>
+</table>
 And using the gtsummary package:
 
-```{r}
-library(gtsummary)
 
-# make model and tbl_regression object
-m_linear <- lm(mpg ~ cyl, data = mtcars)
-t1 <- tbl_regression(m_linear)
-
-# Use function from gt package to save table, after converting to 
-# gt object using as_gt()
-#gt::gtsave(as_gt(t1), file = file.path(tempdir(), "temp.png"))
-
-```
 
 
 
 And of course, graphs aka 'visualisations':
 
-```{r}
-(
-mtcars_plot <- mtcars %>%
-  ggplot(aes(x=mpg))
-+ geom_histogram(binwidth=5)
-)
-```
+<img src="ch_md_files/figure-commonmark/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" />
 
 
 ### Other fancy stuff {.unnumbered}
 
-```{r, eval = "html", results='asis', echo=F, purl=F}
-cat('
-<div class = "keyconcept" id="KC5.4">
-<h3 class = "right"> Key Concept 5.4 </h3>
-<h3 class = "left"> Heteroskedasticity and Homoskedasticity </h3>
-- The error term of our regression model is homoskedastic if the variance of the conditional distribution of $u_i$ given $X_i$, $Var(u_i|X_i=x)$, is constant *for all* observations in our sample:
-\\[ \\text{Var}(u_i|X_i=x) = \\sigma^2 \\ \\forall \\ i=1,\\dots,n. \\]
 
-</div>
-')
-```
+
 
 ### Interactive questions
 
-```{r, echo=FALSE}
-knitr::include_app('https://os301.shinyapps.io/Question/', height = "210px")
-
-#Code for this is detailed below
-# library(shiny)
-# ui <- fluidPage(
-#     radioButtons("rb", "In equilibrium what is Quantity demanded equal to?",
-#                        choiceNames =
-#                            list("None selected", "Quantity Supplied", "Bananas",
-#                                 "Apples", "Pears"),
-#                        choiceValues =
-#                            list("", "supply", "demand", "price", "quantity"),
-#                  selected = ""
-#     ),
-#     textOutput("txt")
-#     )
-# server <- function(input, output) {
-#     output$txt <- renderText({
-#         if (input$rb == "supply"){
-#             print("You are correct")
-#             } else if (input$rb == ""){
-#                 print("")}
-#                 else{
-#                     print("You are incorrect")}
-#             })
-# }
-# shinyApp(ui, server)
-```
+<a href="https://os301.shinyapps.io/Question/" target="_blank"><img src="ch_md_files/figure-commonmark/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /></a>
 
 ### Videos
 
-```{r, echo=FALSE}
-knitr::include_app('https://os301.shinyapps.io/Video/')
-# Code for this is detailed below
-# library(shiny)
-# ui <- fluidPage(
-#     HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/WyrhmqHfdu8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
-# )
-# server <- function(input, output, session) {
-# }
-# shinyApp(ui, server)
-
-```
+<a href="https://os301.shinyapps.io/Video/" target="_blank"><img src="ch_md_files/figure-commonmark/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" /></a>
 
 ## Types of notes within text
 
@@ -316,15 +248,12 @@ Jump to [next chapter](#chapter_2)
 
 ------------------------------------------------------------------------
 
-```{r  fig.cap = 'Just remember...', out.width='40%', fig.asp=.4, fig.align='center',  echo = FALSE}
-
-knitr::include_graphics("images/ecacoacin4life.jpg")
-
-```
+<img src="images/ecacoacin4life.jpg" title="Just remember..." alt="Just remember..." width="40%" style="display: block; margin: auto;" />
 
 Just remember the simple acronym "ECAOAcIn":[^chapter_1_sample-1]
 
 **E**conomic question -- **C**ritical discussion -- **A**pply economics -- **O**rganise/present well -- **Ac**ademic writing -- original **In**sight
 
 [^chapter_1_sample-1]: (Isn't that catchy?)
+
 

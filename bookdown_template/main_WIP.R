@@ -91,7 +91,7 @@ ch_Rmd <- readr::read_file("chapter_1_sample.Rmd")
 ##You need to call it `ch_Rmd` for parse_ea_forum_md.R to run, until I functionalize it
 
 #prefixes for image files
-im_prefix_here_enter <-  "chapter_1_sample_files/figure-commonmark/"
+im_prefix_here_enter <-  "ch_md_files/figure-commonmark/"
 im_url_prefix_enter <- "https://github.com/daaronr/dr-rstuff/blob/a66d110c934006b0abe612c7f12bbbb947997cd6/bookdown_template/chapter_1_sample_files/figure-common_mark/"
 
 

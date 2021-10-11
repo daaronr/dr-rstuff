@@ -107,8 +107,6 @@ ch_Rmd <- ch_Rmd %>%
 }
 
 
-
-
 # reg_kable_pipe <- rex("kable(",
 #                       capture(one_or_more(anything, type="lazy")),
 #                       ")",
@@ -147,7 +145,7 @@ rmarkdown::render("ch_md.Rmd", rmarkdown::md_document(variant = "commonmark"), r
 
 ## POSTPROCESSING md ####
 
-ch_md <- readr::read_file("ch_md.md")
+ch_md <- readr::read_file("ch_md.knit.md")
 
 ## ...Adjust latex math surrounds ####
 
@@ -171,7 +169,7 @@ ch_md <- gsub(reg_html_comment, "", ch_md)
 
 #... TODO: Remove any remaining 'div' sections (these shouldn't be here)
 
-reg_mn_div <- rex('<div class="marginnote">',
+reg_mn_div <- rex('<div',
                       zero_or_more(anything, type="lazy"),
                        '</div>')
 
@@ -182,19 +180,34 @@ ch_md <- gsub(reg_mn_div, "", ch_md)
 # ... Image file prefixes need adjusting!!! ####
 # But this will depend on where they are hosted.  ENTER this here (or at top)!
 
-im_prefix_here <- im_prefix_here_enter
-#"chapter_1_sample_files/figure-commonmark/"
 
-im_url_prefix <- im_url_prefix_enter
+reg_img <- rex('<img src="',
+               one_or_more(anything, type="lazy"),
+               im_prefix_here_enter,
+               capture(one_or_more(anything, type="lazy")),
+               '"',
+               (one_or_more(anything)),
+               ">"
+               )
+
+
+ch_md <- ch_md %>% 
+  gsub(reg_img, 
+       paste0("![](",im_url_prefix_enter,"\\1)"), .)
+  
+#gsub(reg_mn_div, "", ch_md) %>% im_url_prefix_enter
+
+#im_prefix_here <- im_prefix_here_enter
+#"chapter_1_sample_files/figure-commonmark/"
+#im_url_prefix <- im_url_prefix_enter
 
 #"https://github.com/daaronr/dr-rstuff/blob/a66d110c934006b0abe612c7f12bbbb947997cd6/bookdown_template/chapter_1_sample_files/figure-common_mark/"
 
-ch_md <- gsub(im_prefix_here, im_url_prefix, ch_md)
+#ch_md <- gsub(im_prefix_here, im_url_prefix, ch_md)
 # or do we need "https://raw.githubusercontent.com/daaronr..."?
 
 
 #![](chapter_1_sample_md_files/figure-commonmark/unnamed-chunk-3-1.png)<!-- -->
-
 
 # ...
 

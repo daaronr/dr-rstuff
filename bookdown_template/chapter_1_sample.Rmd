@@ -5,6 +5,17 @@ always_allow_html: yes
 
 # About this work {#about}
 
+
+```{r html, echo=FALSE}
+# globally set chunk options
+knitr::opts_chunk$set(fig.align='center', out.width='80%', warning=FALSE, message = FALSE, error=TRUE, echo=TRUE)
+#parse_ea_forum should switch this to echo=false
+
+
+my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
+
+```
+
 ```{block2,  type='note'}
 Click [HERE](#chapter_2) to jump to next chapter.
 ```
@@ -166,7 +177,7 @@ Below, this defaults to an html  styling
 
 #install.packages("magick")
 #install.packages("webshot")
-webshot::install_phantomjs(force=TRUE)
+#webshot::install_phantomjs(force=TRUE)
 #library(webshot)
 #library(magick)
 
@@ -189,7 +200,7 @@ t1 <- tbl_regression(m_linear)
 
 # Use function from gt package to save table, after converting to 
 # gt object using as_gt()
-gt::gtsave(as_gt(t1), file = file.path(tempdir(), "temp.png"))
+#gt::gtsave(as_gt(t1), file = file.path(tempdir(), "temp.png"))
 
 ```
 

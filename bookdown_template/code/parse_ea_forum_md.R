@@ -100,19 +100,14 @@ reg_kab_save_image <- rex("kable_styling(",
                        zero_or_more("%>%")
                       )
 
-
-reg_ake_save_image <- rex("as_kable_extra()",
-                          zero_or_more("%>%")
-                      )
-
-
 ch_Rmd <- ch_Rmd %>%
     gsub(reg_kab_save_image,
-      "kable_styling( \\1 ) %>% \n as_image(width = 8)", .)
- %>%
-     gsub(reg_kab_save_image,
-      "as_kable_extra() %>%  \n as_image(width = 8)", .)
+      "kable_styling( \\1 ) %>% \n as_image(width = 8) \n", .)
+
 }
+
+
+
 
 # reg_kable_pipe <- rex("kable(",
 #                       capture(one_or_more(anything, type="lazy")),
@@ -138,13 +133,17 @@ ch_Rmd <- ch_Rmd %>%
 
 #remove knitr apps
 #ch_Rmd <- ch_Rmd %>%
-#  gsub("knitr\\:", "#knitr\\:", .)
+ # gsub("knitr\\:", "#knitr\\:", .)
 
-write_lines(ch_Rmd, here("ch_md.Rmd"))
+readr::write_lines(ch_Rmd, here::here("ch_md.Rmd"))
 
 ## RENDER as md
 
-rmarkdown::render("ch_md.Rmd", rmarkdown::md_document(variant = "commonmark"))
+{
+options(knitr.duplicate.label = "allow")
+rmarkdown::render("ch_md.Rmd", rmarkdown::md_document(variant = "commonmark"), run_pandoc=FALSE)
+}
+
 
 ## POSTPROCESSING md ####
 
@@ -169,6 +168,17 @@ reg_html_comment <- rex::rex("<!--",
 
 ch_md <- gsub(reg_html_comment, "", ch_md)
 
+
+#... TODO: Remove any remaining 'div' sections (these shouldn't be here)
+
+reg_mn_div <- rex('<div',
+                      zero_or_more(anything, type="lazy"),
+                       '</div>')
+
+
+ch_md <- gsub(reg_mn_div, "", ch_md)
+
+
 # ... Image file prefixes need adjusting!!! ####
 # But this will depend on where they are hosted.  ENTER this here (or at top)!
 
@@ -189,5 +199,4 @@ ch_md <- gsub(im_prefix_here, im_url_prefix, ch_md)
 # ...
 
 write_lines(ch_md, here("ch.md"))
-
 
