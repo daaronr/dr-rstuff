@@ -132,8 +132,8 @@ ch_Rmd <- ch_Rmd %>%
 # .... Note: the pipe format is not preserved when this is knitted so it's all for nought ####
 
 #remove knitr apps
-ch_Rmd <- ch_Rmd %>%
-  gsub("knitr\\:", "#knitr\\:", .)
+#ch_Rmd <- ch_Rmd %>%
+ # gsub("knitr\\:", "#knitr\\:", .)
 
 readr::write_lines(ch_Rmd, here::here("ch_md.Rmd"))
 
