@@ -403,6 +403,15 @@ rdr_cbk <- function(cbfile) {
                 simple.kable = TRUE)
 
 
+.summk <- hijack(vtable::sumtable,
+                summ=c('notNA(x)', 'sum(x != 0)', 'mean(x)', 'sd(x)', 'pctile(x)[50]', 'pctile(x)[90]'),
+                summ.names = c('N Responses', 'N positive', 'Mean', 'Sd', "Median", "90th pct"),
+                digits=1,
+                labels = TRUE, #uses assigned in Hmisc or sjlabelled
+                simple.kable = TRUE,
+                out="kable")
+
+
 #### ... Sumtabs by 'treatment' ... from substitution project
 
 sumtab_func_full <- function(df = ADSX, depvar = donation, treatvar = TreatFirstAsk,

@@ -31,12 +31,6 @@ try_download(
   here::here("code", "project_setup.R")
 )
 
-try_download(
-  "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/parse_ea_forum_md.R",
-  here::here("code", "parse_ea_forum_md.R")
-)
-
-
 ## You MUST run this for anything else to work (installs/loads key packages and functions):
 source(here::here("code", "project_setup.R"))
 

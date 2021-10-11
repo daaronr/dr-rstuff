@@ -8,13 +8,13 @@
 
 ## .... PREPROCESSING ####
 
-#system('sed "/bookdown_start/,/bookdown_end/d" chapter_1_sample.Rmd > "chapter_1_sample_md.Rmd"')
+#system('sed "/bookdown_start/,/bookdown_end/d" ch.Rmd > "ch_md.Rmd"')
 
-library(rex)
-library(readr)
+p_load(rex)
+p_load(readr)
 
 #... input file for editing ####
-ch1_Rmd <- readr::read_file("chapter_1_sample.Rmd")
+#chapter_Rmd <- readr::read_file("ch.Rmd")
 #do gsub and rex  stuff here
 
 #... Remove bookdown-only content by tag ####
@@ -25,14 +25,14 @@ reg_bd <- rex::rex("<--! bookdown_start -->",
                 one_or_more(anything, type="lazy"),
                 "<--! bookdown_end -->")
 
-ch1_Rmd <- gsub(reg_bd, "", ch1_Rmd)
+ch_Rmd <- gsub(reg_bd, "", ch_Rmd)
 
 # ... remove html blocks (mainly comments that the md messes up)
 reg_html <- rex::rex("```{=html}",
                      one_or_more(anything, type="lazy"),
                      "```")
 
-ch1_Rmd <- gsub(reg_html, "", ch1_Rmd)
+ch_Rmd <- gsub(reg_html, "", ch_Rmd)
 
 
 #.... tufte notes and folding boxes to footnotes... ####
@@ -53,7 +53,7 @@ reg_fold <- rex("```{block2,",
                 )
 
 # make this stuff into footnotes
-ch1_Rmd <- ch1_Rmd %>%
+ch_Rmd <- ch_Rmd %>%
   gsub(reg_mn_div, '^[\\1]', .)  %>%
   gsub(reg_mn_col_to_fn, '^[\\1]', .)  %>%
   gsub(reg_fold, '^[\\1]', .)
@@ -69,7 +69,7 @@ reg_block2 <- rex("```{block2",
                 "```"
 )
 
-ch1_Rmd <- ch1_Rmd %>%
+ch_Rmd <- ch_Rmd %>%
   gsub(reg_block2, '**Note**: \\1', .)
 
 
@@ -79,7 +79,7 @@ reg_echo <- rex("echo",
                      "=",
                      zero_or_more(any_spaces),
                      "TRUE")
-ch1_Rmd <- ch1_Rmd %>% gsub(reg_echo, "echo=FALSE", .)
+ch_Rmd <- ch_Rmd %>% gsub(reg_echo, "echo=FALSE", .)
 
 
 # ... TABLES -- change options for kable tables; others may need to be pasted by hand :( ####
@@ -106,13 +106,13 @@ reg_ake_save_image <- rex("as_kable_extra()",
                       )
 
 
-ch1_Rmd <- ch1_Rmd %>%
+ch_Rmd <- ch_Rmd %>%
     gsub(reg_kab_save_image,
-      "kable_styling( \\1 ) %>% \n as_image(width = 8)")
-} %>%
+      "kable_styling( \\1 ) %>% \n as_image(width = 8)", .)
+ %>%
      gsub(reg_kab_save_image,
-      "as_kable_extra() %>%  \n as_image(width = 8)")
-
+      "as_kable_extra() %>%  \n as_image(width = 8)", .)
+}
 
 # reg_kable_pipe <- rex("kable(",
 #                       capture(one_or_more(anything, type="lazy")),
@@ -128,7 +128,7 @@ ch1_Rmd <- ch1_Rmd %>%
 #   )
 #
 # #substitute in the 'pipe' format
-# ch1_Rmd <- ch1_Rmd %>%
+# ch_Rmd <- ch_Rmd %>%
 #   gsub(reg_kable_pipe,
 #        "kable(format='pipe', \\1 ) \n", .) %>%
 #   gsub(reg_ks,"",.)
@@ -137,18 +137,18 @@ ch1_Rmd <- ch1_Rmd %>%
 # .... Note: the pipe format is not preserved when this is knitted so it's all for nought ####
 
 #remove knitr apps
-ch1_Rmd <- ch1_Rmd %>%
+ch_Rmd <- ch_Rmd %>%
   gsub("knitr\\:", "#knitr\\:", .)
 
-write_lines(ch1_Rmd, here("chapter_1_sample_md.Rmd"))
+write_lines(ch_Rmd, here("ch_md.Rmd"))
 
 ## RENDER as md
 
-rmarkdown::render("chapter_1_sample_md.Rmd", md_document(variant = "commonmark"))
+rmarkdown::render("ch_md.Rmd", rmarkdown::md_document(variant = "commonmark"))
 
 ## POSTPROCESSING md ####
 
-ch1_md <- readr::read_file("chapter_1_sample_md.md")
+ch_md <- readr::read_file("ch_md.md")
 
 ## ...Adjust latex math surrounds ####
 
@@ -158,7 +158,7 @@ reg_math <- rex("$",
                 "$"
 )
 
-ch1_md <- ch1_md %>%
+ch_md <- ch_md %>%
   gsub('reg_math', '\\(\\1\\)', .)
 
 #... remove phantom comments ####
@@ -167,16 +167,19 @@ reg_html_comment <- rex::rex("<!--",
                              one_or_more(anything, type="lazy"),
                              "-->")
 
-ch1_md <- gsub(reg_html_comment, "", ch1_md)
+ch_md <- gsub(reg_html_comment, "", ch_md)
 
 # ... Image file prefixes need adjusting!!! ####
 # But this will depend on where they are hosted.  ENTER this here (or at top)!
 
-im_prefix_here <- "chapter_1_sample_files/figure-commonmark/"
+im_prefix_here <- im_prefix_here_enter
+#"chapter_1_sample_files/figure-commonmark/"
 
-im_url_prefix <- "https://github.com/daaronr/dr-rstuff/blob/a66d110c934006b0abe612c7f12bbbb947997cd6/bookdown_template/chapter_1_sample_files/figure-common_mark/"
+im_url_prefix <- im_url_prefix_enter
 
-ch1_md <- gsub(im_prefix_here, im_url_prefix, ch1_md)
+#"https://github.com/daaronr/dr-rstuff/blob/a66d110c934006b0abe612c7f12bbbb947997cd6/bookdown_template/chapter_1_sample_files/figure-common_mark/"
+
+ch_md <- gsub(im_prefix_here, im_url_prefix, ch_md)
 # or do we need "https://raw.githubusercontent.com/daaronr..."?
 
 
@@ -185,6 +188,6 @@ ch1_md <- gsub(im_prefix_here, im_url_prefix, ch1_md)
 
 # ...
 
-write_lines(ch1_md, here("chapter_1_sample.md"))
+write_lines(ch_md, here("ch.md"))
 
 

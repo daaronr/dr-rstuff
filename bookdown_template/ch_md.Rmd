@@ -5,17 +5,11 @@ always_allow_html: yes
 
 # About this work {#about}
 
-```{block2,  type='note'}
+**Note**: 
 Click [HERE](#chapter_2) to jump to next chapter.
-```
-
-<--! bookdown_start -->
-The first bit of content meant 'only for the bookdown' goes here.
 
 
-This contains multiple lines blah blah
 
-<--! bookdown_end -->
 
 
 `r format_with_col("**Note to friends I've asked to look at this book...**","brown")`
@@ -32,18 +26,14 @@ Testing a Zotero reference: [@becker1974] (should cite Becker, 1974). [@adena201
 
 > an example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation.
 
-```{=html}
-<!--
-(As noted at <https://www.econometrics-with-r.org/>; thanks for this example:)
--->
-```
+
 ::: {.rmdreview}
 This book is in <b>Open Review</b>. We want your feedback to make the book better for you and other students. You may annotate some text by [selecting it with the cursor]{style="background-color: #3297FD; color: white"} and then click the <i class="h-icon-annotate"></i> on the pop-up menu. You can also see the annotations of others: click the <i class="h-icon-chevron-left"></i> in the upper right hand corner of the page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i>
 :::
 
-::: {.marginnote}
+^[
 If you have benefitted from this work (and you are not one of my students), please consider giving me some sort of ''kudos'' on Twitter or wherever. One way to materially express gratitude: make a donation in my honor to an *effective and international charity*, such as those listed at [givewell.org](givewell.org). If you make this donation and share it on a social media site with the hashtag \#DRWritingEcon, that would be greatly appreciated.
-:::
+]
 
 ### Licence {.unnumbered}
 
@@ -65,11 +55,11 @@ Testing another one: [@alecstephensonQuickIntroductionShiny2013]
 
 It is referring the contents of bibtex files, in the line `bibliography: [./references.bib, support/reinstein_bibtex.bib]`
 
-<div class="marginnote">
+^[
 
 This can be made easier with the addin citation tool 'citr', along with Zotero and betterbibtex.
 
-</div>
+]
 
 ## Examples of the sort of fancy interactive stuff one can incorporate in this web book
 
@@ -83,38 +73,32 @@ We can have internal links to previous sections like [here, to the about section
 
 Can I ask you a question? (Answer below the fold.)
 
-```{block2,  type='fold'}
+^[
 
 Yes: I just did.
 
-```
+]
 
 \
 
 
-<--! bookdown_start -->
-The second bit of content meant 'only for the bookdown' goes here.
 
-With multiple lines.
-
-second bit ends.
-<--! bookdown_end -->
 
 I can also put expansive detail into a fold, to avoid clutter. If you want to know more about spittlebugs, feel free (to open the fold below).
 
-```{block2,  type='fold'}
+^[
 
 > These families are best known for the nymphal stage, which produces a cover of foamed-up plant sap visually resembling saliva; the nymphs are therefore commonly known as spittlebugs and their foam as cuckoo spit, frog spit, or snake spit. This characteristic spittle production is associated with the unusual trait of xylem feeding. Whereas most insects that feed on sap feed on the nutrient-rich fluid from the phloem, Cercopidae utilize the much more dilute sap flowing upward from the roots via the xylem. The large amount of excess water that must be excreted and the evolution of special breathing tubes allow the young spittlebug nymphs to grown in the relatively protective environment of the spittle.
 
 Indirect source: [wikipedia: Froghopper, accessed 21 Feb 2020](https://en.wikipedia.org/wiki/Froghopper)
 
-```
+]
 
 ### A Shiny app {#shiny_test .unnumbered}
 
 ```{r knitrapp}
 
-knitr::include_app("https://yihui.shinyapps.io/miniUI/", height = "600px")
+#knitr::include_app("https://yihui.shinyapps.io/miniUI/", height = "600px")
 
 ```
 
@@ -128,7 +112,7 @@ knitr::include_app("https://yihui.shinyapps.io/miniUI/", height = "600px")
 
 ```{r wppage}
 
-knitr::include_url("https://davidreinstein.wordpress.com/")
+#knitr::include_url("https://davidreinstein.wordpress.com/")
 
 ```
 
@@ -142,7 +126,7 @@ $$\Theta = \begin{pmatrix}\alpha & \beta\\
 
 These are "code chunks"
 
-```{r chunk-label, echo = TRUE, fig.cap = 'A figure caption.'}
+```{r chunk-label, echo=FALSE, fig.cap = 'A figure caption.'}
 x <- 1 + 1
 rnorm(10)  # 10 random numbers
 plot(dist ~ speed, cars)  # a scatterplot
@@ -223,7 +207,7 @@ cat('
 ### Interactive questions
 
 ```{r, echo=FALSE}
-knitr::include_app('https://os301.shinyapps.io/Question/', height = "210px")
+#knitr::include_app('https://os301.shinyapps.io/Question/', height = "210px")
 
 #Code for this is detailed below
 # library(shiny)
@@ -254,7 +238,7 @@ knitr::include_app('https://os301.shinyapps.io/Question/', height = "210px")
 ### Videos
 
 ```{r, echo=FALSE}
-knitr::include_app('https://os301.shinyapps.io/Video/')
+#knitr::include_app('https://os301.shinyapps.io/Video/')
 # Code for this is detailed below
 # library(shiny)
 # ui <- fluidPage(
@@ -268,26 +252,26 @@ knitr::include_app('https://os301.shinyapps.io/Video/')
 
 ## Types of notes within text
 
-```{block2,  type='note'}
+**Note**: 
 
 "Aside" notes look like this.
 
-```
 
-```{block2,  type='warning'}
+
+**Note**: 
 
 Warnings look like this.
 
-```
+
 
 ### A margin note
 
 What about tufte-style margin notes? \*
 
-<div class="marginnote">
+^[
 
 \* If you are considering pursuing an MSc or PhD this will typically be centered on doing research; it's worth knowing whether this is for you before diving in. Doing research is also a key component of much professional work in the private and public (government) sectors, including at 'think tanks', some government agencies, and many private consulting and 'data analytics' firms.
-</div>
+]
 
 ## Notes for instructors and course organisers {.unnumbered}
 
@@ -323,7 +307,7 @@ Jump to [next chapter](#chapter_2)
 
 ```{r  fig.cap = 'Just remember...', out.width='40%', fig.asp=.4, fig.align='center',  echo = FALSE}
 
-knitr::include_graphics("images/ecacoacin4life.jpg")
+#knitr::include_graphics("images/ecacoacin4life.jpg")
 
 ```
 
@@ -332,3 +316,4 @@ Just remember the simple acronym "ECAOAcIn":[^chapter_1_sample-1]
 **E**conomic question -- **C**ritical discussion -- **A**pply economics -- **O**rganise/present well -- **Ac**ademic writing -- original **In**sight
 
 [^chapter_1_sample-1]: (Isn't that catchy?)
+
