@@ -141,7 +141,7 @@ readr::write_lines(ch_Rmd, here::here("ch_md.Rmd"))
 
 {
 options(knitr.duplicate.label = "allow")
-rmarkdown::render("ch_md.Rmd", rmarkdown::md_document(variant = "commonmark"))
+rmarkdown::render("ch_md.Rmd", rmarkdown::md_document(variant = "commonmark"), run_pandoc=FALSE)
 }
 
 
