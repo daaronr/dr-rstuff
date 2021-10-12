@@ -48,58 +48,7 @@ Essentially:
 
 <https://creativecommons.org/licenses/by-nc-sa/4.0/>
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br />[Researching and writing in Economics (Essays, term paper, dissertations for Economics undergraduates and MSc students)]{xmlns:dct="http://purl.org/dc/terms/" property="dct:title"} by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/daaronr/writing_econ_research" property="cc:attributionName" rel="cc:attributionURL">David Reinstein</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
-
-## Citations
-
-Let's cite a paper here: [@Akerlof1984a]; I don't think I needed the brackets though (@Akerlof1984a would also have worked).
-
-Testing another one: [@alecstephensonQuickIntroductionShiny2013]
-
-It is referring the contents of bibtex files, in the line `bibliography: [./references.bib, support/reinstein_bibtex.bib]`
-
-^[
-
-This can be made easier with the addin citation tool 'citr', along with Zotero and betterbibtex.
-
-]
-
-## Examples of the sort of fancy interactive stuff one can incorporate in this web book
-
-Thanks to Yihui and many others, this book should permit lots of flexible tools. Trying some of these below (with code shown, but it could also be hidden). Thanks Yihui for the [Bookdown package](https://bookdown.org/yihui/bookdown/).
-
-We can have internal links to previous sections like [here, to the about section](#about).
-
-
-
-### Questions with folded answers, folded expanded discussions
-
-Can I ask you a question? (Answer below the fold.)
-
-^[
-
-Yes: I just did.
-
-]
-
-\
-
-
-
-
-I can also put expansive detail into a fold, to avoid clutter. If you want to know more about spittlebugs, feel free (to open the fold below).
-
-^[
-
-> These families are best known for the nymphal stage, which produces a cover of foamed-up plant sap visually resembling saliva; the nymphs are therefore commonly known as spittlebugs and their foam as cuckoo spit, frog spit, or snake spit. This characteristic spittle production is associated with the unusual trait of xylem feeding. Whereas most insects that feed on sap feed on the nutrient-rich fluid from the phloem, Cercopidae utilize the much more dilute sap flowing upward from the roots via the xylem. The large amount of excess water that must be excreted and the evolution of special breathing tubes allow the young spittlebug nymphs to grown in the relatively protective environment of the spittle.
-
-Indirect source: [wikipedia: Froghopper, accessed 21 Feb 2020](https://en.wikipedia.org/wiki/Froghopper)
-
-]
-
-### A Shiny app {#shiny_test .unnumbered}
-
-<a href="https://yihui.shinyapps.io/miniUI/" target="_blank"><img src="ch_md_files/figure-commonmark/knitrapp-1.png" width="80%" style="display: block; margin: auto;" /></a>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">![](https://github.com/daaronr/dr-rstuff/blob/a66d110c934006b0abe612c7f12bbbb947997cd6/bookdown_template/chapter_1_sample_files/figure-common_mark/knitrapp-1.png" width="80%" style="display: block; margin: auto;)</a>
 
 ### My web pages {.unnumbered}
 
@@ -109,7 +58,7 @@ Indirect source: [wikipedia: Froghopper, accessed 21 Feb 2020](https://en.wikipe
 
 ------------------------------------------------------------------------
 
-<a href="https://davidreinstein.wordpress.com/" target="_blank"><img src="ch_md_files/figure-commonmark/wppage-1.png" width="80%" style="display: block; margin: auto;" /></a>
+<a href="https://davidreinstein.wordpress.com/" target="_blank">![](https://github.com/daaronr/dr-rstuff/blob/a66d110c934006b0abe612c7f12bbbb947997cd6/bookdown_template/chapter_1_sample_files/figure-common_mark/wppage-1.png" width="80%" style="display: block; margin: auto;)</a>
 
 ### Scary math {.unnumbered}
 
@@ -126,7 +75,7 @@ These are "code chunks"
 ##  [1]  0.69 -1.36 -0.53  0.45  2.06 -0.37  1.90  1.21 -1.20 -0.27
 ```
 
-<img src="ch_md_files/figure-commonmark/chunk-label-1.png" title="A figure caption." alt="A figure caption." width="80%" style="display: block; margin: auto;" />
+![](https://github.com/daaronr/dr-rstuff/blob/a66d110c934006b0abe612c7f12bbbb947997cd6/bookdown_template/chapter_1_sample_files/figure-common_mark/chunk-label-1.png" title="A figure caption." alt="A figure caption." width="80%" style="display: block; margin: auto;)
 
 And I can refer to the results of the r code in the text itself, e.g., by writing
 
@@ -177,7 +126,7 @@ And using the gtsummary package:
 
 And of course, graphs aka 'visualisations':
 
-<img src="ch_md_files/figure-commonmark/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" />
+![](https://github.com/daaronr/dr-rstuff/blob/a66d110c934006b0abe612c7f12bbbb947997cd6/bookdown_template/chapter_1_sample_files/figure-common_mark/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;)
 
 
 ### Other fancy stuff {.unnumbered}
@@ -187,11 +136,11 @@ And of course, graphs aka 'visualisations':
 
 ### Interactive questions
 
-<a href="https://os301.shinyapps.io/Question/" target="_blank"><img src="ch_md_files/figure-commonmark/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /></a>
+<a href="https://os301.shinyapps.io/Question/" target="_blank">![](https://github.com/daaronr/dr-rstuff/blob/a66d110c934006b0abe612c7f12bbbb947997cd6/bookdown_template/chapter_1_sample_files/figure-common_mark/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;)</a>
 
 ### Videos
 
-<a href="https://os301.shinyapps.io/Video/" target="_blank"><img src="ch_md_files/figure-commonmark/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" /></a>
+<a href="https://os301.shinyapps.io/Video/" target="_blank">![](https://github.com/daaronr/dr-rstuff/blob/a66d110c934006b0abe612c7f12bbbb947997cd6/bookdown_template/chapter_1_sample_files/figure-common_mark/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;)</a>
 
 ## Types of notes within text
 
@@ -209,9 +158,7 @@ Warnings look like this.
 
 ### A margin note
 
-What about tufte-style margin notes? \*
-
-^[
+What about tufte-style margin notes? ^[
 
 \* If you are considering pursuing an MSc or PhD this will typically be centered on doing research; it's worth knowing whether this is for you before diving in. Doing research is also a key component of much professional work in the private and public (government) sectors, including at 'think tanks', some government agencies, and many private consulting and 'data analytics' firms.
 ]

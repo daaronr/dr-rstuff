@@ -166,7 +166,6 @@ reg_html_comment <- rex::rex("<!--",
 
 ch_md <- gsub(reg_html_comment, "", ch_md)
 
-
 #... TODO: Remove any remaining 'div' sections (these shouldn't be here)
 
 reg_mn_div <- rex('<div',
@@ -181,19 +180,21 @@ ch_md <- gsub(reg_mn_div, "", ch_md)
 # But this will depend on where they are hosted.  ENTER this here (or at top)!
 
 
+
 reg_img <- rex('<img src="',
                one_or_more(anything, type="lazy"),
                im_prefix_here_enter,
-               capture(one_or_more(anything, type="lazy")),
-               '"',
-               (one_or_more(anything)),
+               capture(
+                 one_or_more(anything, type="lazy")
+               ),
+               '" ',
+               (one_or_more(anything, type="lazy")),
                ">"
-               )
-
+)
 
 ch_md <- ch_md %>% 
   gsub(reg_img, 
-       paste0("![](",im_url_prefix_enter,"\\1)"), .)
+       paste0("![](", im_url_prefix_enter, "\\1)"), .)
   
 #gsub(reg_mn_div, "", ch_md) %>% im_url_prefix_enter
 
@@ -210,6 +211,19 @@ ch_md <- ch_md %>%
 #![](chapter_1_sample_md_files/figure-commonmark/unnamed-chunk-3-1.png)<!-- -->
 
 # ...
+
+#... Footnote asterisks not needed ... ####
+
+reg_fna <- rex::rex(
+  one_or_more('\\*'),
+  one_or_more(any_spaces, type="lazy"),
+  '^['
+  )
+
+ch_md <- ch_md %>% 
+  gsub(reg_fna, 
+       '^[', .)
+
 
 write_lines(ch_md, here("ch.md"))
 

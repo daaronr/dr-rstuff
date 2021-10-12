@@ -147,7 +147,7 @@ rmarkdown::render("ch_md.Rmd", rmarkdown::md_document(variant = "commonmark"), r
 
 ## POSTPROCESSING md ####
 
-ch_md <- readr::read_file("ch_md.md")
+ch_md <- readr::read_file("ch_md.knit.md")
 
 ## ...Adjust latex math surrounds ####
 
