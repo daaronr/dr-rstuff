@@ -180,22 +180,22 @@ ch_md <- gsub(reg_mn_div, "", ch_md)
 # But this will depend on where they are hosted.  ENTER this here (or at top)!
 
 
-
 reg_img <- rex('<img src="',
                one_or_more(anything, type="lazy"),
                im_prefix_here_enter,
                capture(
                  one_or_more(anything, type="lazy")
                ),
-               '" ',
+               '.png"',
                (one_or_more(anything, type="lazy")),
                ">"
 )
 
+
 ch_md <- ch_md %>% 
   gsub(reg_img, 
-       paste0("![](", im_url_prefix_enter, "\\1)"), .)
-  
+       paste0("![](",im_url_prefix_enter,"\\1.png)"), .)
+
 #gsub(reg_mn_div, "", ch_md) %>% im_url_prefix_enter
 
 #im_prefix_here <- im_prefix_here_enter
