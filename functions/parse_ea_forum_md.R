@@ -8,8 +8,6 @@
 
 ## .... PREPROCESSING ####
 
-#system('sed "/bookdown_start/,/bookdown_end/d" ch.Rmd > "ch_md.Rmd"')
-
 p_load(rex)
 p_load(readr)
 
@@ -21,9 +19,9 @@ p_load(readr)
 
 #define and apply regular expression for 'beginning and end of bookdown only tags'
 
-reg_bd <- rex::rex("<--! bookdown_start -->",
+reg_bd <- rex::rex("<!-- bookdown_start -->",
                 one_or_more(anything, type="lazy"),
-                "<--! bookdown_end -->")
+                "<!-- bookdown_end -->")
 
 ch_Rmd <- gsub(reg_bd, "", ch_Rmd)
 
@@ -84,7 +82,7 @@ ch_Rmd <- ch_Rmd %>% gsub(reg_echo, "echo=FALSE", .)
 
 # ... TABLES -- change options for kable tables; others may need to be pasted by hand :( ####
 
-#TODO: If not on DR's computer, add 'webshot' save commands for relevant tables
+# ... If not on DR's computer, add 'webshot' save commands for relevant tables ####
 # ... this is `as_image(width = 8)` (or some width) for kable
 # and `gt::gtsave()` (I think) for gtsummary stuff ... or convert with `as_kable_extra()` ad use same `as_image`
 
@@ -107,31 +105,6 @@ ch_Rmd <- ch_Rmd %>%
 }
 
 
-# reg_kable_pipe <- rex("kable(",
-#                       capture(one_or_more(anything, type="lazy")),
-#                       ")",
-#                       zero_or_more(any_spaces),
-#                       zero_or_more("%>%")
-# )
-#
-# reg_ks <- rex(between(".", 0, 1, type="lazy"),
-#               "kable_styling(",
-#   zero_or_more(anything, type="lazy"),
-#   ")"
-#   )
-#
-# #substitute in the 'pipe' format
-# ch_Rmd <- ch_Rmd %>%
-#   gsub(reg_kable_pipe,
-#        "kable(format='pipe', \\1 ) \n", .) %>%
-#   gsub(reg_ks,"",.)
-#
-
-# .... Note: the pipe format is not preserved when this is knitted so it's all for nought ####
-
-#remove knitr apps
-#ch_Rmd <- ch_Rmd %>%
- # gsub("knitr\\:", "#knitr\\:", .)
 
 readr::write_lines(ch_Rmd, here::here("ch_md.Rmd"))
 
@@ -175,8 +148,10 @@ reg_mn_div <- rex('<div',
 
 ch_md <- gsub(reg_mn_div, "", ch_md)
 
+
 # ... Image file prefixes need adjusting!!! ####
 # But this will depend on where they are hosted.  ENTER this here (or at top)!
+
 
 reg_img <- rex('<img src="',
                one_or_more(anything, type="lazy"),
@@ -196,9 +171,6 @@ reg_img <- rex('<img src="',
 ch_md <- ch_md %>%
   gsub(reg_img,
        paste0("![](",im_url_prefix_enter,"\\1.png)"), .)
-
-
-
 
 #gsub(reg_mn_div, "", ch_md) %>% im_url_prefix_enter
 
@@ -228,6 +200,27 @@ ch_md <- ch_md %>%
   gsub(reg_fna,
        '^[', .)
 
+
+# ... Remove multiple blank lines ####
+
+reg_blanks <- rex::rex(at_least("\n", 3))
+
+ch_md <- gsub(reg_blanks, "\n\n", ch_md)
+
+
+
+# ... if on DR computer, remove tables that will not come out (TODO) ####
+
+reg_tab <- rex::rex('<table class=',
+                   one_or_more(anything, type="lazy"),
+                   '</table>')
+
+
+if(Sys.info()[[4]]=="Yosemites-iMac.local") {
+  ch_md <- gsub(reg_tab, "", ch_md)
+}
+
+# ... TODO: Internal links to URL links (very difficult!)
 
 write_lines(ch_md, here("ch.md"))
 
