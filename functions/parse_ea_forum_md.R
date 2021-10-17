@@ -175,10 +175,8 @@ reg_mn_div <- rex('<div',
 
 ch_md <- gsub(reg_mn_div, "", ch_md)
 
-
 # ... Image file prefixes need adjusting!!! ####
 # But this will depend on where they are hosted.  ENTER this here (or at top)!
-
 
 reg_img <- rex('<img src="',
                one_or_more(anything, type="lazy"),
@@ -188,13 +186,19 @@ reg_img <- rex('<img src="',
                ),
                '.png"',
                (one_or_more(anything, type="lazy")),
+
                ">"
-)
+               )
 
 
-ch_md <- ch_md %>% 
-  gsub(reg_img, 
+# note this is a bit rigid as it needs it to be png, but when I tried anchoring with only the '>' it kept the formatting suffix stuff (`width=80%' etc)  in
+
+ch_md <- ch_md %>%
+  gsub(reg_img,
        paste0("![](",im_url_prefix_enter,"\\1.png)"), .)
+
+
+
 
 #gsub(reg_mn_div, "", ch_md) %>% im_url_prefix_enter
 
@@ -220,8 +224,8 @@ reg_fna <- rex::rex(
   '^['
   )
 
-ch_md <- ch_md %>% 
-  gsub(reg_fna, 
+ch_md <- ch_md %>%
+  gsub(reg_fna,
        '^[', .)
 
 
