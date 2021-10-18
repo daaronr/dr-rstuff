@@ -119,7 +119,7 @@ rmarkdown::render("ch_md.Rmd", rmarkdown::md_document(variant = "commonmark"), r
 ## POSTPROCESSING md ####
 
 ch_md <- readr::read_file("ch_md.knit.md")
-
+#ch_md <- readr::read_file(here("temp_work_on_md_with_pete", "ch_md.knit.md"))
 ## ...Adjust latex math surrounds ####
 
 reg_math <- rex("$",
@@ -152,25 +152,46 @@ ch_md <- gsub(reg_mn_div, "", ch_md)
 # ... Image file prefixes need adjusting!!! ####
 # But this will depend on where they are hosted.  ENTER this here (or at top)!
 
-
 reg_img <- rex('<img src="',
-               one_or_more(anything, type="lazy"),
                im_prefix_here_enter,
                capture(
                  one_or_more(anything, type="lazy")
                ),
                '.png"',
-               (one_or_more(anything, type="lazy")),
-
-               ">"
+               (zero_or_more(anything, type="lazy")),
+               "/>"
                )
 
+reg_img_pete <- rex('<img src="',
+               pete_prefix_here_enter,
+               capture(
+                 one_or_more(anything, type="lazy")
+               ),
+               '.png"',
+               (zero_or_more(anything, type="lazy")),
+               "/>"
+)
 
 # note this is a bit rigid as it needs it to be png, but when I tried anchoring with only the '>' it kept the formatting suffix stuff (`width=80%' etc)  in
 
+reg_gif <-  rex('<img src="',
+                      pete_gif_prefix,
+                      capture(
+                        one_or_more(anything, type="lazy")
+                      ),
+                      '.gif"',
+                      (zero_or_more(anything, type="lazy")),
+                      "/>"
+  )
+
+
 ch_md <- ch_md %>%
+  gsub(reg_img_pete,
+       paste0("![](",im_url_prefix_enter,"\\1.png)"), .) %>%
   gsub(reg_img,
-       paste0("![](",im_url_prefix_enter,"\\1.png)"), .)
+       paste0("![](",im_url_prefix_enter,"\\1.png)"), .)  %>%
+  gsub(reg_gif,
+       paste0("![](",im_url_prefix_enter,"\\1.gif)"), .)
 
 #gsub(reg_mn_div, "", ch_md) %>% im_url_prefix_enter
 
