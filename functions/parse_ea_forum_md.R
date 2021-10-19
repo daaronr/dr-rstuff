@@ -209,7 +209,8 @@ ch_md <- ch_md %>%
 
 # ...
 
-#... Footnote asterisks not needed ... ####
+#... Footnote newlines not needed, footnotes can not contain *any* new lines ... (todo) ####
+
 
 reg_fna <- rex::rex(
   one_or_more('\\*'),
@@ -221,6 +222,7 @@ ch_md <- ch_md %>%
   gsub(reg_fna,
        '^[', .)
 
+#Todo -- Remove all explicit asterisks (remember -- no significance stars etc are present because we turned it into images)
 
 # ... Remove multiple blank lines ####
 
@@ -228,7 +230,8 @@ reg_blanks <- rex::rex(at_least("\n", 3))
 
 ch_md <- gsub(reg_blanks, "\n\n", ch_md)
 
-
+# ... single backslashes should be blank lines
+#ch_md <- gsub(rex(start, "\", newline), "\n\n", ch_md)
 
 # ... if on DR computer, remove tables that will not come out (TODO) ####
 
@@ -244,4 +247,17 @@ if(Sys.info()[[4]]=="Yosemites-iMac.local") {
 # ... TODO: Internal links to URL links (very difficult!)
 
 write_lines(ch_md, here("ch.md"))
+#write_lines(ch_md, here("code", "ch_fix_pete.md"))
+
+#This doesn't seem to do anything
+#p_load(reticulate)
+#py_run_file(here("code", "fix_eafo_links.py"))
+#file.copy(here("code", "ch_lf.md"), here("ch_lf.md"), overwrite = TRUE)
+# aborted attempt to get this to run python code and take object from R
+
+
+# ... Internal links to URL links with external python script (thanks Hamish Huggard) -- run
+
+
+
 
