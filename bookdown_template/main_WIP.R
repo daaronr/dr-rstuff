@@ -3,6 +3,7 @@
 
 # In Rstudio, select 'Code - Run Region - Run all'
 
+
 #### Setup ####
 
 try_download <- function(url, path) {
@@ -31,7 +32,20 @@ try_download(
   here::here("code", "project_setup.R")
 )
 
-## You MUST run this for anything else to work (installs/loads key packages and functions):
+
+#### Install packages here ###
+
+try_download(
+  "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/packageadditions.R",
+  here::here("code", "packageadditions.R")
+)
+
+source(here("code", "packageadditions.R"))
+
+
+
+## You MUST run this for anything else to work 
+
 source(here::here("code", "project_setup.R"))
 
 #... and a few more packages ####
