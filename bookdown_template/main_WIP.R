@@ -43,7 +43,6 @@ try_download(
 source(here("code", "packageadditions.R"))
 
 
-
 ## You MUST run this for anything else to work 
 
 source(here::here("code", "project_setup.R"))
@@ -79,19 +78,6 @@ p_load_gh("peterhurford/checkr")
   options(knitr.duplicate.label = "allow")
   rmarkdown::render_site(output_format = 'bookdown::gitbook', encoding = 'UTF-8')
 }
-
-
-#### Codebooks... to understand and communicate the generated datasets ####
-
-#rdr_cbk defined in functions
-
-#d_codebooks <-
- # readline("Do you want codebooks? They take a long time... (Y/N)")
-
-#if (d_codebooks == "Y") {
- # rdr_cbk("codebook_eas_2020.Rmd")
-#}
-
 
 
 ########### EA Forum Markdown ##################

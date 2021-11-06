@@ -5,7 +5,6 @@ always_allow_html: yes
 
 # About this work {#about}
 
-
 ```{r html, echo=FALSE}
 # globally set chunk options
 knitr::opts_chunk$set(fig.align='center', out.width='80%', warning=FALSE, message = FALSE, error=TRUE, echo=TRUE)
@@ -20,14 +19,11 @@ my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 Click [HERE](#chapter_2) to jump to next chapter.
 ```
 
-<--! bookdown_start -->
-The first bit of content meant 'only for the bookdown' goes here.
-
+\<--! bookdown_start --\> The first bit of content meant 'only for the bookdown' goes here.
 
 This contains multiple lines blah blah
 
-<--! bookdown_end -->
-
+\<--! bookdown_end --\>
 
 `r format_with_col("**Note to friends I've asked to look at this book...**","brown")`
 
@@ -70,25 +66,23 @@ Essentially:
 
 ## Citations
 
-Let's cite a paper here: [@Akerlof1984a]; I don't think I needed the brackets though (@Akerlof1984a would also have worked).
+Let's cite a paper here: [@lakens2014]; I don't think I needed the brackets though (@lakens2014 would also have worked).
 
-Testing another one: [@alecstephensonQuickIntroductionShiny2013]
+Testing another one: [@alecstephenson2013]
 
-It is referring the contents of bibtex files, in the line `bibliography: [./references.bib, support/reinstein_bibtex.bib]`
+It is referring the contents of bibtex files, mentioned in the index.Rmd file in the line `bibliography: ["references.bib"]`
 
-<div class="marginnote">
+This can be more 'automated' with the visual editor ... turning on Zotero (necessary?) and inserting a reference from the linked library, this should automatically be added to `references.bib`
 
-This can be made easier with the addin citation tool 'citr', along with Zotero and betterbibtex.
+Or you can add it manually (there was the 'citr' plugin a while ago, but that might now confuse things.) 
 
-</div>
+Adding one manually: [@AkerlofGeorgeA.2000] ... let's see if it works
 
 ## Examples of the sort of fancy interactive stuff one can incorporate in this web book
 
 Thanks to Yihui and many others, this book should permit lots of flexible tools. Trying some of these below (with code shown, but it could also be hidden). Thanks Yihui for the [Bookdown package](https://bookdown.org/yihui/bookdown/).
 
 We can have internal links to previous sections like [here, to the about section](#about).
-
-
 
 ### Questions with folded answers, folded expanded discussions
 
@@ -102,14 +96,11 @@ Yes: I just did.
 
 \
 
-
-<--! bookdown_start -->
-The second bit of content meant 'only for the bookdown' goes here.
+\<--! bookdown_start --\> The second bit of content meant 'only for the bookdown' goes here.
 
 With multiple lines.
 
-second bit ends.
-<--! bookdown_end -->
+second bit ends. \<--! bookdown_end --\>
 
 I can also put expansive detail into a fold, to avoid clutter. If you want to know more about spittlebugs, feel free (to open the fold below).
 
@@ -169,7 +160,7 @@ I get ... one plus one equals `r x`.
 
 We can make tables from data (but these might struggle exporting to markdown formats?)
 
-Below, this defaults to an html  styling
+Below, this defaults to an html styling
 
 (but in the md substitution code I swap in 'pipe styling')
 
@@ -189,6 +180,7 @@ mtcars %>% as_tibble() %>%
 
 
 ```
+
 And using the gtsummary package:
 
 ```{r}
@@ -204,8 +196,6 @@ t1 <- tbl_regression(m_linear)
 
 ```
 
-
-
 And of course, graphs aka 'visualisations':
 
 ```{r}
@@ -215,7 +205,6 @@ mtcars_plot <- mtcars %>%
 + geom_histogram(binwidth=5)
 )
 ```
-
 
 ### Other fancy stuff {.unnumbered}
 
@@ -295,10 +284,9 @@ Warnings look like this.
 
 What about tufte-style margin notes? \*
 
-<div class="marginnote">
-
+::: {.marginnote}
 \* If you are considering pursuing an MSc or PhD this will typically be centered on doing research; it's worth knowing whether this is for you before diving in. Doing research is also a key component of much professional work in the private and public (government) sectors, including at 'think tanks', some government agencies, and many private consulting and 'data analytics' firms.
-</div>
+:::
 
 ## Notes for instructors and course organisers {.unnumbered}
 

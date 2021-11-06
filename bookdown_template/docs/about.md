@@ -3,7 +3,7 @@ title: "Template for Reinstein bookdowns"
 author: "Dr. David Reinstein, "
 abstract: "This 'book' organizes the project and helps others understand it and learn from it"
 #cover-image: "images/cardcatalogue.JPG"
-date: "2021-09-27"
+date: "2021-11-05"
 site: bookdown::bookdown_site
 output:
   md_document:
@@ -78,19 +78,9 @@ source(here("code", "project_setup.R"))
 ```
 
 ```
-## Installing package into '/Users/yosemite/githubs/dr-rstuff/bookdown_template/renv/library/R-4.0/x86_64-apple-darwin17.0'
+## Installing package into '/Users/yosemite/githubs/dr-rstuff/bookdown_template/renv/library/R-4.1/x86_64-apple-darwin17.0'
 ## (as 'lib' is unspecified)
-## Installing package into '/Users/yosemite/githubs/dr-rstuff/bookdown_template/renv/library/R-4.0/x86_64-apple-darwin17.0'
-## (as 'lib' is unspecified)
-```
-
-```
-## 
-## citr installed
-```
-
-```
-## Installing package into '/Users/yosemite/githubs/dr-rstuff/bookdown_template/renv/library/R-4.0/x86_64-apple-darwin17.0'
+## Installing package into '/Users/yosemite/githubs/dr-rstuff/bookdown_template/renv/library/R-4.1/x86_64-apple-darwin17.0'
 ## (as 'lib' is unspecified)
 ```
 
@@ -152,11 +142,20 @@ knitr::write_bib(c(
 
 ---
 bibliography: references.bib
+always_allow_html: yes
 ---
 
 # About this work {#about}
 
+
+
 \BeginKnitrBlock{note}<div class="note">Click [HERE](#chapter_2) to jump to next chapter.</div>\EndKnitrBlock{note}
+
+\<--! bookdown_start --\> The first bit of content meant 'only for the bookdown' goes here.
+
+This contains multiple lines blah blah
+
+\<--! bookdown_end --\>
 
 <font color='brown'>**Note to friends I've asked to look at this book...**</font>
 
@@ -199,23 +198,23 @@ Essentially:
 
 ## Citations
 
-Let's cite a paper here: [@Akerlof1984a]; I don't think I needed the brackets though (@Akerlof1984a would also have worked).
+Let's cite a paper here: [@lakens2014]; I don't think I needed the brackets though (@lakens2014 would also have worked).
 
-Testing another one: [@alecstephensonQuickIntroductionShiny2013]
+Testing another one: [@alecstephenson2013]
 
-It is referring the contents of bibtex files, in the line `bibliography: [./references.bib, support/reinstein_bibtex.bib]`
+It is referring the contents of bibtex files, mentioned in the index.Rmd file in the line `bibliography: ["references.bib"]`
 
-::: {.marginnote}
-This can be made easier with the addin citation tool 'citr', along with Zotero and betterbibtex.
-:::
+This can be more 'automated' with the visual editor ... turning on Zotero (necessary?) and inserting a reference from the linked library, this should automatically be added to `references.bib`
+
+Or you can add it manually (there was the 'citr' plugin a while ago, but that might now confuse things.) 
+
+Adding one manually: [@AkerlofGeorgeA.2000] ... let's see if it works
 
 ## Examples of the sort of fancy interactive stuff one can incorporate in this web book
 
 Thanks to Yihui and many others, this book should permit lots of flexible tools. Trying some of these below (with code shown, but it could also be hidden). Thanks Yihui for the [Bookdown package](https://bookdown.org/yihui/bookdown/).
 
 We can have internal links to previous sections like [here, to the about section](#about).
-
-
 
 ### Questions with folded answers, folded expanded discussions
 
@@ -226,6 +225,12 @@ Yes: I just did.
 </div>\EndKnitrBlock{fold}
 
 \
+
+\<--! bookdown_start --\> The second bit of content meant 'only for the bookdown' goes here.
+
+With multiple lines.
+
+second bit ends. \<--! bookdown_end --\>
 
 I can also put expansive detail into a fold, to avoid clutter. If you want to know more about spittlebugs, feel free (to open the fold below).
 
@@ -239,11 +244,10 @@ Indirect source: [wikipedia: Froghopper, accessed 21 Feb 2020](https://en.wikipe
 
 
 ```r
-knitr::include_app("https://yihui.shinyapps.io/miniUI/",
-  height = "600px")
+knitr::include_app("https://yihui.shinyapps.io/miniUI/", height = "600px")
 ```
 
-<iframe src="https://yihui.shinyapps.io/miniUI/?showcase=0" width="80%" height="600px"></iframe>
+<iframe src="https://yihui.shinyapps.io/miniUI/?showcase=0" width="80%" height="600px" data-external="1"></iframe>
 
 ### My web pages {.unnumbered}
 
@@ -258,7 +262,7 @@ knitr::include_app("https://yihui.shinyapps.io/miniUI/",
 knitr::include_url("https://davidreinstein.wordpress.com/")
 ```
 
-<iframe src="https://davidreinstein.wordpress.com/" width="80%" height="400px"></iframe>
+<iframe src="https://davidreinstein.wordpress.com/" width="80%" height="400px" data-external="1"></iframe>
 
 ### Scary math {.unnumbered}
 
@@ -277,7 +281,7 @@ rnorm(10)  # 10 random numbers
 ```
 
 ```
-##  [1] -0.85 -2.27 -0.79  0.06  0.34 -0.68 -0.50 -0.39  0.21  1.13
+##  [1]  0.965 -1.234 -0.523  0.115  1.092  0.980 -0.173  0.939  0.066 -0.618
 ```
 
 ```r
@@ -295,20 +299,30 @@ And I can refer to the results of the r code in the text itself, e.g., by writin
 
 I get ... one plus one equals 2.
 
-### Tables and graphs 
+### Tables and graphs
 
 We can make tables from data (but these might struggle exporting to markdown formats?)
 
+Below, this defaults to an html styling
+
+(but in the md substitution code I swap in 'pipe styling')
+
 
 ```r
-mtcars %>% as_tibble() %>%  
-  tabyl(cyl) %>%
-  .kable(caption="don't forget a caption") %>%
-  .kable_styling()
+#install.packages("magick")
+#install.packages("webshot")
+#webshot::install_phantomjs(force=TRUE)
+#library(webshot)
+#library(magick)
+
+mtcars %>% as_tibble() %>%
+  janitor::tabyl(cyl) %>%
+  kable(caption="don't forget a caption") %>%
+  kable_styling() 
 ```
 
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>(\#tab:unnamed-chunk-7)don't forget a caption</caption>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:unnamed-chunk-8)don't forget a caption</caption>
  <thead>
   <tr>
    <th style="text-align:right;"> cyl </th>
@@ -334,19 +348,38 @@ mtcars %>% as_tibble() %>%
   </tr>
 </tbody>
 </table>
+
+```r
+    #as_image(width = 8) (this fails)
+```
+
+And using the gtsummary package:
+
+
+```r
+library(gtsummary)
+
+# make model and tbl_regression object
+m_linear <- lm(mpg ~ cyl, data = mtcars)
+t1 <- tbl_regression(m_linear)
+
+# Use function from gt package to save table, after converting to 
+# gt object using as_gt()
+#gt::gtsave(as_gt(t1), file = file.path(tempdir(), "temp.png"))
+```
+
 And of course, graphs aka 'visualisations':
 
 
 ```r
 (
-mtcars_plot <- mtcars %>% 
-  ggplot(aes(x=mpg)) 
+mtcars_plot <- mtcars %>%
+  ggplot(aes(x=mpg))
 + geom_histogram(binwidth=5)
 )
 ```
 
-<img src="template_project_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;" />
-
+<img src="template_project_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" />
 
 ### Other fancy stuff {.unnumbered}
 
@@ -361,11 +394,11 @@ mtcars_plot <- mtcars %>%
 
 ### Interactive questions
 
-<iframe src="https://os301.shinyapps.io/Question/?showcase=0" width="80%" height="210px"></iframe>
+<iframe src="https://os301.shinyapps.io/Question/?showcase=0" width="80%" height="210px" data-external="1"></iframe>
 
 ### Videos
 
-<iframe src="https://os301.shinyapps.io/Video/?showcase=0" width="80%" height="400px"></iframe>
+<iframe src="https://os301.shinyapps.io/Video/?showcase=0" width="80%" height="400px" data-external="1"></iframe>
 
 ## Types of notes within text
 
@@ -380,6 +413,7 @@ Warnings look like this.
 ### A margin note
 
 What about tufte-style margin notes? \*
+
 ::: {.marginnote}
 \* If you are considering pursuing an MSc or PhD this will typically be centered on doing research; it's worth knowing whether this is for you before diving in. Doing research is also a key component of much professional work in the private and public (government) sectors, including at 'think tanks', some government agencies, and many private consulting and 'data analytics' firms.
 :::
@@ -418,7 +452,7 @@ Jump to [next chapter](#chapter_2)
 
 <div class="figure" style="text-align: center">
 <img src="images/ecacoacin4life.jpg" alt="Just remember..." width="40%" />
-<p class="caption">(\#fig:unnamed-chunk-14)Just remember...</p>
+<p class="caption">(\#fig:unnamed-chunk-16)Just remember...</p>
 </div>
 
 Just remember the simple acronym "ECAOAcIn":[^chapter_1_sample-1]
