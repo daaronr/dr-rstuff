@@ -19,11 +19,11 @@ my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 Click [HERE](#chapter_2) to jump to next chapter.
 ```
 
-\<--! bookdown_start --\> The first bit of content meant 'only for the bookdown' goes here.
+<!-- bookdown_start --> The first bit of content meant 'only for the bookdown' goes here.
 
 This contains multiple lines blah blah
 
-\<--! bookdown_end --\>
+<!-- bookdown_end -->
 
 `r format_with_col("**Note to friends I've asked to look at this book...**","brown")`
 
@@ -74,7 +74,7 @@ It is referring the contents of bibtex files, mentioned in the index.Rmd file in
 
 This can be more 'automated' with the visual editor ... turning on Zotero (necessary?) and inserting a reference from the linked library, this should automatically be added to `references.bib`
 
-Or you can add it manually (there was the 'citr' plugin a while ago, but that might now confuse things.) 
+Or you can add it manually (there was the 'citr' plugin a while ago, but that might now confuse things.)
 
 Adding one manually: [@AkerlofGeorgeA.2000] ... let's see if it works
 
@@ -96,11 +96,11 @@ Yes: I just did.
 
 \
 
-\<--! bookdown_start --\> The second bit of content meant 'only for the bookdown' goes here.
+<!-- bookdown_start --> The second bit of content meant 'only for the bookdown' goes here.
 
 With multiple lines.
 
-second bit ends. \<--! bookdown_end --\>
+second bit ends. <!-- bookdown_end -->
 
 I can also put expansive detail into a fold, to avoid clutter. If you want to know more about spittlebugs, feel free (to open the fold below).
 
@@ -175,7 +175,7 @@ Below, this defaults to an html styling
 mtcars %>% as_tibble() %>%
   janitor::tabyl(cyl) %>%
   kable(caption="don't forget a caption") %>%
-  kable_styling() 
+  kable_styling()
     #as_image(width = 8) (this fails)
 
 
@@ -190,7 +190,7 @@ library(gtsummary)
 m_linear <- lm(mpg ~ cyl, data = mtcars)
 t1 <- tbl_regression(m_linear)
 
-# Use function from gt package to save table, after converting to 
+# Use function from gt package to save table, after converting to
 # gt object using as_gt()
 #gt::gtsave(as_gt(t1), file = file.path(tempdir(), "temp.png"))
 
