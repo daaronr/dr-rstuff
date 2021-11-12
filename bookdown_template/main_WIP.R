@@ -25,7 +25,7 @@ here <- here::here()
 rename_all <- dplyr::rename_all
 
 
-#... Import packages for this project using template from dr-rstuff  ####
+#... Import setup for this project using template from dr-rstuff  ####
 # - you don't need to do this each time, but it keeps it updated
 try_download(
   "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/project_setup.R",
@@ -33,7 +33,13 @@ try_download(
 )
 
 
+print("project_setup creates 'support' folder and downloads tufte_plus.css, header.html into it")
+print("project_setup creates 'code' folder and downloads baseoptions.R, and functions.R into it, and sources these")
+
 #### Install packages here ###
+
+# Change this?: ... with renv we can just have renv search for and install these (in Rstudio it reminds you; otherwise use call `renv::dependencies()` or `renv::hydrate` I think. )
+
 
 try_download(
   "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/packageadditions.R",
@@ -43,7 +49,7 @@ try_download(
 source(here("code", "packageadditions.R"))
 
 
-## You MUST run this for anything else to work 
+## You MUST run this for anything else to work
 
 source(here::here("code", "project_setup.R"))
 
@@ -87,7 +93,7 @@ p_load_gh("peterhurford/checkr")
 library(readr)
 
 #... input file for editing ####
-ch_Rmd <- readr::read_file("chapter_1_sample.Rmd") 
+ch_Rmd <- readr::read_file("chapter_1_sample.Rmd")
 ##You need to call it `ch_Rmd` for parse_ea_forum_md.R to run, until I functionalize it
 
 #prefixes for image files

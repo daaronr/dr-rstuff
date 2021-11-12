@@ -14,7 +14,8 @@ output:
       in_header: support/header.html
       #in_header: https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/header.html
     #css: https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/tufte_plus.css
-    css: support/tufte_plus_test.css
+    css: support/tufte_plus_test.css #formatting stuff, includes code to enable margin notes and folds
+
     config:
       toc:
         after: |
@@ -33,7 +34,7 @@ output:
         all: ['github', 'facebook', 'twitter', 'linkedin']
     highlight: tango
     download: [pdf, epub, mobi]
-    keep_md: yes 
+    keep_md: yes
   bookdown::pdf_book:
     keep_tex: yes
 always_allow_html: yes
@@ -63,17 +64,6 @@ Needs to be set to `echo = FALSE` for creating EAF markdowns (or do this in post
 (Note: we ultimately can do this in main, but this is a bridge)
 
 
-Try downloading and accessing my basic content support tool...
-
-
-```{r download-project-setup, eval=TRUE}
-#?removed because this is now in `main.R`
-# but we need it if we use the 'build' option for the md
-
-library(here)
-source(here("code", "project_setup.R"))
-
-```
 
 
 \
@@ -108,6 +98,7 @@ knitr::write_bib(c(
 ```{r html, echo=FALSE}
 # globally set chunk options
 
+#This allows building even if errors come along the way
 knitr::opts_chunk$set(fig.align='center', out.width='80%', warning=FALSE, message = FALSE, error=TRUE)
 
 my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
@@ -118,6 +109,7 @@ my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 ```{r knit-hooks-thing, echo=FALSE}
 
 #From https://stackoverflow.com/questions/62028925/how-do-i-catch-errors-in-inline-code-chunk-in-r-markdown
+#inline code -- this should allows building even if errors come along the way
 
 knitr::knit_hooks$set(
   evaluate.inline = function (code, envir = knit_global()) {
