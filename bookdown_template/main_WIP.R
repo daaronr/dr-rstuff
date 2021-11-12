@@ -33,8 +33,14 @@ try_download(
 )
 
 
-print("project_setup creates 'support' folder and downloads tufte_plus.css, header.html into it")
 print("project_setup creates 'code' folder and downloads baseoptions.R, and functions.R into it, and sources these")
+
+try_download(
+  "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/download_formatting.R",
+  here::here("code", "download_formatting.R")
+)
+
+print("download_formatting.R creates 'support' folder and downloads tufte_plus.css, header.html into it")
 
 #### Install packages here ###
 
