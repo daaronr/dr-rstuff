@@ -1,5 +1,7 @@
 # wip_rmd_to_forum_templating
 
+**Needs updating to reflect actual pricess used**
+
 28 Sep 2021 working on this at bottom of `main_WIP.R` [HERE](https://github.com/daaronr/dr-rstuff/blob/master/bookdown_template/main_WIP.R)
 
 - Work on writing scripts to move from the Rmd bookdown format to a markdown format that can be pasted into EA Forum
