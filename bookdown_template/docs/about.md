@@ -3,7 +3,7 @@ title: "Template for Reinstein bookdowns"
 author: "Dr. David Reinstein, "
 abstract: "This 'book' organizes the project and helps others understand it and learn from it"
 #cover-image: "images/cardcatalogue.JPG"
-date: "2021-11-05"
+date: "2021-11-28"
 site: bookdown::bookdown_site
 output:
   md_document:
@@ -14,7 +14,8 @@ output:
       in_header: support/header.html
       #in_header: https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/header.html
     #css: https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/tufte_plus.css
-    css: support/tufte_plus_test.css
+    css: support/tufte_plus_test.css #formatting stuff, includes code to enable margin notes and folds
+
     config:
       toc:
         after: |
@@ -33,7 +34,7 @@ output:
         all: ['github', 'facebook', 'twitter', 'linkedin']
     highlight: tango
     download: [pdf, epub, mobi]
-    keep_md: yes 
+    keep_md: yes
   bookdown::pdf_book:
     keep_tex: yes
 always_allow_html: yes
@@ -65,24 +66,6 @@ Needs to be set to `echo = FALSE` for creating EAF markdowns (or do this in post
 (Note: we ultimately can do this in main, but this is a bridge)
 
 
-Try downloading and accessing my basic content support tool...
-
-
-
-```r
-#?removed because this is now in `main.R`
-# but we need it if we use the 'build' option for the md
-
-library(here)
-source(here("code", "project_setup.R"))
-```
-
-```
-## Installing package into '/Users/yosemite/githubs/dr-rstuff/bookdown_template/renv/library/R-4.1/x86_64-apple-darwin17.0'
-## (as 'lib' is unspecified)
-## Installing package into '/Users/yosemite/githubs/dr-rstuff/bookdown_template/renv/library/R-4.1/x86_64-apple-darwin17.0'
-## (as 'lib' is unspecified)
-```
 
 
 \
@@ -151,11 +134,11 @@ always_allow_html: yes
 
 \BeginKnitrBlock{note}<div class="note">Click [HERE](#chapter_2) to jump to next chapter.</div>\EndKnitrBlock{note}
 
-\<--! bookdown_start --\> The first bit of content meant 'only for the bookdown' goes here.
+<!-- bookdown_start --> The first bit of content meant 'only for the bookdown' goes here.
 
 This contains multiple lines blah blah
 
-\<--! bookdown_end --\>
+<!-- bookdown_end -->
 
 <font color='brown'>**Note to friends I've asked to look at this book...**</font>
 
@@ -206,7 +189,7 @@ It is referring the contents of bibtex files, mentioned in the index.Rmd file in
 
 This can be more 'automated' with the visual editor ... turning on Zotero (necessary?) and inserting a reference from the linked library, this should automatically be added to `references.bib`
 
-Or you can add it manually (there was the 'citr' plugin a while ago, but that might now confuse things.) 
+Or you can add it manually (there was the 'citr' plugin a while ago, but that might now confuse things.)
 
 Adding one manually: [@AkerlofGeorgeA.2000] ... let's see if it works
 
@@ -226,11 +209,11 @@ Yes: I just did.
 
 \
 
-\<--! bookdown_start --\> The second bit of content meant 'only for the bookdown' goes here.
+<!-- bookdown_start --> The second bit of content meant 'only for the bookdown' goes here.
 
 With multiple lines.
 
-second bit ends. \<--! bookdown_end --\>
+second bit ends. <!-- bookdown_end -->
 
 I can also put expansive detail into a fold, to avoid clutter. If you want to know more about spittlebugs, feel free (to open the fold below).
 
@@ -281,7 +264,8 @@ rnorm(10)  # 10 random numbers
 ```
 
 ```
-##  [1]  0.965 -1.234 -0.523  0.115  1.092  0.980 -0.173  0.939  0.066 -0.618
+##  [1] -0.84559400 -2.27417723 -0.78985865  0.05996691  0.34304818 -0.68390744
+##  [7] -0.49854578 -0.38923039  0.20692085  1.13226801
 ```
 
 ```r
@@ -318,7 +302,7 @@ Below, this defaults to an html styling
 mtcars %>% as_tibble() %>%
   janitor::tabyl(cyl) %>%
   kable(caption="don't forget a caption") %>%
-  kable_styling() 
+  kable_styling()
 ```
 
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -334,17 +318,17 @@ mtcars %>% as_tibble() %>%
   <tr>
    <td style="text-align:right;"> 4 </td>
    <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 0.34 </td>
+   <td style="text-align:right;"> 0.34375 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 6 </td>
    <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 0.22 </td>
+   <td style="text-align:right;"> 0.21875 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 8 </td>
    <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 0.44 </td>
+   <td style="text-align:right;"> 0.43750 </td>
   </tr>
 </tbody>
 </table>
@@ -363,7 +347,7 @@ library(gtsummary)
 m_linear <- lm(mpg ~ cyl, data = mtcars)
 t1 <- tbl_regression(m_linear)
 
-# Use function from gt package to save table, after converting to 
+# Use function from gt package to save table, after converting to
 # gt object using as_gt()
 #gt::gtsave(as_gt(t1), file = file.path(tempdir(), "temp.png"))
 ```

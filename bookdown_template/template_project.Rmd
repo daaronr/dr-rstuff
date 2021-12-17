@@ -14,7 +14,8 @@ output:
       in_header: support/header.html
       #in_header: https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/header.html
     #css: https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/tufte_plus.css
-    css: support/tufte_plus_test.css
+    css: support/tufte_plus_test.css #formatting stuff, includes code to enable margin notes and folds
+
     config:
       toc:
         after: |
@@ -33,7 +34,7 @@ output:
         all: ['github', 'facebook', 'twitter', 'linkedin']
     highlight: tango
     download: [pdf, epub, mobi]
-    keep_md: yes 
+    keep_md: yes
   bookdown::pdf_book:
     keep_tex: yes
 always_allow_html: yes
@@ -63,17 +64,6 @@ Needs to be set to `echo = FALSE` for creating EAF markdowns (or do this in post
 (Note: we ultimately can do this in main, but this is a bridge)
 
 
-Try downloading and accessing my basic content support tool...
-
-
-```{r download-project-setup, eval=TRUE}
-#?removed because this is now in `main.R`
-# but we need it if we use the 'build' option for the md
-
-library(here)
-source(here("code", "project_setup.R"))
-
-```
 
 
 \
@@ -108,6 +98,7 @@ knitr::write_bib(c(
 ```{r html, echo=FALSE}
 # globally set chunk options
 
+#This allows building even if errors come along the way
 knitr::opts_chunk$set(fig.align='center', out.width='80%', warning=FALSE, message = FALSE, error=TRUE)
 
 my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
@@ -118,6 +109,7 @@ my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 ```{r knit-hooks-thing, echo=FALSE}
 
 #From https://stackoverflow.com/questions/62028925/how-do-i-catch-errors-in-inline-code-chunk-in-r-markdown
+#inline code -- this should allows building even if errors come along the way
 
 knitr::knit_hooks$set(
   evaluate.inline = function (code, envir = knit_global()) {
@@ -171,11 +163,11 @@ my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 Click [HERE](#chapter_2) to jump to next chapter.
 ```
 
-\<--! bookdown_start --\> The first bit of content meant 'only for the bookdown' goes here.
+<!-- bookdown_start --> The first bit of content meant 'only for the bookdown' goes here.
 
 This contains multiple lines blah blah
 
-\<--! bookdown_end --\>
+<!-- bookdown_end -->
 
 `r format_with_col("**Note to friends I've asked to look at this book...**","brown")`
 
@@ -226,7 +218,7 @@ It is referring the contents of bibtex files, mentioned in the index.Rmd file in
 
 This can be more 'automated' with the visual editor ... turning on Zotero (necessary?) and inserting a reference from the linked library, this should automatically be added to `references.bib`
 
-Or you can add it manually (there was the 'citr' plugin a while ago, but that might now confuse things.) 
+Or you can add it manually (there was the 'citr' plugin a while ago, but that might now confuse things.)
 
 Adding one manually: [@AkerlofGeorgeA.2000] ... let's see if it works
 
@@ -248,11 +240,11 @@ Yes: I just did.
 
 \
 
-\<--! bookdown_start --\> The second bit of content meant 'only for the bookdown' goes here.
+<!-- bookdown_start --> The second bit of content meant 'only for the bookdown' goes here.
 
 With multiple lines.
 
-second bit ends. \<--! bookdown_end --\>
+second bit ends. <!-- bookdown_end -->
 
 I can also put expansive detail into a fold, to avoid clutter. If you want to know more about spittlebugs, feel free (to open the fold below).
 
@@ -327,7 +319,7 @@ Below, this defaults to an html styling
 mtcars %>% as_tibble() %>%
   janitor::tabyl(cyl) %>%
   kable(caption="don't forget a caption") %>%
-  kable_styling() 
+  kable_styling()
     #as_image(width = 8) (this fails)
 
 
@@ -342,7 +334,7 @@ library(gtsummary)
 m_linear <- lm(mpg ~ cyl, data = mtcars)
 t1 <- tbl_regression(m_linear)
 
-# Use function from gt package to save table, after converting to 
+# Use function from gt package to save table, after converting to
 # gt object using as_gt()
 #gt::gtsave(as_gt(t1), file = file.path(tempdir(), "temp.png"))
 

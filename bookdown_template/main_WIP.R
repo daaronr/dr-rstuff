@@ -1,8 +1,6 @@
 ### 'Main' for template (wip) ####
 # 'main.R': this single file should (ideally) source and build all data, build codebooks, run all analysis, and build bookdown and other output
 
-# In Rstudio, select 'Code - Run Region - Run all'
-
 
 #### Setup ####
 
@@ -27,6 +25,10 @@ rename_all <- dplyr::rename_all
 
 #... Import setup for this project using template from dr-rstuff  ####
 # - you don't need to do this each time, but it keeps it updated
+
+dir.create(here("code"))
+
+
 try_download(
   "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/project_setup.R",
   here::here("code", "project_setup.R")
