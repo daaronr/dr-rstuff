@@ -31,6 +31,12 @@ try_download(
   here::here("code", "project_setup.R")
 )
 
+# try_download(
+#   "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/download_formatting.R",
+#   here::here("code", "download_formatting.R")
+# )
+
+# RENV: We can just have renv search for and install these (in Rstudio it reminds you; otherwise use call `renv::dependencies()` or `renv::hydrate` I think. )
 source(here::here("assets", "R", "project_setup.R"))
 
 my.file.rename <- function(from, to) {
@@ -39,18 +45,16 @@ my.file.rename <- function(from, to) {
   file.rename(from = from,  to = to)
 }
 
+#annoying workaround to clean up folder structure without changing project_setup.R
 my.file.rename(from = here::here("code", "plotting_functions.R"),
                to = here::here("assets", "R", "plotting_functions.R"))
+my.file.rename(from = here::here("code", "baseoptions.R"),
+               to = here::here("assets", "R", "baseoptions.R"))
+my.file.rename(from = here::here("code", "functions.R"),
+               to = here::here("assets", "R", "functions.R"))
+unlink(here::here("code"), recursive = TRUE)
 
 source(here("assets", "R", "plotting_functions.R"))
-
-
-# try_download(
-#   "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/download_formatting.R",
-#   here::here("code", "download_formatting.R")
-# )
-
-# RENV: We can just have renv search for and install these (in Rstudio it reminds you; otherwise use call `renv::dependencies()` or `renv::hydrate` I think. )
 
 #source(here::here("code", "download_formatting.R"))
 
@@ -82,5 +86,6 @@ library(downlit)
   options(knitr.duplicate.label = "allow")
   rmarkdown::render_site(output_format = 'bookdown::bs4_book', encoding = 'UTF-8')
 }
+
 
 
