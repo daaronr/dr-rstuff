@@ -78,8 +78,7 @@ p_load("bettertrace") #better tracking after bugs
 #remotes::install_github("rstudio/bookdown")
 library(downlit)
 
-#library(bs4_book)
-#library(bookdown)
+library(bookdown)
 
 
 {

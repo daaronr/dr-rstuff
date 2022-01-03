@@ -1,76 +1,4 @@
----
-title: "BS4 Template for bookdowns"
-author: "Dr. David Reinstein, William Sleegers"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
-documentclass: book
-bibliography: ["assets/bib/book.bib", "assets/bib/packages.bib"]
-
-always_allow_html: yes
-link-citations: yes
-github-repo: daaronr/dr-rstuff
-description: "bs4 - Template testing this format"
-#url: 'https\://daaronr.github.io//'
-tags: [Testing, Economics, Experiments, Charity]
----
-
-
-```{r}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-
-Needs to be set to `echo = FALSE` for creating EAF markdowns (or do this in post?)
-
-```{r}
-#knitr::opts_chunk$set(echo = FALSE)
-```
-
-
-
-```{r }
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
-
-
-```{r html, echo=FALSE}
-# globally set chunk options
-
-#This allows building even if errors come along the way
-knitr::opts_chunk$set(fig.align='center', out.width='80%', warning=FALSE, message = FALSE, error=TRUE)
-
-my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
-
-```
-
-
-```{r knit-hooks-thing, echo=FALSE}
-
-#From https://stackoverflow.com/questions/62028925/how-do-i-catch-errors-in-inline-code-chunk-in-r-markdown
-#inline code -- this should allows building even if errors come along the way
-
-knitr::knit_hooks$set(
-  evaluate.inline = function (code, envir = knit_global()) {
-    v = try(eval(xfun::parse_only(code), envir = envir))
-    knitr::knit_print(v, inline = TRUE, options = knitr::opts_chunk$get())
-  },
-  inline = function(x) {
-  if (any(class(x) == "try-error")) {
-    as.vector(x)
-  } else x
-})
-```
-
-
-
-<!-- Global site tag (gtag.js) - Google Analytics -- update -->
-
-<!--chapter:end:index.Rmd-->
-
-# About this work {#about}
+# Chapter 1 - About this work {#about}
 
 ```{r html, echo=FALSE}
 # globally set chunk options
@@ -82,9 +10,11 @@ my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 
 ```
 
-```{block2,  type='note'}
+::: {.rmdnote}
+ 
 Click [HERE](#chapter_2) to jump to next chapter.
-```
+ 
+:::
 
 <!-- bookdown_start --> The first bit of content meant 'only for the bookdown' goes here.
 
@@ -92,9 +22,6 @@ This contains multiple lines blah blah
 
 <!-- bookdown_end -->
 
-`r format_with_col("**Note to friends I've asked to look at this book...**","brown")`
-
-`r format_with_col("Thanks for looking at this.", "brown")`
 
 ## Preface {#preface}
 
@@ -115,9 +42,8 @@ Testing a Zotero reference: [@becker1974] (should cite Becker, 1974). [@adena201
 This book is in <b>Open Review</b>. We want your feedback to make the book better for you and other students. You may annotate some text by [selecting it with the cursor]{style="background-color: #3297FD; color: white"} and then click the <i class="h-icon-annotate"></i> on the pop-up menu. You can also see the annotations of others: click the <i class="h-icon-chevron-left"></i> in the upper right hand corner of the page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i>
 :::
 
-::: {.marginnote}
-If you have benefitted from this work (and you are not one of my students), please consider giving me some sort of ''kudos'' on Twitter or wherever. One way to materially express gratitude: make a donation in my honor to an *effective and international charity*, such as those listed at [givewell.org](givewell.org). If you make this donation and share it on a social media site with the hashtag \#DRWritingEcon, that would be greatly appreciated.
-:::
+^[If you have benefitted from this work (and you are not one of my students), please consider giving me some sort of ''kudos'' on Twitter or wherever. One way to materially express gratitude: make a donation in my honor to an *effective and international charity*, such as those listed at [givewell.org](givewell.org). If you make this donation and share it on a social media site with the hashtag \#DRWritingEcon, that would be greatly appreciated.
+]
 
 ### Licence {.unnumbered}
 
@@ -155,11 +81,10 @@ We can have internal links to previous sections like [here, to the about section
 
 Can I ask you a question? (Answer below the fold.)
 
-```{block2,  type='fold'}
-
+::: {.foldable} 
 Yes: I just did.
-
-```
+ 
+:::
 
 \
 
@@ -171,13 +96,15 @@ second bit ends. <!-- bookdown_end -->
 
 I can also put expansive detail into a fold, to avoid clutter. If you want to know more about spittlebugs, feel free (to open the fold below).
 
-```{block2,  type='fold'}
+::: {.foldable} 
+ 
 
 > These families are best known for the nymphal stage, which produces a cover of foamed-up plant sap visually resembling saliva; the nymphs are therefore commonly known as spittlebugs and their foam as cuckoo spit, frog spit, or snake spit. This characteristic spittle production is associated with the unusual trait of xylem feeding. Whereas most insects that feed on sap feed on the nutrient-rich fluid from the phloem, Cercopidae utilize the much more dilute sap flowing upward from the roots via the xylem. The large amount of excess water that must be excreted and the evolution of special breathing tubes allow the young spittlebug nymphs to grown in the relatively protective environment of the spittle.
 
 Indirect source: [wikipedia: Froghopper, accessed 21 Feb 2020](https://en.wikipedia.org/wiki/Froghopper)
 
-```
+ 
+:::
 
 ### A Shiny app {#shiny_test .unnumbered}
 
@@ -335,25 +262,28 @@ knitr::include_app('https://os301.shinyapps.io/Video/')
 
 ## Types of notes within text
 
-```{block2,  type='note'}
+::: {.rmdnote}
+ 
 
 "Aside" notes look like this.
 
-```
+ 
+:::
 
-```{block2,  type='warning'}
+::: {.rmdnote}
+ 
 
 Warnings look like this.
 
-```
+ 
+:::
 
 ### A margin note
 
 What about tufte-style margin notes? \*
 
-::: {.marginnote}
-\* If you are considering pursuing an MSc or PhD this will typically be centered on doing research; it's worth knowing whether this is for you before diving in. Doing research is also a key component of much professional work in the private and public (government) sectors, including at 'think tanks', some government agencies, and many private consulting and 'data analytics' firms.
-:::
+^[ If you are considering pursuing an MSc or PhD this will typically be centered on doing research; it's worth knowing whether this is for you before diving in. Doing research is also a key component of much professional work in the private and public (government) sectors, including at 'think tanks', some government agencies, and many private consulting and 'data analytics' firms.
+]
 
 ## Notes for instructors and course organisers {.unnumbered}
 
@@ -398,66 +328,4 @@ Just remember the simple acronym "ECAOAcIn":[^chapter_1_sample-1]
 **E**conomic question -- **C**ritical discussion -- **A**pply economics -- **O**rganise/present well -- **Ac**ademic writing -- original **In**sight
 
 [^chapter_1_sample-1]: (Isn't that catchy?)
-
-<!--chapter:end:chapters/chapter_1_sample.Rmd-->
-
-# Second sample chapter {#chapter_2}
-
-
-Blah blah
-
-## Test
-
-### Link back to first chapter
-
-Link back to the first chapter [here](link_back)
-
-## Blah
-
-### A proposed lecture programme {-}
-
-*Note:* I have slides covering a range of key topics, which tie in with this web book. Please contact me directly for details.
-
-<br>
-
-\
-
-Large lectures have limited value in this context. From my experience students appreciate *occasional* lectures for motivation and clarification, and to ask questions, but more than 5-6 traditional lectures seems to be overkill.
-
-If resources permit, it will be helpful to intersperse this with casual scheduled 'research coffees', encouraging students to discuss their ideas with instructors and with each other. I recommend a 'light-touch approach' in sessions. Let the students take the lead in presenting and responding (making occasional course-corrections where necessary). From our experience, students engage actively in these contexts!
-
-
-
-
-# Works Cited
-
-# Appendix
-
-## Alphabetical list of abbreviations
-
-
-## Abbreviations: Notes for paper marking and commenting
-
-Here is a categorized list of abbreviations I use in marking; you may
-find it useful just to read these to be aware of common issues.
-
-- (abbreviations as pdf)[https://github.com/daaronr/writing_econ_research/blob/master/ec831%20lecture%20slides%20(powerpoint)/abbreviations%20for%20editing%20-%20alphaall%20(David%20Reinstein's%20conflicted%20copy%202012-05-15).pdf] - download and view
-
-- (link to page to download spreadsheet)](https://github.com/daaronr/writing_econ_research/blob/master/ec831%20lecture%20slides%20(powerpoint)/abbreviations%20for%20marking%20-%20forstudents.xlsx)
-
-- [Airtable view link (sortable etc)](https://airtable.com/shrPGYSbNvnUV4TzU)
-
-
-\
-
-<iframe class="airtable-embed" src="https://airtable.com/embed/shrPGYSbNvnUV4TzU?backgroundColor=purple&viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
-
-
-<!--chapter:end:chapters/chapter_2_sample.Rmd-->
-
-`r if (knitr::is_html_output()) '
-# References {-}
-'`
-
-<!--chapter:end:chapters/references.Rmd-->
 

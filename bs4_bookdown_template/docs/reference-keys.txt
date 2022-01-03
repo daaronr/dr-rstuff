@@ -1,4 +1,6 @@
 fig:chunk-label
+fig:unnamed-chunk-10
+template
 about
 preface
 citations

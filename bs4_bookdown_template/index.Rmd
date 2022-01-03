@@ -11,18 +11,15 @@ link-citations: yes
 github-repo: daaronr/dr-rstuff
 description: "bs4 - Template testing this format"
 #url: 'https\://daaronr.github.io//'
-tags: [Testing, Economics, Experiments, Charity]
+tags: [Testing]
 ---
 
+# Template
+
 
 ```{r}
-knitr::opts_chunk$set(echo = TRUE)
-```
+#Needs to be set to `echo = FALSE` for creating EAF markdowns (or do this in post?)
 
-
-Needs to be set to `echo = FALSE` for creating EAF markdowns (or do this in post?)
-
-```{r}
 #knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -34,6 +31,7 @@ knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
 ```
+
 
 
 ```{r html, echo=FALSE}
@@ -64,6 +62,3 @@ knitr::knit_hooks$set(
 })
 ```
 
-
-
-<!-- Global site tag (gtag.js) - Google Analytics -- update -->

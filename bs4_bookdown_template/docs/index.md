@@ -1,18 +1,66 @@
+---
+title: "BS4 Template for bookdowns"
+author: "Dr. David Reinstein, William Sleegers"
+date: "2022-01-03"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: ["assets/bib/book.bib", "assets/bib/packages.bib"]
+
+always_allow_html: yes
+link-citations: yes
+github-repo: daaronr/dr-rstuff
+description: "bs4 - Template testing this format"
+#url: 'https\://daaronr.github.io//'
+tags: [Testing]
+---
+
+# Template
+
+
+
+```r
+#Needs to be set to `echo = FALSE` for creating EAF markdowns (or do this in post?)
+
+#knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
+
+```r
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+```
+## Warning in utils::citation(..., lib.loc = lib.loc): no date field in DESCRIPTION file of package 'bettertrace'
+```
+
+```
+## Warning in utils::citation(..., lib.loc = lib.loc): no date field in DESCRIPTION file of package 'bookdown'
+```
+
+
+
+
+
+
+
+
+
+<!--chapter:end:index.Rmd-->
+
 # Chapter 1 - About this work {#about}
 
-```{r html, echo=FALSE}
-# globally set chunk options
-knitr::opts_chunk$set(fig.align='center', out.width='80%', warning=FALSE, message = FALSE, error=TRUE, echo=TRUE)
-#parse_ea_forum should switch this to echo=false
 
 
-my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
-
-```
-
-```{block2,  type='note'}
+::: {.rmdnote}
+ 
 Click [HERE](#chapter_2) to jump to next chapter.
-```
+ 
+:::
 
 <!-- bookdown_start --> The first bit of content meant 'only for the bookdown' goes here.
 
@@ -40,9 +88,8 @@ Testing a Zotero reference: [@becker1974] (should cite Becker, 1974). [@adena201
 This book is in <b>Open Review</b>. We want your feedback to make the book better for you and other students. You may annotate some text by [selecting it with the cursor]{style="background-color: #3297FD; color: white"} and then click the <i class="h-icon-annotate"></i> on the pop-up menu. You can also see the annotations of others: click the <i class="h-icon-chevron-left"></i> in the upper right hand corner of the page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i>
 :::
 
-::: {.marginnote}
-If you have benefitted from this work (and you are not one of my students), please consider giving me some sort of ''kudos'' on Twitter or wherever. One way to materially express gratitude: make a donation in my honor to an *effective and international charity*, such as those listed at [givewell.org](givewell.org). If you make this donation and share it on a social media site with the hashtag \#DRWritingEcon, that would be greatly appreciated.
-:::
+^[If you have benefitted from this work (and you are not one of my students), please consider giving me some sort of ''kudos'' on Twitter or wherever. One way to materially express gratitude: make a donation in my honor to an *effective and international charity*, such as those listed at [givewell.org](givewell.org). If you make this donation and share it on a social media site with the hashtag \#DRWritingEcon, that would be greatly appreciated.
+]
 
 ### Licence {.unnumbered}
 
@@ -80,11 +127,10 @@ We can have internal links to previous sections like [here, to the about section
 
 Can I ask you a question? (Answer below the fold.)
 
-```{block2,  type='fold'}
-
+::: {.foldable} 
 Yes: I just did.
-
-```
+ 
+:::
 
 \
 
@@ -96,21 +142,24 @@ second bit ends. <!-- bookdown_end -->
 
 I can also put expansive detail into a fold, to avoid clutter. If you want to know more about spittlebugs, feel free (to open the fold below).
 
-```{block2,  type='fold'}
+::: {.foldable} 
+ 
 
 > These families are best known for the nymphal stage, which produces a cover of foamed-up plant sap visually resembling saliva; the nymphs are therefore commonly known as spittlebugs and their foam as cuckoo spit, frog spit, or snake spit. This characteristic spittle production is associated with the unusual trait of xylem feeding. Whereas most insects that feed on sap feed on the nutrient-rich fluid from the phloem, Cercopidae utilize the much more dilute sap flowing upward from the roots via the xylem. The large amount of excess water that must be excreted and the evolution of special breathing tubes allow the young spittlebug nymphs to grown in the relatively protective environment of the spittle.
 
 Indirect source: [wikipedia: Froghopper, accessed 21 Feb 2020](https://en.wikipedia.org/wiki/Froghopper)
 
-```
+ 
+:::
 
 ### A Shiny app {#shiny_test .unnumbered}
 
-```{r knitrapp}
 
+```r
 knitr::include_app("https://yihui.shinyapps.io/miniUI/", height = "600px")
-
 ```
+
+<iframe src="https://yihui.shinyapps.io/miniUI/?showcase=0" width="80%" height="600px" data-external="1"></iframe>
 
 ### My web pages {.unnumbered}
 
@@ -120,11 +169,12 @@ knitr::include_app("https://yihui.shinyapps.io/miniUI/", height = "600px")
 
 ------------------------------------------------------------------------
 
-```{r wppage}
 
+```r
 knitr::include_url("https://davidreinstein.wordpress.com/")
-
 ```
+
+<iframe src="https://davidreinstein.wordpress.com/" width="80%" height="400px" data-external="1"></iframe>
 
 ### Scary math {.unnumbered}
 
@@ -136,17 +186,31 @@ $$\Theta = \begin{pmatrix}\alpha & \beta\\
 
 These are "code chunks"
 
-```{r chunk-label, echo = TRUE, fig.cap = 'A figure caption.'}
+
+```r
 x <- 1 + 1
 rnorm(10)  # 10 random numbers
+```
+
+```
+##  [1] -1.4854712 -1.7755788  0.2173540  0.7815074 -1.4209830 -0.1306488  0.1045348 -0.1204451  1.0553428
+## [10] -1.3304819
+```
+
+```r
 plot(dist ~ speed, cars)  # a scatterplot
 ```
+
+<div class="figure" style="text-align: center">
+<img src="bs4_template-project_files/figure-html/chunk-label-1.png" alt="A figure caption." width="80%" />
+<p class="caption">(\#fig:chunk-label)A figure caption.</p>
+</div>
 
 And I can refer to the results of the r code in the text itself, e.g., by writing
 
     ``  one plus one equals  ` r x `   ``
 
-I get ... one plus one equals `r x`.
+I get ... one plus one equals 2.
 
 ### Tables and graphs
 
@@ -156,8 +220,8 @@ Below, this defaults to an html styling
 
 (but in the md substitution code I swap in 'pipe styling')
 
-```{r}
 
+```r
 #install.packages("magick")
 #install.packages("webshot")
 #webshot::install_phantomjs(force=TRUE)
@@ -168,14 +232,20 @@ mtcars %>% as_tibble() %>%
   janitor::tabyl(cyl) %>%
   kable(caption="don't forget a caption") %>%
   kable_styling()
+```
+
+```
+## Error in kable_styling(.): could not find function "kable_styling"
+```
+
+```r
     #as_image(width = 8) (this fails)
-
-
 ```
 
 And using the gtsummary package:
 
-```{r}
+
+```r
 library(gtsummary)
 
 # make model and tbl_regression object
@@ -185,12 +255,12 @@ t1 <- tbl_regression(m_linear)
 # Use function from gt package to save table, after converting to
 # gt object using as_gt()
 #gt::gtsave(as_gt(t1), file = file.path(tempdir(), "temp.png"))
-
 ```
 
 And of course, graphs aka 'visualisations':
 
-```{r}
+
+```r
 (
 mtcars_plot <- mtcars %>%
   ggplot(aes(x=mpg))
@@ -198,87 +268,51 @@ mtcars_plot <- mtcars %>%
 )
 ```
 
+<img src="bs4_template-project_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" />
+
 ### Other fancy stuff {.unnumbered}
 
-```{r, eval = "html", results='asis', echo=F, purl=F}
-cat('
+
 <div class = "keyconcept" id="KC5.4">
 <h3 class = "right"> Key Concept 5.4 </h3>
 <h3 class = "left"> Heteroskedasticity and Homoskedasticity </h3>
 - The error term of our regression model is homoskedastic if the variance of the conditional distribution of $u_i$ given $X_i$, $Var(u_i|X_i=x)$, is constant *for all* observations in our sample:
-\\[ \\text{Var}(u_i|X_i=x) = \\sigma^2 \\ \\forall \\ i=1,\\dots,n. \\]
+\[ \text{Var}(u_i|X_i=x) = \sigma^2 \ \forall \ i=1,\dots,n. \]
 
 </div>
-')
-```
 
 ### Interactive questions
 
-```{r, echo=FALSE}
-knitr::include_app('https://os301.shinyapps.io/Question/', height = "210px")
-
-#Code for this is detailed below
-# library(shiny)
-# ui <- fluidPage(
-#     radioButtons("rb", "In equilibrium what is Quantity demanded equal to?",
-#                        choiceNames =
-#                            list("None selected", "Quantity Supplied", "Bananas",
-#                                 "Apples", "Pears"),
-#                        choiceValues =
-#                            list("", "supply", "demand", "price", "quantity"),
-#                  selected = ""
-#     ),
-#     textOutput("txt")
-#     )
-# server <- function(input, output) {
-#     output$txt <- renderText({
-#         if (input$rb == "supply"){
-#             print("You are correct")
-#             } else if (input$rb == ""){
-#                 print("")}
-#                 else{
-#                     print("You are incorrect")}
-#             })
-# }
-# shinyApp(ui, server)
-```
+<iframe src="https://os301.shinyapps.io/Question/?showcase=0" width="80%" height="210px" data-external="1"></iframe>
 
 ### Videos
 
-```{r, echo=FALSE}
-knitr::include_app('https://os301.shinyapps.io/Video/')
-# Code for this is detailed below
-# library(shiny)
-# ui <- fluidPage(
-#     HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/WyrhmqHfdu8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
-# )
-# server <- function(input, output, session) {
-# }
-# shinyApp(ui, server)
-
-```
+<iframe src="https://os301.shinyapps.io/Video/?showcase=0" width="80%" height="400px" data-external="1"></iframe>
 
 ## Types of notes within text
 
-```{block2,  type='note'}
+::: {.rmdnote}
+ 
 
 "Aside" notes look like this.
 
-```
+ 
+:::
 
-```{block2,  type='warning'}
+::: {.rmdnote}
+ 
 
 Warnings look like this.
 
-```
+ 
+:::
 
 ### A margin note
 
 What about tufte-style margin notes? \*
 
-::: {.marginnote}
-\* If you are considering pursuing an MSc or PhD this will typically be centered on doing research; it's worth knowing whether this is for you before diving in. Doing research is also a key component of much professional work in the private and public (government) sectors, including at 'think tanks', some government agencies, and many private consulting and 'data analytics' firms.
-:::
+^[ If you are considering pursuing an MSc or PhD this will typically be centered on doing research; it's worth knowing whether this is for you before diving in. Doing research is also a key component of much professional work in the private and public (government) sectors, including at 'think tanks', some government agencies, and many private consulting and 'data analytics' firms.
+]
 
 ## Notes for instructors and course organisers {.unnumbered}
 
@@ -312,14 +346,77 @@ Jump to [next chapter](#chapter_2)
 
 ------------------------------------------------------------------------
 
-```{r  fig.cap = 'Just remember...', out.width='40%', fig.asp=.4, fig.align='center',  echo = FALSE}
-
-knitr::include_graphics("images/ecacoacin4life.jpg")
-
-```
+<div class="figure" style="text-align: center">
+<img src="images/ecacoacin4life.jpg" alt="Just remember..." width="40%" />
+<p class="caption">(\#fig:unnamed-chunk-10)Just remember...</p>
+</div>
 
 Just remember the simple acronym "ECAOAcIn":[^chapter_1_sample-1]
 
 **E**conomic question -- **C**ritical discussion -- **A**pply economics -- **O**rganise/present well -- **Ac**ademic writing -- original **In**sight
 
 [^chapter_1_sample-1]: (Isn't that catchy?)
+
+
+<!--chapter:end:chapters/chapter_1_sample_bs2.Rmd-->
+
+# Second sample chapter {#chapter_2}
+
+
+Blah blah
+
+## Test
+
+### Link back to first chapter
+
+Link back to the first chapter [here](link_back)
+
+## Blah
+
+### A proposed lecture programme {-}
+
+*Note:* I have slides covering a range of key topics, which tie in with this web book. Please contact me directly for details.
+
+<br>
+
+\
+
+Large lectures have limited value in this context. From my experience students appreciate *occasional* lectures for motivation and clarification, and to ask questions, but more than 5-6 traditional lectures seems to be overkill.
+
+If resources permit, it will be helpful to intersperse this with casual scheduled 'research coffees', encouraging students to discuss their ideas with instructors and with each other. I recommend a 'light-touch approach' in sessions. Let the students take the lead in presenting and responding (making occasional course-corrections where necessary). From our experience, students engage actively in these contexts!
+
+
+
+
+# Works Cited
+
+# Appendix
+
+## Alphabetical list of abbreviations
+
+
+## Abbreviations: Notes for paper marking and commenting
+
+Here is a categorized list of abbreviations I use in marking; you may
+find it useful just to read these to be aware of common issues.
+
+- (abbreviations as pdf)[https://github.com/daaronr/writing_econ_research/blob/master/ec831%20lecture%20slides%20(powerpoint)/abbreviations%20for%20editing%20-%20alphaall%20(David%20Reinstein's%20conflicted%20copy%202012-05-15).pdf] - download and view
+
+- (link to page to download spreadsheet)](https://github.com/daaronr/writing_econ_research/blob/master/ec831%20lecture%20slides%20(powerpoint)/abbreviations%20for%20marking%20-%20forstudents.xlsx)
+
+- [Airtable view link (sortable etc)](https://airtable.com/shrPGYSbNvnUV4TzU)
+
+
+\
+
+<iframe class="airtable-embed" src="https://airtable.com/embed/shrPGYSbNvnUV4TzU?backgroundColor=purple&viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+
+
+<!--chapter:end:chapters/chapter_2_sample.Rmd-->
+
+
+# References {-}
+
+
+<!--chapter:end:chapters/references.Rmd-->
+
