@@ -1,0 +1,20 @@
+bookdown::bs4_book:
+  css: "assets/css/style.css"
+  includes:
+    in_header: "assets/html/header.html"
+  theme:
+    primary: "#42708e"
+  config:
+      sharing:
+        github: yes
+        facebook: yes
+        twitter: yes
+        linkedin: yes
+        all: ['github', 'facebook', 'twitter', 'linkedin']
+      collapse: none
+      scroll_highlight: yes
+  download: [pdf, epub, mobi]
+  keep_md: yes
+
+md_document:
+  variant: commonmark

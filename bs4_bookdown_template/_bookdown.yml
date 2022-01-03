@@ -1,0 +1,5 @@
+book_filename: "bs4_template project"
+delete_merged_file: FALSE
+output_dir: "docs"
+rmd_files: ["index.Rmd", "chapters/chapter_1_sample.Rmd", "chapters/chapter_2_sample.Rmd", "chapters/references.Rmd"]
+

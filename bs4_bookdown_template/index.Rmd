@@ -1,0 +1,69 @@
+---
+title: "BS4 Template for bookdowns"
+author: "Dr. David Reinstein, William Sleegers"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: ["assets/bib/book.bib", "assets/bib/packages.bib"]
+
+always_allow_html: yes
+link-citations: yes
+github-repo: daaronr/dr-rstuff
+description: "bs4 - Template testing this format"
+#url: 'https\://daaronr.github.io//'
+tags: [Testing, Economics, Experiments, Charity]
+---
+
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Needs to be set to `echo = FALSE` for creating EAF markdowns (or do this in post?)
+
+```{r}
+#knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
+```{r }
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+
+```{r html, echo=FALSE}
+# globally set chunk options
+
+#This allows building even if errors come along the way
+knitr::opts_chunk$set(fig.align='center', out.width='80%', warning=FALSE, message = FALSE, error=TRUE)
+
+my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
+
+```
+
+
+```{r knit-hooks-thing, echo=FALSE}
+
+#From https://stackoverflow.com/questions/62028925/how-do-i-catch-errors-in-inline-code-chunk-in-r-markdown
+#inline code -- this should allows building even if errors come along the way
+
+knitr::knit_hooks$set(
+  evaluate.inline = function (code, envir = knit_global()) {
+    v = try(eval(xfun::parse_only(code), envir = envir))
+    knitr::knit_print(v, inline = TRUE, options = knitr::opts_chunk$get())
+  },
+  inline = function(x) {
+  if (any(class(x) == "try-error")) {
+    as.vector(x)
+  } else x
+})
+```
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -- update -->
