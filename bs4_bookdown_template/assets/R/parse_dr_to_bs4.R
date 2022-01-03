@@ -6,16 +6,16 @@ p_load(magrittr)
 
 
 # Attempt to get whole list of files to map (not applied yet) ####
-
-filenames <- c(list.files("chapters", pattern=".Rmd"))
-
-fileloc_specific <- c(here("index.Rmd"), here("chapters", "chapter_1_sample.Rmd"), here("chapters", "chapter_2_sample.Rmd"), here("chapters", "references.Rmd"))
-
-ch_Rmd <- list()
-for(i in filenames_specific) { 
-  #... input file for editing ####
-  ch_Rmd[i] <- readr::read_file((i))
-}
+# 
+# filenames <- c(list.files("chapters", pattern=".Rmd"))
+# 
+# filenames_specific <- c(here("index.Rmd"), here("chapters", "chapter_1_sample.Rmd"), here("chapters", "chapter_2_sample.Rmd"), here("chapters", "references.Rmd"))
+# 
+# ch_Rmd <- list()
+# for(i in filenames_specific) { 
+#   #... input file for editing ####
+#   ch_Rmd[i] <- readr::read_file((i))
+# }
 
 
 
@@ -104,8 +104,8 @@ dr_to_bs4 <- function(input, output) {
 
 
 # Trying it out ####
-dr_to_bs4(here::here("chapters", "chapter_1_sample.Rmd"), 
-          here::here("chapters", "chapter_1_sample_bs2.Rmd"))
+# dr_to_bs4(here::here("chapters", "chapter_1_sample.Rmd"), 
+#           here::here("chapters", "chapter_1_sample_bs2.Rmd"))
 
 #assign(output, data.frame(object), envir = .GlobalEnv)  
 
