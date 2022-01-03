@@ -82,7 +82,10 @@ We can have internal links to previous sections like [here, to the about section
 Can I ask you a question? (Answer below the fold.)
 
 ::: {.foldable} 
+ 
+
 Yes: I just did.
+
  
 :::
 
