@@ -94,12 +94,12 @@ block2_to_callout <- function(filename) {
 
 # Put this all together into a function that maps an old file into a new one and writes it in the environment, with set names ####
 
-dr_to_bs4 <- function(input, output) {
+dr_to_bs2 <- function(input, output) {
   readr::read_file(input) %>% 
     tufte_to_footnote %>%
     fold_to_foldable %>%
     block2_to_callout %>%
-    readr::write_lines(here::here(output))
+    readr::write_lines(output)
 }
 
 
