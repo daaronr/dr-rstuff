@@ -6,13 +6,13 @@ p_load(magrittr)
 
 
 # Attempt to get whole list of files to map (not applied yet) ####
-# 
+#
 # filenames <- c(list.files("chapters", pattern=".Rmd"))
-# 
+#
 # filenames_specific <- c(here("index.Rmd"), here("chapters", "chapter_1_sample.Rmd"), here("chapters", "chapter_2_sample.Rmd"), here("chapters", "references.Rmd"))
-# 
+#
 # ch_Rmd <- list()
-# for(i in filenames_specific) { 
+# for(i in filenames_specific) {
 #   #... input file for editing ####
 #   ch_Rmd[i] <- readr::read_file((i))
 # }
@@ -23,29 +23,34 @@ p_load(magrittr)
   # tag 2 formats of tufte notes
 
 tufte_to_footnote <- function(filename) {
-  reg_mn_div <- rex('<div class="marginnote">',
+  reg_mn_div <- rex(zero_or_more("\\*"),
+                    zero_or_more(any_spaces),
+                    '<div class="marginnote">',
+                    zero_or_more(any_spaces),
                     zero_or_more("\\*"),
                     capture(one_or_more(anything, type="lazy")),
                     '</div>')
-  
-  reg_mn_col_to_fn <- rex('::: {.marginnote}',
+
+reg_mn_col_to_fn <- rex(zero_or_more("\\*"),
+                          zero_or_more(any_spaces),
+                          '::: {.marginnote}',
                           zero_or_more(any_spaces),
                           zero_or_more("\\*"),
                           capture(one_or_more(anything, type="lazy")), ':::')
-  
+
   # make into footnotes
   ch_ed <- filename %>%
     gsub(reg_mn_div, '^[\\1]', .)  %>%
     gsub(reg_mn_col_to_fn, '^[\\1]', .)
-  
+
   return(ch_ed)
 }
 
 # ch_Rmds <- purrr::map(ch_Rmd, tufte_to_footnote)
-# 
-# new_list <- set_names(map2(list_a,names(list_a),  
+#
+# new_list <- set_names(map2(list_a,names(list_a),
 #                            ~tibble(!!.y := .x)), str_c("df", 1:3))
-# 
+#
 # list2env(new_list, .GlobalEnv)
 
 
@@ -65,9 +70,9 @@ fold_to_foldable <- function(filename) {
                                       type="lazy")),
                   "```"
   )
-  ch_ed <- filename %>% 
+  ch_ed <- filename %>%
     gsub(reg_fold, "::: {.foldable} \n \\1 \n:::", .)
-  
+
   return(ch_ed)
 }
 
@@ -84,10 +89,10 @@ block2_to_callout <- function(filename) {
                                         type="lazy")),
                     "```"
   )
-  
-  ch_ed <- filename %>% 
+
+  ch_ed <- filename %>%
     gsub(reg_block2, "::: {.rmdnote}\n \\1 \n:::", .)
-  
+
   return(ch_ed)
 }
 
@@ -95,7 +100,7 @@ block2_to_callout <- function(filename) {
 # Put this all together into a function that maps an old file into a new one and writes it in the environment, with set names ####
 
 dr_to_bs4 <- function(input, output) {
-  readr::read_file(input) %>% 
+  readr::read_file(input) %>%
     tufte_to_footnote %>%
     fold_to_foldable %>%
     block2_to_callout %>%
@@ -104,9 +109,9 @@ dr_to_bs4 <- function(input, output) {
 
 
 # Trying it out ####
-# dr_to_bs4(here::here("chapters", "chapter_1_sample.Rmd"), 
+# dr_to_bs4(here::here("chapters", "chapter_1_sample.Rmd"),
 #           here::here("chapters", "chapter_1_sample_bs4.Rmd"))
 
-#assign(output, data.frame(object), envir = .GlobalEnv)  
+#assign(output, data.frame(object), envir = .GlobalEnv)
 
 
