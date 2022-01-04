@@ -94,7 +94,7 @@ block2_to_callout <- function(filename) {
 
 # Put this all together into a function that maps an old file into a new one and writes it in the environment, with set names ####
 
-dr_to_bs2 <- function(input, output) {
+dr_to_bs4 <- function(input, output) {
   readr::read_file(input) %>% 
     tufte_to_footnote %>%
     fold_to_foldable %>%
@@ -105,7 +105,7 @@ dr_to_bs2 <- function(input, output) {
 
 # Trying it out ####
 # dr_to_bs4(here::here("chapters", "chapter_1_sample.Rmd"), 
-#           here::here("chapters", "chapter_1_sample_bs2.Rmd"))
+#           here::here("chapters", "chapter_1_sample_bs4.Rmd"))
 
 #assign(output, data.frame(object), envir = .GlobalEnv)  
 
