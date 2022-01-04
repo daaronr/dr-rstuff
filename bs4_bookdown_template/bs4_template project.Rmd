@@ -1,7 +1,7 @@
 ---
 title: "BS4 Template for bookdowns"
 author: "Dr. David Reinstein, William Sleegers"
-date: "2022-01-04"
+date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: ["assets/bib/book.bib", "assets/bib/packages.bib"]
@@ -17,8 +17,7 @@ tags: [Testing]
 # Template
 
 
-
-```r
+```{r}
 #Needs to be set to `echo = FALSE` for creating EAF markdowns (or do this in post?)
 
 #knitr::opts_chunk$set(echo = FALSE)
@@ -26,8 +25,7 @@ tags: [Testing]
 
 
 
-
-```r
+```{r }
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
@@ -36,17 +34,48 @@ knitr::write_bib(c(
 
 
 
+```{r html, echo=FALSE}
+# globally set chunk options
+
+#This allows building even if errors come along the way
+knitr::opts_chunk$set(fig.align='center', out.width='80%', warning=FALSE, message = FALSE, error=TRUE)
+
+my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
+
+```
 
 
+```{r knit-hooks-thing, echo=FALSE}
 
+#From https://stackoverflow.com/questions/62028925/how-do-i-catch-errors-in-inline-code-chunk-in-r-markdown
+#inline code -- this should allows building even if errors come along the way
 
+knitr::knit_hooks$set(
+  evaluate.inline = function (code, envir = knit_global()) {
+    v = try(eval(xfun::parse_only(code), envir = envir))
+    knitr::knit_print(v, inline = TRUE, options = knitr::opts_chunk$get())
+  },
+  inline = function(x) {
+  if (any(class(x) == "try-error")) {
+    as.vector(x)
+  } else x
+})
+```
 
 
 <!--chapter:end:index.Rmd-->
 
 # Chapter 1 - About this work {#about}
 
+```{r html, echo=FALSE}
+# globally set chunk options
+knitr::opts_chunk$set(fig.align='center', out.width='80%', warning=FALSE, message = FALSE, error=TRUE, echo=TRUE)
+#parse_ea_forum should switch this to echo=false
 
+
+my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
+
+```
 
 ::: {.rmdnote}
  
@@ -149,12 +178,11 @@ Indirect source: [wikipedia: Froghopper, accessed 21 Feb 2020](https://en.wikipe
 
 ### A Shiny app {#shiny_test .unnumbered}
 
+```{r knitrapp}
 
-```r
 knitr::include_app("https://yihui.shinyapps.io/miniUI/", height = "600px")
-```
 
-<iframe src="https://yihui.shinyapps.io/miniUI/?showcase=0" width="80%" height="600px" data-external="1"></iframe>
+```
 
 ### My web pages {.unnumbered}
 
@@ -164,12 +192,11 @@ knitr::include_app("https://yihui.shinyapps.io/miniUI/", height = "600px")
 
 ------------------------------------------------------------------------
 
+```{r wppage}
 
-```r
 knitr::include_url("https://davidreinstein.wordpress.com/")
-```
 
-<iframe src="https://davidreinstein.wordpress.com/" width="80%" height="400px" data-external="1"></iframe>
+```
 
 ### Scary math {.unnumbered}
 
@@ -181,31 +208,17 @@ $$\Theta = \begin{pmatrix}\alpha & \beta\\
 
 These are "code chunks"
 
-
-```r
+```{r chunk-label, echo = TRUE, fig.cap = 'A figure caption.'}
 x <- 1 + 1
 rnorm(10)  # 10 random numbers
-```
-
-```
-##  [1] -1.14830890 -0.60629046 -1.70233765  0.17565768 -0.05910427 -0.40941473
-##  [7]  0.51686361 -0.90821055  0.61029262  1.40012282
-```
-
-```r
 plot(dist ~ speed, cars)  # a scatterplot
 ```
-
-<div class="figure" style="text-align: center">
-<img src="bs4_template-project_files/figure-html/chunk-label-1.png" alt="A figure caption." width="80%" />
-<p class="caption">(\#fig:chunk-label)A figure caption.</p>
-</div>
 
 And I can refer to the results of the r code in the text itself, e.g., by writing
 
     ``  one plus one equals  ` r x `   ``
 
-I get ... one plus one equals 2.
+I get ... one plus one equals `r x`.
 
 ### Tables and graphs
 
@@ -215,8 +228,8 @@ Below, this defaults to an html styling
 
 (but in the md substitution code I swap in 'pipe styling')
 
+```{r}
 
-```r
 #install.packages("magick")
 #install.packages("webshot")
 #webshot::install_phantomjs(force=TRUE)
@@ -227,20 +240,14 @@ mtcars %>% as_tibble() %>%
   janitor::tabyl(cyl) %>%
   kable(caption="don't forget a caption") %>%
   kable_styling()
-```
-
-```
-## Error in kable_styling(.): could not find function "kable_styling"
-```
-
-```r
     #as_image(width = 8) (this fails)
+
+
 ```
 
 And using the gtsummary package:
 
-
-```r
+```{r}
 library(gtsummary)
 
 # make model and tbl_regression object
@@ -250,12 +257,12 @@ t1 <- tbl_regression(m_linear)
 # Use function from gt package to save table, after converting to
 # gt object using as_gt()
 #gt::gtsave(as_gt(t1), file = file.path(tempdir(), "temp.png"))
+
 ```
 
 And of course, graphs aka 'visualisations':
 
-
-```r
+```{r}
 (
 mtcars_plot <- mtcars %>%
   ggplot(aes(x=mpg))
@@ -263,28 +270,65 @@ mtcars_plot <- mtcars %>%
 )
 ```
 
-```
-## Error in ggplot(., aes(x = mpg)): could not find function "ggplot"
-```
-
 ### Other fancy stuff {.unnumbered}
 
-
+```{r, eval = "html", results='asis', echo=F, purl=F}
+cat('
 <div class = "keyconcept" id="KC5.4">
 <h3 class = "right"> Key Concept 5.4 </h3>
 <h3 class = "left"> Heteroskedasticity and Homoskedasticity </h3>
 - The error term of our regression model is homoskedastic if the variance of the conditional distribution of $u_i$ given $X_i$, $Var(u_i|X_i=x)$, is constant *for all* observations in our sample:
-\[ \text{Var}(u_i|X_i=x) = \sigma^2 \ \forall \ i=1,\dots,n. \]
+\\[ \\text{Var}(u_i|X_i=x) = \\sigma^2 \\ \\forall \\ i=1,\\dots,n. \\]
 
 </div>
+')
+```
 
 ### Interactive questions
 
-<iframe src="https://os301.shinyapps.io/Question/?showcase=0" width="80%" height="210px" data-external="1"></iframe>
+```{r, echo=FALSE}
+knitr::include_app('https://os301.shinyapps.io/Question/', height = "210px")
+
+#Code for this is detailed below
+# library(shiny)
+# ui <- fluidPage(
+#     radioButtons("rb", "In equilibrium what is Quantity demanded equal to?",
+#                        choiceNames =
+#                            list("None selected", "Quantity Supplied", "Bananas",
+#                                 "Apples", "Pears"),
+#                        choiceValues =
+#                            list("", "supply", "demand", "price", "quantity"),
+#                  selected = ""
+#     ),
+#     textOutput("txt")
+#     )
+# server <- function(input, output) {
+#     output$txt <- renderText({
+#         if (input$rb == "supply"){
+#             print("You are correct")
+#             } else if (input$rb == ""){
+#                 print("")}
+#                 else{
+#                     print("You are incorrect")}
+#             })
+# }
+# shinyApp(ui, server)
+```
 
 ### Videos
 
-<iframe src="https://os301.shinyapps.io/Video/?showcase=0" width="80%" height="400px" data-external="1"></iframe>
+```{r, echo=FALSE}
+knitr::include_app('https://os301.shinyapps.io/Video/')
+# Code for this is detailed below
+# library(shiny)
+# ui <- fluidPage(
+#     HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/WyrhmqHfdu8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
+# )
+# server <- function(input, output, session) {
+# }
+# shinyApp(ui, server)
+
+```
 
 ## Types of notes within text
 
@@ -343,10 +387,11 @@ Jump to [next chapter](#chapter_2)
 
 ------------------------------------------------------------------------
 
-<div class="figure" style="text-align: center">
-<img src="images/ecacoacin4life.jpg" alt="Just remember..." width="40%" />
-<p class="caption">(\#fig:unnamed-chunk-10)Just remember...</p>
-</div>
+```{r  fig.cap = 'Just remember...', out.width='40%', fig.asp=.4, fig.align='center',  echo = FALSE}
+
+knitr::include_graphics("images/ecacoacin4life.jpg")
+
+```
 
 Just remember the simple acronym "ECAOAcIn":[^chapter_1_sample-1]
 
@@ -411,9 +456,9 @@ find it useful just to read these to be aware of common issues.
 
 <!--chapter:end:chapters/chapter_2_sample.Rmd-->
 
-
+`r if (knitr::is_html_output()) '
 # References {-}
-
+'`
 
 <!--chapter:end:chapters/references.Rmd-->
 
