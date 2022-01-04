@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>BS4 Template for bookdowns</title>
+
+    <meta name="author" content="Dr. David Reinstein, William Sleegers" />
+  
+   <meta name="description" content="bs4 - Template testing this format" />
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="BS4 Template for bookdowns" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="bs4 - Template testing this format" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="BS4 Template for bookdowns" />
+  
+  <meta name="twitter:description" content="bs4 - Template testing this format" />
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.3.1.9000/transition.js"></script>
+    <script src="libs/bs3compat-0.3.1.9000/tabs.js"></script>
+    <script src="libs/bs3compat-0.3.1.9000/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <header>
+      <script>
+        function toggleAllCode() {
+          const button = this
+        
+          // Find all pre tags and copy buttons
+          var preTags = document.querySelectorAll("pre")
+          var copyButtons = document.getElementsByClassName("btn-copy")
+          
+          // Loop over the pre elements and toggle the hidden class
+          for (let pre of preTags) {
+            if (pre.classList.contains("sourceCode")) {
+              pre.classList.toggle("hidden")
+            }
+          }
+          
+          // Loop over the buttons and set the hidden class
+          for (let copyButton of copyButtons) {
+            copyButton.classList.toggle("hidden")
+          }
+        
+          // Toggle the button's class
+          button.classList.toggle("code-hidden")
+        
+          // Update the button text
+          if (button.classList.contains("code-hidden")) {
+            button.textContent = "Show All Code"
+          } else {
+            button.textContent = "Hide All Code"
+          }
+        }
+        
+        function toggleText() {
+          // Find the foldable div this button belongs to
+          const div = this.parentNode;
+          
+          // Loop over the elements and toggle the folded class
+          for (child of div.children) {
+            child.classList.toggle("folded")
+          }
+          
+          // Toggle the text of the button
+          const button = this
+          if (button.textContent == "Show me more") {
+            button.textContent = "Show me less"
+          } else {
+            button.textContent = "Show me more"
+          }
+        }
+        
+        function addFoldButtons() {
+          // Create a fold button
+          var button = document.createElement("button")
+          button.textContent = "Show me more"
+          button.className = "btn foldable-button"
+          button.onclick = toggleText
+          
+          // Find all foldable divs
+          var foldableDivs = document.getElementsByClassName("foldable")
+          
+          // Loop over the foldable divs to add a folded class to each child and 
+          // add a foldable button at the bottom
+          for (let div of foldableDivs) {
+            
+            const children = div.children;
+            for (let child of children) {
+              child.classList.toggle("folded")
+            }
+            
+            div.insertBefore(button, div.firstChild)
+          }
+        }
+        
+        window.onload = function() {
+          // Check if there are any code sections on the page
+          var codeBlocks = document.getElementsByClassName("sourceCode")
+          
+          // Add toggle code button, but only if there are code blocks
+          if (codeBlocks.length > 0) {
+            // Find the book-extra class element on the right side of the page
+            var extra = document.getElementsByClassName("book-extra").item(1)
+            
+            // Create a settings label
+            var label = document.createElement("p")
+            label.textContent = "Settings"
+            label.className = "settings-label"
+            
+            // Add the label to the book-extra element
+            extra.appendChild(label)
+          
+            // Create a button
+            var button = document.createElement("button")
+            button.textContent = "Hide All Code"
+            button.className = "btn toggle-code-button active-code"
+            button.onclick = toggleAllCode
+            
+            // Add the button to the book-extra element
+            extra.appendChild(button)
+          }
+          
+          // Add foldable text buttons
+          addFoldButtons()
+        }
+      </script>
+    </header>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+  
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<!--bookdown:title:start-->
+<!--bookdown:title:end-->
+
+<!--bookdown:toc:start-->
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">BS4 Template for bookdowns</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </form>
+
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<!--bookdown:toc:end-->
+<!--bookdown:body:start-->
+<div id="template" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Template</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Needs to be set to `echo = FALSE` for creating EAF markdowns (or do this in post?)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#knitr::opts_chunk$set(echo = FALSE)</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># automatically create a bib database for R packages</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">write_bib</span>(<span class="fu">c</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.packages</span>(), <span class="st">&#39;bookdown&#39;</span>, <span class="st">&#39;knitr&#39;</span>, <span class="st">&#39;rmarkdown&#39;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>), <span class="st">&#39;packages.bib&#39;</span>)</span></code></pre></div>
+<!--chapter:end:index.Rmd-->
+</div>
+<div id="about" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Chapter 1 - About this work</h1>
+<div class="rmdnote">
+<p>Click <a href="#chapter_2">HERE</a> to jump to next chapter.</p>
+</div>
+<!-- bookdown_start -->
+<p>The first bit of content meant ‘only for the bookdown’ goes here.</p>
+<p>This contains multiple lines blah blah</p>
+<!-- bookdown_end -->
+<div id="preface" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Preface</h2>
+<p>Testing a Zotero reference: <span class="citation">(<a href="#ref-becker1974" role="doc-biblioref"><strong>becker1974?</strong></a>)</span> (should cite Becker, 1974). <span class="citation">(<a href="#ref-adena2019" role="doc-biblioref"><strong>adena2019?</strong></a>)</span> – should cite Adena 2019.</p>
+<p><strong>Leaving feedback, asking questions, seeking other’s feedback/notes/questions:</strong></p>
+<p><em>All feedback is appreciated, and I will try to respond to your questions.</em> An easy way to take notes and leave feedback: sign up for <a href="https://web.hypothes.is/">‘hypothes.is’</a> and you can put your ‘public notes’ <em>directly on this web book.</em> Don’t worry, these comments are saved even if the web book is updated.</p>
+<blockquote>
+<p>an example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation.</p>
+</blockquote>
+<!--
+(As noted at <https://www.econometrics-with-r.org/>; thanks for this example:)
+-->
+<div class="rmdreview">
+<p>This book is in <b>Open Review</b>. We want your feedback to make the book better for you and other students. You may annotate some text by <span style="background-color: #3297FD; color: white">selecting it with the cursor</span> and then click the <i class="h-icon-annotate"></i> on the pop-up menu. You can also see the annotations of others: click the <i class="h-icon-chevron-left"></i> in the upper right hand corner of the page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i></p>
+</div>
+<p><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<div id="licence" class="section level3 unnumbered">
+<h3 class="unnumbered">Licence</h3>
+<p>Essentially:</p>
+<ul>
+<li><p>You can use this freely and create other versions as long as you give proper attribution, and you make your work publicly available</p></li>
+<li><p>You cannot sell this or use it, or any part of it, for commercial purposes</p></li>
+</ul>
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="uri">https://creativecommons.org/licenses/by-nc-sa/4.0/</a></p>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Researching and writing in Economics (Essays, term paper, dissertations for Economics undergraduates and MSc students)</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/daaronr/writing_econ_research" property="cc:attributionName" rel="cc:attributionURL">David Reinstein</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
+</div>
+</div>
+<div id="citations" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Citations</h2>
+<p>Let’s cite a paper here: <span class="citation">(<a href="#ref-lakens2014" role="doc-biblioref"><strong>lakens2014?</strong></a>)</span>; I don’t think I needed the brackets though (<span class="citation">(<a href="#ref-lakens2014" role="doc-biblioref"><strong>lakens2014?</strong></a>)</span> would also have worked).</p>
+<p>Testing another one: <span class="citation">(<a href="#ref-alecstephenson2013" role="doc-biblioref"><strong>alecstephenson2013?</strong></a>)</span></p>
+<p>It is referring the contents of bibtex files, mentioned in the index.Rmd file in the line <code>bibliography: ["references.bib"]</code></p>
+<p>This can be more ‘automated’ with the visual editor … turning on Zotero (necessary?) and inserting a reference from the linked library, this should automatically be added to <code>references.bib</code></p>
+<p>Or you can add it manually (there was the ‘citr’ plugin a while ago, but that might now confuse things.)</p>
+<p>Adding one manually: <span class="citation">(<a href="#ref-AkerlofGeorgeA.2000" role="doc-biblioref"><strong>AkerlofGeorgeA.2000?</strong></a>)</span> … let’s see if it works</p>
+</div>
+<div id="examples-of-the-sort-of-fancy-interactive-stuff-one-can-incorporate-in-this-web-book" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Examples of the sort of fancy interactive stuff one can incorporate in this web book</h2>
+<p>Thanks to Yihui and many others, this book should permit lots of flexible tools. Trying some of these below (with code shown, but it could also be hidden). Thanks Yihui for the <a href="https://bookdown.org/yihui/bookdown/">Bookdown package</a>.</p>
+<p>We can have internal links to previous sections like <a href="#about">here, to the about section</a>.</p>
+<div id="questions-with-folded-answers-folded-expanded-discussions" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Questions with folded answers, folded expanded discussions</h3>
+<p>Can I ask you a question? (Answer below the fold.)</p>
+<div class="foldable">
+<p>Yes: I just did.</p>
+</div>
+<p><br />
+</p>
+<!-- bookdown_start -->
+<p>The second bit of content meant ‘only for the bookdown’ goes here.</p>
+<p>With multiple lines.</p>
+<p>second bit ends. <!-- bookdown_end --></p>
+<p>I can also put expansive detail into a fold, to avoid clutter. If you want to know more about spittlebugs, feel free (to open the fold below).</p>
+<div class="foldable">
+<blockquote>
+<p>These families are best known for the nymphal stage, which produces a cover of foamed-up plant sap visually resembling saliva; the nymphs are therefore commonly known as spittlebugs and their foam as cuckoo spit, frog spit, or snake spit. This characteristic spittle production is associated with the unusual trait of xylem feeding. Whereas most insects that feed on sap feed on the nutrient-rich fluid from the phloem, Cercopidae utilize the much more dilute sap flowing upward from the roots via the xylem. The large amount of excess water that must be excreted and the evolution of special breathing tubes allow the young spittlebug nymphs to grown in the relatively protective environment of the spittle.</p>
+</blockquote>
+<p>Indirect source: <a href="https://en.wikipedia.org/wiki/Froghopper">wikipedia: Froghopper, accessed 21 Feb 2020</a></p>
+</div>
+</div>
+<div id="shiny_test" class="section level3 unnumbered">
+<h3 class="unnumbered">A Shiny app</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_app</span>(<span class="st">&quot;https://yihui.shinyapps.io/miniUI/&quot;</span>, <span class="at">height =</span> <span class="st">&quot;600px&quot;</span>)</span></code></pre></div>
+<iframe src="https://yihui.shinyapps.io/miniUI/?showcase=0" width="80%" height="600px" data-external="1">
+</iframe>
+</div>
+<div id="my-web-pages" class="section level3 unnumbered">
+<h3 class="unnumbered">My web pages</h3>
+<p><a href="https://innovationsinfundraising.org/doku.php">innovationsinfundraising.org</a></p>
+<p>(This page couldn’t embed)</p>
+<hr />
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">&quot;https://davidreinstein.wordpress.com/&quot;</span>)</span></code></pre></div>
+<iframe src="https://davidreinstein.wordpress.com/" width="80%" height="400px" data-external="1">
+</iframe>
+</div>
+<div id="scary-math" class="section level3 unnumbered">
+<h3 class="unnumbered">Scary math</h3>
+<p><span class="math display">\[\Theta = \begin{pmatrix}\alpha &amp; \beta\\
+\gamma &amp; \delta
+\end{pmatrix}\]</span></p>
+</div>
+<div id="r-code-and-data" class="section level3 unnumbered">
+<h3 class="unnumbered">R code and data</h3>
+<p>These are “code chunks”</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">10</span>)  <span class="co"># 10 random numbers</span></span></code></pre></div>
+<pre><code>##  [1]  0.5077923  0.2722400  0.8662356  1.4731616  1.0573759  0.1297300 -1.0569749
+##  [8]  0.5313054 -0.5013386  0.7222475</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dist <span class="sc">~</span> speed, cars)  <span class="co"># a scatterplot</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="bs4_template-project_files/figure-html/chunk-label-1.png" alt="A figure caption." width="80%" />
+<p class="caption">
+(#fig:chunk-label)A figure caption.
+</p>
+</div>
+<p>And I can refer to the results of the r code in the text itself, e.g., by writing</p>
+<pre><code>``  one plus one equals  ` r x `   ``</code></pre>
+<p>I get … one plus one equals 2.</p>
+</div>
+<div id="tables-and-graphs" class="section level3" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Tables and graphs</h3>
+<p>We can make tables from data (but these might struggle exporting to markdown formats?)</p>
+<p>Below, this defaults to an html styling</p>
+<p>(but in the md substitution code I swap in ‘pipe styling’)</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;magick&quot;)</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;webshot&quot;)</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#webshot::install_phantomjs(force=TRUE)</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#library(webshot)</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#library(magick)</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">tabyl</span>(cyl) <span class="sc">%&gt;%</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption=</span><span class="st">&quot;don&#39;t forget a caption&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span></code></pre></div>
+<pre><code>## Error in kable_styling(.): could not find function &quot;kable_styling&quot;</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">#as_image(width = 8) (this fails)</span></span></code></pre></div>
+<p>And using the gtsummary package:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># make model and tbl_regression object</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>m_linear <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> cyl, <span class="at">data =</span> mtcars)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">tbl_regression</span>(m_linear)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Use function from gt package to save table, after converting to</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># gt object using as_gt()</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#gt::gtsave(as_gt(t1), file = file.path(tempdir(), &quot;temp.png&quot;))</span></span></code></pre></div>
+<p>And of course, graphs aka ‘visualisations’:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>mtcars_plot <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>mpg))</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">5</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Error in ggplot(., aes(x = mpg)): could not find function &quot;ggplot&quot;</code></pre>
+</div>
+<div id="other-fancy-stuff" class="section level3 unnumbered">
+<h3 class="unnumbered">Other fancy stuff</h3>
+<div id="KC5.4" class="keyconcept">
+<h3 class="right">
+Key Concept 5.4
+</h3>
+<h3 class="left">
+Heteroskedasticity and Homoskedasticity
+</h3>
+<ul>
+<li>The error term of our regression model is homoskedastic if the variance of the conditional distribution of <span class="math inline">\(u_i\)</span> given <span class="math inline">\(X_i\)</span>, <span class="math inline">\(Var(u_i|X_i=x)\)</span>, is constant <em>for all</em> observations in our sample:
+<span class="math display">\[ \text{Var}(u_i|X_i=x) = \sigma^2 \ \forall \ i=1,\dots,n. \]</span></li>
+</ul>
+</div>
+</div>
+<div id="interactive-questions" class="section level3" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Interactive questions</h3>
+<iframe src="https://os301.shinyapps.io/Question/?showcase=0" width="80%" height="210px" data-external="1">
+</iframe>
+</div>
+<div id="videos" class="section level3" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> Videos</h3>
+<iframe src="https://os301.shinyapps.io/Video/?showcase=0" width="80%" height="400px" data-external="1">
+</iframe>
+</div>
+</div>
+<div id="types-of-notes-within-text" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Types of notes within text</h2>
+<div class="rmdnote">
+<p>“Aside” notes look like this.</p>
+</div>
+<div class="rmdnote">
+<p>Warnings look like this.</p>
+</div>
+<div id="a-margin-note" class="section level3" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> A margin note</h3>
+<p>What about tufte-style margin notes? *</p>
+<p><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+</div>
+</div>
+<div id="notes-for-instructors-and-course-organisers" class="section level2 unnumbered">
+<h2 class="unnumbered">Notes for instructors and course organisers</h2>
+<p>Note: related pptx slides (covering Ch 1-3, adapted to Exeter) are downloadable:</p>
+<button onclick="window.open(&#39;Lecture1_intro_andyourtopic_exeter.pptx&#39;)">
+<p>Download</p>
+</button>
+</div>
+<div id="link_back" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> We link back here in the next chapter – check it out</h2>
+<p>Jump to <a href="#chapter_2">next chapter</a></p>
+<div id="a-fun-acronym" class="section level3" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> A fun acronym</h3>
+<p><strong>Six simple rules for writing a good paper</strong> (and, incidentally, for getting a good mark)</p>
+<ol style="list-style-type: decimal">
+<li><p>Frame your topic as an interesting, well-defined <strong>Economic</strong> question. Demonstrate that you understand your question.</p></li>
+<li><p>Explain what others have written about your topic and which techniques they used. <a href="#crit_examine"><strong>Critically</strong></a> <strong>discuss</strong> the strengths and limitations these. Explain how these relate to and inform your own work. Cite correctly and do not plagiarise.</p></li>
+<li><p><strong>Apply economics</strong> (and econometrics) to your question. Demonstrate an understanding of your approach and techniques.</p></li>
+<li><p><strong>Organise and present</strong> your work clearly, including an outline and labels and explanations of any tables, graphs, and equations.</p></li>
+<li><p>Write clearly, logically, and in a professional <strong>academic</strong> style.</p></li>
+<li><p>If you are aiming to produce a great paper, make an original contribution or <strong>insight.</strong> (This can be a small insight, and it is not always necessary for a top mark.)</p></li>
+</ol>
+<hr />
+<div class="figure" style="text-align: center">
+<img src="images/ecacoacin4life.jpg" alt="Just remember..." width="40%" />
+<p class="caption">
+(#fig:unnamed-chunk-10)Just remember…
+</p>
+</div>
+<p>Just remember the simple acronym “ECAOAcIn”:<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p><strong>E</strong>conomic question – <strong>C</strong>ritical discussion – <strong>A</strong>pply economics – <strong>O</strong>rganise/present well – <strong>Ac</strong>ademic writing – original <strong>In</strong>sight</p>
+<!--chapter:end:chapters/chapter_1_sample_bs2.Rmd-->
+</div>
+</div>
+</div>
+<div id="chapter_2" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Second sample chapter</h1>
+<p>Blah blah</p>
+<div id="test" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Test</h2>
+<div id="link-back-to-first-chapter" class="section level3" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Link back to first chapter</h3>
+<p>Link back to the first chapter <a href="link_back">here</a></p>
+</div>
+</div>
+<div id="blah" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Blah</h2>
+<div id="a-proposed-lecture-programme" class="section level3 unnumbered">
+<h3 class="unnumbered">A proposed lecture programme</h3>
+<p><em>Note:</em> I have slides covering a range of key topics, which tie in with this web book. Please contact me directly for details.</p>
+<p><br></p>
+<p><br />
+</p>
+<p>Large lectures have limited value in this context. From my experience students appreciate <em>occasional</em> lectures for motivation and clarification, and to ask questions, but more than 5-6 traditional lectures seems to be overkill.</p>
+<p>If resources permit, it will be helpful to intersperse this with casual scheduled ‘research coffees’, encouraging students to discuss their ideas with instructors and with each other. I recommend a ‘light-touch approach’ in sessions. Let the students take the lead in presenting and responding (making occasional course-corrections where necessary). From our experience, students engage actively in these contexts!</p>
+</div>
+</div>
+</div>
+<div id="works-cited" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Works Cited</h1>
+</div>
+<div id="appendix" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Appendix</h1>
+<div id="alphabetical-list-of-abbreviations" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Alphabetical list of abbreviations</h2>
+</div>
+<div id="abbreviations-notes-for-paper-marking-and-commenting" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Abbreviations: Notes for paper marking and commenting</h2>
+<p>Here is a categorized list of abbreviations I use in marking; you may
+find it useful just to read these to be aware of common issues.</p>
+<ul>
+<li><p>(abbreviations as pdf)[<a href="https://github.com/daaronr/writing_econ_research/blob/master/ec831%20lecture%20slides%20(powerpoint)/abbreviations%20for%20editing%20-%20alphaall%20(David%20Reinstein&#39;s%20conflicted%20copy%202012-05-15" class="uri">https://github.com/daaronr/writing_econ_research/blob/master/ec831%20lecture%20slides%20(powerpoint)/abbreviations%20for%20editing%20-%20alphaall%20(David%20Reinstein's%20conflicted%20copy%202012-05-15</a>).pdf] - download and view</p></li>
+<li><p>(link to page to download spreadsheet)](<a href="https://github.com/daaronr/writing_econ_research/blob/master/ec831%20lecture%20slides%20(powerpoint)/abbreviations%20for%20marking%20-%20forstudents.xlsx" class="uri">https://github.com/daaronr/writing_econ_research/blob/master/ec831%20lecture%20slides%20(powerpoint)/abbreviations%20for%20marking%20-%20forstudents.xlsx</a>)</p></li>
+<li><p><a href="https://airtable.com/shrPGYSbNvnUV4TzU">Airtable view link (sortable etc)</a></p></li>
+</ul>
+<p><br />
+</p>
+<iframe class="airtable-embed" src="https://airtable.com/embed/shrPGYSbNvnUV4TzU?backgroundColor=purple&amp;viewControls=on" frameborder="0" onmousewheel width="100%" height="533" style="background: transparent; border: 1px solid #ccc;">
+</iframe>
+<!--chapter:end:chapters/chapter_2_sample.Rmd-->
+</div>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1 class="unnumbered">References</h1>
+<!--chapter:end:chapters/references.Rmd-->
+</div>
+<div class="footnotes footnotes-end-of-document">
+<hr />
+<ol>
+<li id="fn1"><p>If you have benefitted from this work (and you are not one of my students), please consider giving me some sort of ‘’kudos’’ on Twitter or wherever. One way to materially express gratitude: make a donation in my honor to an <em>effective and international charity</em>, such as those listed at <a href="givewell.org">givewell.org</a>. If you make this donation and share it on a social media site with the hashtag #DRWritingEcon, that would be greatly appreciated.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p> If you are considering pursuing an MSc or PhD this will typically be centered on doing research; it’s worth knowing whether this is for you before diving in. Doing research is also a key component of much professional work in the private and public (government) sectors, including at ‘think tanks’, some government agencies, and many private consulting and ‘data analytics’ firms.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>(Isn’t that catchy?)<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+<!--bookdown:body:end-->
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>BS4 Template for bookdowns</strong>" was written by Dr. David Reinstein, William Sleegers. It was last built on 2022-01-04.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+<script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+
+</html>
