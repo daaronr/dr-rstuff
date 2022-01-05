@@ -1,7 +1,7 @@
 ---
 title: "BS4 Template for bookdowns"
 author: "Dr. David Reinstein, William Sleegers"
-date: "2022-01-04"
+date: "2022-01-05"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: ["assets/bib/book.bib", "assets/bib/packages.bib"]
@@ -188,8 +188,7 @@ rnorm(10)  # 10 random numbers
 ```
 
 ```
-##  [1] -0.4340696  0.7966753 -0.2909908  0.6865793 -1.4343928 -1.6163698  0.4554221
-##  [8] -0.6400412 -0.9251758  1.4985323
+##  [1]  0.2079549 -0.6375418 -1.2934181  2.4147158  1.1961693 -0.0171831  0.5073284  1.0659609  0.1860423 -1.0435140
 ```
 
 ```r

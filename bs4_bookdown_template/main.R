@@ -79,6 +79,9 @@ p_load("bettertrace") #better tracking after bugs
 library(downlit)
 
 library(bookdown)
+library(bslib)
+library(xml2)
+
 
 
 {
