@@ -15,7 +15,7 @@ p_load(arm, arsenal, blockTools, bookdown, broom, car,  cobalt, codebook, coefpl
       install = FALSE)
 
 devtools::install_github("robertzk/bettertrace")
-library(bettertrace) 
+library(bettertrace)
 
 
 print("Note we have now set install=FALSE in the p_load; thus you must install all of these packages yourself (but only once)")
@@ -24,5 +24,12 @@ print("Note we have now set install=FALSE in the p_load; thus you must install a
 
 p_load_gh('peterhurford/surveytools2')
 p_load_gh('hughjonesd/rumpel')
+
+
+devtools::install_github("rethinkpriorities/rp-r-package")
+library(rethinkpriorities)
+devtools::install_github("rethinkpriorities/r-noodling-package")
+library(rnoodling)
+
 
 
