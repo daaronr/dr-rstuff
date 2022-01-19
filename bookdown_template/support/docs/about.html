@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Template for Reinstein bookdowns</title>
+  <meta name="description" content="Template testing this format" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Template for Reinstein bookdowns" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Template testing this format" />
+  <meta name="github-repo" content="daaronr/dr-rstuff" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Template for Reinstein bookdowns" />
+  
+  <meta name="twitter:description" content="Template testing this format" />
+  
+
+<meta name="author" content="Dr. David Reinstein," />
+
+
+<meta name="date" content="2022-01-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="chapter_2.html"/>
+<style type="text/css">
+p.abstract{
+  text-align: center;
+  font-weight: bold;
+}
+div.abstract{
+  margin: auto;
+  width: 90%;
+}
+</style>
+<script src="book_assets/header-attrs-2.11/header-attrs.js"></script>
+<script src="book_assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="book_assets/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="book_assets/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
+<link href="book_assets/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<!-- font families -->
+
+<link href="https://fonts.googleapis.com/css?family=PT+Sans|Pacifico|Source+Sans+Pro" rel="stylesheet">
+
+<!-- <script src="js/hideOutput.js"></script> -->
+
+<!-- Mathjax -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/default.js"></script>
+
+ <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js", "TeX/AMSmath.js"],
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+        jax: ["input/TeX","output/CommonHTML"]
+      });
+      MathJax.Hub.processSectionDelay = 0;
+  </script>
+
+
+
+
+<script async defer src="https://hypothes.is/embed.js"></script>
+
+<!-- Folding text box javascript thing -->
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $folds = $(".fold");
+  $folds.wrapInner("<div class=\"fold-blck\">"); // wrap a div container around content
+  $folds.prepend("<button class=\"fold-btn\">Unfold</button>");  // add a button
+  $(".fold-blck").toggle();  // fold all blocks
+  $(".fold-btn").on("click", function() {  // add onClick event
+    $(this).text($(this).text() === "Fold" ? "Unfold" : "Fold");  // if the text equals "Fold", change it to "Unfold"or else to "Fold"
+    $(this).next(".fold-blck").toggle("linear");  // "swing" is the default easing function. This can be further customized in its speed or the overall animation itself.
+  })
+});
+</script>
+
+<!--
+<script type="text/javascript">
+
+// toggle visibility of R source blocks in R Markdown output
+function toggle_R() {
+  var x = document.getElementsByClassName('r');
+  if (x.length == 0) return;
+  function toggle_vis(o) {
+    var d = o.style.display;
+    o.style.display = (d == 'block' || d == '') ? 'none':'block';
+  }
+
+  for (i = 0; i < x.length; i++) {
+    var y = x[i];
+    if (y.tagName.toLowerCase() === 'pre') toggle_vis(y);
+  }
+
+    var elem = document.getElementById("myButton1");
+    if (elem.value === "Hide Global") elem.value = "Show Global";
+    else elem.value = "Hide Global";
+}
+
+document.write('<input onclick="toggle_R();" type="button" value="Hide Global" id="myButton1" style="position: absolute; top: 10%; right: 2%; z-index: 200"></input>')
+
+</script> -->
+
+<!-- Global site tag (gtag.js) - Google Analytics
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148137970-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-148137970-3');
+</script>
+-->
+
+<!-- FOLDING TEXT BOXES -->
+
+<script>
+/* ========================================================================
+ * Bootstrap: transition.js v3.3.7
+ * http://getbootstrap.com/javascript/#transitions
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // ============================================================
+
+  function transitionEnd() {
+    var el = document.createElement('bootstrap')
+
+    var transEndEventNames = {
+      WebkitTransition : 'webkitTransitionEnd',
+      MozTransition    : 'transitionend',
+      OTransition      : 'oTransitionEnd otransitionend',
+      transition       : 'transitionend'
+    }
+
+    for (var name in transEndEventNames) {
+      if (el.style[name] !== undefined) {
+        return { end: transEndEventNames[name] }
+      }
+    }
+
+    return false // explicit for ie8 (  ._.)
+  }
+
+  // http://blog.alexmaccaw.com/css-transitions
+  $.fn.emulateTransitionEnd = function (duration) {
+    var called = false
+    var $el = this
+    $(this).one('bsTransitionEnd', function () { called = true })
+    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    setTimeout(callback, duration)
+    return this
+  }
+
+  $(function () {
+    $.support.transition = transitionEnd()
+
+    if (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = {
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: function (e) {
+        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+      }
+    }
+  })
+
+}(jQuery);
+</script>
+<script>
+/* ========================================================================
+ * Bootstrap: collapse.js v3.3.7
+ * http://getbootstrap.com/javascript/#collapse
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+/* jshint latedef: false */
+
++function ($) {
+  'use strict';
+
+  // COLLAPSE PUBLIC CLASS DEFINITION
+  // ================================
+
+  var Collapse = function (element, options) {
+    this.$element      = $(element)
+    this.options       = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
+                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+    this.transitioning = null
+
+    if (this.options.parent) {
+      this.$parent = this.getParent()
+    } else {
+      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
+    }
+
+    if (this.options.toggle) this.toggle()
+  }
+
+  Collapse.VERSION  = '3.3.7'
+
+  Collapse.TRANSITION_DURATION = 350
+
+  Collapse.DEFAULTS = {
+    toggle: true
+  }
+
+  Collapse.prototype.dimension = function () {
+    var hasWidth = this.$element.hasClass('width')
+    return hasWidth ? 'width' : 'height'
+  }
+
+  Collapse.prototype.show = function () {
+    if (this.transitioning || this.$element.hasClass('in')) return
+
+    var activesData
+    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
+
+    if (actives && actives.length) {
+      activesData = actives.data('bs.collapse')
+      if (activesData && activesData.transitioning) return
+    }
+
+    var startEvent = $.Event('show.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    if (actives && actives.length) {
+      Plugin.call(actives, 'hide')
+      activesData || actives.data('bs.collapse', null)
+    }
+
+    var dimension = this.dimension()
+
+    this.$element
+      .removeClass('collapse')
+      .addClass('collapsing')[dimension](0)
+      .attr('aria-expanded', true)
+
+    this.$trigger
+      .removeClass('collapsed')
+      .attr('aria-expanded', true)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse in')[dimension]('')
+      this.transitioning = 0
+      this.$element
+        .trigger('shown.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+
+    this.$element
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+  }
+
+  Collapse.prototype.hide = function () {
+    if (this.transitioning || !this.$element.hasClass('in')) return
+
+    var startEvent = $.Event('hide.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    var dimension = this.dimension()
+
+    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+    this.$element
+      .addClass('collapsing')
+      .removeClass('collapse in')
+      .attr('aria-expanded', false)
+
+    this.$trigger
+      .addClass('collapsed')
+      .attr('aria-expanded', false)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.transitioning = 0
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse')
+        .trigger('hidden.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    this.$element
+      [dimension](0)
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+  }
+
+  Collapse.prototype.toggle = function () {
+    this[this.$element.hasClass('in') ? 'hide' : 'show']()
+  }
+
+  Collapse.prototype.getParent = function () {
+    return $(this.options.parent)
+      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
+      .each($.proxy(function (i, element) {
+        var $element = $(element)
+        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
+      }, this))
+      .end()
+  }
+
+  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
+    var isOpen = $element.hasClass('in')
+
+    $element.attr('aria-expanded', isOpen)
+    $trigger
+      .toggleClass('collapsed', !isOpen)
+      .attr('aria-expanded', isOpen)
+  }
+
+  function getTargetFromTrigger($trigger) {
+    var href
+    var target = $trigger.attr('data-target')
+      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+
+    return $(target)
+  }
+
+
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.collapse')
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
+      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.collapse
+
+  $.fn.collapse             = Plugin
+  $.fn.collapse.Constructor = Collapse
+
+
+  // COLLAPSE NO CONFLICT
+  // ====================
+
+  $.fn.collapse.noConflict = function () {
+    $.fn.collapse = old
+    return this
+  }
+
+
+  // COLLAPSE DATA-API
+  // =================
+
+  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
+    var $this   = $(this)
+
+    if (!$this.attr('data-target')) e.preventDefault()
+
+    var $target = getTargetFromTrigger($this)
+    var data    = $target.data('bs.collapse')
+    var option  = data ? 'toggle' : $this.data()
+
+    Plugin.call($target, option)
+  })
+
+}(jQuery);
+</script>
+<script>
+window.initializeCodeFolding = function(show) {
+
+  // handlers for show-all and hide all
+  $("#rmd-show-all-code").click(function() {
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('show');
+    });
+  });
+  $("#rmd-hide-all-code").click(function() {
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('hide');
+    });
+  });
+
+  // index for unique code element ids
+  var currentIndex = 1;
+
+  // select all R code blocks
+  var rCodeBlocks = $('pre.sourceCode, pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan, pre.js');
+  rCodeBlocks.each(function() {
+
+    // create a collapsable div to wrap the code in
+    var div = $('<div class="collapse r-code-collapse"></div>');
+    if (show)
+      div.addClass('in');
+    var id = 'rcode-643E0F36' + currentIndex++;
+    div.attr('id', id);
+    $(this).before(div);
+    $(this).detach().appendTo(div);
+
+    // add a show code button right above
+    var showCodeText = $('<span>' + (show ? 'Hide' : 'Code') + '</span>');
+    var showCodeButton = $('<button type="button" class="btn btn-default btn-xs code-folding-btn pull-right"></button>');
+    showCodeButton.append(showCodeText);
+    showCodeButton
+        .attr('data-toggle', 'collapse')
+        .attr('data-target', '#' + id)
+        .attr('aria-expanded', show)
+        .attr('aria-controls', id);
+
+    var buttonRow = $('<div class="row"></div>');
+    var buttonCol = $('<div class="col-md-12"></div>');
+
+    buttonCol.append(showCodeButton);
+    buttonRow.append(buttonCol);
+
+    div.before(buttonRow);
+
+    // update state of button on show/hide
+    div.on('hidden.bs.collapse', function () {
+      showCodeText.text('Code');
+    });
+    div.on('show.bs.collapse', function () {
+      showCodeText.text('Hide');
+    });
+  });
+
+}
+</script>
+<script>
+/* ========================================================================
+ * Bootstrap: dropdown.js v3.3.7
+ * http://getbootstrap.com/javascript/#dropdowns
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // DROPDOWN CLASS DEFINITION
+  // =========================
+
+  var backdrop = '.dropdown-backdrop'
+  var toggle   = '[data-toggle="dropdown"]'
+  var Dropdown = function (element) {
+    $(element).on('click.bs.dropdown', this.toggle)
+  }
+
+  Dropdown.VERSION = '3.3.7'
+
+  function getParent($this) {
+    var selector = $this.attr('data-target')
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
+
+    var $parent = selector && $(selector)
+
+    return $parent && $parent.length ? $parent : $this.parent()
+  }
+
+  function clearMenus(e) {
+    if (e && e.which === 3) return
+    $(backdrop).remove()
+    $(toggle).each(function () {
+      var $this         = $(this)
+      var $parent       = getParent($this)
+      var relatedTarget = { relatedTarget: this }
+
+      if (!$parent.hasClass('open')) return
+
+      if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
+
+      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this.attr('aria-expanded', 'false')
+      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
+    })
+  }
+
+  Dropdown.prototype.toggle = function (e) {
+    var $this = $(this)
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    clearMenus()
+
+    if (!isActive) {
+      if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
+        // if mobile we use a backdrop because click events don't delegate
+        $(document.createElement('div'))
+          .addClass('dropdown-backdrop')
+          .insertAfter($(this))
+          .on('click', clearMenus)
+      }
+
+      var relatedTarget = { relatedTarget: this }
+      $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this
+        .trigger('focus')
+        .attr('aria-expanded', 'true')
+
+      $parent
+        .toggleClass('open')
+        .trigger($.Event('shown.bs.dropdown', relatedTarget))
+    }
+
+    return false
+  }
+
+  Dropdown.prototype.keydown = function (e) {
+    if (!/(38|40|27|32)/.test(e.which) || /input|textarea/i.test(e.target.tagName)) return
+
+    var $this = $(this)
+
+    e.preventDefault()
+    e.stopPropagation()
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    if (!isActive && e.which != 27 || isActive && e.which == 27) {
+      if (e.which == 27) $parent.find(toggle).trigger('focus')
+      return $this.trigger('click')
+    }
+
+    var desc = ' li:not(.disabled):visible a'
+    var $items = $parent.find('.dropdown-menu' + desc)
+
+    if (!$items.length) return
+
+    var index = $items.index(e.target)
+
+    if (e.which == 38 && index > 0)                 index--         // up
+    if (e.which == 40 && index < $items.length - 1) index++         // down
+    if (!~index)                                    index = 0
+
+    $items.eq(index).trigger('focus')
+  }
+
+
+  // DROPDOWN PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data('bs.dropdown')
+
+      if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)))
+      if (typeof option == 'string') data[option].call($this)
+    })
+  }
+
+  var old = $.fn.dropdown
+
+  $.fn.dropdown             = Plugin
+  $.fn.dropdown.Constructor = Dropdown
+
+
+  // DROPDOWN NO CONFLICT
+  // ====================
+
+  $.fn.dropdown.noConflict = function () {
+    $.fn.dropdown = old
+    return this
+  }
+
+
+  // APPLY TO STANDARD DROPDOWN ELEMENTS
+  // ===================================
+
+  $(document)
+    .on('click.bs.dropdown.data-api', clearMenus)
+    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
+    .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
+    .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
+    .on('keydown.bs.dropdown.data-api', '.dropdown-menu', Dropdown.prototype.keydown)
+
+}(jQuery);
+</script>
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+.row { display: flex; }
+.collapse { display: none; }
+.in { display:block }
+.pull-right > .dropdown-menu {
+    right: 0;
+    left: auto;
+}
+.open > .dropdown-menu {
+    display: block;
+}
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "hide");
+});
+</script>
+
+
+<script>
+document.write('<div class="btn-group pull-right" style="position: absolute; top: 10%; right: 15%; z-index: 200"><button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-_extension-text-contrast=""><span>Code</span> <span class="caret"></span></button><ul class="dropdown-menu" style="min-width: 50px;"><li><a id="rmd-show-all-code" href="#">Show All Code</a></li><li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li></ul></div>')
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="about.html"><a href="about.html"><i class="fa fa-check"></i><b>1</b> About this work</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="about.html"><a href="about.html#preface"><i class="fa fa-check"></i><b>1.1</b> Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="about.html"><a href="about.html#licence"><i class="fa fa-check"></i>Licence</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="about.html"><a href="about.html#citations"><i class="fa fa-check"></i><b>1.2</b> Citations</a></li>
+<li class="chapter" data-level="1.3" data-path="about.html"><a href="about.html#examples-of-the-sort-of-fancy-interactive-stuff-one-can-incorporate-in-this-web-book"><i class="fa fa-check"></i><b>1.3</b> Examples of the sort of fancy interactive stuff one can incorporate in this web book</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="about.html"><a href="about.html#questions-with-folded-answers-folded-expanded-discussions"><i class="fa fa-check"></i><b>1.3.1</b> Questions with folded answers, folded expanded discussions</a></li>
+<li class="chapter" data-level="" data-path="about.html"><a href="about.html#shiny_test"><i class="fa fa-check"></i>A Shiny app</a></li>
+<li class="chapter" data-level="" data-path="about.html"><a href="about.html#my-web-pages"><i class="fa fa-check"></i>My web pages</a></li>
+<li class="chapter" data-level="" data-path="about.html"><a href="about.html#scary-math"><i class="fa fa-check"></i>Scary math</a></li>
+<li class="chapter" data-level="" data-path="about.html"><a href="about.html#r-code-and-data"><i class="fa fa-check"></i>R code and data</a></li>
+<li class="chapter" data-level="1.3.2" data-path="about.html"><a href="about.html#tables-and-graphs"><i class="fa fa-check"></i><b>1.3.2</b> Tables and graphs</a></li>
+<li class="chapter" data-level="" data-path="about.html"><a href="about.html#other-fancy-stuff"><i class="fa fa-check"></i>Other fancy stuff</a></li>
+<li class="chapter" data-level="1.3.3" data-path="about.html"><a href="about.html#interactive-questions"><i class="fa fa-check"></i><b>1.3.3</b> Interactive questions</a></li>
+<li class="chapter" data-level="1.3.4" data-path="about.html"><a href="about.html#videos"><i class="fa fa-check"></i><b>1.3.4</b> Videos</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="about.html"><a href="about.html#types-of-notes-within-text"><i class="fa fa-check"></i><b>1.4</b> Types of notes within text</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="about.html"><a href="about.html#a-margin-note"><i class="fa fa-check"></i><b>1.4.1</b> A margin note</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="about.html"><a href="about.html#notes-for-instructors-and-course-organisers"><i class="fa fa-check"></i>Notes for instructors and course organisers</a></li>
+<li class="chapter" data-level="1.5" data-path="about.html"><a href="about.html#link_back"><i class="fa fa-check"></i><b>1.5</b> We link back here in the next chapter – check it out</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="about.html"><a href="about.html#a-fun-acronym"><i class="fa fa-check"></i><b>1.5.1</b> A fun acronym</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chapter_2.html"><a href="chapter_2.html"><i class="fa fa-check"></i><b>2</b> Second sample chapter</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="chapter_2.html"><a href="chapter_2.html#test"><i class="fa fa-check"></i><b>2.1</b> Test</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="chapter_2.html"><a href="chapter_2.html#link-back-to-first-chapter"><i class="fa fa-check"></i><b>2.1.1</b> Link back to first chapter</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="chapter_2.html"><a href="chapter_2.html#blah"><i class="fa fa-check"></i><b>2.2</b> Blah</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter_2.html"><a href="chapter_2.html#a-proposed-lecture-programme"><i class="fa fa-check"></i>A proposed lecture programme</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="works-cited.html"><a href="works-cited.html"><i class="fa fa-check"></i><b>3</b> Works Cited</a></li>
+<li class="chapter" data-level="4" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>4</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="appendix.html"><a href="appendix.html#alphabetical-list-of-abbreviations"><i class="fa fa-check"></i><b>4.1</b> Alphabetical list of abbreviations</a></li>
+<li class="chapter" data-level="4.2" data-path="appendix.html"><a href="appendix.html#abbreviations-notes-for-paper-marking-and-commenting"><i class="fa fa-check"></i><b>4.2</b> Abbreviations: Notes for paper marking and commenting</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>5</b> List of works cited</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Template for Reinstein bookdowns</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Template for Reinstein bookdowns</h1>
+<p class="author"><em>Dr. David Reinstein,</em></p>
+<p class="date"><em>2022-01-12</em></p>
+<div class="abstract">
+<p class="abstract">Abstract</p>
+This ‘book’ organizes the project and helps others understand it and learn from it
+</div>
+</div>
+<div id="about" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> About this work</h1>
+
+<div class="note">
+Click <a href="chapter_2.html#chapter_2">HERE</a> to jump to next chapter.
+</div>
+<!-- bookdown_start -->
+<p>The first bit of content meant ‘only for the bookdown’ goes here.</p>
+<p>This contains multiple lines blah blah</p>
+<!-- bookdown_end -->
+<p><font color='brown'><strong>Note to friends I’ve asked to look at this book…</strong></font></p>
+<p><font color='brown'>Thanks for looking at this.</font></p>
+<div id="preface" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Preface</h2>
+<p>Testing a Zotero reference: <span class="citation">(<a href="#ref-becker1974" role="doc-biblioref">Becker 1974</a>)</span> (should cite Becker, 1974). <span class="citation">(<a href="#ref-adena2019" role="doc-biblioref">Adena and Huck 2019</a>)</span> – should cite Adena 2019.</p>
+<p><strong>Leaving feedback, asking questions, seeking other’s feedback/notes/questions:</strong></p>
+<p><em>All feedback is appreciated, and I will try to respond to your questions.</em> An easy way to take notes and leave feedback: sign up for <a href="https://web.hypothes.is/">‘hypothes.is’</a> and you can put your ‘public notes’ <em>directly on this web book.</em> Don’t worry, these comments are saved even if the web book is updated.</p>
+<blockquote>
+<p>an example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation example of a quotation.</p>
+</blockquote>
+<!--
+(As noted at <https://www.econometrics-with-r.org/>; thanks for this example:)
+-->
+<div class="rmdreview">
+<p>This book is in <b>Open Review</b>. We want your feedback to make the book better for you and other students. You may annotate some text by <span style="background-color: #3297FD; color: white">selecting it with the cursor</span> and then click the <i class="h-icon-annotate"></i> on the pop-up menu. You can also see the annotations of others: click the <i class="h-icon-chevron-left"></i> in the upper right hand corner of the page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i></p>
+</div>
+<div class="marginnote">
+<p>If you have benefitted from this work (and you are not one of my students), please consider giving me some sort of ‘’kudos’’ on Twitter or wherever. One way to materially express gratitude: make a donation in my honor to an <em>effective and international charity</em>, such as those listed at <a href="givewell.org">givewell.org</a>. If you make this donation and share it on a social media site with the hashtag #DRWritingEcon, that would be greatly appreciated.</p>
+</div>
+<div id="licence" class="section level3 unnumbered">
+<h3>Licence</h3>
+<p>Essentially:</p>
+<ul>
+<li><p>You can use this freely and create other versions as long as you give proper attribution, and you make your work publicly available</p></li>
+<li><p>You cannot sell this or use it, or any part of it, for commercial purposes</p></li>
+</ul>
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="uri">https://creativecommons.org/licenses/by-nc-sa/4.0/</a></p>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Researching and writing in Economics (Essays, term paper, dissertations for Economics undergraduates and MSc students)</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/daaronr/writing_econ_research" property="cc:attributionName" rel="cc:attributionURL">David Reinstein</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
+</div>
+</div>
+<div id="citations" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Citations</h2>
+<p>Let’s cite a paper here: <span class="citation">(<a href="#ref-lakens2014" role="doc-biblioref">Lakens 2014</a>)</span>; I don’t think I needed the brackets though (<span class="citation">Lakens (<a href="#ref-lakens2014" role="doc-biblioref">2014</a>)</span> would also have worked).</p>
+<p>Testing another one: <span class="citation">(<a href="#ref-alecstephenson2013" role="doc-biblioref">Alec Stephenson 2013</a>)</span></p>
+<p>It is referring the contents of bibtex files, mentioned in the index.Rmd file in the line <code>bibliography: ["references.bib"]</code></p>
+<p>This can be more ‘automated’ with the visual editor … turning on Zotero (necessary?) and inserting a reference from the linked library, this should automatically be added to <code>references.bib</code></p>
+<p>Or you can add it manually (there was the ‘citr’ plugin a while ago, but that might now confuse things.)</p>
+<p>Adding one manually: <span class="citation">(<a href="#ref-AkerlofGeorgeA.2000" role="doc-biblioref">Akerlof George A. and Kranton Rachel E. 2000</a>)</span> … let’s see if it works</p>
+</div>
+<div id="examples-of-the-sort-of-fancy-interactive-stuff-one-can-incorporate-in-this-web-book" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Examples of the sort of fancy interactive stuff one can incorporate in this web book</h2>
+<p>Thanks to Yihui and many others, this book should permit lots of flexible tools. Trying some of these below (with code shown, but it could also be hidden). Thanks Yihui for the <a href="https://bookdown.org/yihui/bookdown/">Bookdown package</a>.</p>
+<p>We can have internal links to previous sections like <a href="about.html#about">here, to the about section</a>.</p>
+<div id="questions-with-folded-answers-folded-expanded-discussions" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Questions with folded answers, folded expanded discussions</h3>
+<p>Can I ask you a question? (Answer below the fold.)</p>
+
+<div class="fold">
+<p>Yes: I just did.</p>
+</div>
+<p><br />
+</p>
+<!-- bookdown_start -->
+<p>The second bit of content meant ‘only for the bookdown’ goes here.</p>
+<p>With multiple lines.</p>
+<p>second bit ends. <!-- bookdown_end --></p>
+<p>I can also put expansive detail into a fold, to avoid clutter. If you want to know more about spittlebugs, feel free (to open the fold below).</p>
+
+<div class="fold">
+<blockquote>
+<p>These families are best known for the nymphal stage, which produces a cover of foamed-up plant sap visually resembling saliva; the nymphs are therefore commonly known as spittlebugs and their foam as cuckoo spit, frog spit, or snake spit. This characteristic spittle production is associated with the unusual trait of xylem feeding. Whereas most insects that feed on sap feed on the nutrient-rich fluid from the phloem, Cercopidae utilize the much more dilute sap flowing upward from the roots via the xylem. The large amount of excess water that must be excreted and the evolution of special breathing tubes allow the young spittlebug nymphs to grown in the relatively protective environment of the spittle.</p>
+</blockquote>
+<p>Indirect source: <a href="https://en.wikipedia.org/wiki/Froghopper">wikipedia: Froghopper, accessed 21 Feb 2020</a></p>
+</div>
+</div>
+<div id="shiny_test" class="section level3 unnumbered">
+<h3>A Shiny app</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="about.html#cb5-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_app</span>(<span class="st">&quot;https://yihui.shinyapps.io/miniUI/&quot;</span>, <span class="at">height =</span> <span class="st">&quot;600px&quot;</span>)</span></code></pre></div>
+<iframe src="https://yihui.shinyapps.io/miniUI/?showcase=0" width="80%" height="600px" data-external="1">
+</iframe>
+</div>
+<div id="my-web-pages" class="section level3 unnumbered">
+<h3>My web pages</h3>
+<p><a href="https://innovationsinfundraising.org/doku.php">innovationsinfundraising.org</a></p>
+<p>(This page couldn’t embed)</p>
+<hr />
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="about.html#cb6-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">&quot;https://davidreinstein.wordpress.com/&quot;</span>)</span></code></pre></div>
+<iframe src="https://davidreinstein.wordpress.com/" width="80%" height="400px" data-external="1">
+</iframe>
+</div>
+<div id="scary-math" class="section level3 unnumbered">
+<h3>Scary math</h3>
+<p><span class="math display">\[\Theta = \begin{pmatrix}\alpha &amp; \beta\\
+\gamma &amp; \delta
+\end{pmatrix}\]</span></p>
+</div>
+<div id="r-code-and-data" class="section level3 unnumbered">
+<h3>R code and data</h3>
+<p>These are “code chunks”</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="about.html#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb7-2"><a href="about.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">10</span>)  <span class="co"># 10 random numbers</span></span></code></pre></div>
+<pre><code>##  [1]  0.01649221  1.96656758  1.88290810  0.62289619 -0.32140098 -0.64893598  0.19644578 -0.39802346 -1.49955297
+## [10]  1.29062023</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="about.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dist <span class="sc">~</span> speed, cars)  <span class="co"># a scatterplot</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:chunk-label"></span>
+<img src="template_project_files/figure-html/chunk-label-1.png" alt="A figure caption." width="80%" />
+<p class="caption">
+Figure 1.1: A figure caption.
+</p>
+</div>
+<p>And I can refer to the results of the r code in the text itself, e.g., by writing</p>
+<pre><code>``  one plus one equals  ` r x `   ``</code></pre>
+<p>I get … one plus one equals 2.</p>
+</div>
+<div id="tables-and-graphs" class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Tables and graphs</h3>
+<p>We can make tables from data (but these might struggle exporting to markdown formats?)</p>
+<p>Below, this defaults to an html styling</p>
+<p>(but in the md substitution code I swap in ‘pipe styling’)</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="about.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;magick&quot;)</span></span>
+<span id="cb11-2"><a href="about.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;webshot&quot;)</span></span>
+<span id="cb11-3"><a href="about.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#webshot::install_phantomjs(force=TRUE)</span></span>
+<span id="cb11-4"><a href="about.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#library(webshot)</span></span>
+<span id="cb11-5"><a href="about.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#library(magick)</span></span>
+<span id="cb11-6"><a href="about.html#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="about.html#cb11-7" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb11-8"><a href="about.html#cb11-8" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">tabyl</span>(cyl) <span class="sc">%&gt;%</span></span>
+<span id="cb11-9"><a href="about.html#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption=</span><span class="st">&quot;don&#39;t forget a caption&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-10"><a href="about.html#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-8">Table 1.1: </span>don’t forget a caption
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+cyl
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+percent
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+0.34375
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0.21875
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.43750
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="about.html#cb12-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">#as_image(width = 8) (this fails)</span></span></code></pre></div>
+<p>And using the gtsummary package:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="about.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb13-2"><a href="about.html#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="about.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># make model and tbl_regression object</span></span>
+<span id="cb13-4"><a href="about.html#cb13-4" aria-hidden="true" tabindex="-1"></a>m_linear <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> cyl, <span class="at">data =</span> mtcars)</span>
+<span id="cb13-5"><a href="about.html#cb13-5" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">tbl_regression</span>(m_linear)</span>
+<span id="cb13-6"><a href="about.html#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="about.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Use function from gt package to save table, after converting to</span></span>
+<span id="cb13-8"><a href="about.html#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># gt object using as_gt()</span></span>
+<span id="cb13-9"><a href="about.html#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#gt::gtsave(as_gt(t1), file = file.path(tempdir(), &quot;temp.png&quot;))</span></span></code></pre></div>
+<p>And of course, graphs aka ‘visualisations’:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="about.html#cb14-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb14-2"><a href="about.html#cb14-2" aria-hidden="true" tabindex="-1"></a>mtcars_plot <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="about.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>mpg))</span>
+<span id="cb14-4"><a href="about.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">5</span>)</span>
+<span id="cb14-5"><a href="about.html#cb14-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="template_project_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="other-fancy-stuff" class="section level3 unnumbered">
+<h3>Other fancy stuff</h3>
+<div id="KC5.4" class="keyconcept">
+<h3 class="right">
+Key Concept 5.4
+</h3>
+<h3 class="left">
+Heteroskedasticity and Homoskedasticity
+</h3>
+<ul>
+<li>The error term of our regression model is homoskedastic if the variance of the conditional distribution of <span class="math inline">\(u_i\)</span> given <span class="math inline">\(X_i\)</span>, <span class="math inline">\(Var(u_i|X_i=x)\)</span>, is constant <em>for all</em> observations in our sample:
+<span class="math display">\[ \text{Var}(u_i|X_i=x) = \sigma^2 \ \forall \ i=1,\dots,n. \]</span></li>
+</ul>
+</div>
+</div>
+<div id="interactive-questions" class="section level3" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Interactive questions</h3>
+<iframe src="https://os301.shinyapps.io/Question/?showcase=0" width="80%" height="210px" data-external="1">
+</iframe>
+</div>
+<div id="videos" class="section level3" number="1.3.4">
+<h3><span class="header-section-number">1.3.4</span> Videos</h3>
+<iframe src="https://os301.shinyapps.io/Video/?showcase=0" width="80%" height="400px" data-external="1">
+</iframe>
+</div>
+</div>
+<div id="types-of-notes-within-text" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Types of notes within text</h2>
+
+<div class="note">
+<p>“Aside” notes look like this.</p>
+</div>
+
+<div class="warning">
+<p>Warnings look like this.</p>
+</div>
+<div id="a-margin-note" class="section level3" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> A margin note</h3>
+<p>What about tufte-style margin notes? *</p>
+<div class="marginnote">
+<p>* If you are considering pursuing an MSc or PhD this will typically be centered on doing research; it’s worth knowing whether this is for you before diving in. Doing research is also a key component of much professional work in the private and public (government) sectors, including at ‘think tanks’, some government agencies, and many private consulting and ‘data analytics’ firms.</p>
+</div>
+</div>
+</div>
+<div id="notes-for-instructors-and-course-organisers" class="section level2 unnumbered">
+<h2>Notes for instructors and course organisers</h2>
+<p>Note: related pptx slides (covering Ch 1-3, adapted to Exeter) are downloadable:</p>
+<button onclick="window.open(&#39;Lecture1_intro_andyourtopic_exeter.pptx&#39;)">
+<p>Download</p>
+</button>
+</div>
+<div id="link_back" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> We link back here in the next chapter – check it out</h2>
+<p>Jump to <a href="chapter_2.html#chapter_2">next chapter</a></p>
+<div id="a-fun-acronym" class="section level3" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> A fun acronym</h3>
+<p><strong>Six simple rules for writing a good paper</strong> (and, incidentally, for getting a good mark)</p>
+<ol style="list-style-type: decimal">
+<li><p>Frame your topic as an interesting, well-defined <strong>Economic</strong> question. Demonstrate that you understand your question.</p></li>
+<li><p>Explain what others have written about your topic and which techniques they used. <a href="#crit_examine"><strong>Critically</strong></a> <strong>discuss</strong> the strengths and limitations these. Explain how these relate to and inform your own work. Cite correctly and do not plagiarise.</p></li>
+<li><p><strong>Apply economics</strong> (and econometrics) to your question. Demonstrate an understanding of your approach and techniques.</p></li>
+<li><p><strong>Organise and present</strong> your work clearly, including an outline and labels and explanations of any tables, graphs, and equations.</p></li>
+<li><p>Write clearly, logically, and in a professional <strong>academic</strong> style.</p></li>
+<li><p>If you are aiming to produce a great paper, make an original contribution or <strong>insight.</strong> (This can be a small insight, and it is not always necessary for a top mark.)</p></li>
+</ol>
+<hr />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-16"></span>
+<img src="images/ecacoacin4life.jpg" alt="Just remember..." width="40%" />
+<p class="caption">
+Figure 1.2: Just remember…
+</p>
+</div>
+<p>Just remember the simple acronym “ECAOAcIn”:<a href="references.html#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p><strong>E</strong>conomic question – <strong>C</strong>ritical discussion – <strong>A</strong>pply economics – <strong>O</strong>rganise/present well – <strong>Ac</strong>ademic writing – original <strong>In</strong>sight</p>
+
+</div>
+</div>
+</div>
+<h3> List of works cited</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-adena2019" class="csl-entry">
+Adena, Maja, and Steffen Huck. 2019. <span>“Giving Once, Giving Twice: A Two-Period Field Experiment on Intertemporal Crowding in Charitable Giving.”</span> <em>Journal of Public Economics</em> 172. <a href="https://doi.org/10.1016/j.jpubeco.2019.01.002">https://doi.org/10.1016/j.jpubeco.2019.01.002</a>.
+</div>
+<div id="ref-AkerlofGeorgeA.2000" class="csl-entry">
+Akerlof George A., and Kranton Rachel E. 2000. <span>“Economics and Identity.”</span> <em>The Quarterly Journal of Economics</em> 115 (3): 715–53.
+</div>
+<div id="ref-alecstephenson2013" class="csl-entry">
+Alec Stephenson. 2013. <span>“A Quick Introduction to r Shiny,”</span> 17.
+</div>
+<div id="ref-becker1974" class="csl-entry">
+Becker, Gary S. 1974. <span>“A Theory of Social Interactions.”</span> <em>The Journal of Political Economy</em> 82 (6): 10631093. <a href="http://links.jstor.org/sici?sici=0022-3808(197411/12)82:6%3C1063:ATOSI%3E2.0.CO;2-W">http://links.jstor.org/sici?sici=0022-3808(197411/12)82:6%3C1063:ATOSI%3E2.0.CO;2-W</a>.
+</div>
+<div id="ref-lakens2014" class="csl-entry">
+Lakens, Daniël. 2014. <span>“Performing High-Powered Studies Efficiently with Sequential Analyses.”</span> <em>European Journal of Social Psychology</em> 44 (7): 701710.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="chapter_2.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": true,
+"weibo": true,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["github", "facebook", "twitter", "linkedin"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "none",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -3,7 +3,7 @@ title: "Template for Reinstein bookdowns"
 author: "Dr. David Reinstein, "
 abstract: "This 'book' organizes the project and helps others understand it and learn from it"
 #cover-image: "images/cardcatalogue.JPG"
-date: "2021-11-28"
+date: "2022-01-12"
 site: bookdown::bookdown_site
 output:
   md_document:
@@ -13,8 +13,8 @@ output:
     includes:
       in_header: support/header.html
       #in_header: https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/header.html
-    #css: https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/tufte_plus.css
-    css: support/tufte_plus_test.css #formatting stuff, includes code to enable margin notes and folds
+        #css: https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/tufte_plus.css
+    css: support/tufte_plus.css
 
     config:
       toc:
@@ -61,9 +61,6 @@ Needs to be set to `echo = FALSE` for creating EAF markdowns (or do this in post
 ```
 
 
-#### Download,  access and run project_setup.R ####
-
-(Note: we ultimately can do this in main, but this is a bridge)
 
 
 
@@ -264,8 +261,8 @@ rnorm(10)  # 10 random numbers
 ```
 
 ```
-##  [1] -0.84559400 -2.27417723 -0.78985865  0.05996691  0.34304818 -0.68390744
-##  [7] -0.49854578 -0.38923039  0.20692085  1.13226801
+##  [1] -0.98511027 -0.38924233 -0.69688223 -0.06506012 -0.43826390 -0.54032901 -0.08374644  0.17360991 -0.84652910
+## [10]  0.03212937
 ```
 
 ```r

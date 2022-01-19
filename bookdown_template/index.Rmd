@@ -13,14 +13,14 @@ output:
     includes:
       in_header: support/header.html
       #in_header: https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/header.html
-    #css: https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/tufte_plus.css
-    css: support/tufte_plus_test.css #formatting stuff, includes code to enable margin notes and folds
+        #css: https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/tufte_plus.css
+    css: support/tufte_plus.css
 
     config:
       toc:
         after: |
           <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
-        collapse: none
+        collapse: section
         scroll_highlight: yes
       fontsettings:
         theme: white
@@ -59,11 +59,6 @@ Needs to be set to `echo = FALSE` for creating EAF markdowns (or do this in post
 ```
 
 
-#### Download,  access and run project_setup.R ####
-
-(Note: we ultimately can do this in main, but this is a bridge)
-
-
 
 
 \
@@ -73,8 +68,6 @@ library(png)
 library(grid)
 ```
 
-
-```
 
 
 # install.packages("bookdown")

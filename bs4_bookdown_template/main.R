@@ -18,18 +18,25 @@ try_download <- function(url, path) {
 library(here)
 library(pacman)
 here <- here::here()
-rename_all <- dplyr::rename_all
-rename <- dplyr::rename
+
+#source(here("code", "packages.R")) # Install and load packages used in build and analysis (note: these could be cleaned)
+#p_load_gh("rethinkpriorities/rp-r-package")
+#p_load_gh("rethinkpriorities/r-noodling-package")
+
+source_url("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/baseoptions.R") # Basic options used across files, names and shortcuts for  functions and packages
+
+source_url("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/plotting_functions.R")
+
 
 #NOTE: I USUALLY USE THE SUFF BELOW FOR SETUP, BUT I COMMENTED IT OUT HERE FOR NOW
 #... Import setup for this project using template from dr-rstuff  ####
 
 dir.create(here("code"))
 
-try_download(
-  "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/project_setup.R",
-  here::here("code", "project_setup.R")
-)
+#try_download(
+ # "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/project_setup.R",
+#  here::here("code", "project_setup.R")
+#)
 
 # try_download(
 #   "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/download_formatting.R",
@@ -37,7 +44,7 @@ try_download(
 # )
 
 # RENV: We can just have renv search for and install these (in Rstudio it reminds you; otherwise use call `renv::dependencies()` or `renv::hydrate` I think. )
-source(here::here("assets", "R", "project_setup.R"))
+#source(here::here("assets", "R", "project_setup.R"))
 
 my.file.rename <- function(from, to) {
   todir <- dirname(to)
@@ -46,15 +53,12 @@ my.file.rename <- function(from, to) {
 }
 
 #annoying workaround to clean up folder structure without changing project_setup.R
-my.file.rename(from = here::here("code", "plotting_functions.R"),
-               to = here::here("assets", "R", "plotting_functions.R"))
 my.file.rename(from = here::here("code", "baseoptions.R"),
                to = here::here("assets", "R", "baseoptions.R"))
 my.file.rename(from = here::here("code", "functions.R"),
                to = here::here("assets", "R", "functions.R"))
 unlink(here::here("code"), recursive = TRUE)
 
-source(here("assets", "R", "plotting_functions.R"))
 
 #source(here::here("code", "download_formatting.R"))
 
@@ -76,18 +80,14 @@ p_load("bettertrace") #better tracking after bugs
 #remotes::install_github("rstudio/bslib")
 #install.packages("downlit")
 #remotes::install_github("rstudio/bookdown")
-library(downlit)
 
+library(rmarkdown)
 library(bookdown)
 library(bslib)
-library(xml2)
-
-
 
 {
   options(knitr.duplicate.label = "allow")
   rmarkdown::render_site(output_format = 'bookdown::bs4_book', encoding = 'UTF-8')
 }
-
 
 

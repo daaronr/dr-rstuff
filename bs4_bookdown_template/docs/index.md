@@ -34,6 +34,21 @@ knitr::write_bib(c(
 ), 'packages.bib')
 ```
 
+```
+## Warning in utils::citation(..., lib.loc = lib.loc): no date field in DESCRIPTION file
+## of package 'bettertrace'
+```
+
+```
+## Warning in utils::citation(..., lib.loc = lib.loc): no date field in DESCRIPTION file
+## of package 'bookdown'
+```
+
+```
+## Warning in utils::citation(..., lib.loc = lib.loc): no date field in DESCRIPTION file
+## of package 'bslib'
+```
+
 
 
 
@@ -188,7 +203,8 @@ rnorm(10)  # 10 random numbers
 ```
 
 ```
-##  [1]  0.2079549 -0.6375418 -1.2934181  2.4147158  1.1961693 -0.0171831  0.5073284  1.0659609  0.1860423 -1.0435140
+##  [1]  0.1122039 -0.3519986  1.4926508 -0.5583574  0.2237905 -0.1315129  0.3180126
+##  [8] -0.1039445 -0.4211718 -0.5602289
 ```
 
 ```r
