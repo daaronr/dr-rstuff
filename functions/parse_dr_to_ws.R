@@ -71,7 +71,7 @@ fold_to_foldable <- function(filename) {
                   "```"
   )
   ch_ed <- filename %>%
-    gsub(reg_fold, "::: {.foldable} \n <button class='fold-button'>Show me more</button> \n \\1 \n:::", .)
+    gsub(reg_fold, "::: {.foldable} \n \\1 \n:::", .)
 
   return(ch_ed)
 }
@@ -81,7 +81,7 @@ fold_to_foldable <- function(filename) {
 
 #note -- this must be run *after* the previous (otherwise we need to exclude blocks containing 'fold')
 
-block2_to_callout <- function(filename) {
+block2_to_secondary_alert <- function(filename) {
   reg_block2 <- rex("```{block2",
                     one_or_more(anything, type="lazy"),
                     "}",
@@ -91,7 +91,7 @@ block2_to_callout <- function(filename) {
   )
 
   ch_ed <- filename %>%
-    gsub(reg_block2, "::: {.rmdnote}\n \\1 \n:::", .)
+    gsub(reg_block2, "::: {.alert .alert-secondary}\n \\1 \n:::", .)
 
   return(ch_ed)
 }
@@ -103,7 +103,7 @@ dr_to_bs4 <- function(input, output) {
   readr::read_file(input) %>%
     tufte_to_footnote %>%
     fold_to_foldable %>%
-    block2_to_callout %>%
+    block2_to_secondary_alert %>%
     readr::write_lines(output)
 }
 
