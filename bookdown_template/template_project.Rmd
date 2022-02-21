@@ -20,7 +20,7 @@ output:
       toc:
         after: |
           <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
-        collapse: none
+        collapse: section
         scroll_highlight: yes
       fontsettings:
         theme: white
@@ -59,10 +59,6 @@ Needs to be set to `echo = FALSE` for creating EAF markdowns (or do this in post
 ```
 
 
-
-
-
-
 \
 
 ```{r install,  echo = FALSE, include=FALSE}
@@ -71,12 +67,11 @@ library(grid)
 ```
 
 
-```
 
+<!--  install.packages("bookdown")
+ or the development version devtools::install_github("rstudio/bookdown")
+-->
 
-# install.packages("bookdown")
-# or the development version
-# devtools::install_github("rstudio/bookdown")
 
 <!-- Download 'backup' bibtex file from dropbox (synced with Zotero), do the rename workaround -->
 
@@ -169,6 +164,21 @@ This contains multiple lines blah blah
 `r format_with_col("**Note to friends I've asked to look at this book...**","brown")`
 
 `r format_with_col("Thanks for looking at this.", "brown")`
+
+
+### Testing something
+
+
+testing 
+
+```
+"Period outside quote".
+'Comma outside quote', 'semicolon outside quote'; OK.  
+```
+
+"Period outside quote".
+'Comma outside quote', 'semicolon outside quote'; OK.  
+
 
 ## Preface {#preface}
 

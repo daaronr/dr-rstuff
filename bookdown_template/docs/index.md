@@ -61,16 +61,17 @@ Needs to be set to `echo = FALSE` for creating EAF markdowns (or do this in post
 ```
 
 
+
+
 \
 
 
 
 
 
-<!--  install.packages("bookdown")
- or the development version devtools::install_github("rstudio/bookdown")
--->
-
+# install.packages("bookdown")
+# or the development version
+# devtools::install_github("rstudio/bookdown")
 
 <!-- Download 'backup' bibtex file from dropbox (synced with Zotero), do the rename workaround -->
 
@@ -135,21 +136,6 @@ This contains multiple lines blah blah
 <font color='brown'>**Note to friends I've asked to look at this book...**</font>
 
 <font color='brown'>Thanks for looking at this.</font>
-
-
-### Testing something
-
-
-testing 
-
-```
-"Period outside quote".
-'Comma outside quote', 'semicolon outside quote'; OK.  
-```
-
-"Period outside quote".
-'Comma outside quote', 'semicolon outside quote'; OK.  
-
 
 ## Preface {#preface}
 
@@ -271,8 +257,8 @@ rnorm(10)  # 10 random numbers
 ```
 
 ```
-##  [1]  0.01649221  1.96656758  1.88290810  0.62289619 -0.32140098 -0.64893598
-##  [7]  0.19644578 -0.39802346 -1.49955297  1.29062023
+##  [1] -0.84559400 -2.27417723 -0.78985865  0.05996691  0.34304818 -0.68390744 -0.49854578
+##  [8] -0.38923039  0.20692085  1.13226801
 ```
 
 ```r

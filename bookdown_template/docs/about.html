@@ -24,7 +24,7 @@
 <meta name="author" content="Dr. David Reinstein," />
 
 
-<meta name="date" content="2022-01-12" />
+<meta name="date" content="2022-02-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -793,6 +793,7 @@ div.csl-indent {
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="about.html"><a href="about.html"><i class="fa fa-check"></i><b>1</b> About this work</a>
 <ul>
+<li class="chapter" data-level="1.0.1" data-path="about.html"><a href="about.html#testing-something"><i class="fa fa-check"></i><b>1.0.1</b> Testing something</a></li>
 <li class="chapter" data-level="1.1" data-path="about.html"><a href="about.html#preface"><i class="fa fa-check"></i><b>1.1</b> Preface</a>
 <ul>
 <li class="chapter" data-level="" data-path="about.html"><a href="about.html#licence"><i class="fa fa-check"></i>Licence</a></li>
@@ -861,7 +862,7 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">Template for Reinstein bookdowns</h1>
 <p class="author"><em>Dr. David Reinstein,</em></p>
-<p class="date"><em>2022-01-12</em></p>
+<p class="date"><em>2022-02-21</em></p>
 <div class="abstract">
 <p class="abstract">Abstract</p>
 This ‘book’ organizes the project and helps others understand it and learn from it
@@ -879,6 +880,14 @@ Click <a href="chapter_2.html#chapter_2">HERE</a> to jump to next chapter.
 <!-- bookdown_end -->
 <p><font color='brown'><strong>Note to friends I’ve asked to look at this book…</strong></font></p>
 <p><font color='brown'>Thanks for looking at this.</font></p>
+<div id="testing-something" class="section level3" number="1.0.1">
+<h3><span class="header-section-number">1.0.1</span> Testing something</h3>
+<p>testing</p>
+<pre><code>&quot;Period outside quote&quot;.
+&#39;Comma outside quote&#39;, &#39;semicolon outside quote&#39;; OK.  </code></pre>
+<p>“Period outside quote.”
+‘Comma outside quote,’ ‘semicolon outside quote’; OK.</p>
+</div>
 <div id="preface" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Preface</h2>
 <p>Testing a Zotero reference: <span class="citation">(<a href="#ref-becker1974" role="doc-biblioref">Becker 1974</a>)</span> (should cite Becker, 1974). <span class="citation">(<a href="#ref-adena2019" role="doc-biblioref">Adena and Huck 2019</a>)</span> – should cite Adena 2019.</p>
@@ -909,7 +918,7 @@ Click <a href="chapter_2.html#chapter_2">HERE</a> to jump to next chapter.
 </div>
 <div id="citations" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Citations</h2>
-<p>Let’s cite a paper here: <span class="citation">(<a href="#ref-lakens2014" role="doc-biblioref">Lakens 2014</a>)</span>; I don’t think I needed the brackets though (<span class="citation">Lakens (<a href="#ref-lakens2014" role="doc-biblioref">2014</a>)</span> would also have worked).</p>
+<p>Let’s cite a paper here: <span class="citation">(<a href="#ref-lakens2014" role="doc-biblioref">Lakens 2014</a>)</span>; I don’t think I needed the brackets though (<span class="citation"><a href="#ref-lakens2014" role="doc-biblioref">Lakens</a> (<a href="#ref-lakens2014" role="doc-biblioref">2014</a>)</span> would also have worked).</p>
 <p>Testing another one: <span class="citation">(<a href="#ref-alecstephenson2013" role="doc-biblioref">Alec Stephenson 2013</a>)</span></p>
 <p>It is referring the contents of bibtex files, mentioned in the index.Rmd file in the line <code>bibliography: ["references.bib"]</code></p>
 <p>This can be more ‘automated’ with the visual editor … turning on Zotero (necessary?) and inserting a reference from the linked library, this should automatically be added to <code>references.bib</code></p>
@@ -944,7 +953,7 @@ Click <a href="chapter_2.html#chapter_2">HERE</a> to jump to next chapter.
 </div>
 <div id="shiny_test" class="section level3 unnumbered">
 <h3>A Shiny app</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="about.html#cb5-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_app</span>(<span class="st">&quot;https://yihui.shinyapps.io/miniUI/&quot;</span>, <span class="at">height =</span> <span class="st">&quot;600px&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="about.html#cb6-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_app</span>(<span class="st">&quot;https://yihui.shinyapps.io/miniUI/&quot;</span>, <span class="at">height =</span> <span class="st">&quot;600px&quot;</span>)</span></code></pre></div>
 <iframe src="https://yihui.shinyapps.io/miniUI/?showcase=0" width="80%" height="600px" data-external="1">
 </iframe>
 </div>
@@ -953,7 +962,7 @@ Click <a href="chapter_2.html#chapter_2">HERE</a> to jump to next chapter.
 <p><a href="https://innovationsinfundraising.org/doku.php">innovationsinfundraising.org</a></p>
 <p>(This page couldn’t embed)</p>
 <hr />
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="about.html#cb6-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">&quot;https://davidreinstein.wordpress.com/&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="about.html#cb7-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">&quot;https://davidreinstein.wordpress.com/&quot;</span>)</span></code></pre></div>
 <iframe src="https://davidreinstein.wordpress.com/" width="80%" height="400px" data-external="1">
 </iframe>
 </div>
@@ -966,11 +975,11 @@ Click <a href="chapter_2.html#chapter_2">HERE</a> to jump to next chapter.
 <div id="r-code-and-data" class="section level3 unnumbered">
 <h3>R code and data</h3>
 <p>These are “code chunks”</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="about.html#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb7-2"><a href="about.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">10</span>)  <span class="co"># 10 random numbers</span></span></code></pre></div>
-<pre><code>##  [1] -0.98511027 -0.38924233 -0.69688223 -0.06506012 -0.43826390 -0.54032901 -0.08374644  0.17360991 -0.84652910
-## [10]  0.03212937</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="about.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dist <span class="sc">~</span> speed, cars)  <span class="co"># a scatterplot</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="about.html#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb8-2"><a href="about.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">10</span>)  <span class="co"># 10 random numbers</span></span></code></pre></div>
+<pre><code>##  [1]  0.01649221  1.96656758  1.88290810  0.62289619 -0.32140098 -0.64893598
+##  [7]  0.19644578 -0.39802346 -1.49955297  1.29062023</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="about.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dist <span class="sc">~</span> speed, cars)  <span class="co"># a scatterplot</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:chunk-label"></span>
 <img src="template_project_files/figure-html/chunk-label-1.png" alt="A figure caption." width="80%" />
 <p class="caption">
@@ -986,16 +995,16 @@ Figure 1.1: A figure caption.
 <p>We can make tables from data (but these might struggle exporting to markdown formats?)</p>
 <p>Below, this defaults to an html styling</p>
 <p>(but in the md substitution code I swap in ‘pipe styling’)</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="about.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;magick&quot;)</span></span>
-<span id="cb11-2"><a href="about.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;webshot&quot;)</span></span>
-<span id="cb11-3"><a href="about.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#webshot::install_phantomjs(force=TRUE)</span></span>
-<span id="cb11-4"><a href="about.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#library(webshot)</span></span>
-<span id="cb11-5"><a href="about.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#library(magick)</span></span>
-<span id="cb11-6"><a href="about.html#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="about.html#cb11-7" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb11-8"><a href="about.html#cb11-8" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">tabyl</span>(cyl) <span class="sc">%&gt;%</span></span>
-<span id="cb11-9"><a href="about.html#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption=</span><span class="st">&quot;don&#39;t forget a caption&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb11-10"><a href="about.html#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="about.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;magick&quot;)</span></span>
+<span id="cb12-2"><a href="about.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;webshot&quot;)</span></span>
+<span id="cb12-3"><a href="about.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#webshot::install_phantomjs(force=TRUE)</span></span>
+<span id="cb12-4"><a href="about.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#library(webshot)</span></span>
+<span id="cb12-5"><a href="about.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#library(magick)</span></span>
+<span id="cb12-6"><a href="about.html#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="about.html#cb12-7" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb12-8"><a href="about.html#cb12-8" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">tabyl</span>(cyl) <span class="sc">%&gt;%</span></span>
+<span id="cb12-9"><a href="about.html#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption=</span><span class="st">&quot;don&#39;t forget a caption&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-10"><a href="about.html#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-8">Table 1.1: </span>don’t forget a caption
@@ -1049,23 +1058,23 @@ percent
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="about.html#cb12-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">#as_image(width = 8) (this fails)</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="about.html#cb13-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">#as_image(width = 8) (this fails)</span></span></code></pre></div>
 <p>And using the gtsummary package:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="about.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb13-2"><a href="about.html#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="about.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># make model and tbl_regression object</span></span>
-<span id="cb13-4"><a href="about.html#cb13-4" aria-hidden="true" tabindex="-1"></a>m_linear <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> cyl, <span class="at">data =</span> mtcars)</span>
-<span id="cb13-5"><a href="about.html#cb13-5" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">tbl_regression</span>(m_linear)</span>
-<span id="cb13-6"><a href="about.html#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="about.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Use function from gt package to save table, after converting to</span></span>
-<span id="cb13-8"><a href="about.html#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># gt object using as_gt()</span></span>
-<span id="cb13-9"><a href="about.html#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#gt::gtsave(as_gt(t1), file = file.path(tempdir(), &quot;temp.png&quot;))</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="about.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb14-2"><a href="about.html#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="about.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># make model and tbl_regression object</span></span>
+<span id="cb14-4"><a href="about.html#cb14-4" aria-hidden="true" tabindex="-1"></a>m_linear <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> cyl, <span class="at">data =</span> mtcars)</span>
+<span id="cb14-5"><a href="about.html#cb14-5" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">tbl_regression</span>(m_linear)</span>
+<span id="cb14-6"><a href="about.html#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="about.html#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Use function from gt package to save table, after converting to</span></span>
+<span id="cb14-8"><a href="about.html#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># gt object using as_gt()</span></span>
+<span id="cb14-9"><a href="about.html#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#gt::gtsave(as_gt(t1), file = file.path(tempdir(), &quot;temp.png&quot;))</span></span></code></pre></div>
 <p>And of course, graphs aka ‘visualisations’:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="about.html#cb14-1" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb14-2"><a href="about.html#cb14-2" aria-hidden="true" tabindex="-1"></a>mtcars_plot <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="about.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>mpg))</span>
-<span id="cb14-4"><a href="about.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">5</span>)</span>
-<span id="cb14-5"><a href="about.html#cb14-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="about.html#cb15-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb15-2"><a href="about.html#cb15-2" aria-hidden="true" tabindex="-1"></a>mtcars_plot <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="about.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>mpg))</span>
+<span id="cb15-4"><a href="about.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">5</span>)</span>
+<span id="cb15-5"><a href="about.html#cb15-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="template_project_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="other-fancy-stuff" class="section level3 unnumbered">
@@ -1108,7 +1117,7 @@ Heteroskedasticity and Homoskedasticity
 <h3><span class="header-section-number">1.4.1</span> A margin note</h3>
 <p>What about tufte-style margin notes? *</p>
 <div class="marginnote">
-<p>* If you are considering pursuing an MSc or PhD this will typically be centered on doing research; it’s worth knowing whether this is for you before diving in. Doing research is also a key component of much professional work in the private and public (government) sectors, including at ‘think tanks’, some government agencies, and many private consulting and ‘data analytics’ firms.</p>
+<p>* If you are considering pursuing an MSc or PhD this will typically be centered on doing research; it’s worth knowing whether this is for you before diving in. Doing research is also a key component of much professional work in the private and public (government) sectors, including at ‘think tanks,’ some government agencies, and many private consulting and ‘data analytics’ firms.</p>
 </div>
 </div>
 </div>
@@ -1140,7 +1149,7 @@ Heteroskedasticity and Homoskedasticity
 Figure 1.2: Just remember…
 </p>
 </div>
-<p>Just remember the simple acronym “ECAOAcIn”:<a href="references.html#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>Just remember the simple acronym “ECAOAcIn”:<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p><strong>E</strong>conomic question – <strong>C</strong>ritical discussion – <strong>A</strong>pply economics – <strong>O</strong>rganise/present well – <strong>Ac</strong>ademic writing – original <strong>In</strong>sight</p>
 
 </div>
@@ -1163,6 +1172,12 @@ Becker, Gary S. 1974. <span>“A Theory of Social Interactions.”</span> <em>Th
 <div id="ref-lakens2014" class="csl-entry">
 Lakens, Daniël. 2014. <span>“Performing High-Powered Studies Efficiently with Sequential Analyses.”</span> <em>European Journal of Social Psychology</em> 44 (7): 701710.
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>(Isn’t that catchy?)<a href="about.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
@@ -1218,7 +1233,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "none",
+"collapse": "section",
 "scroll_highlight": true
 }
 });

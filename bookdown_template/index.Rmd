@@ -59,8 +59,6 @@ Needs to be set to `echo = FALSE` for creating EAF markdowns (or do this in post
 ```
 
 
-
-
 \
 
 ```{r install,  echo = FALSE, include=FALSE}
@@ -70,9 +68,10 @@ library(grid)
 
 
 
-# install.packages("bookdown")
-# or the development version
-# devtools::install_github("rstudio/bookdown")
+<!--  install.packages("bookdown")
+ or the development version devtools::install_github("rstudio/bookdown")
+-->
+
 
 <!-- Download 'backup' bibtex file from dropbox (synced with Zotero), do the rename workaround -->
 
