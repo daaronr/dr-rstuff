@@ -5,6 +5,14 @@ always_allow_html: yes
 
 # About this work {#about}
 
+
+```{block2,  type='note'}
+NOTE that the current bookdown just contains examples for illustrating the template. 
+
+NOTE I (David Reinstein) am also likely to be switching many or all of my bookdowns to the 'Rethink Priorities' template (see https://github.com/rethinkpriorities/bookdown-template)
+
+```  
+
 ```{r html, echo=FALSE}
 # globally set chunk options
 knitr::opts_chunk$set(fig.align='center', out.width='80%', warning=FALSE, message = FALSE, error=TRUE, echo=TRUE)

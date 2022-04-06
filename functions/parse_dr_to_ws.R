@@ -1,9 +1,8 @@
 ########### Make DR gitbook style Rmd files adaptable to Sleegers bs4 style  ##################
 
-p_load(readr)
-p_load(rex)
-p_load(magrittr)
-
+require(readr)
+require(rex)
+require(magrittr)
 
 # Attempt to get whole list of files to map (not applied yet) ####
 #
@@ -63,7 +62,8 @@ reg_mn_col_to_fn <- rex(zero_or_more("\\*"),
 #:::
 
 fold_to_foldable <- function(filename) {
-  reg_fold <- rex("```{block2,",
+  reg_fold <- rex(
+                  "```{block2,",
                   zero_or_more(any_spaces, type="lazy"),
                   "type='fold'}",
                   capture(one_or_more(anything,
