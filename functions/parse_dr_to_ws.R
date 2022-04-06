@@ -91,7 +91,8 @@ block2_to_secondary_alert <- function(filename) {
   )
 
   ch_ed <- filename %>%
-    gsub(reg_block2, "::: {.alert .alert-secondary}\n \\1 \n:::", .)
+    gsub(reg_block2,
+         "::: {.alert .alert-secondary}\n \\1 \n:::", .)
 
   return(ch_ed)
 }
